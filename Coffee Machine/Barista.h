@@ -1,7 +1,5 @@
 /*
 	barista lib
-
-	input parameters from app called somehow
 */
 
 #pragma once
@@ -30,7 +28,7 @@ public:
 			bool milk = false,
 			bool chokolate = false,
 			bool canella = false,
-			size_t shugar = 0); // WRITEME
-
+			size_t shugar = 0); 
+	
 	~Barista();
 };
