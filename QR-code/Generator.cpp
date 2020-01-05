@@ -16,7 +16,7 @@ string randomString (size_t len = 25, string const &allowed_chars = default_char
 	return ret;
 } // OK
 
-string const Suffix = "#¯\_(ツ)_/¯#"; 
+string const Suffix = "#¯\\_(ツ)_/¯#"; 
 string const AppLink = "https://coffeebreaker.com"; // SETME FIXME !
 string const UnicID = "1"; // SETME FIXME
 string const UnicKey  = randomString(); // OK 
