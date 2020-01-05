@@ -7,6 +7,3 @@ Barista::Barista(size_t _DrinkType,
 				 size_t _shugar) : DrinkType(_DrinkType), milk(_milk), chokolate(_chokolate), canella(_canella), sugar(_shugar) {}  
 
 Barista::~Barista() {}
-
-Barista::getBarista (Barista _cashed_one) {
-}
