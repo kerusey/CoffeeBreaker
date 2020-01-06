@@ -1,3 +1,5 @@
+# usage python3 Visualizer.py > name.png
+
 import qrcode
 import string 
 import random
@@ -12,4 +14,4 @@ UnicKey = generateString() # OK
 QRLink = AppLink + Suffix + UnicID + Suffix + UnicKey + Suffix # SAVEME
 
 img = qrcode.make(QRLink)
-img.show()
+# img.show()
