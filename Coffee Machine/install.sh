@@ -10,3 +10,6 @@ python3 get-pip.py
 pip install -U pip
 pip install qrcode
 pip install
+apt-get install realvnc-vnc-server
+vncserver :1 # 5901 / 5902
+apt-get -y install python3-rpi.gpio
