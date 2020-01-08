@@ -1,6 +1,6 @@
 # TODO file 
 ____
-## 1) responce to the mobile app (Validation.py) 
+## 1) response to the mobile app (Validation.py) 
  description:
  
  	1.1) if app token and current token are the same, send packet with responce OK / CONTINUE / etc
