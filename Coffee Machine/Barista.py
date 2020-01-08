@@ -1,4 +1,5 @@
 #	barista lib
+import RPi.GPIO as GPIO
 
 UP_RELAY = 1
 DOWN_RELAY = 2
@@ -81,7 +82,7 @@ class Barista:
 	
 	# def addChokolate ():
 		
-	# def addCanella ():
+	# def addCanella (): # also add delays !!!
 
 	def addShugar ():
 		for i in range (shugar):
@@ -108,5 +109,7 @@ class Barista:
 		# addMilk()
 		# addChokolate()
 		# addCanella()
+		restoreSettings();
+		# here you need to delete the log.json
 
 # coffeeCoup = Barista(espresso, 0, 0, False, False, False, 0) # Works pretty fine
