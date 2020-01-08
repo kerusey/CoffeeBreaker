@@ -3,9 +3,9 @@ ____
 ## 1) response to the mobile app (Validation.py) 
  description:
  
- 	1.1) if app token and current token are the same, send packet with responce OK / CONTINUE / etc
+ 	1.1) if app token and current token are the same, send packet with response OK / CONTINUE / etc
   
- 	1.2) if app token and current token are not the same, send packet with respomce DENIED / STOP / etc
+ 	1.2) if app token and current token are not the same, send packet with response DENIED / STOP / etc
 
 ___
 
