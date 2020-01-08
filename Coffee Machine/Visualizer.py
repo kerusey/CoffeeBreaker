@@ -1,5 +1,3 @@
-# usage python3 Visualizer.py > name.png
-
 import qrcode
 import string 
 import random
@@ -7,11 +5,16 @@ import random
 def generateString (len = 25):
 	return ''.join(random.SystemRandom().choice(string.ascii_letters + string.digits ) for _ in range(len))
 
-Suffix = "#¯\\_(ツ)_/¯#" 
-AppLink = "https://coffeebreaker.com"; # SETME FIXME !
-UnicID = "1" # SETME FIXME
-UnicKey = generateString() # OK 
-QRLink = AppLink + Suffix + UnicID + Suffix + UnicKey + Suffix # SAVEME
+Suffix_const = "#¯\\_(ツ)_/¯#" # OK
+AppLink_const = "https://coffeebreaker.com"; # SETME FIXME !
+UnicID_const = "1" # SETME FIXME
 
-img = qrcode.make(QRLink)
-# img.show()
+def generateQRLink ():
+    UnicKey = generateString()
+    return AppLink_const +  Suffix_const + UnicID_const +  Suffix_const + UnicKey +  Suffix_const, UnicKey # QRLink func
+
+def visualNewSession(QRLink):   # !!! generates NEW token and starts NEW session !!!
+    QRLink, token = generateQRLink()
+    current_image = qrcode.make(QRLink)
+    current_image.show()
+    return token

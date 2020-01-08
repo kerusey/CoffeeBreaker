@@ -17,8 +17,9 @@ cd ~/Downloads
 apt-get install python3-tk
 apt-get install vsftpd
 nano /etc/vsftpd.conf # annonymous enble (NO) ; local enable ; write enable ; local umask ; chroot local user ; user sub token ; local root  
-cd home/<username> # SETME FIXME
+cd home/pi 
 mkdir FTP
-mkdir FTP/files
+mkdir FTP/validation
+mkdir FTP/order 
 chmod a-w FTP
 service vsftpd restart
