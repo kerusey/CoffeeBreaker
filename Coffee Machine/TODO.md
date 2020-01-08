@@ -12,7 +12,9 @@ ___
 ## 2) limit number of files that could be located in FTP/validation or FTP/order
  description: 
  
- 	2) FTP/validation and FTP/order limits on ftprotocol interface
+ 	2.1) FTP/validation and FTP/order limits on ftprotocol interface
+		
+		2.2) shell exeption (deny access to write file if files number more than 0) 
 ___
 
 ## 3) create architecture !!! ✅
