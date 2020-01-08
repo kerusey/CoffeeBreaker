@@ -1,4 +1,4 @@
-# Validation file. 
+# TODO file 
 ____
 ## 1) responce to the mobile app (Validation.py) 
  description:
@@ -15,7 +15,7 @@ ___
  	2) FTP/validation and FTP/order limits on ftprotocol interface
 ___
 
-## 3) create architecture !!!
+## 3) create architecture !!! ✅
  description:
  	
  	3) create scheme architecture
