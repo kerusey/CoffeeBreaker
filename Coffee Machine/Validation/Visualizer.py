@@ -10,8 +10,8 @@ AppLink_const = "https://coffeebreaker.com"; # SETME FIXME !
 UnicID_const = "1" # SETME FIXME
 
 def generateQRLink ():
-    UnicKey = generateString()
-    return AppLink_const +  Suffix_const + UnicID_const +  Suffix_const + UnicKey +  Suffix_const, UnicKey # QRLink func
+    UnicToken = generateString()
+    return AppLink_const +  Suffix_const + UnicID_const +  Suffix_const + UnicToken +  Suffix_const, UnicToken # QRLink func
 
 def visualNewSession(QRLink):   # !!! generates NEW token and starts NEW session !!!
     QRLink, token = generateQRLink()
