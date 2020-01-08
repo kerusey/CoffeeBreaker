@@ -21,7 +21,7 @@ ___
  	3) create scheme architecture
 ___
 
-## 4) write, debud and test order.py
+## 4) write, debud and test order.py ✅
  description:
  	
  	4.1) if scanned qr token is valid (1) and buyer has setted up his order, send it to FTP/order
