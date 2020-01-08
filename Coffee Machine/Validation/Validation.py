@@ -2,7 +2,7 @@ import qrcode
 import Visualizer
 import Server
 
-current_token = Visualizer.visualNewSession() #### initialize QRCode and save current token  
+current_token = Visualizer.visualNewSession() # initialize QRCode and save current token  
 
 def serverCheck(token = current_token):
 	if (Server.getToken() != token):
