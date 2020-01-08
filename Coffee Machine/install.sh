@@ -8,8 +8,9 @@ nano /etc/wpa_supplicant/wpa_supplicant.conf # network = { ssid="SSIDNAME"  psk=
 apt-get -y install python3
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 python3 get-pip.py
-pip install -U pip
-pip install qrcode
+pip3 install -U pip
+pip3 install Pynput
+pip3 install qrcode
 apt-get -y install realvnc-vnc-server
 vncserver :1 # 5901 / 5902
 apt-get -y install python3-rpi.gpio
