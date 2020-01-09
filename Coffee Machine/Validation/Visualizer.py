@@ -4,18 +4,20 @@ import random
 import time
 from pynput.keyboard import Key, Controller
 
-#import Tkinter 
-
 def generateString (len = 25):
 	return ''.join(random.SystemRandom().choice(string.ascii_letters + string.digits ) for _ in range(len))
 
 Suffix_const = "#¯\\_(ツ)_/¯#" # OK
-AppLink_const = "https://coffeebreaker.com"; # SETME FIXME !
-UnicID_const = "1" # SETME FIXME
+AppLink_const = "https://coffeebreaker.com" # SETME FIXME !
+
+with open("/home/kerusey/Documents/MachineSettings.json") as json_file:
+        MachineSettings = json.load(json_file)
+
+MachineID = MachineSettings['MachineID']
 
 def generateQRLink ():
     UnicKey = generateString()
-    return AppLink_const +  Suffix_const + UnicID_const +  Suffix_const + UnicKey +  Suffix_const, UnicKey # QRLink func
+    return AppLink_const +  Suffix_const + MachineID +  Suffix_const + UnicKey +  Suffix_const, UnicKey # QRLink func
 
 def fullscreen():
     time.sleep(0.5)
