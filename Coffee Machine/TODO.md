@@ -14,7 +14,7 @@ ___
  
  	2.1) FTP/validation and FTP/order limits on ftprotocol interface
 		
-		2.2) shell exeption (deny access to write file if files number more than 0) 
+	2.2) shell exeption (deny access to write file if files number more than 0) 
 ___
 
 ## 3) create architecture !!! ✅
@@ -41,6 +41,7 @@ ___
  	5.1) debug all methods and events of ButtonPressed 
  	
  	5.2) try real example
+___
 
 ## 6) <RELEASED> write main file
  description:
@@ -50,3 +51,10 @@ ___
  	6.2) write the full logic over here (best idea to call funcs and methods from different files)
  	
  	6.3) coming soon
+____
+
+## 7) set ctrl + alt + x as a hotkey of maximizing window size
+ description:
+	
+	7.1) set ctrl + alt + x as a hotkey in raspbian gui settings
+____
