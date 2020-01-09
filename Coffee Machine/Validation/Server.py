@@ -3,7 +3,7 @@ import json
 import os
 
 folderPath = "/home/pi/FTP/validation/"
-fileName = "checkme.json"
+fileName = "Validate.json"
 
 def getToken():
 	with open(folderPath + fileName) as json_file:
