@@ -2,9 +2,12 @@
 import json
 import os
 
-MachineID = 1
-folderPath = "/home/pi/FTP/validation/"
-fileName = "Validate" + MachineID + ".json"
+with open("/home/kerusey/Documents/MachineSettings.json") as json_file:
+		MachineSettings = json.load(json_file)
+
+folderPath = MachineSettings['logsPath']
+fileName = "Validation" + str(MachineSettings['MachineID']) + ".json"
+print(folderPath + fileName)
 
 def getToken():
 	with open(folderPath + fileName) as json_file:
