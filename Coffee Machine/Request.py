@@ -6,7 +6,7 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 import json
 
-with open("/home/kerusey/Documents/MachineSettings.json") as json_file:
+with open("/home/pi/Documents/MachineSettings.json") as json_file:
     MachineSettings = json.load(json_file)
 
 fileName = str(MachineSettings['MachineID']) + ".json"
