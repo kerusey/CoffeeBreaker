@@ -2,8 +2,9 @@
 import json
 import os
 
+MachineID = 1
 folderPath = "/home/pi/FTP/order/"
-fileName = "order.json"
+fileName = "Order" + MachineID + ".json"
 
 def getOrder(): 
 	with open(folderPath + fileName) as json_file:
