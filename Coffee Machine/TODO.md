@@ -9,12 +9,16 @@ ____
 
 ___
 
-## 2) limit number of files that could be located in FTP/validation or FTP/order
+## 2) write a python script that allaws you to download and upload file 
  description: 
  
- 	2.1) FTP/validation and FTP/order limits on ftprotocol interface
+ 	2.1) get file link by reading specific folder (ex. "validation/ID/" + machineID + "validation.json") 
 		
-	2.2) shell exeption (deny access to write file if files number more than 0) 
+	2.2) download file by token via google drive python api (ex. if validation.json has a string("kjshfkjsfgy") as file token). Also download to specific folder (/home/pi/FTP/validation) 
+	
+	2.3) delete current file from drive and call serverCheck() func
+	
+	2.4) create a respond and post it to google drive
 ___
 
 ## 3) create architecture !!! ✅
