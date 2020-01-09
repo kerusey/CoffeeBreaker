@@ -17,15 +17,26 @@ def generateQRLink ():
     UnicKey = generateString()
     return AppLink_const +  Suffix_const + UnicID_const +  Suffix_const + UnicKey +  Suffix_const, UnicKey # QRLink func
 
+def fullscreen():
+    time.sleep(0.5)
+    keyboard = Controller()
+    keyboard.press(Key.ctrl)
+    keyboard.press(Key.alt)
+    keyboard.press("x")
+    keyboard.release("x")
+    keyboard.release(Key.ctrl)
+    keyboard.release(Key.alt) # set ctrl + alt + x as a hotkey n settings !!!
+    
+
 def visualNewSession():   # !!! generates NEW token and starts NEW session !!!
     QRLink, token = generateQRLink()
     current_image = qrcode.make(QRLink)
-    # Tk.attributes("-fullscreen", True)
     current_image.show()
+    fullscreen()
     return token
 
 def closeWindow(): # OK
-    time.sleep(2)
+    time.sleep(0.5)
     keyboard = Controller()
     keyboard.press(Key.alt)
     keyboard.press(Key.f4)
