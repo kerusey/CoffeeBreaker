@@ -1,0 +1,9 @@
+{
+	"type": "espresso",
+	"strenght": 0,
+	"volume": 0,
+	"milk": false,
+	"chokolate": false,
+	"canella": false,
+	"shugar": 0
+}
