@@ -62,3 +62,8 @@ ____
 	
 	7.1) set ctrl + alt + x as a hotkey in raspbian gui settings
 ____
+
+## 8) create server 
+	8.1) write http python server
+	
+___
