@@ -1,5 +1,7 @@
 #	barista lib
 import RPi.GPIO as GPIO
+import Order
+import time
 
 UP_RELAY = 1
 DOWN_RELAY = 2
@@ -13,7 +15,9 @@ strenght_RELAY = 9
 volume_RELAY = 10
 
 def relaySetup ():
-
+	
+	GPIO.setmode(GPIO.BOARD)
+	
 	GPIO.setup(UP_RELAY, GPIO.OUT)
 	GPIO.setup(DOWN_RELAY, GPIO.OUT)
 	GPIO.setup(espresso_RELAY, GPIO.OUT)
@@ -63,17 +67,17 @@ class Barista:
 
 	def setDrink ():
 		GPIO.output(DrinkType, GPIO.HIGH)
-		delay(750)
+		time.sleep(750)
 		GPIO.output(strenght_RELAY, GPIO.HIGH) # setting drink strenght 
-		delay(750)
+		time.sleep(750)
 		for i in range (strenght):
 			GPIO.output(UP_RELAY, GPIO.HIGH)
-			delay(750)
+			time.sleep(750)
 
 		GPIO.output(volume_RELAY, GPIO.HIGH) # setting drink volume 
 		for j in range (volume):
 			GPIO.output(UP_RELAY, GPIO.HIGH)
-			delay(750)
+			time.sleep(750)
 	
 	def __init__ (self):
 		setDrink();
@@ -82,34 +86,35 @@ class Barista:
 	
 	# def addChokolate ():
 		
-	# def addCanella (): # also add delays !!!
+	# def addCanella (): # also add time.sleeps !!!
 
 	def addShugar ():
 		for i in range (shugar):
 			GPIO.output(shugar_RELAY, GPIO.HIGH) # adding shugar
-			delay(750)
+			time.sleep(750)
 	
 	def restoreSettings ():
 		GPIO.output(strenght_RELAY, GPIO.HIGH) # restoring drink strenght 
-		delay(750)
+		time.sleep(750)
 		for i in range (strenght):
 			GPIO.output(DOWN_RELAY, GPIO.HIGH)
-			delay(750)
+			time.sleep(750)
 
 		GPIO.output(volume_RELAY, GPIO.HIGH) # restoring drink volume 
 		for j in range (volume):
 			GPIO.output(DOWN_RELAY, GPIO.HIGH)
-			delay(750)
+			time.sleep(750)
 		GPIO.output(espresso, GPIO.HIGH) 
 
 	def coffeeStart():
 		addShugar()
 		GPIO.output(START_RELAY, GPIO.HIGH)
-		delay(60000) # FIXME
+		time.sleep(60000) # FIXME
 		# addMilk()
 		# addChokolate()
 		# addCanella()
 		restoreSettings();
 		# here you need to delete the log.json
 
-# coffeeCoup = Barista(espresso, 0, 0, False, False, False, 0) # Works pretty fine
+# my current cup of coffee  
+coffeeCoup = Barista(Order.getOrder()) # Works pretty fine
