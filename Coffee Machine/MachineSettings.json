@@ -1,4 +1,7 @@
 {
 	"MachineID": 1,
-	"logsPath": "/home/pi/Server/"
+	"LogsPath": "/home/pi/Server/",
+	"Ip": "http://127.0.0.1/",
+	"ServerValidationPath": "/validation/",
+	"ServerOrderPath": "/order/"
 }
