@@ -1,46 +1,62 @@
 import qrcode
 import string 
-import random
 import time
+import json
+import os
 from pynput.keyboard import Key, Controller
+from guizero import App, Picture
+import datetime
+from PIL import Image
 
-def generateString (len = 25):
-	return ''.join(random.SystemRandom().choice(string.ascii_letters + string.digits ) for _ in range(len))
+def generateString ():
+	return str(datetime.datetime.now())
 
 Suffix_const = "#¯\\_(ツ)_/¯#" # OK
 AppLink_const = "https://coffeebreaker.com" # SETME FIXME !
+MachineSettingsPath = "/home/pi/Documents/MachineSettings.json"    
 
-with open("/home/kerusey/Documents/MachineSettings.json") as json_file:
+with open(MachineSettingsPath) as json_file:
         MachineSettings = json.load(json_file)
 
 MachineID = MachineSettings['MachineID']
 
 def generateQRLink ():
-    UnicKey = generateString()
-    return AppLink_const +  Suffix_const + MachineID +  Suffix_const + UnicKey +  Suffix_const, UnicKey # QRLink func
+    Token = generateString()
+    return AppLink_const +  Suffix_const + str(MachineID) +  Suffix_const + Token +  Suffix_const, Token # QRLink func
 
 def fullscreen():
-    time.sleep(0.5)
+    time.sleep(0.1)
     keyboard = Controller()
-    keyboard.press(Key.ctrl)
     keyboard.press(Key.alt)
+    keyboard.press(Key.space)
+    time.sleep(0.5)
     keyboard.press("x")
     keyboard.release("x")
-    keyboard.release(Key.ctrl)
+    keyboard.release(Key.space)
     keyboard.release(Key.alt) # set ctrl + alt + x as a hotkey n settings !!!
-    
 
 def visualNewSession():   # !!! generates NEW token and starts NEW session !!!
     QRLink, token = generateQRLink()
-    current_image = qrcode.make(QRLink)
-    current_image.show()
-    fullscreen()
+    currentQRCode = qrcode.QRCode( 
+        version = 1,
+        error_correction = qrcode.constants.ERROR_CORRECT_M,
+        box_size = 15,
+        border = 3,
+        )
+    currentQRCode.add_data(QRLink)
+    currentQRCode.make(fit = True)
+    current_image = currentQRCode.make_image(fill_color = "black", back_color = "white")
+    current_image.save("session.png", "PNG")
+    session = Image.open("session.png").show()
     return token
 
-def closeWindow(): # OK
-    time.sleep(0.5)
+def stopSession(): # OK
+    time.sleep(1)
     keyboard = Controller()
     keyboard.press(Key.alt)
     keyboard.press(Key.f4)
     keyboard.release(Key.alt)
     keyboard.release(Key.f4)
+    os.remove("session.png")
+
+# fullscreen()
