@@ -1,15 +1,19 @@
+
 import Visualizer
 import Server
+import json
 
-current_token = Visualizer.visualNewSession() #### initialize QRCode and save current token  
 
-def serverCheck(token = current_token):
+with open(MachineSettingsPath) as json_file:
+		MachineSettings = json.load(json_file)
+
+def validateToken(token):
 	if (Server.getToken() != token): 
-		Visualizer.closeWindow()
-		# also app have to drop session => need feedback # FIXME
+		Visualizer.stopSession()
+		Server.Post(MachineSettings['MachineID'] + " terminate")
 		return Visualizer.visualNewSession()
-	else: # if (Server.getToken() == token)
-		pass # app need another feedback to resume buyer session # FIXME
+	else:
+		Server.Post(MachineSettings['MachineID'] + " fine")
 		return token
 
-# token = serverCheck() # OK
+token = serverCheck()
