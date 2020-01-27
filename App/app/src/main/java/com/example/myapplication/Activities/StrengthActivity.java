@@ -9,13 +9,13 @@ import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
-import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 
 public class StrengthActivity extends AppCompatActivity {
     SeekBar seekBar;
     Button btn_strong;
     public static String STRENGTH_CHOICE;
+    public static int STRENGTH_CHOICE1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +37,7 @@ public class StrengthActivity extends AppCompatActivity {
             public void onProgressChanged (SeekBar seekBar,int progress,
             boolean fromUser){
                 STRENGTH_CHOICE = String.valueOf(seekBar.getProgress());
+                STRENGTH_CHOICE1=seekBar.getProgress();
                 Toast.makeText(getApplicationContext(), "Степень:" + progress, Toast.LENGTH_SHORT).show();
             }
             @Override

@@ -12,6 +12,7 @@ import com.example.myapplication.R;
 public class SugarActivity extends AppCompatActivity implements View.OnClickListener {
 Button btn_0, btn_1, btn_2, btn_3, btn_4;
 public static String SUGAR_QTY;
+public static int SUGAR_QTY1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,22 +38,27 @@ public static String SUGAR_QTY;
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_0:
+                SUGAR_QTY1 =0;
                 SUGAR_QTY = String.valueOf(0);
                 startActivity(new Intent(SugarActivity.this, MilkActivity.class));
                 break;
             case R.id.btn_1:
+                SUGAR_QTY1 =1;
                 SUGAR_QTY = String.valueOf(1);
                 startActivity(new Intent(SugarActivity.this, MilkActivity.class));
                 break;
             case R.id.btn_2:
+                SUGAR_QTY1 =2;
                 SUGAR_QTY = String.valueOf(2);
                 startActivity(new Intent(SugarActivity.this, MilkActivity.class));
                 break;
             case R.id.btn_3:
+                SUGAR_QTY1 =3;
                 SUGAR_QTY = String.valueOf(3);
                 startActivity(new Intent(SugarActivity.this, MilkActivity.class));
                 break;
             case R.id.btn_4:
+                SUGAR_QTY1 =4;
                 SUGAR_QTY = String.valueOf(4);
                 startActivity(new Intent(SugarActivity.this, MilkActivity.class));
                 break;

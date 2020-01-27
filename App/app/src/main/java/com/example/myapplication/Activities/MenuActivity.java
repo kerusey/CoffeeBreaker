@@ -1,18 +1,18 @@
 package com.example.myapplication.Activities;
 
-        import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
-        import android.Manifest;
-        import android.content.Intent;
-        import android.content.pm.PackageManager;
-        import android.graphics.Color;
-        import android.os.Build;
-        import android.os.Bundle;
-        import android.view.View;
-        import android.widget.Button;
-        import android.widget.Toast;
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.os.Build;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
-        import com.example.myapplication.R;
+import com.example.myapplication.R;
 
 public class MenuActivity extends AppCompatActivity implements View.OnClickListener {
     Button btn_scan_qr, btn_machine_near, btn_my_drinks, btn_price_list, btn_options;
@@ -63,9 +63,10 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
                 btn_options.setBackgroundColor(Color.parseColor("#333333"));
                 break;
             case R.id.btn_my_drinks:
+                startActivity(new Intent(MenuActivity.this, ChoiceActivity.class));
                 break;
             case R.id.btn_price_list:
-                startActivity(new Intent(MenuActivity.this, ChoiceActivity.class));
+
                 break;
         }
 
