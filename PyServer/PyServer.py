@@ -1,7 +1,12 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
+import requests
 import json
+import os.path 
+
 app = Flask(__name__)
 
+myHost = "172.16.0.37"
+myPort = 8090
 
 @app.route("/name")
 def hello():
@@ -22,6 +27,7 @@ def postJsonOrder():
 		}
 	js = json.dumps(jjson, sort_keys=True, indent=4, separators=(',', ': '))
 	with open ('Order.json', 'w+') as f:
+		
 		f.write(js) 
 	return "#¯\\_(ツ)_/¯#"   # OK
 
@@ -34,14 +40,30 @@ def postJsonToken():
 		f.write(js) 
 	return "#¯\\_(ツ)_/¯#"   # OK
 
-@app.route('/getToken')
-def getJsonToken():
-	SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
-    json_url = os.path.join(SITE_ROOT,'static', 'test.json')
-    token = open(json_url)
-    stored_json = token.readlines()
-	token.close()
-	return stored_json # FIXME
+@app.route('/getToken/<id>')
+def getJsonToken(id):
+	path = "validations/"
+	filename = 'Validate' + str(id) + '.json'
+	if (os.path.isfile(path + filename)):
+		with open(path + filename) as json_data:
+			jsonToken = json.load(json_data)
+		os.remove(path + filename)
+		return jsonify(jsonToken)
+	else: 
+		return "0"
+
+@app.route('/getOrder/<id>')
+def getJsonOrder(id):
+	path = "orders/"
+	filename = 'Order' + str(id) + '.json'
+	if(os.path.isfile(path + filename)):
+		with open(path + filename) as json_data:
+			jsonToken = json.load(json_data)
+		os.remove(path + filename)
+		return jsonify(jsonToken)
+	else:
+		return "0"
+
 
 if __name__ == '__main__':
-	app.run(host="172.16.0.37", port=8090)
+	app.run(host=myHost, port=myPort)
