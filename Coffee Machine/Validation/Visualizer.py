@@ -59,6 +59,5 @@ def stopSession(): # OK
     keyboard.release(Key.alt)
     keyboard.release(Key.f4)
     os.remove("session.png")
-visualNewSession()
 
 # fullscreen()
