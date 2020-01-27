@@ -22,7 +22,7 @@ MachineID = MachineSettings['MachineID']
 
 def generateQRLink ():
     Token = generateString()
-    return AppLink_const +  Suffix_const + str(MachineID) +  Suffix_const + Token +  Suffix_const, Token # QRLink func
+    return AppLink_const +  Suffix_const + str(MachineID) +  Suffix_const + Token, Token # QRLink func
 
 def fullscreen():
     time.sleep(0.1)
@@ -38,16 +38,17 @@ def fullscreen():
 def visualNewSession():   # !!! generates NEW token and starts NEW session !!!
     QRLink, token = generateQRLink()
     currentQRCode = qrcode.QRCode( 
-        version = 1,
-        error_correction = qrcode.constants.ERROR_CORRECT_M,
-        box_size = 15,
+        version = 2,
+        error_correction = qrcode.constants.ERROR_CORRECT_H,
+        box_size = 10,
         border = 3,
         )
     currentQRCode.add_data(QRLink)
     currentQRCode.make(fit = True)
     current_image = currentQRCode.make_image(fill_color = "black", back_color = "white")
     current_image.save("session.png", "PNG")
-    session = Image.open("session.png").show()
+    session = Image.open(r"session.png")
+    session.show()
     return token
 
 def stopSession(): # OK
@@ -58,5 +59,6 @@ def stopSession(): # OK
     keyboard.release(Key.alt)
     keyboard.release(Key.f4)
     os.remove("session.png")
+visualNewSession()
 
 # fullscreen()
