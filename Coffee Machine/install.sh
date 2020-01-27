@@ -19,3 +19,4 @@ vncserver :1 # 5901 / 5902
 apt-get -y install python3-rpi.gpio
 apt-get install python3-tk
 mkdir /home/pi/Server
+sudo apt install imagemagick
