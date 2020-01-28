@@ -55,29 +55,29 @@ def postJsonToken(id):
 		f.write(js) 
 	return "#¯\\_(ツ)_/¯#"   # OK
 
-@app.route('/postValidationStatus/<id>', methods = ['POST'])
+@app.route('/postTokenStatus/<id>', methods = ['POST'])
 def postTokenStatus(id):
 	path = "TokenStatuses/"
 	filename = "TokenStatus" + str(id)
 	
-	content = request.args()
+	content = request.get_json()
 	jjson = {'status': content['status']}
 	js = json.dumps(jjson, sort_keys=True, indent=4, separators=(',', ': '))
 	with open (path + filename + '.json', 'w+') as f:
 		f.write(js) 
-	return "#¯\\_(ツ)_/¯#"
+	return "#¯\\_(ツ)_/¯#"   # OK
 
 @app.route('/postOrderStatus/<id>', methods = ['POST'])
 def postOrderStatus(id):
 	path = "OrderStatuses/"
-	filename = "OrderStatus"
+	filename = "OrderStatus" + str(id)
 
-	content = request.args()
+	content = request.get_json()
 	jjson = {'status': content['status']}
 	js = json.dumps(jjson, sort_keys=True, indent=4, separators=(',', ': '))
 	with open (path + filename + '.json', 'w+') as f:
 		f.write(js) 
-	return "#¯\\_(ツ)_/¯#"
+	return "#¯\\_(ツ)_/¯#"   # OK
 
 @app.route('/getToken/<id>') #  OK
 def getJsonToken(id):
