@@ -97,7 +97,6 @@ def getTokenStatus(id):
 	path = "TokenStatuses/"
 	filename = 'TokenStatus' + str(id) + '.json'
 	jsonFile = getExistance(path + filename)
-	print (jsonFile + "  :  " + str(type(jsonFile)))
 	if (jsonFile == "0"):
 		return "0"
 	else:
