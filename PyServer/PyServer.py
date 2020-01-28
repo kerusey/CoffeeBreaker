@@ -3,10 +3,20 @@ import requests
 import json
 import os.path 
 
+def getExistance(path, filename):
+	if(os.path.isfile(path + filename)):
+		with open(path + filename) as json_data:
+			jsonFile = json.load(json_data)
+		os.remove(path + filename)
+		return jsonify(jsonFile)
+	else:
+		return "0"  #  OK
+
 app = Flask(__name__)
 
-myHost = "172.16.0.37"
+myHost = "192.168.0.173"
 myPort = 8090
+
 
 @app.route("/name")
 def hello():
@@ -40,30 +50,64 @@ def postJsonToken():
 		f.write(js) 
 	return "#¯\\_(ツ)_/¯#"   # OK
 
+@app.route('/postValidationStatus/<id>', methods = ['POST'])
+def postValidationStatus(id):
+	content = request.args()
+	pass # FIXME
+
+@app.route('/postOrderStatus/<id>', methods = ['POST'])
+def postOrderStatus(id):
+	pass
+
 @app.route('/getToken/<id>')
 def getJsonToken(id):
-	path = "validations/"
+	path = "Validations/"
 	filename = 'Validate' + str(id) + '.json'
-	if (os.path.isfile(path + filename)):
+	if(os.path.isfile(path + filename)):
 		with open(path + filename) as json_data:
-			jsonToken = json.load(json_data)
+			jsonFile = json.load(json_data)
 		os.remove(path + filename)
-		return jsonify(jsonToken)
-	else: 
-		return "0"
+		return jsonify(jsonFile)
+	else:
+		return "0"  #  OK
 
 @app.route('/getOrder/<id>')
 def getJsonOrder(id):
-	path = "orders/"
+	path = "Orders/"
 	filename = 'Order' + str(id) + '.json'
 	if(os.path.isfile(path + filename)):
 		with open(path + filename) as json_data:
-			jsonToken = json.load(json_data)
+			jsonFile = json.load(json_data)
 		os.remove(path + filename)
-		return jsonify(jsonToken)
+		return jsonify(jsonFile)
 	else:
-		return "0"
+		return "0"  #  OK
 
+'''
+@app.route('/getValidationStatus/<id>')
+def getValidationStatus(id):
+	path = "ValidationStatuses/"
+	filename = 'ValidationStatus' + str(id) + '.json'
+	if(os.path.isfile(path + filename)):
+		with open(path + filename) as json_data:
+			jsonFile = json.load(json_data)
+		os.remove(path + filename)
+		return jsonify(jsonFile)
+	else:
+		return "0"  #  OK
+
+@app.route('/getOrderStatus/<id>')
+def getValidationStatus(id):
+	path = "OrderStatuses/"
+	filename = 'OrderStatus' + str(id) + '.json'
+	if(os.path.isfile(path + filename)):
+		with open(path + filename) as json_data:
+			jsonFile = json.load(json_data)
+		os.remove(path + filename)
+		return jsonify(jsonFile)
+	else:
+		return "0"  #  OK
+'''
 
 if __name__ == '__main__':
 	app.run(host=myHost, port=myPort)
