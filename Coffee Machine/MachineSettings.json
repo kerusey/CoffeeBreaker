@@ -1,7 +1,8 @@
 {
 	"MachineID": 1,
 	"LogsPath": "/home/pi/Server/",
-	"Ip": "http://127.0.0.1/",
+	"Ip": "172.16.0.40",
+	"Port": 8090,
 	"ServerValidationPath": "/validation/",
 	"ServerOrderPath": "/order/"
 }
