@@ -14,7 +14,7 @@ def getExistance(fullFileName):
 
 app = Flask(__name__)
 
-myHost = "192.168.0.173"
+myHost = "172.16.0.40"
 myPort = 8090
 
 
@@ -27,15 +27,12 @@ def hello():
 def postJsonOrder(id):
 	path = "Orders/"
 	filename = "Order" + str(id)
-
 	content = request.get_json()
 	jjson = { "MachineID": str(content['MachineID']),
 			"type": str(content['type']),
 			"strenght": int(content['strenght']),
 			"volume": int(content['volume']),
 			"milk": bool(content['milk']),
-			"chokolate": bool(content['chokolate']),
-			"canella": bool(content['canella']),
 			"shugar": int(content['shugar'])
 		}
 	js = json.dumps(jjson, sort_keys=True, indent=4, separators=(',', ': '))
@@ -83,8 +80,10 @@ def postOrderStatus(id):
 def getJsonToken(id):
 	path = "Tokens/"
 	filename = 'Token' + str(id) + '.json'
-	return jsonify(getExistance(path + filename))
-
+	if(os.path.isfile(path + filename)):
+		return jsonify(getExistance(path + filename))
+	else:
+		return "0"
 
 @app.route('/getOrder/<id>') #  OK
 def getJsonOrder(id):
