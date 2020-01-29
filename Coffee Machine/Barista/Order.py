@@ -1,8 +1,10 @@
-# Server folder home/pi/Server/orders
 import json
 import os
+import sys
+Request = sys.path.insert(1, '/home/kerusey/CoffeeMachine/Request.py')
+import Request
 
-with open("/home/pi/Documents/MachineSettings.json") as json_file:
+with open("/home/kerusey/Documents/MachineSettings.json") as json_file:
 		MachineSettings = json.load(json_file)
 
 folderPath = MachineSettings['logsPath']
