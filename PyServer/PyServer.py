@@ -17,7 +17,6 @@ app = Flask(__name__)
 myHost = "172.16.0.40"
 myPort = 8090
 
-
 @app.route("/name")
 def hello():
 	print("val")
