@@ -1,6 +1,6 @@
 # TODO file 
 ____
-## 1) response to the mobile app (Validation.py) 
+## 1) response to the mobile app (Requests.py) ✅
  description:
  
  	1.1) if app token and current token are the same, send packet with response OK / CONTINUE / etc
@@ -9,7 +9,7 @@ ____
 
 ___
 
-## 2) write a python script that allaws you to download and upload file 
+## 2) write a python script that allaws you to download and upload file ✅
  description: 
  
  	2.1) get file link by reading specific folder (ex. "validation/ID/" + machineID + "validation.json") 
@@ -19,6 +19,8 @@ ___
 	2.3) delete current file from drive and call serverCheck() func
 	
 	2.4) create a respond and post it to google drive
+	
+	RELEASED IN A DIFFERENT WAY
 ___
 
 ## 3) create architecture !!! ✅
@@ -63,7 +65,7 @@ ____
 	7.1) set ctrl + alt + x as a hotkey in raspbian gui settings
 ____
 
-## 8) create server 
+## 8) create server ✅
 	8.1) write http python server
 	
 ___
