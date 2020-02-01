@@ -1,7 +1,7 @@
 import json
 import requests
 
-MachineSettingsPath = "/home/pi/CoffeeBreaker/CoffeeMachine/MachineSettings.json"
+MachineSettingsPath = "/home/pi/Documents/MachineSettings.json"
 
 with open(MachineSettingsPath) as json_file:
         MachineSettings = json.load(json_file)
@@ -30,10 +30,12 @@ def getOrder():
 
 def postTokenStatus(status):
     codeSmile = requests.post(url + "postTokenStatus/" + str(MachineSettings['MachineID']), json={"status": status})
-    # return codeSmile
+    # return codeSmile   # optional (if you are in mood)
     # OK
 
 def postOrderStatus(status):
     codeSmile = requests.post(url + "postOrderStatus/" + str(MachineSettings['MachineID']), json={"status": status})
     # return codeSmile   # optional (if you are in mood)
     # OK
+
+
