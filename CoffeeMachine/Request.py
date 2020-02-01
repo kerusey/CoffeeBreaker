@@ -1,7 +1,7 @@
 import json
 import requests
 
-MachineSettingsPath = "/home/kerusey/CoffeeMachine/MachineSettings.json"
+MachineSettingsPath = "/home/pi/CoffeeBreaker/CoffeeMachine/MachineSettings.json"
 
 with open(MachineSettingsPath) as json_file:
         MachineSettings = json.load(json_file)
@@ -13,7 +13,7 @@ def getHelloWorld():
     print(resp.text)
 
 def getToken():
-    resp = requests.get(url + "getToken/" + str(MachineSettings['MachineID'])) 
+    resp = requests.get(url + "getToken/" + str(MachineSettings['MachineID']))
     try:
         JToken = resp.json()
         return JToken['token']

@@ -1,8 +1,12 @@
 
 from Validation import Visualizer
 from Barista import Order
+import Request
 
 def main():
-	current_token = Visualizer.visualNewSession()
-	validateToken()
-	
+	currentToken = Visualizer.visualNewSession()
+	validationStatus = Visualizer.validateToken(currentToken)
+	if(not validationStatus):
+            Visualizer.stopSession()
+
+main()
