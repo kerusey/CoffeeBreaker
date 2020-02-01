@@ -14,7 +14,7 @@ def getExistance(fullFileName):
 
 app = Flask(__name__)
 
-myHost = "172.16.0.40"
+myHost = "192.168.0.173"
 myPort = 8090
 
 @app.route("/name")
