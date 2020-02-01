@@ -1,5 +1,5 @@
 import qrcode
-import string 
+import string
 import time
 import json
 import os
@@ -8,16 +8,16 @@ from pynput.keyboard import Key, Controller
 from guizero import App, Picture
 import datetime
 from PIL import Image
-Request = sys.path.insert(1, '/home/kerusey/CoffeeMachine/Request.py')
+Request = sys.path.insert(1, '/home/pi/CoffeeBreaker/CoffeeMachine')
 import Request
 
 
 def generateString ():
-	return str(datetime.datetime.now())
+    return str(datetime.datetime.now())
 
 Suffix_const = "#¯\\_(ツ)_/¯#" # OK
 AppLink_const = "https://coffeebreaker.com" # SETME FIXME !
-MachineSettingsPath = "/home/kerusey/Documents/MachineSettings.json"    
+MachineSettingsPath = "/home/pi/Documents/MachineSettings.json"
 
 with open(MachineSettingsPath) as json_file:
         MachineSettings = json.load(json_file)
@@ -41,11 +41,11 @@ def fullscreen():
 
 def visualNewSession():   # !!! generates NEW token and starts NEW session !!!
     QRLink, token = generateQRLink()
-    currentQRCode = qrcode.QRCode( 
-        version = 1,
-        error_correction = qrcode.constants.ERROR_CORRECT_M,
-        box_size = 15,
-        border = 3,
+    currentQRCode = qrcode.QRCode(
+        version = 2,
+        error_correction = qrcode.constants.ERROR_CORRECT_H,
+        box_size = 9,
+        border = 2,
         )
     currentQRCode.add_data(QRLink)
     currentQRCode.make(fit = True)
@@ -64,9 +64,10 @@ def stopSession(): # OK
     os.remove("session.png")
 
 def validateToken(token):
-    if (Request.getToken() != token): 
+    if (Request.getToken() != token):
         return False
     else:
         return True
 
 # fullscreen()
+# visualNewSession()
