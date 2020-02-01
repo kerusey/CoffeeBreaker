@@ -1,6 +1,5 @@
 sudo apt-get update
-sudo apt-get -y upgrade
-cp CoffeeBreaker/MachineSettings.json  /home/pi/Documents
+cp MachineSettings.json  /home/pi/Documents
 sudo apt-get -y install python3
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 python3 get-pip.py
@@ -17,4 +16,5 @@ mkdir Orders
 mkdir OrderStatuses
 cd
 sudo apt-get install imagemagick
-raspi-config
+rm get-pip.py
+sudo raspi-config
