@@ -26,7 +26,7 @@ MachineID = MachineSettings['MachineID']
 
 def generateQRLink ():
     Token = generateString()
-    return AppLink_const + Suffix_const + str(MachineID) + Suffix_const + Token + Suffix_const, Token # QRLink func
+    return AppLink_const + Suffix_const + str(MachineID) + Suffix_const + Token, Token # QRLink func
 
 def fullscreen():
     time.sleep(0.1)
