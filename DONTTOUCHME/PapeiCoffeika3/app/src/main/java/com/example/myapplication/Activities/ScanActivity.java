@@ -66,7 +66,6 @@ public class ScanActivity extends AppCompatActivity {
                     public void run() {
                         LayoutInflater inflater = getLayoutInflater();
 
-
                         AlertDialog.Builder builder = new AlertDialog.Builder(ScanActivity.this);
                         View view = inflater.inflate(R.layout.dialog_stuck, null);
                         builder.setView(view);
@@ -74,7 +73,6 @@ public class ScanActivity extends AppCompatActivity {
                         String[] array= result.getText().split("#",3);
 
                         txt_parsed_url_data.setText("Ссылка: "+array[0]+"\nИндификатор: "+array[1]+"\nДата: "+array[2]);
-
 
                         AlertDialog alertDialog = builder.create();
                         alertDialog.show();

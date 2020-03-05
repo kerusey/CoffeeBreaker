@@ -18,10 +18,6 @@
         android:theme="@style/AppTheme">
         <activity android:name=".Activities.RememberActivity" />
         <activity android:name=".Activities.Result" />
-        <activity android:name=".Activities.ConfigManager" />
-        <activity android:name=".Activities.Valuem2Activity" />
-        <activity android:name=".Activities.Sugar2Activity" />
-        <activity android:name=".Activities.Milk2Activity" />
         <activity android:name=".Activities.ScanActivity" />
         <activity android:name=".Activities.MenuActivity" />
         <activity android:name=".Activities.ChoiceActivity" />

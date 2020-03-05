@@ -64,11 +64,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="70dp"
         android:layout_marginEnd="70dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="36dp"
         android:background="#E9D06C"
         android:text="Латте"
         app:layout_constraintBottom_toTopOf="@+id/btn_capuccino"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button

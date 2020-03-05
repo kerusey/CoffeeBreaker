@@ -15,22 +15,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.myapplication.R;
 
 public class ResultActivity extends AppCompatActivity implements View.OnClickListener {
+
     Button btn_accept, btn_m, btn_s, btn_v, btn_st;
     SharedPreferences answer;
-
-
-
     TextView txt_sugar, txt_milk, txt_valuem, txt_strength, txt_type, txt_price;
 
-
-
-    @SuppressLint("SetTextI18n")
+    @SuppressLint({"SetTextI18n", "DefaultLocale"})
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
         setContentView(R.layout.activity_result);
+
         answer = getSharedPreferences("answer", Context.MODE_PRIVATE);
 
         btn_accept = findViewById(R.id.btn_accept);
@@ -44,7 +39,6 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
 
         btn_v = findViewById(R.id.btn_v);
         btn_v.setOnClickListener(ResultActivity.this);
-
 
         btn_st = findViewById(R.id.btn_st);
         btn_st.setOnClickListener(ResultActivity.this);
@@ -72,23 +66,18 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_accept:
-
                 startActivity(new Intent(ResultActivity.this, OkayActivity.class));
                 break;
             case R.id.btn_s:
-
-                startActivity(new Intent(ResultActivity.this, Sugar2Activity.class));
+                startActivity(new Intent(ResultActivity.this, SugarActivity.class));
                 break;
             case R.id.btn_m:
-
-                startActivity(new Intent(ResultActivity.this, Milk2Activity.class));
+                startActivity(new Intent(ResultActivity.this, MilkActivity.class));
                 break;
             case R.id.btn_v:
-
-                startActivity(new Intent(ResultActivity.this, Valuem2Activity.class));
+                startActivity(new Intent(ResultActivity.this, ValuemActivity.class));
                 break;
             case R.id.btn_st:
-
                 startActivity(new Intent(ResultActivity.this, StrengthActivity.class));
                 break;
         }

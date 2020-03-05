@@ -17,19 +17,16 @@ public class Result extends AppCompatActivity {
     float volume;
     int sugar, strenght, price;
     SharedPreferences answer;
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
-
          answer = getSharedPreferences("answer", Context.MODE_PRIVATE);  //Выбираем файл реестра
-
-
-
     }
-    public Result(int id, String choice, int sugar, String milk, float volume, int price, int strenght){
 
+    public Result(int id, String choice, int sugar, String milk, float volume, int price, int strenght){
         this.id = id;
         this.choice = answer.getString("сoffeeType", null);
         this.sugar = answer.getInt("sugar", -1);
@@ -38,4 +35,5 @@ public class Result extends AppCompatActivity {
         this.price = answer.getInt("price", 0);
         this.strenght = answer.getInt("skbValue",-1 );
     }
+
 }
