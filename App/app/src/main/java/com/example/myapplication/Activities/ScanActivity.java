@@ -1,38 +1,28 @@
 package com.example.myapplication.Activities;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.webkit.CookieManager;
-import android.webkit.WebResourceRequest;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.Button;
-import android.widget.Toast;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
-import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.google.zxing.Result;
 
-public class ScanActivity extends AppCompatActivity  {
+public class ScanActivity extends AppCompatActivity {
 
     CodeScanner mCodeScanner;
     static final int CAMERA_PERMISSION_REQUEST_CODE = 1;
@@ -71,35 +61,22 @@ public class ScanActivity extends AppCompatActivity  {
             @Override
             public void onDecoded(@NonNull final Result result) {
                 runOnUiThread(new Runnable() {
-                    @SuppressLint("SetJavaScriptEnabled")
+                    @SuppressLint({"SetJavaScriptEnabled", "SetTextI18n"})
                     @Override
                     public void run() {
-                        webView = new WebView(ScanActivity.this);
-                        WebSettings webSettings = webView.getSettings();
-                        webSettings.setJavaScriptEnabled(true);
-                        webSettings.setBuiltInZoomControls(true);
+                        LayoutInflater inflater = getLayoutInflater();
 
-                        if (android.os.Build.VERSION.SDK_INT >= 21) {
-                            CookieManager.getInstance().setAcceptThirdPartyCookies(webView, true);
-                        } else {
-                            CookieManager.getInstance().setAcceptCookie(true);
-                        }
+                        AlertDialog.Builder builder = new AlertDialog.Builder(ScanActivity.this);
+                        View view = inflater.inflate(R.layout.dialog_stuck, null);
+                        builder.setView(view);
+                        TextView txt_parsed_url_data= view.findViewById(R.id.txt_parsed_url_data);
+                        String[] array= result.getText().split("#",3);
 
-                        webView.setVerticalScrollBarEnabled(true);
-                        webView.setHorizontalScrollBarEnabled(true);
-                        webView.loadUrl(result.getText());
+                        txt_parsed_url_data.setText("Ссылка: "+array[0]+"\nИндификатор: "+array[1]+"\nДата: "+array[2]);
 
-                        webView.setWebViewClient(new WebViewClient() {
-                            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-                            @Override
-                            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-                                view.loadUrl(request.getUrl().toString());
-                                return false;
+                        AlertDialog alertDialog = builder.create();
+                        alertDialog.show();
 
-                            }
-                        });
-                        setContentView(webView);
-                        view = webView;
                     }
                 });
             }
@@ -144,8 +121,5 @@ public class ScanActivity extends AppCompatActivity  {
             mCodeScanner.startPreview();
             setContentView(scannerView);
         }
-            super.onBackPressed();
-
     }
-
 }
