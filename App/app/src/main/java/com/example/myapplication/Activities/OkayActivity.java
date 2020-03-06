@@ -17,9 +17,11 @@ public class OkayActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_okay);
+
         btn_return = findViewById(R.id.btn_return);
-        btn_return.setOnClickListener(this);
         btn_remember = findViewById(R.id.btn_remember);
+
+        btn_return.setOnClickListener(this);
         btn_remember.setOnClickListener(this);
     }
 
@@ -27,12 +29,12 @@ public class OkayActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_return:
-                startActivity(new Intent(OkayActivity.this, MenuActivity.class));
+                startActivity(new Intent(OkayActivity.this, MenuActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 break;
             case R.id.btn_remember:
                 startActivity(new Intent(OkayActivity.this, RememberActivity.class));
+                finish();
                 break;
         }
     }
 }
-

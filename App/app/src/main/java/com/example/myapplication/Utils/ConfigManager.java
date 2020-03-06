@@ -1,4 +1,4 @@
-package com.example.myapplication.Activities;
+package com.example.myapplication.Utils;
 
 import android.Manifest;
 import android.app.Activity;
@@ -12,7 +12,6 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.myapplication.R;
-import com.example.myapplication.Utils.Variables;
 
 import java.io.BufferedReader;
 import java.io.File;

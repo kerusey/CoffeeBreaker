@@ -14,9 +14,9 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="Papei Coffeika"
+        android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
+        android:screenOrientation="portrait"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
 
@@ -33,10 +33,16 @@
         <activity android:name=".Activities.ChoiceActivity" />
         <activity android:name=".Activities.MilkActivity" />
         <activity android:name=".Activities.OkayActivity" />
-        <activity android:name=".Activities.ResultActivity" />
+        <activity android:name=".Activities.ResultActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity android:name=".Activities.StrengthActivity" />
         <activity android:name=".Activities.SugarActivity" />
-        <activity android:name=".Activities.ValuemActivity" />
+        <activity android:name=".Activities.VolumeActivity" />
     </application>
 
 </manifest>

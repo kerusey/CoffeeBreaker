@@ -19,7 +19,8 @@
         app:layout_constraintBottom_toTopOf="@+id/btn_latte_m"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
 
     <Button
         android:id="@+id/btn_espresso"
@@ -34,7 +35,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_americano" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_americano"
+        tools:ignore="HardcodedText" />
 
     <Button
         android:id="@+id/btn_americano"
@@ -49,7 +51,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_cappuccino" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_cappuccino"
+        tools:ignore="HardcodedText" />
 
     <Button
         android:id="@+id/btn_cappuccino"
@@ -63,7 +66,8 @@
         app:layout_constraintBottom_toTopOf="@+id/btn_americano"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_latte" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_latte"
+        tools:ignore="HardcodedText" />
 
     <Button
         android:id="@+id/btn_latte"
@@ -78,7 +82,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_latte_m" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_latte_m"
+        tools:ignore="HardcodedText" />
 
     <Button
         android:id="@+id/btn_latte_m"
@@ -93,6 +98,7 @@
         app:layout_constraintBottom_toTopOf="@+id/btn_latte"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_title" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_title"
+        tools:ignore="HardcodedText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

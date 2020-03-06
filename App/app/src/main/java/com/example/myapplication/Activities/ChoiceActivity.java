@@ -68,7 +68,7 @@ public class ChoiceActivity extends AppCompatActivity implements View.OnClickLis
                 break;
         }
         editor.apply();
-        startActivity(new Intent(ChoiceActivity.this, SugarActivity.class));
+        startActivity(new Intent(ChoiceActivity.this, SugarActivity.class).putExtra("editMode", false));
     }
 
     @Override

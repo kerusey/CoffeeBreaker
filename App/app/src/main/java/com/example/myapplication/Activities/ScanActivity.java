@@ -1,6 +1,5 @@
 package com.example.myapplication.Activities;
 
-
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.res.Configuration;

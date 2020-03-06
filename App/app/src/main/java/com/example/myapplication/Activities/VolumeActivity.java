@@ -11,11 +11,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.R;
 
-public class MilkActivity extends AppCompatActivity implements View.OnClickListener {
+public class VolumeActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Button btn_yes, btn_no;
-    Bundle bundle;
+    Button btn_2, btn_4;
     SharedPreferences answer;
+    Bundle bundle;
 
     @Override
     protected void onStart() {
@@ -24,34 +24,35 @@ public class MilkActivity extends AppCompatActivity implements View.OnClickListe
         bundle = getIntent().getExtras();
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_milk);
+        setContentView(R.layout.activity_volume);
 
-        btn_yes = findViewById(R.id.btn_yes);
-        btn_no = findViewById(R.id.btn_no);
+        btn_2 = findViewById(R.id.btn_2);
+        btn_4 = findViewById(R.id.btn_4);
 
-        btn_yes.setOnClickListener(this);
-        btn_no.setOnClickListener(this);
+        btn_2.setOnClickListener(this);
+        btn_4.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         SharedPreferences.Editor editor = answer.edit();
         switch (v.getId()) {
-            case R.id.btn_yes:
-                editor.putBoolean("milk", true);
+            case R.id.btn_2:
+                editor.putFloat("volume", 0.2F);//Включаем режим редактирования файла
                 break;
-            case R.id.btn_no:
-                editor.putBoolean("milk", false);
+            case R.id.btn_4:
+                editor.putFloat("volume", 0.4F);//Включаем режим редактирования файла
                 break;
         }
         editor.apply();
-        if (!bundle.getBoolean("editMode")) {
-            startActivity(new Intent(MilkActivity.this, VolumeActivity.class).putExtra("editMode", false));
-        } else {
-            startActivity(new Intent(MilkActivity.this, ResultActivity.class));
+        if (!bundle.getBoolean("editMode"))
+            startActivity(new Intent(VolumeActivity.this, StrengthActivity.class).putExtra("editMode", false));
+        else {
+            startActivity(new Intent(VolumeActivity.this, ResultActivity.class));
             finish();
         }
     }

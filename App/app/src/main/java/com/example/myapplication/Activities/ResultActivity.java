@@ -14,10 +14,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.R;
 
+import java.util.Random;
+
 public class ResultActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button btn_accept, btn_m, btn_s, btn_v, btn_st;
-    SharedPreferences answer;
     TextView txt_sugar, txt_milk, txt_valuem, txt_strength, txt_type, txt_price;
 
     @SuppressLint({"SetTextI18n", "DefaultLocale"})
@@ -26,61 +27,68 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
 
-        answer = getSharedPreferences("answer", Context.MODE_PRIVATE);
+        SharedPreferences answer = getSharedPreferences("answer", Context.MODE_PRIVATE);
 
         btn_accept = findViewById(R.id.btn_accept);
-        btn_accept.setOnClickListener(ResultActivity.this);
-
         btn_m = findViewById(R.id.btn_m);
-        btn_m.setOnClickListener(ResultActivity.this);
-
         btn_s = findViewById(R.id.btn_s);
-        btn_s.setOnClickListener(ResultActivity.this);
-
         btn_v = findViewById(R.id.btn_v);
-        btn_v.setOnClickListener(ResultActivity.this);
-
         btn_st = findViewById(R.id.btn_st);
+        txt_sugar = findViewById(R.id.txt_sugar);
+
+        btn_accept.setOnClickListener(ResultActivity.this);
+        btn_m.setOnClickListener(ResultActivity.this);
+        btn_s.setOnClickListener(ResultActivity.this);
+        btn_v.setOnClickListener(ResultActivity.this);
         btn_st.setOnClickListener(ResultActivity.this);
 
-        txt_sugar = findViewById(R.id.txt_sugar);
-        txt_sugar.setText(String.format("%d", answer.getInt("shugar", -1)));
+        txt_sugar.setText(String.format("%d", answer.getInt("sugar", -1)));
 
         txt_milk = findViewById(R.id.txt_milk);
-        txt_milk.setText(String.format("%s", answer.getString("milkw", null)));
+        if (!answer.getBoolean("milk", true))
+            txt_milk.setText("Нет");
+        else
+            txt_milk.setText("Да");
 
         txt_valuem = findViewById(R.id.txt_valuem);
-        txt_valuem.setText(String.format("%s", answer.getString("valuem", null)));
+        if (answer.getFloat("volume", -0F) != 0.2F)
+            txt_valuem.setText("0.4 Л");
+        else
+            txt_valuem.setText("0.2 Л");
 
         txt_strength = findViewById(R.id.txt_strength);
-        txt_strength.setText(String.format("%d", answer.getInt("strenght", -1)));
+        if (answer.getInt("strength", -1) <= 0)
+            txt_strength.setText("0");
+        else
+            txt_strength.setText(String.format("%d", answer.getInt("strength", -1)));
 
-        txt_type = findViewById(R.id.txt_type);
+        txt_type = findViewById(R.id.txt_coffee_type);
         txt_type.setText(String.format("%s", answer.getString("сoffeeType", null)));
 
         txt_price = findViewById(R.id.txt_price);
-        txt_price.setText(String.format("%d", answer.getInt("price", -1)));
+        txt_price.setText((new Random().nextInt(999) + 1) + "\u20bd");
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.btn_accept:
                 startActivity(new Intent(ResultActivity.this, OkayActivity.class));
                 break;
             case R.id.btn_s:
-                startActivity(new Intent(ResultActivity.this, SugarActivity.class));
+                startActivity(new Intent(ResultActivity.this, SugarActivity.class).putExtra("editMode", true));
                 break;
             case R.id.btn_m:
-                startActivity(new Intent(ResultActivity.this, MilkActivity.class));
+                startActivity(new Intent(ResultActivity.this, MilkActivity.class).putExtra("editMode", true));
                 break;
             case R.id.btn_v:
-                startActivity(new Intent(ResultActivity.this, ValuemActivity.class));
+                startActivity(new Intent(ResultActivity.this, VolumeActivity.class).putExtra("editMode", true));
                 break;
             case R.id.btn_st:
                 startActivity(new Intent(ResultActivity.this, StrengthActivity.class));
                 break;
         }
     }
+
 
 }

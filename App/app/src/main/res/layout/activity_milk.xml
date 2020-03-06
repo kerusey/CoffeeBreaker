@@ -4,49 +4,56 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.StrengthActivity">
+    tools:context=".Activities.MilkActivity">
 
     <ImageView
-        android:id="@+id/imageView7"
+        android:id="@+id/imageView5"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="72dp"
         android:layout_marginEnd="72dp"
         android:layout_marginBottom="32dp"
         android:src="@drawable/ic_cup"
-        app:layout_constraintBottom_toTopOf="@+id/skb_straight"
+        app:layout_constraintBottom_toTopOf="@+id/btn_no"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_title" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_title"
+        tools:ignore="ContentDescription" />
 
     <Button
-        android:id="@+id/btn_strong"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
-        android:layout_marginEnd="72dp"
-        android:layout_marginBottom="32dp"
-        android:background="#E9D06C"
-        android:text="Подтвердить"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.987"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <SeekBar
-        android:id="@+id/skb_straight"
+        android:id="@+id/btn_yes"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="32dp"
-        android:max="7"
-        android:min="1"
-        android:progress="1"
-        app:layout_constraintBottom_toTopOf="@+id/btn_strong"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="64dp"
+        android:background="#E9D06C"
+        android:text="Да"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_no"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView7" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView5"
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/btn_no"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="64dp"
+        android:background="#E9D06C"
+        android:text="Нет"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btn_yes"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5"
+        tools:ignore="HardcodedText" />
 
     <TextView
         android:id="@+id/txt_title"
@@ -54,13 +61,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="32dp"
-        android:text="Настройте крепкость"
+        android:text="Настройте количество молоко"
         android:textAlignment="center"
+        android:textAllCaps="false"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/imageView7"
+        app:layout_constraintBottom_toTopOf="@+id/imageView5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,8 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.Activities.ChoiceActivity;
-import com.example.myapplication.Activities.ConfigManager;
 import com.example.myapplication.Activities.ScanActivity;
+import com.example.myapplication.Utils.ConfigManager;
 import com.example.myapplication.Utils.Variables;
 
 public class MenuActivity extends AppCompatActivity implements View.OnClickListener {
