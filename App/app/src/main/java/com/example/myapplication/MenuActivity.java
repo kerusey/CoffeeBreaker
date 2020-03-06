@@ -10,7 +10,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,10 +17,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.myapplication.Activities.ChoiceActivity;
 import com.example.myapplication.Activities.ConfigManager;
 import com.example.myapplication.Activities.ScanActivity;
+import com.example.myapplication.Utils.Variables;
 
 public class MenuActivity extends AppCompatActivity implements View.OnClickListener {
     Button btn_scan_qr, btn_machine_near, btn_my_drinks, btn_price_list, btn_options;
-    private static final int CAMERA_PERMISSION_REQUEST_CODE = 1;
 
     @Override
     protected void onStart() {
@@ -63,7 +62,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_scan_qr:
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                        requestPermissions(new String[]{Manifest.permission.CAMERA}, 1);
+                        requestPermissions(new String[]{Manifest.permission.CAMERA}, Variables.CAMERA_PERMISSION_REQUEST_CODE());
                     } else {
                         startActivity(new Intent(MenuActivity.this, ScanActivity.class));
                     }
@@ -90,11 +89,9 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == CAMERA_PERMISSION_REQUEST_CODE) {// If request is cancelled, the result arrays are empty.
+        if (requestCode == Variables.CAMERA_PERMISSION_REQUEST_CODE()) {// If request is cancelled, the result arrays are empty.
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                //Start your camera handling here
-            } else {
-                Toast.makeText(MenuActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MenuActivity.this, ScanActivity.class));
             }
         }
     }

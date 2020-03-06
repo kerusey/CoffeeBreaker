@@ -12,6 +12,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.myapplication.R;
+import com.example.myapplication.Utils.Variables;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -20,7 +21,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class ConfigManager  {
-    private static final int REQUEST_CODE_WRITE_EXTERNAL_STORAGE_PERMISSION = 1;
     public ConfigManager(Context context, String content, String filename) {
         File root = new File(Environment.getExternalStorageDirectory(),
                 context.getString(R.string.app_name));
@@ -78,13 +78,13 @@ public class ConfigManager  {
             ActivityCompat
                     .requestPermissions((Activity) context,
                             new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                            REQUEST_CODE_WRITE_EXTERNAL_STORAGE_PERMISSION);
+                            Variables.WRITE_EXTERNAL_STORAGE_PERMISSION_REQUEST_CODE());
         }
     }
 
     public static void onRequestPermissionsResult(Context context, int requestCode,
                                                   @NonNull int[] grantResults) {
-        if (requestCode == REQUEST_CODE_WRITE_EXTERNAL_STORAGE_PERMISSION) {
+        if (requestCode == Variables.WRITE_EXTERNAL_STORAGE_PERMISSION_REQUEST_CODE()) {
             int grantResultsLength = grantResults.length;
             if (grantResultsLength > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(context.getApplicationContext(),
