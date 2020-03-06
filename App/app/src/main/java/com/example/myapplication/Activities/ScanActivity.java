@@ -1,11 +1,8 @@
 package com.example.myapplication.Activities;
 
 
-import android.Manifest;
 import android.annotation.SuppressLint;
-import android.content.pm.PackageManager;
 import android.content.res.Configuration;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
@@ -23,31 +20,9 @@ import com.google.zxing.Result;
 public class ScanActivity extends AppCompatActivity {
 
     CodeScanner mCodeScanner;
-    static final int CAMERA_PERMISSION_REQUEST_CODE = 1;
     View view;
     CodeScannerView scannerView;
     WebView webView;
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(new String[]{Manifest.permission.CAMERA}, 1);
-            }
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        if (requestCode
-                == CAMERA_PERMISSION_REQUEST_CODE) {// If request is cancelled, the result arrays are empty.
-            if (grantResults.length <= 0 || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                finish();
-            }
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +59,6 @@ public class ScanActivity extends AppCompatActivity {
                 mCodeScanner.startPreview();
             }
         });
-
     }
 
     @Override
@@ -101,11 +75,9 @@ public class ScanActivity extends AppCompatActivity {
 
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
-        // TODO Auto-generated method stub
         super.onConfigurationChanged(newConfig);
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             System.out.println("this's landscape");
-
         } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
             System.out.println("this's portrait");
         }
@@ -116,6 +88,8 @@ public class ScanActivity extends AppCompatActivity {
         if (view == webView) {
             mCodeScanner.startPreview();
             setContentView(scannerView);
+        } else {
+            super.onBackPressed();
         }
     }
 }
