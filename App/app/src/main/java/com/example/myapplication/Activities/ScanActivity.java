@@ -7,7 +7,6 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.TextView;
@@ -19,7 +18,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
-import com.example.myapplication.R;
 import com.google.zxing.Result;
 
 public class ScanActivity extends AppCompatActivity {
@@ -64,19 +62,17 @@ public class ScanActivity extends AppCompatActivity {
                     @SuppressLint({"SetJavaScriptEnabled", "SetTextI18n"})
                     @Override
                     public void run() {
-                        LayoutInflater inflater = getLayoutInflater();
-
                         AlertDialog.Builder builder = new AlertDialog.Builder(ScanActivity.this);
-                        View view = inflater.inflate(R.layout.dialog_stuck, null);
-                        builder.setView(view);
-                        TextView txt_parsed_url_data= view.findViewById(R.id.txt_parsed_url_data);
-                        String[] array= result.getText().split("#",3);
 
-                        txt_parsed_url_data.setText("Ссылка: "+array[0]+"\nИндификатор: "+array[1]+"\nДата: "+array[2]);
+                        TextView textView = new TextView(ScanActivity.this);
+                        textView.setPadding(16, 16, 16, 16);
+                        builder.setView(textView);
+
+                        String[] array = result.getText().split("#", 3);
+                        textView.setText("Ссылка: " + array[0] + "\nИндификатор: " + array[1] + "\nДата: " + array[2]);
 
                         AlertDialog alertDialog = builder.create();
                         alertDialog.show();
-
                     }
                 });
             }
@@ -104,7 +100,7 @@ public class ScanActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onConfigurationChanged(Configuration newConfig) {
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
         // TODO Auto-generated method stub
         super.onConfigurationChanged(newConfig);
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {

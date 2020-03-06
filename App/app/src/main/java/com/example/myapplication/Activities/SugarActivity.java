@@ -12,18 +12,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.myapplication.R;
 
 public class SugarActivity extends AppCompatActivity implements View.OnClickListener {
-Button btn_0, btn_1, btn_2, btn_3, btn_4;
+    Button btn_0, btn_1, btn_2, btn_3, btn_4;
     SharedPreferences.Editor editor;  //Выделение памяти под редактор настроек
     SharedPreferences answer;
+
     //TODO он скажет
     @Override
     protected void onStart() {
         super.onStart();
-        answer  = getSharedPreferences("answer", Context.MODE_PRIVATE); //Выбираем файл реестра
+        answer = getSharedPreferences("answer", Context.MODE_PRIVATE); //Выбираем файл реестра
 
 
     }
-//public static String SUGAR_QTY;
+
+    //public static String SUGAR_QTY;
 //public static int SUGAR_QTY1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
