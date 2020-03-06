@@ -1,9 +1,9 @@
 package com.example.myapplication.Activities;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +22,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+
         btn_scan_qr = findViewById(R.id.btn_scan_qr);
         btn_scan_qr.setOnClickListener(MenuActivity.this);
 
@@ -40,39 +41,40 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     //TODO перекинуть на мои напитки и вымышленный прайс лист
+    @SuppressLint("SetTextI18n")
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_scan_qr:
-
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                         requestPermissions(new String[]{Manifest.permission.CAMERA}, 1);
-                    }
-                    else {
+                    } else {
                         startActivity(new Intent(MenuActivity.this, ScanActivity.class));
                     }
+                } else {
+                    startActivity(new Intent(MenuActivity.this, ScanActivity.class));
                 }
-
                 break;
             case R.id.btn_machine_near:
+                btn_machine_near.setText("Coming Soon");
                 break;
             case R.id.btn_options:
-                btn_options.setText("Паша умница и красавица" );
-                btn_options.setTextColor(Color.argb(100, 238, 42, 27));
-                btn_options.setBackgroundColor(Color.parseColor("#333333"));
+                btn_options.setText("Coming Soon");
                 break;
             case R.id.btn_my_drinks:
                 startActivity(new Intent(MenuActivity.this, ChoiceActivity.class));
                 break;
             case R.id.btn_price_list:
 
+                btn_price_list.setText("Coming Soon");
                 break;
         }
 
     }
+
     @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         switch (requestCode) {
             case CAMERA_PERMISSION_REQUEST_CODE:
                 // If request is cancelled, the result arrays are empty.
