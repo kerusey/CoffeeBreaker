@@ -27,17 +27,14 @@ public class RememberActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_remember);
-        Gson gson = new Gson();
 
-        cfgManager = new ConfigManager(this, gson.toJson(new Result(1, "C", 1, "M", 0F, 1, 1)), "somefile");  //Создаём конфиг
+        cfgManager = new ConfigManager(this, new Gson().toJson(new Result(this, 1, "C", 1, "M", 0F, 1, 1)), "somefile");  //Создаём конфиг
         btn_menu = findViewById(R.id.btn_menu);
 
         btn_menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 startActivity(new Intent(RememberActivity.this, MenuActivity.class));
-
             }
         });
     }
