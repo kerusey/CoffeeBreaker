@@ -69,7 +69,7 @@ public class ScanActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void scannerStuck(Result result) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(ScanActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         TextView textView = new TextView(ScanActivity.this);
         textView.setPadding(16, 16, 16, 16);

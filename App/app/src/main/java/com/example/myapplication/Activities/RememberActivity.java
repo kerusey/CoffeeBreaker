@@ -19,10 +19,9 @@ public class RememberActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
         ConfigManager.permissionCheck(this);   //Запрашиваем права
-
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

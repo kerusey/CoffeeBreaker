@@ -22,14 +22,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btn_expresso"
+        android:id="@+id/btn_espresso"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="72dp"
         android:layout_marginEnd="72dp"
         android:layout_marginBottom="64dp"
         android:background="#E9D06C"
-        android:text="Экспрессо"
+        android:text="Эспрессо"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,14 +45,14 @@
         android:layout_marginBottom="24dp"
         android:background="#E9D06C"
         android:text="Американо"
-        app:layout_constraintBottom_toTopOf="@+id/btn_expresso"
+        app:layout_constraintBottom_toTopOf="@+id/btn_espresso"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_capuccino" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_cappuccino" />
 
     <Button
-        android:id="@+id/btn_capuccino"
+        android:id="@+id/btn_cappuccino"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="72dp"
@@ -74,7 +74,7 @@
         android:layout_marginBottom="24dp"
         android:background="#E9D06C"
         android:text="Латте"
-        app:layout_constraintBottom_toTopOf="@+id/btn_capuccino"
+        app:layout_constraintBottom_toTopOf="@+id/btn_cappuccino"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -88,7 +88,7 @@
         android:layout_marginEnd="72dp"
         android:layout_marginBottom="24dp"
         android:background="#E9D06C"
-        android:text="Латте макьиато"
+        android:text="Латте макиато"
         android:textColor="#000000"
         app:layout_constraintBottom_toTopOf="@+id/btn_latte"
         app:layout_constraintEnd_toEndOf="parent"
