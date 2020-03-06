@@ -2,10 +2,9 @@ package com.example.myapplication.Activities;
 
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.view.View;
-import android.webkit.WebView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,9 +19,7 @@ import com.google.zxing.Result;
 public class ScanActivity extends AppCompatActivity {
 
     CodeScanner mCodeScanner;
-    View view;
     CodeScannerView scannerView;
-    WebView webView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,29 +31,11 @@ public class ScanActivity extends AppCompatActivity {
             @Override
             public void onDecoded(@NonNull final Result result) {
                 runOnUiThread(new Runnable() {
-                    @SuppressLint({"SetJavaScriptEnabled", "SetTextI18n"})
                     @Override
                     public void run() {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(ScanActivity.this);
-
-                        TextView textView = new TextView(ScanActivity.this);
-                        textView.setPadding(16, 16, 16, 16);
-                        builder.setView(textView);
-
-                        String[] array = result.getText().split("#", 3);
-                        textView.setText("Ссылка: " + array[0] + "\nИндификатор: " + array[1] + "\nДата: " + array[2]);
-
-                        AlertDialog alertDialog = builder.create();
-                        alertDialog.show();
+                        scannerStuck(result);
                     }
                 });
-            }
-        });
-
-        scannerView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mCodeScanner.startPreview();
             }
         });
     }
@@ -74,6 +53,11 @@ public class ScanActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
+    @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -83,13 +67,25 @@ public class ScanActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        if (view == webView) {
-            mCodeScanner.startPreview();
-            setContentView(scannerView);
-        } else {
-            super.onBackPressed();
-        }
+    @SuppressLint("SetTextI18n")
+    private void scannerStuck(Result result) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(ScanActivity.this);
+
+        TextView textView = new TextView(ScanActivity.this);
+        textView.setPadding(16, 16, 16, 16);
+        builder.setView(textView);
+
+        String[] array = result.getText().split("#", 3);
+        textView.setText("Ссылка: " + array[0] + "\nИндификатор: " + array[1] + "\nДата: " + array[2]);
+
+        builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                mCodeScanner.startPreview();
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 }
