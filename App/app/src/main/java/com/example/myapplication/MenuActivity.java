@@ -1,8 +1,10 @@
-package com.example.myapplication.Activities;
+package com.example.myapplication;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -10,13 +12,26 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.myapplication.R;
+import com.example.myapplication.Activities.ChoiceActivity;
+import com.example.myapplication.Activities.ConfigManager;
+import com.example.myapplication.Activities.ScanActivity;
 
 public class MenuActivity extends AppCompatActivity implements View.OnClickListener {
     Button btn_scan_qr, btn_machine_near, btn_my_drinks, btn_price_list, btn_options;
     private static final int CAMERA_PERMISSION_REQUEST_CODE = 1;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        SharedPreferences answer = getSharedPreferences("answer", Context.MODE_PRIVATE); //Выбираем файл реестра
+        ConfigManager.permissionCheck(this);
+        SharedPreferences.Editor editor = answer.edit();  //Включаем режим редактирования файла
+        editor.clear();          //Чистим реестар
+        editor.apply();          //Сохроняем настройки
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,15 +89,13 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        switch (requestCode) {
-            case CAMERA_PERMISSION_REQUEST_CODE:
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    //Start your camera handling here
-                } else {
-                    Toast.makeText(MenuActivity.this, "Error", Toast.LENGTH_SHORT).show();
-                }
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == CAMERA_PERMISSION_REQUEST_CODE) {// If request is cancelled, the result arrays are empty.
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                //Start your camera handling here
+            } else {
+                Toast.makeText(MenuActivity.this, "Error", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

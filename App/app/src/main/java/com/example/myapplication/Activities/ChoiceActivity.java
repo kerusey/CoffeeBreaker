@@ -12,17 +12,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.myapplication.R;
 
 public class ChoiceActivity extends AppCompatActivity implements View.OnClickListener {
-Button btn_latte_m, btn_latte, btn_capuccino, btn_americano, btn_expresso;
+    Button btn_latte_m, btn_latte, btn_capuccino, btn_americano, btn_expresso;
     //TODO он скажет
     SharedPreferences answer;
     SharedPreferences.Editor editor;
-//public static String TYPE_CHOICE;
-@Override
-protected void onStart() {
-    super.onStart();
-    answer  = getSharedPreferences("answer", Context.MODE_PRIVATE); //Выбираем файл реестра
 
-}
+    //public static String TYPE_CHOICE;
+    @Override
+    protected void onStart() {
+        super.onStart();
+        answer = getSharedPreferences("answer", Context.MODE_PRIVATE); //Выбираем файл реестра
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,39 +46,38 @@ protected void onStart() {
         btn_expresso.setOnClickListener(ChoiceActivity.this);
 
 
-
     }
 
-//TODO сохранить какой напиток выбрали
+    //TODO сохранить какой напиток выбрали
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.btn_latte_m:
-                editor =answer.edit();
+                editor = answer.edit();
                 editor.putString("сoffeeType", "Латте Макиято");
                 editor.apply();
                 startActivity(new Intent(ChoiceActivity.this, SugarActivity.class));
                 break;
             case R.id.btn_latte:
-                editor =answer.edit();
+                editor = answer.edit();
                 editor.putString("сoffeeType", "Латте");
                 editor.apply();
                 startActivity(new Intent(ChoiceActivity.this, SugarActivity.class));
                 break;
             case R.id.btn_capuccino:
-                editor =answer.edit();
+                editor = answer.edit();
                 editor.putString("сoffeeType", "Капучино");
                 editor.apply();
                 startActivity(new Intent(ChoiceActivity.this, SugarActivity.class));
                 break;
             case R.id.btn_americano:
-                editor =answer.edit();
+                editor = answer.edit();
                 editor.putString("сoffeeType", "Американо");
                 editor.apply();
                 startActivity(new Intent(ChoiceActivity.this, SugarActivity.class));
                 break;
             case R.id.btn_expresso:
-                editor =answer.edit();
+                editor = answer.edit();
                 editor.putString("сoffeeType", "Экспрессо");
                 editor.apply();
                 startActivity(new Intent(ChoiceActivity.this, SugarActivity.class));

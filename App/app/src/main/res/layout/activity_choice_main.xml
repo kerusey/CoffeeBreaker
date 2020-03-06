@@ -6,84 +6,93 @@
     android:layout_height="match_parent"
     tools:context=".Activities.ChoiceActivity">
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="254dp"
-        android:layout_height="72dp"
+    <TextView
+        android:id="@+id/txt_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
-        android:src="@drawable/ic_resurs"
+        android:layout_marginBottom="64dp"
+        android:text="Выберите напиток"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/btn_latte_m"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btn_expresso"
         android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="70dp"
-        android:layout_marginEnd="70dp"
-        android:layout_marginBottom="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:layout_marginEnd="72dp"
+        android:layout_marginBottom="64dp"
         android:background="#E9D06C"
         android:text="Экспрессо"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_americano" />
 
     <Button
         android:id="@+id/btn_americano"
         android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="70dp"
-        android:layout_marginEnd="70dp"
-        android:layout_marginBottom="40dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:layout_marginEnd="72dp"
+        android:layout_marginBottom="24dp"
         android:background="#E9D06C"
         android:text="Американо"
         app:layout_constraintBottom_toTopOf="@+id/btn_expresso"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_capuccino" />
 
     <Button
         android:id="@+id/btn_capuccino"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="70dp"
-        android:layout_marginEnd="70dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginEnd="72dp"
+        android:layout_marginBottom="24dp"
         android:background="#E9D06C"
         android:text="Капучино"
         app:layout_constraintBottom_toTopOf="@+id/btn_americano"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_latte" />
 
     <Button
         android:id="@+id/btn_latte"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="70dp"
-        android:layout_marginEnd="70dp"
-        android:layout_marginBottom="36dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginEnd="72dp"
+        android:layout_marginBottom="24dp"
         android:background="#E9D06C"
         android:text="Латте"
         app:layout_constraintBottom_toTopOf="@+id/btn_capuccino"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_latte_m" />
 
     <Button
         android:id="@+id/btn_latte_m"
         android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="70dp"
-        android:layout_marginEnd="70dp"
-        android:layout_marginBottom="40dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:layout_marginEnd="72dp"
+        android:layout_marginBottom="24dp"
         android:background="#E9D06C"
         android:text="Латте макьиато"
         android:textColor="#000000"
         app:layout_constraintBottom_toTopOf="@+id/btn_latte"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_title" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
