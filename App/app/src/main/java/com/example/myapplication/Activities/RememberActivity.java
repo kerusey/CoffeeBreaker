@@ -12,6 +12,7 @@ import com.example.myapplication.MenuActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.Utils.ConfigManager;
 
+@SuppressWarnings("EmptyMethod")
 public class RememberActivity extends AppCompatActivity {
     ConfigManager cfgManager;
     Button btn_menu;

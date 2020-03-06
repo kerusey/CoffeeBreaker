@@ -133,7 +133,7 @@
             android:textAlignment="center"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/txt_valuem"
+            app:layout_constraintEnd_toStartOf="@+id/txt_volume"
             app:layout_constraintStart_toEndOf="@+id/txt_sugar"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -148,7 +148,7 @@
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/txt_valuem"
+            app:layout_constraintStart_toEndOf="@+id/txt_volume"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -166,7 +166,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/txt_valuem"
+            android:id="@+id/txt_volume"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"

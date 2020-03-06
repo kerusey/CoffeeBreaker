@@ -19,7 +19,7 @@ import java.util.Random;
 public class ResultActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button btn_accept, btn_m, btn_s, btn_v, btn_st;
-    TextView txt_sugar, txt_milk, txt_valuem, txt_strength, txt_type, txt_price;
+    TextView txt_sugar, txt_milk, txt_volume, txt_strength, txt_type, txt_price;
 
     @SuppressLint({"SetTextI18n", "DefaultLocale"})
     @Override
@@ -50,11 +50,11 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
         else
             txt_milk.setText("Да");
 
-        txt_valuem = findViewById(R.id.txt_valuem);
+        txt_volume = findViewById(R.id.txt_volume);
         if (answer.getFloat("volume", -0F) != 0.2F)
-            txt_valuem.setText("0.4 Л");
+            txt_volume.setText("0.4 Л");
         else
-            txt_valuem.setText("0.2 Л");
+            txt_volume.setText("0.2 Л");
 
         txt_strength = findViewById(R.id.txt_strength);
         if (answer.getInt("strength", -1) <= 0)
