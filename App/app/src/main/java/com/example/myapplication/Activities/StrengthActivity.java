@@ -1,23 +1,32 @@
 package com.example.myapplication.Activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
-import android.widget.Toast;
 
-import com.example.myapplication.MainActivity;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.myapplication.R;
 
 public class StrengthActivity extends AppCompatActivity {
-    SeekBar seekBar;
+
     Button btn_strong;
-    public static String STRENGTH_CHOICE;
+    SeekBar skb_straight;             //Выделение памяти под SeekBar
+    SharedPreferences answer;         //Выделение памяти под реестр настроек
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        answer = getSharedPreferences("answer", Context.MODE_PRIVATE); //Выбираем файл реестра
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_strength);
 
@@ -25,29 +34,31 @@ public class StrengthActivity extends AppCompatActivity {
         btn_strong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                startActivity(new Intent(StrengthActivity.this, ResultActivity.class));
-
+                startActivity(new Intent(StrengthActivity.this, ResultActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         });
 
-        seekBar= findViewById(R.id.seekBar);
-        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        skb_straight = findViewById(R.id.skb_straight);
+        skb_straight.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
-            public void onProgressChanged (SeekBar seekBar,int progress,
-            boolean fromUser){
-                STRENGTH_CHOICE = String.valueOf(seekBar.getProgress());
-                Toast.makeText(getApplicationContext(), "Степень:" + progress, Toast.LENGTH_SHORT).show();
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {  //Получаем информацию после каждого пекредкижения
+                SharedPreferences.Editor editor = answer.edit();               //Включаем режим редактирования файла
+                editor.putInt("strength", progress);  //Устанавливаем переменной skbValue значения получаемое с SeekBar
+                editor.apply();                       //Сохроняем настройки
             }
+
             @Override
-            public void onStartTrackingTouch (SeekBar seekBar){
-                Toast.makeText(getApplicationContext(), "Регулируйте ползунком ", Toast.LENGTH_SHORT).show();
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
             }
+
             @Override
-            public void onStopTrackingTouch (SeekBar seekBar){
-                Toast.makeText(getApplicationContext(), "Подтвердите!", Toast.LENGTH_SHORT).show();
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
             }
         });
     }
-
 }
+
+
+

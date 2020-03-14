@@ -15,7 +15,7 @@ import Request
 def generateString ():
     return str(datetime.datetime.now())
 
-Suffix_const = "#¯\\_(ツ)_/¯#" # OK
+Suffix_const = "#" # OK
 AppLink_const = "https://coffeebreaker.com" # SETME FIXME !
 MachineSettingsPath = "/home/pi/Documents/MachineSettings.json"
 
@@ -26,7 +26,7 @@ MachineID = MachineSettings['MachineID']
 
 def generateQRLink ():
     Token = generateString()
-    return AppLink_const +  Suffix_const + str(MachineID) +  Suffix_const + Token +  Suffix_const, Token # QRLink func
+    return AppLink_const + Suffix_const + str(MachineID) + Suffix_const + Token, Token # QRLink func
 
 def fullscreen():
     time.sleep(0.1)
