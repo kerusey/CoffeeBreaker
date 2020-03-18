@@ -1,4 +1,4 @@
- from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify
 import requests
 import json
 import os.path
@@ -14,7 +14,7 @@ def getExistance(fullFileName):
 
 app = Flask(__name__)
 
-myHost = "172.16.0.40"
+myHost = "192.168.0.173"
 myPort = 8090
 
 @app.route("/name")
@@ -58,7 +58,7 @@ def postTokenStatus(id):
 
 	content = request.get_json()
 	jjson = {'status':content['status']}
-	js = json.dumps(jjson, sort_keys=True, indent=4, separators=(',', ':''))
+	js = json.dumps(jjson, sort_keys=True, indent=4, separators=(',', ':'))
 	with open (path + filename + '.json', 'w+') as f:
 		f.write(js)
 	return "#¯\\_(ツ)_/¯#"   # OK
