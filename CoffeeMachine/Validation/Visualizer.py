@@ -29,15 +29,17 @@ def generateQRLink ():
     return AppLink_const + Suffix_const + str(MachineID) + Suffix_const + Token, Token # QRLink func
 
 def fullscreen():
-    time.sleep(0.1)
+    time.sleep(0.7)
+    
     keyboard = Controller()
     keyboard.press(Key.alt)
-    keyboard.press(Key.space)
-    time.sleep(0.5)
-    keyboard.press("x")
-    keyboard.release("x")
-    keyboard.release(Key.space)
-    keyboard.release(Key.alt) # set ctrl + alt + x as a hotkey n settings !!!
+    
+    time.sleep(0.3)
+    keyboard.press(Key.f11)
+    time.sleep(0.3)
+    keyboard.release(Key.f11)
+    
+    keyboard.release(Key.alt) # OK
 
 def visualNewSession():   # !!! generates NEW token and starts NEW session !!!
     QRLink, token = generateQRLink()
@@ -52,6 +54,7 @@ def visualNewSession():   # !!! generates NEW token and starts NEW session !!!
     current_image = currentQRCode.make_image(fill_color = "black", back_color = "white")
     current_image.save("session.png", "PNG")
     session = Image.open("session.png").show()
+    fullscreen()
     return token
 
 def stopSession(): # OK
@@ -68,6 +71,4 @@ def validateToken(token):
         return False
     else:
         return True
-
-# fullscreen()
-# visualNewSession()
+    
