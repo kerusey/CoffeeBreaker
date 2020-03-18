@@ -79,10 +79,7 @@ def postOrderStatus(id):
 def getJsonToken(id):
 	path = "Tokens/"
 	filename = 'Token' + str(id) + '.json'
-	if(os.path.isfile(path + filename)):
-		return jsonify(getExistance(path + filename))
-	else:
-		return "0"
+	return jsonify(getExistance(path + filename))
 
 @app.route('/getOrder/<id>') #  OK
 def getJsonOrder(id):
