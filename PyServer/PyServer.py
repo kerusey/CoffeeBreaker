@@ -1,7 +1,7 @@
-from flask import Flask, request, jsonify
+ from flask import Flask, request, jsonify
 import requests
 import json
-import os.path 
+import os.path
 
 def getExistance(fullFileName):
 	if(os.path.isfile(fullFileName)):
@@ -24,60 +24,60 @@ def hello():
 
 @app.route('/postOrder/<id>', methods = ['POST'])
 def postJsonOrder(id):
-	path = "Orders/"
+	path = "./Orders/"
 	filename = "Order" + str(id)
 	content = request.get_json()
-	jjson = { "MachineID": str(content['MachineID']),
-			"type": str(content['type']),
-			"strenght": int(content['strenght']),
-			"volume": int(content['volume']),
-			"milk": bool(content['milk']),
-			"shugar": int(content['shugar'])
+	jjson = { "MachineID":str(content['MachineID']),
+			"type":str(content['type']),
+			"strenght":int(content['strenght']),
+			"volume":int(content['volume']),
+			"milk":bool(content['milk']),
+			"shugar":int(content['shugar'])
 		}
-	js = json.dumps(jjson, sort_keys=True, indent=4, separators=(',', ': '))
+	js = json.dumps(jjson, sort_keys=True, indent=4, separators=(',', ':'))
 	with open (path + filename + '.json', 'w+') as f:
-		f.write(js) 
+		f.write(js)
 	return "#¯\\_(ツ)_/¯#"   # OK
 
 @app.route('/postToken/<id>', methods = ['POST'])
 def postJsonToken(id):
-	path = "Tokens/"
+	path = "./Tokens/"
 	filename = "Token" + str(id)
 
 	content = request.get_json()
-	jjson = {'token': content['token']}
-	js = json.dumps(jjson, sort_keys=True, indent=4, separators=(',', ': '))
+	jjson = {'token':content['token']}
+	js = json.dumps(jjson, sort_keys=True, indent=4, separators=(',', ':'))
 	with open (path + filename + '.json', 'w+') as f:
-		f.write(js) 
+		f.write(js)
 	return "#¯\\_(ツ)_/¯#"   # OK
 
 @app.route('/postTokenStatus/<id>', methods = ['POST'])
 def postTokenStatus(id):
-	path = "TokenStatuses/"
+	path = "./TokenStatuses/"
 	filename = "TokenStatus" + str(id)
-	
+
 	content = request.get_json()
-	jjson = {'status': content['status']}
-	js = json.dumps(jjson, sort_keys=True, indent=4, separators=(',', ': '))
+	jjson = {'status':content['status']}
+	js = json.dumps(jjson, sort_keys=True, indent=4, separators=(',', ':''))
 	with open (path + filename + '.json', 'w+') as f:
-		f.write(js) 
+		f.write(js)
 	return "#¯\\_(ツ)_/¯#"   # OK
 
 @app.route('/postOrderStatus/<id>', methods = ['POST'])
 def postOrderStatus(id):
-	path = "OrderStatuses/"
+	path = "./OrderStatuses/"
 	filename = "OrderStatus" + str(id)
 
 	content = request.get_json()
 	jjson = {'status': content['status']}
 	js = json.dumps(jjson, sort_keys=True, indent=4, separators=(',', ': '))
 	with open (path + filename + '.json', 'w+') as f:
-		f.write(js) 
+		f.write(js)
 	return "#¯\\_(ツ)_/¯#"   # OK
 
 @app.route('/getToken/<id>') #  OK
 def getJsonToken(id):
-	path = "Tokens/"
+	path = "./Tokens/"
 	filename = 'Token' + str(id) + '.json'
 	if(os.path.isfile(path + filename)):
 		return jsonify(getExistance(path + filename))
@@ -86,13 +86,13 @@ def getJsonToken(id):
 
 @app.route('/getOrder/<id>') #  OK
 def getJsonOrder(id):
-	path = "Orders/"
+	path = "./Orders/"
 	filename = 'Order' + str(id) + '.json'
 	return jsonify(getExistance(path + filename))
 
 @app.route('/getTokenStatus/<id>') #  OK
 def getTokenStatus(id):
-	path = "TokenStatuses/"
+	path = "./TokenStatuses/"
 	filename = 'TokenStatus' + str(id) + '.json'
 	jsonFile = getExistance(path + filename)
 	if (jsonFile == "0"):
@@ -102,7 +102,7 @@ def getTokenStatus(id):
 
 @app.route('/getOrderStatus/<id>') #  OK
 def getOrderStatus(id):
-	path = "OrderStatuses/"
+	path = "./OrderStatuses/"
 	filename = 'OrderStatus' + str(id) + '.json'
 	jsonFile = getExistance(path + filename)
 	if (jsonFile == "0"):
