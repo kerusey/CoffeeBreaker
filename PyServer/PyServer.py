@@ -14,17 +14,18 @@ def getExistance(fullFileName):
 
 app = Flask(__name__)
 
-myHost = "192.168.0.173"
+myHost = "192.168.0.102"
 myPort = 8090
 
-@app.route("/name")
+@app.route("/")
 def hello():
 	print("val")
 	return "Hello World!"
 
 @app.route('/postOrder/<id>', methods = ['POST'])
 def postJsonOrder(id):
-	path = "Orders/"
+	BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+	path = BASE_DIR + "/Orders/"
 	filename = "Order" + str(id)
 	content = request.get_json()
 	jjson = { "MachineID": int(content['MachineID']),
@@ -34,26 +35,30 @@ def postJsonOrder(id):
 			"milk": bool(content['milk']),
 			"shugar": int(content['shugar'])
 		}
+
 	js = json.dumps(jjson, sort_keys=True, indent=4, separators=(',', ': '))
 	with open (path + filename + '.json', 'w+') as f:
 		f.write(js)
-	return "#"   # OK
+
+	return "#" # OK 
 
 @app.route('/postToken/<id>', methods = ['POST'])
 def postJsonToken(id):
-	path = "Tokens/"
+	BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+	path = BASE_DIR + "/Tokens/"
 	filename = "Token" + str(id)
-
 	content = request.get_json()
 	jjson = {'token':content['token']}
 	js = json.dumps(jjson, sort_keys=True, indent=4, separators=(',', ': '))
 	with open (path + filename + '.json', 'w+') as f:
 		f.write(js)
+
 	return "#"   # OK
 
 @app.route('/postTokenStatus/<id>', methods = ['POST'])
 def postTokenStatus(id):
-	path = "TokenStatuses/"
+	BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+	path = BASE_DIR + "/TokenStatuses/"
 	filename = "TokenStatus" + str(id)
 
 	content = request.get_json()
@@ -61,11 +66,13 @@ def postTokenStatus(id):
 	js = json.dumps(jjson, sort_keys=True, indent=4, separators=(',', ': '))
 	with open (path + filename + '.json', 'w+') as f:
 		f.write(js)
+	
 	return "#"   # OK
 
 @app.route('/postOrderStatus/<id>', methods = ['POST'])
 def postOrderStatus(id):
-	path = "OrderStatuses/"
+	BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+	path = BASE_DIR + "/OrderStatuses/"
 	filename = "OrderStatus" + str(id)
 
 	content = request.get_json()
@@ -73,23 +80,27 @@ def postOrderStatus(id):
 	js = json.dumps(jjson, sort_keys=True, indent=4, separators=(',', ': '))
 	with open (path + filename + '.json', 'w+') as f:
 		f.write(js)
+	
 	return "#"   # OK
 
 @app.route('/getToken/<id>') #  OK
 def getJsonToken(id):
-	path = "Tokens/"
+	BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+	path = BASE_DIR + "/Tokens/"
 	filename = 'Token' + str(id) + '.json'
 	return jsonify(getExistance(path + filename))
 
 @app.route('/getOrder/<id>') #  OK
 def getJsonOrder(id):
-	path = "Orders/"
+	BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+	path = BASE_DIR + "/Orders/"
 	filename = 'Order' + str(id) + '.json'
 	return jsonify(getExistance(path + filename))
 
 @app.route('/getTokenStatus/<id>') #  OK
 def getTokenStatus(id):
-	path = "TokenStatuses/"
+	BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+	path = BASE_DIR + "/TokenStatuses/"
 	filename = 'TokenStatus' + str(id) + '.json'
 	jsonFile = getExistance(path + filename)
 	if (jsonFile == "0"):
@@ -99,14 +110,14 @@ def getTokenStatus(id):
 
 @app.route('/getOrderStatus/<id>') #  OK
 def getOrderStatus(id):
-	path = "OrderStatuses/"
+	BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+	path = BASE_DIR + "/OrderStatuses/"
 	filename = 'OrderStatus' + str(id) + '.json'
 	jsonFile = getExistance(path + filename)
 	if (jsonFile == "0"):
 		return "0"
 	else:
 		return jsonFile['status']
-
 
 if __name__ == '__main__':
 	app.run(host=myHost, port=myPort)
