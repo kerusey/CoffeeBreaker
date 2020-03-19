@@ -1,4 +1,4 @@
-package space.fstudio.lio.coffeebreaker.Activitys;
+package space.fstudio.lio.coffeebreaker.Activities;
 
 import android.os.Bundle;
 
