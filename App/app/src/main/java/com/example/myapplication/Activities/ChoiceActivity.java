@@ -52,19 +52,19 @@ public class ChoiceActivity extends AppCompatActivity implements View.OnClickLis
         SharedPreferences.Editor editor = answer.edit();
         switch (v.getId()) {
             case R.id.btn_latte_m:
-                editor.putString("сoffeeType", "Латте макиато");
+                editor.putString("coffeeType", "Латте макиато");
                 break;
             case R.id.btn_latte:
-                editor.putString("сoffeeType", "Латте");
+                editor.putString("coffeeType", "Латте");
                 break;
             case R.id.btn_cappuccino:
-                editor.putString("сoffeeType", "Капучино");
+                editor.putString("coffeeType", "Капучино");
                 break;
             case R.id.btn_americano:
-                editor.putString("сoffeeType", "Американо");
+                editor.putString("coffeeType", "Американо");
                 break;
             case R.id.btn_espresso:
-                editor.putString("сoffeeType", "Эспрессо");
+                editor.putString("coffeeType", "Эспрессо");
                 break;
         }
         editor.apply();

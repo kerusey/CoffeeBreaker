@@ -19,6 +19,8 @@ import com.example.myapplication.Activities.ScanActivity;
 import com.example.myapplication.Utils.ConfigManager;
 import com.example.myapplication.Utils.Variables;
 
+import static com.example.myapplication.Utils.Variables.CAMERA_PERMISSION_REQUEST_CODE;
+
 public class MenuActivity extends AppCompatActivity implements View.OnClickListener {
     Button btn_scan_qr, btn_machine_near, btn_my_drinks, btn_price_list, btn_options;
 
@@ -62,7 +64,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_scan_qr:
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                        requestPermissions(new String[]{Manifest.permission.CAMERA}, Variables.CAMERA_PERMISSION_REQUEST_CODE());
+                        requestPermissions(new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_REQUEST_CODE);
                     } else {
                         startActivity(new Intent(MenuActivity.this, ScanActivity.class));
                     }
@@ -89,7 +91,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == Variables.CAMERA_PERMISSION_REQUEST_CODE()) {// If request is cancelled, the result arrays are empty.
+        if (requestCode == CAMERA_PERMISSION_REQUEST_CODE) {// If request is cancelled, the result arrays are empty.
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 startActivity(new Intent(MenuActivity.this, ScanActivity.class));
             }

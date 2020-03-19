@@ -63,7 +63,7 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
             txt_strength.setText(String.format("%d", answer.getInt("strength", -1)));
 
         txt_type = findViewById(R.id.txt_coffee_type);
-        txt_type.setText(String.format("%s", answer.getString("сoffeeType", null)));
+        txt_type.setText(String.format("%s", answer.getString("coffeeType", null)));
 
         txt_price = findViewById(R.id.txt_price);
         txt_price.setText((new Random().nextInt(999) + 1) + "\u20bd");

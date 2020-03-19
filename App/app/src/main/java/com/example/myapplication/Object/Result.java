@@ -5,20 +5,18 @@ import android.content.SharedPreferences;
 
 public class Result {
 
-    private int id;
-    private String choice, milk;
-    private float volume;
-    private int sugar, strength, price;
+    private int shugar, strenght, volume, MachineID;
+    private String type;
+    private boolean milk;
 
-    public Result(Context context, int id, String choice, int sugar, String milk, float volume, int price, int strength) {
+    public Result(Context context, int MachineID, String type, int shugar, boolean milk, int volume, int strenght) {
         SharedPreferences answer = context.getSharedPreferences("answer", Context.MODE_PRIVATE);  //Выбираем файл реестра
-        this.id = id;
-        this.choice = answer.getString("coffeeType", null);
-        this.sugar = answer.getInt("sugar", -1);
-        this.milk = answer.getString("milk", null);
-        this.volume = answer.getFloat("volume", 0F);
-        this.price = answer.getInt("price", 0);
-        this.strength = answer.getInt("skbValue", -1);
+        this.MachineID = MachineID;
+        this.type = answer.getString("coffeeType", "espresso");
+        this.strenght = answer.getInt("skbValue", 0);
+        this.volume = (int) answer.getFloat("volume", 0);
+        this.milk = answer.getBoolean("milk", false);
+        this.shugar = answer.getInt("sugar", 0);
     }
 
 }
