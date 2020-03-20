@@ -3,8 +3,6 @@ package com.example.myapplication.Activities;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.res.Configuration;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,19 +14,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
-import com.example.myapplication.R;
-import com.example.myapplication.Utils.Variables;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.zxing.Result;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
-import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -141,7 +134,7 @@ public class ScanActivity extends AppCompatActivity {
 
         client.newCall(request).enqueue(new Callback() {
             @Override
-            public void onFailure(Call call, IOException e) {
+            public void onFailure(final Call call, final IOException e) {
                 // Cancel the post on failure.
                 call.cancel();
 
@@ -149,6 +142,7 @@ public class ScanActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        e.printStackTrace();
                         Toast.makeText(ScanActivity.this, "Error", Toast.LENGTH_SHORT).show();
                     }
                 });
