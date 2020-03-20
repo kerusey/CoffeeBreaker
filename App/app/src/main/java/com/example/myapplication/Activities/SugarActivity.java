@@ -20,8 +20,8 @@ public class SugarActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onStart() {
         super.onStart();
-        answer = getSharedPreferences("answer", Context.MODE_PRIVATE); //Выбираем файл реестра
-        bundle = getIntent().getExtras();
+        answer = getSharedPreferences("answer", Context.MODE_PRIVATE); //Выбираем файл реестра, и говорим о том, что доступ есть только у нашей программы
+        bundle = getIntent().getExtras();//объявляем намерение на чтение данных из контеёнера данных
     }
 
     @Override
@@ -62,12 +62,12 @@ public class SugarActivity extends AppCompatActivity implements View.OnClickList
                 editor.putInt("sugar", 4);  //Устанавливаем переменной btnValue значения true
                 break;
         }
-        editor.apply();
-        if (!bundle.getBoolean("editMode"))
-            startActivity(new Intent(SugarActivity.this, MilkActivity.class).putExtra("editMode", false));
+        editor.apply();// применить измиенения и закрытт редактор
+        if (!bundle.getBoolean("editMode"))//editMode- переменная, которая заполняется в странице результатов, по умолчанию это false
+            startActivity(new Intent(SugarActivity.this, MilkActivity.class).putExtra("editMode", false));//переходим в следущую активити
         else {
-            startActivity(new Intent(SugarActivity.this, ResultActivity.class));
-            finish();
+            startActivity(new Intent(SugarActivity.this, ResultActivity.class));//возвращаемся обратно на страницу резельтатов
+            finish();//стирание страницы
         }
     }
 }

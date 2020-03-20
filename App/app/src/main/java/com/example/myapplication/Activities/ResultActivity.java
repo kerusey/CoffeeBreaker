@@ -21,7 +21,7 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
     Button btn_accept, btn_m, btn_s, btn_v, btn_st;
     TextView txt_sugar, txt_milk, txt_volume, txt_strength, txt_type, txt_price;
 
-    @SuppressLint({"SetTextI18n", "DefaultLocale"})
+    @SuppressLint({"SetTextI18n", "DefaultLocale"})//игорирование английского текста
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
