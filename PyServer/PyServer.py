@@ -72,7 +72,7 @@ def postOrderStatus(id):
 	content = request.get_json()
 
 	jjson = {'status': content['status']}
-	
+		
 	return dumping(jjson, path + filename)
 
 @app.route('/getToken/<id>') #  OK
@@ -98,7 +98,6 @@ def getTokenStatus(id):
 	path = myPath + "/TokenStatuses/"
 	filename = 'TokenStatus' + str(id) + '.json'
 	jsonFile = getExistance(path + filename)
-	print(jsonFile)
 	return "0" if (jsonFile == 0) else jsonFile
 
 @app.route('/getOrderStatus/<id>') #  OK
