@@ -7,7 +7,6 @@ def getExistance(fullFileName):
 	if(os.path.isfile(fullFileName)):
 		with open(fullFileName) as json_data:
 			jsonFile = json.load(json_data)
-		os.remove(fullFileName)
 		return jsonFile
 	else:
 		return "0"  #  OK
@@ -20,7 +19,7 @@ def dumping(jjson, fullFileName):
 
 app = Flask(__name__)
 
-myHost = "192.168.0.173"
+myHost = "192.168.0.102"
 myPort = 8090
 myPath = os.path.dirname(os.path.abspath(__file__))
 
@@ -80,15 +79,19 @@ def postOrderStatus(id):
 def getJsonToken(id):
 	path = myPath + "/Tokens/"
 	filename = 'Token' + str(id) + '.json'
-	
-	return jsonify(getExistance(path + filename))
+
+	responce = jsonify(getExistance(path + filename))
+	os.remove(path + filename)
+	return responce
 
 @app.route('/getOrder/<id>') #  OK
 def getJsonOrder(id):
 	path = myPath + "/Orders/"
 	filename = 'Order' + str(id) + '.json'
 	
-	return jsonify(getExistance(path + filename))
+	responce = jsonify(getExistance(path + filename))
+	os.remove(path + filename)
+	return responce
 
 @app.route('/getTokenStatus/<id>') #  OK
 def getTokenStatus(id):
