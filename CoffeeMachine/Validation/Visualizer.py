@@ -60,14 +60,12 @@ def visualNewSession():   # !!! generates NEW token and starts NEW session !!!
 def stopSession(): # OK
     time.sleep(1)
     keyboard = Controller()
-    keyboard.press(Key.alt)
-    keyboard.press(Key.f4)
-    keyboard.release(Key.alt)
-    keyboard.release(Key.f4)
+    keyboard.press(Key.space)
+    keyboard.release(Key.space)
     os.remove("session.png")
 
 def validateToken(token):
     if (Request.getToken() != token):
-        return False
+        return "FAILED"
     else:
-        return True
+        return "OK"

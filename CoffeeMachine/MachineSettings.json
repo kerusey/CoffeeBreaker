@@ -1,7 +1,7 @@
 {
 	"MachineID": 1,
 	"LogsPath": "/home/pi/Server/",
-	"Ip": "172.16.0.40",
+	"Ip": "fstudio.space",
 	"Port": 8090,
 	"ServerValidationPath": "/validation/",
 	"ServerOrderPath": "/order/"

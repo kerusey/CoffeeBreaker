@@ -14,8 +14,8 @@ def getOrder():
     with open(folderPath + fileName) as json_file:
         json_data = json.load(json_file)
     #
-    coffeeType = json_data['type']
-    strenght = json_data['strenght']
+    coffeeType = json_data['coffeeType']
+    strenght = json_data['strength']
     volume = json_data['volume']
     milk = json_data['milk']
     chokolate = json_data['chokolate']
