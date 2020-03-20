@@ -2,6 +2,7 @@ package com.example.myapplication.Activities;
 
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -14,6 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
+import com.example.myapplication.MenuActivity;
+import com.example.myapplication.Object.StatusScan;
 import com.google.gson.Gson;
 import com.google.zxing.Result;
 
@@ -34,7 +37,7 @@ public class ScanActivity extends AppCompatActivity {
 
     CodeScanner mCodeScanner;
     CodeScannerView scannerView;
-
+    String[] array;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +52,7 @@ public class ScanActivity extends AppCompatActivity {
                     public void run() {
                         try {
 //                            scannerStuck(result);
-                            jsonToServer(result);
+                            jsonToServer(result);//передаем id кофемашины на сервер (отдельная функция)
                         } catch (Exception e) {
                             Toast.makeText(ScanActivity.this, "Некоректный QR код", Toast.LENGTH_SHORT).show();
                             mCodeScanner.startPreview();
@@ -84,7 +87,7 @@ public class ScanActivity extends AppCompatActivity {
     }
 
     @SuppressLint("SetTextI18n")
-    private void scannerStuck(Result result) {
+    private void scannerStuck(Result result) {//заглушка
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         TextView textView = new TextView(ScanActivity.this);
@@ -106,27 +109,43 @@ public class ScanActivity extends AppCompatActivity {
     }
 
     private void jsonToServer(Result result) {
-        String[] array = result.getText().split("#", 3);
+        array = result.getText().split("#", 3);
         /* 0 = URL, 1 = ID, 2 = TIME */
 //        connectServer(array[0], array[1]);
-        connectServer(SERVER_DEFAULT_ADDRESS, array[1]);
+        connectServer(SERVER_DEFAULT_ADDRESS, array[1], array[2]);
     }
 
-    void connectServer(String ipv4Address, String id) {
-        String postUrl = "http://" + ipv4Address + ":" + SERVER_DEFAULT_PORT + "/postOrder/" + id;
+    private void jsonToServer1(String[] array) {
+
+
+        connectServer1(SERVER_DEFAULT_ADDRESS, array[1]);
+    }
+
+    void connectServer(String ipv4Address, String id, String token) {
+        String postUrl = "http://" + ipv4Address + ":" + SERVER_DEFAULT_PORT + "/postToken/" + id;
 
         MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
-        String json = new Gson().toJson(new com.example.myapplication.Object.Result(this, 1, "C", 1, false, 0, 1));
+        String json = new Gson().toJson(new com.example.myapplication.Object.Token(this, token));
         System.out.println(json);
         RequestBody postBody = RequestBody.create(mediaType, json);
 
         postRequest(postUrl, postBody);
     }
 
-    void postRequest(String postUrl, RequestBody postBody) {
+    void connectServer1(String ipv4Address, String id) {
+        String postUrl = "http://" + ipv4Address + ":" + SERVER_DEFAULT_PORT + "/postTokenStatus/" + id;
+
+        MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
+        String json = new Gson().toJson(new StatusScan(this, "Scaned"));
+        System.out.println(json);
+        RequestBody postBody = RequestBody.create(mediaType, json);
+
+        postRequest1(postUrl, postBody);
+    }
+
+    void postRequest1(String postUrl, RequestBody postBody) {
 
         OkHttpClient client = new OkHttpClient();
-
         Request request = new Request.Builder()
                 .url(postUrl)
                 .post(postBody)
@@ -143,7 +162,7 @@ public class ScanActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         e.printStackTrace();
-                        Toast.makeText(ScanActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ScanActivity.this, "Не удалось подключиться к Интернету", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -159,6 +178,87 @@ public class ScanActivity extends AppCompatActivity {
                             System.out.println("======DEBUG======");
                             System.out.println(response.body().string());
                             System.out.println("======DEBUG======");
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    try {
+//                            scannerStuck(result);
+                                        jsonToServer1(array);//передаем статус
+                                    } catch (Exception e) {
+                                        mCodeScanner.startPreview();
+                                        e.printStackTrace();
+                                    }
+                                }
+                            });
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
+        });
+    }
+    void postRequest(String postUrl, RequestBody postBody) {
+
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(postUrl)
+                .post(postBody)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(final Call call, final IOException e) {
+                // Cancel the post on failure.
+                call.cancel();
+
+                // In order to access the TextView inside the UI thread, the code is executed inside runOnUiThread()
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        e.printStackTrace();
+                        Toast.makeText(ScanActivity.this, "Не удалось подключиться к Интернету", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+
+            @Override
+            public void onResponse(Call call, final Response response) throws IOException {
+                // In order to access the TextView inside the UI thread, the code is executed inside runOnUiThread()
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            assert response.body() != null;
+                            String otv = response.body().string();
+                            System.out.println(otv);
+                            System.out.println("======DEBUG======");
+                            System.out.println(otv);
+                            System.out.println("======DEBUG======");
+
+                            if (otv.equals("#")) {
+
+                                System.out.println("??????");
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        try {
+//                            scannerStuck(result);
+                                            jsonToServer1(array);//передаем статус
+                                        } catch (Exception e) {
+                                            mCodeScanner.startPreview();
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                });
+                                startActivity(new Intent(ScanActivity.this, ChoiceActivity.class).putExtra("array", array));
+                            } else {
+                                Toast.makeText(ScanActivity.this, "Не удалось подключиться к Интернету", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(ScanActivity.this, MenuActivity.class));
+
+
+                            }
                         } catch (IOException e) {
                             e.printStackTrace();
                         }

@@ -17,6 +17,7 @@ public class MilkActivity extends AppCompatActivity implements View.OnClickListe
     Bundle bundle;
     SharedPreferences answer;
 
+    //17 24 51
     @Override
     protected void onStart() {
         super.onStart();

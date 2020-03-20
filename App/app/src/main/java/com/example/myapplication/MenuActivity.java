@@ -14,10 +14,8 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.myapplication.Activities.ChoiceActivity;
 import com.example.myapplication.Activities.ScanActivity;
 import com.example.myapplication.Utils.ConfigManager;
-import com.example.myapplication.Utils.Variables;
 
 import static com.example.myapplication.Utils.Variables.CAMERA_PERMISSION_REQUEST_CODE;
 
@@ -79,7 +77,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
                 btn_options.setText("Coming Soon");
                 break;
             case R.id.btn_my_drinks:
-                startActivity(new Intent(MenuActivity.this, ChoiceActivity.class));
+
                 break;
             case R.id.btn_price_list:
 
