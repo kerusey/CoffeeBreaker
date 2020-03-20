@@ -34,9 +34,9 @@ def postJsonOrder(id):
 	filename = "Order" + str(id)
 	content = request.get_json()
 
-	jjson ={"MachineID": int(content['MachineID']),
-			"type": str(content['type']),
-			"strenght": int(content['strenght']),
+	jjson ={"machineId": int(content['machineId']),
+			"coffeeType": str(content['coffeeType']),
+			"strength": int(content['strength']),
 			"volume": int(content['volume']),
 			"milk": bool(content['milk']),
 			"shugar": int(content['shugar'])
