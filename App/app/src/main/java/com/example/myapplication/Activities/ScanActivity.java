@@ -121,6 +121,12 @@ public class ScanActivity extends AppCompatActivity {
         connectServer1(SERVER_DEFAULT_ADDRESS, array[1]);
     }
 
+    private void jsonToServer2(String[] array) {
+
+
+        connectServer2(SERVER_DEFAULT_ADDRESS, array[1]);
+    }
+
     void connectServer(String ipv4Address, String id, String token) {
         String postUrl = "http://" + ipv4Address + ":" + SERVER_DEFAULT_PORT + "/postToken/" + id;
 
@@ -143,6 +149,9 @@ public class ScanActivity extends AppCompatActivity {
         postRequest1(postUrl, postBody);
     }
 
+    void connectServer2(String ipv4Address, String id) {
+        System.out.println("УРРРРРРРРАААААААААААААААА");
+    }
 
     void postRequest1(String postUrl, RequestBody postBody) {
 
@@ -184,7 +193,7 @@ public class ScanActivity extends AppCompatActivity {
                                 public void run() {
                                     try {
 //                            scannerStuck(result);
-                                        jsonToServer1(array);//передаем статус
+                                        jsonToServer2(array);//передаем статус
                                     } catch (Exception e) {
                                         mCodeScanner.startPreview();
                                         e.printStackTrace();
