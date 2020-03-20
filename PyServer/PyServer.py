@@ -3,10 +3,18 @@ import requests
 import json
 import os.path
 
-def getExistance(fullFileName):
+app = Flask(__name__)
+
+myHost = "192.168.0.102"
+myPort = 8090
+myPath = os.path.dirname(os.path.abspath(__file__))
+
+def getExistance(fullFileName, remove=False):
 	if(os.path.isfile(fullFileName)):
 		with open(fullFileName) as json_data:
 			jsonFile = json.load(json_data)
+		if(remove):
+			os.remove(fullFileName)
 		return jsonFile
 	else:
 		return "0"  #  OK
@@ -16,12 +24,6 @@ def dumping(jjson, fullFileName):
 	with open (fullFileName + '.json', 'w+') as f:
 		f.write(js)
 	return "#" # OK
-
-app = Flask(__name__)
-
-myHost = "192.168.0.102"
-myPort = 8090
-myPath = os.path.dirname(os.path.abspath(__file__))
 
 @app.route("/")
 def hello():
@@ -44,16 +46,14 @@ def postJsonOrder(id):
 
 	return dumping(jjson, path + filename)
 
+
 @app.route('/postToken/<id>', methods = ['POST'])
 def postJsonToken(id):
 	path = myPath + "/Tokens/"
 	filename = "Token" + str(id)
 	content = request.get_json()
-
 	jjson = {'token': content['token']}
-
 	return dumping(jjson, path + filename)
-
 
 @app.route('/postTokenStatus/<id>', methods = ['POST'])
 def postTokenStatus(id):
@@ -80,17 +80,15 @@ def getJsonToken(id):
 	path = myPath + "/Tokens/"
 	filename = 'Token' + str(id) + '.json'
 
-	responce = jsonify(getExistance(path + filename))
-	os.remove(path + filename)
+	responce = jsonify(getExistance(path + filename, True))
 	return responce
 
 @app.route('/getOrder/<id>') #  OK
 def getJsonOrder(id):
 	path = myPath + "/Orders/"
 	filename = 'Order' + str(id) + '.json'
-
-	responce = jsonify(getExistance(path + filename))
-	os.remove(path + filename)
+	
+	responce = jsonify(getExistance(path + filename, True))
 	return responce
 
 @app.route('/getTokenStatus/<id>') #  OK
