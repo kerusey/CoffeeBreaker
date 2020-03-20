@@ -14,7 +14,7 @@ def scanActivity():
 		timer += 1
 		if (timer >= 90):
 			timer = 1      # OK
-	
+
 	validationStatus = Visualizer.validateToken(currentToken)
 	Request.postTokenStatus(validationStatus)
 	if(validationStatus == "FAILED"):
@@ -22,30 +22,30 @@ def scanActivity():
 		os.remove(ssesion.png) # FAILCHECK
 		time.sleep(10)
 		return True
-	
+
 	return False
-	
+
 def finalOrder():
 	Request.postOrderStatus("Waiting")
-	
+
 	timer = 1
 	while(Request.getOrderStatus() == "Waiting"):
 		time.sleep(timer)
 		timer += 1
 		if (timer >= 90):
 			timer = 1      # OK
-	
+
 	return Request.getOrder()
-	
-	
+
+
 def main():
 	flag = True
 	while flag:
 		flag = scanActivity()
 	jsonOrder = finalOrder()
-	
-	# Barista.make(jsonOrder) 
-	
-	
-	
+
+	# Barista.make(jsonOrder)
+
+
+
 main()

@@ -15,11 +15,11 @@ def dumping(jjson, fullFileName):
 	js = json.dumps(jjson, sort_keys=True, indent=4, separators=(',', ': '))
 	with open (fullFileName + '.json', 'w+') as f:
 		f.write(js)
-	return "#" # OK 
+	return "#" # OK
 
 app = Flask(__name__)
 
-myHost = "192.168.0.173"
+myHost = "192.168.0.102"
 myPort = 8090
 myPath = os.path.dirname(os.path.abspath(__file__))
 
@@ -33,7 +33,7 @@ def postJsonOrder(id):
 	path = myPath + "/Orders/"
 	filename = "Order" + str(id)
 	content = request.get_json()
-	
+
 	jjson ={"MachineID": int(content['MachineID']),
 			"type": str(content['type']),
 			"strenght": int(content['strenght']),
@@ -60,9 +60,9 @@ def postTokenStatus(id):
 	path = myPath + "/TokenStatuses/"
 	filename = "TokenStatus" + str(id)
 	content = request.get_json()
-	
+
 	jjson = {'status':content['status']}
-	
+
 	return dumping(jjson, path + filename)
 
 @app.route('/postOrderStatus/<id>', methods = ['POST'])
@@ -72,7 +72,7 @@ def postOrderStatus(id):
 	content = request.get_json()
 
 	jjson = {'status': content['status']}
-		
+
 	return dumping(jjson, path + filename)
 
 @app.route('/getToken/<id>') #  OK
@@ -88,7 +88,7 @@ def getJsonToken(id):
 def getJsonOrder(id):
 	path = myPath + "/Orders/"
 	filename = 'Order' + str(id) + '.json'
-	
+
 	responce = jsonify(getExistance(path + filename))
 	os.remove(path + filename)
 	return responce

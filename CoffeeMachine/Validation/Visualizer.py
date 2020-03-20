@@ -30,15 +30,15 @@ def generateQRLink ():
 
 def fullscreen():
     time.sleep(0.7)
-    
+
     keyboard = Controller()
     keyboard.press(Key.alt)
-    
+
     time.sleep(0.3)
     keyboard.press(Key.f11)
     time.sleep(0.3)
     keyboard.release(Key.f11)
-    
+
     keyboard.release(Key.alt) # OK
 
 def visualNewSession():   # !!! generates NEW token and starts NEW session !!!
