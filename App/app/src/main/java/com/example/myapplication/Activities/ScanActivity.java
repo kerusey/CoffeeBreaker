@@ -143,6 +143,7 @@ public class ScanActivity extends AppCompatActivity {
         postRequest1(postUrl, postBody);
     }
 
+
     void postRequest1(String postUrl, RequestBody postBody) {
 
         OkHttpClient client = new OkHttpClient();
@@ -199,6 +200,8 @@ public class ScanActivity extends AppCompatActivity {
             }
         });
     }
+
+
     void postRequest(String postUrl, RequestBody postBody) {
 
         OkHttpClient client = new OkHttpClient();
