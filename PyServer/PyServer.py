@@ -19,7 +19,7 @@ def dumping(jjson, fullFileName):
 
 app = Flask(__name__)
 
-myHost = "192.168.0.102"
+myHost = "192.168.0.173"
 myPort = 8090
 myPath = os.path.dirname(os.path.abspath(__file__))
 
@@ -98,14 +98,15 @@ def getTokenStatus(id):
 	path = myPath + "/TokenStatuses/"
 	filename = 'TokenStatus' + str(id) + '.json'
 	jsonFile = getExistance(path + filename)
-	return "0" if (jsonFile == "0")	else jsonFile['status']
+	print(jsonFile)
+	return "0" if (jsonFile == 0) else jsonFile
 
 @app.route('/getOrderStatus/<id>') #  OK
 def getOrderStatus(id):
 	path = myPath + "/OrderStatuses/"
 	filename = 'OrderStatus' + str(id) + '.json'
 	jsonFile = getExistance(path + filename)
-	return "0" if (jsonFile == "0")	else jsonFile['status']
+	return "0" if (jsonFile == "0")	else jsonFile
 
 if __name__ == '__main__':
 	app.run(host=myHost, port=myPort)
