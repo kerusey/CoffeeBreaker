@@ -32,6 +32,7 @@ import okhttp3.Response;
 import static com.example.myapplication.Utils.Variables.SERVER_DEFAULT_ADDRESS;
 import static com.example.myapplication.Utils.Variables.SERVER_DEFAULT_PORT;
 
+
 public class ScanActivity extends AppCompatActivity {
     Result result;
     CodeScanner mCodeScanner;
@@ -186,12 +187,64 @@ public class ScanActivity extends AppCompatActivity {
                             System.out.println(otv);
                             System.out.println("======DEBUG======");
                             if (otv.equals("#")) {
-                                startActivity(new Intent(ScanActivity.this, ChoiceActivity.class).putExtra("array", array));
+                                Toast.makeText(ScanActivity.this, "Отправился запрос ", Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(ScanActivity.this, "Пересканьте QR-код", Toast.LENGTH_SHORT).show();
                                 finish();
                             }
+                            GetUrl(SERVER_DEFAULT_ADDRESS, array[1]);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
+        });
 
+    }
+
+    void GetUrl(String ipv4Address, String id) {
+        String getUrl = "http://" + ipv4Address + ":" + SERVER_DEFAULT_PORT + "/getTokenStatus/" + id;
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(getUrl)
+                .get()
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(final Call call, final IOException e) {
+                // Cancel the post on failure.
+                call.cancel();
+                // In order to access the TextView inside the UI thread, the code is executed inside runOnUiThread()
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        e.printStackTrace();
+                        Toast.makeText(ScanActivity.this, "Не удалось подключиться к Интернету", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+
+            @Override
+            public void onResponse(Call call, final Response response) throws IOException {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            assert response.body() != null;
+                            String otv = response.body().string();
+                            System.out.println("======DEBUG======");
+                            System.out.println(otv);
+                            System.out.println("======DEBUG======");
+                            do {
+                                GetUrl(SERVER_DEFAULT_ADDRESS, array[1]);
+                            } while (otv.equals("OK"));
+                            if (otv.equals("OK")) {
+
+                                startActivity(new Intent(ScanActivity.this, ChoiceActivity.class).putExtra("array", array));
+                            } else {
+                                Toast.makeText(ScanActivity.this, "Не удалось подключиться к Интернету111111", Toast.LENGTH_SHORT).show();
+                            }
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -200,6 +253,9 @@ public class ScanActivity extends AppCompatActivity {
             }
         });
     }
+
+
+
 
 
     void postRequest(String postUrl, RequestBody postBody) {
@@ -267,3 +323,6 @@ public class ScanActivity extends AppCompatActivity {
         });
     }
 }
+
+
+
