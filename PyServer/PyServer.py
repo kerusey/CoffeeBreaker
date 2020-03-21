@@ -87,7 +87,6 @@ def getJsonToken(id):
 def getJsonOrder(id):
 	path = myPath + "/Orders/"
 	filename = 'Order' + str(id) + '.json'
-	
 	responce = jsonify(getExistance(path + filename, True))
 	return responce
 
@@ -96,7 +95,7 @@ def getTokenStatus(id):
 	path = myPath + "/TokenStatuses/"
 	filename = 'TokenStatus' + str(id) + '.json'
 	jsonFile = getExistance(path + filename)
-	return "0" if (jsonFile == 0) else jsonFile
+	return "0" if (jsonFile == "0") else jsonFile
 
 @app.route('/getOrderStatus/<id>') #  OK
 def getOrderStatus(id):
