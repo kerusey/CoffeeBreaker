@@ -41,7 +41,7 @@ def postJsonOrder(id):
 			"strength": int(content['strength']),
 			"volume": int(content['volume']),
 			"milk": bool(content['milk']),
-			"sugar": int(content['sugar'])
+			"shugar": int(content['shugar'])
 			}
 
 	return dumping(jjson, path + filename)
@@ -80,13 +80,14 @@ def getJsonToken(id):
 	path = myPath + "/Tokens/"
 	filename = 'Token' + str(id) + '.json'
 
-	responce = jsonify(getExistance(path + filename, True))
-	return responce
+	jsonFile = getExistance(path + filename)
+	return "0" if (jsonFile == "0") else jsonFile['token']
 
 @app.route('/getOrder/<id>') #  OK
 def getJsonOrder(id):
 	path = myPath + "/Orders/"
 	filename = 'Order' + str(id) + '.json'
+	
 	responce = jsonify(getExistance(path + filename, True))
 	return responce
 
@@ -95,14 +96,15 @@ def getTokenStatus(id):
 	path = myPath + "/TokenStatuses/"
 	filename = 'TokenStatus' + str(id) + '.json'
 	jsonFile = getExistance(path + filename)
-	return "0" if (jsonFile == "0") else jsonFile
+	return "0" if (jsonFile == "0") else jsonFile['status']
 
 @app.route('/getOrderStatus/<id>') #  OK
 def getOrderStatus(id):
 	path = myPath + "/OrderStatuses/"
 	filename = 'OrderStatus' + str(id) + '.json'
 	jsonFile = getExistance(path + filename)
-	return "0" if (jsonFile == "0")	else jsonFile
+	return "0" if (jsonFile == "0")	else jsonFile['status']
 
 if __name__ == '__main__':
 	app.run(host=myHost, port=myPort)
+
