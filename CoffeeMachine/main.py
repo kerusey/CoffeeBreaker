@@ -6,10 +6,10 @@ import time
 def scanActivity():
 	currentToken = Visualizer.visualNewSession()
 	currentToken = 0
-	Request.postTokenStatus("ReadyToScan")
+	Request.postTokenStatus("READYTOSCAN")
 
 	timer = 1
-	while(Request.getTokenStatus() == "ReadyToScan"):
+	while(Request.getTokenStatus() == "READYTOSCAN"):
 		time.sleep(timer)
 		timer += 1
 		if (timer >= 90):
@@ -26,10 +26,10 @@ def scanActivity():
 	return False
 
 def finalOrder():
-	Request.postOrderStatus("Waiting")
+	Request.postOrderStatus("WAITING")
 
 	timer = 1
-	while(Request.getOrderStatus() == "Waiting"):
+	while(Request.getOrderStatus() == "WAITING"):
 		time.sleep(timer)
 		timer += 1
 		if (timer >= 90):
