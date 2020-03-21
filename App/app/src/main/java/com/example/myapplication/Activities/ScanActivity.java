@@ -15,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
-import com.example.myapplication.MenuActivity;
 import com.example.myapplication.Object.StatusScan;
 import com.google.gson.Gson;
 import com.google.zxing.Result;
@@ -34,10 +33,11 @@ import static com.example.myapplication.Utils.Variables.SERVER_DEFAULT_ADDRESS;
 import static com.example.myapplication.Utils.Variables.SERVER_DEFAULT_PORT;
 
 public class ScanActivity extends AppCompatActivity {
-
+    Result result;
     CodeScanner mCodeScanner;
     CodeScannerView scannerView;
     String[] array;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,11 +121,6 @@ public class ScanActivity extends AppCompatActivity {
         connectServer1(SERVER_DEFAULT_ADDRESS, array[1]);
     }
 
-    private void jsonToServer2(String[] array) {
-
-
-        connectServer2(SERVER_DEFAULT_ADDRESS, array[1]);
-    }
 
     void connectServer(String ipv4Address, String id, String token) {
         String postUrl = "http://" + ipv4Address + ":" + SERVER_DEFAULT_PORT + "/postToken/" + id;
@@ -178,28 +173,24 @@ public class ScanActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onResponse(Call call, final Response response) throws IOException {
+            public void onResponse(Call call, final Response response1) throws IOException {
                 // In order to access the TextView inside the UI thread, the code is executed inside runOnUiThread()
+
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         try {
-                            assert response.body() != null;
+                            assert response1.body() != null;
+                            String otv = response1.body().string();
                             System.out.println("======DEBUG======");
-                            System.out.println(response.body().string());
+                            System.out.println(otv);
                             System.out.println("======DEBUG======");
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    try {
-//                            scannerStuck(result);
-                                        jsonToServer2(array);//передаем статус
-                                    } catch (Exception e) {
-                                        mCodeScanner.startPreview();
-                                        e.printStackTrace();
-                                    }
-                                }
-                            });
+                            if (otv.equals("#")) {
+                                startActivity(new Intent(ScanActivity.this, ChoiceActivity.class).putExtra("array", array));
+                            } else {
+                                Toast.makeText(ScanActivity.this, "Пересканьте QR-код", Toast.LENGTH_SHORT).show();
+                                finish();
+                            }
 
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -250,13 +241,11 @@ public class ScanActivity extends AppCompatActivity {
                             System.out.println("======DEBUG======");
 
                             if (otv.equals("#")) {
-
-                                System.out.println("??????");
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
                                         try {
-//                            scannerStuck(result);
+//
                                             jsonToServer1(array);//передаем статус
                                         } catch (Exception e) {
                                             mCodeScanner.startPreview();
@@ -264,10 +253,8 @@ public class ScanActivity extends AppCompatActivity {
                                         }
                                     }
                                 });
-                                startActivity(new Intent(ScanActivity.this, ChoiceActivity.class).putExtra("array", array));
                             } else {
                                 Toast.makeText(ScanActivity.this, "Не удалось подключиться к Интернету", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(ScanActivity.this, MenuActivity.class));
 
 
                             }
