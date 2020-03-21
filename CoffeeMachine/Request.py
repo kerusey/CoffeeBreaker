@@ -12,30 +12,17 @@ def getHelloWorld():
     resp = requests.get(url)
     print(resp.text)
 
-
 def getOrderStatus():
     resp = requests.get(url + "getOrderStatus/" + str(MachineSettings['MachineID']))
-    try:
-        JOrderStatus = resp.json()
-        return JOrderStatus['status']
-    except:
-        return resp
+    return resp.text # OK
 
 def getTokenStatus():
     resp = requests.get(url + "getTokenStatus/" + str(MachineSettings['MachineID']))
-    try:
-        JTokenStatus = resp.json()
-        return JTokenStatus['status']
-    except:
-        return resp # OK
-    
+    return resp.text # OK
+        
 def getToken():
     resp = requests.get(url + "getToken/" + str(MachineSettings['MachineID']))
-    try:
-        JToken = resp.json()
-        return JToken['token']
-    except:
-        return resp # OK
+    return resp.text
 
 def getOrder():
     resp = requests.get(url + "getOrder/" + str(MachineSettings['MachineID']))
@@ -49,6 +36,9 @@ def postTokenStatus(status):
     codeSmile = requests.post(url + "postTokenStatus/" + str(MachineSettings['MachineID']), json={"status": status})
     # return codeSmile
     # OK
+
+def postToken(token):
+    codeSmile = requests.post(url + "postToken/" + str(MachineSettings['MachineID']), json={"token": token})
 
 def postOrderStatus(status):
     codeSmile = requests.post(url + "postOrderStatus/" + str(MachineSettings['MachineID']), json={"status": status})
