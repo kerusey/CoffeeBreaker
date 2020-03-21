@@ -41,7 +41,7 @@ def postJsonOrder(id):
 			"strength": int(content['strength']),
 			"volume": int(content['volume']),
 			"milk": bool(content['milk']),
-			"shugar": int(content['shugar'])
+			"sugar": int(content['sugar'])
 			}
 
 	return dumping(jjson, path + filename)
