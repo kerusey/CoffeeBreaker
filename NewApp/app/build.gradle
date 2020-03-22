@@ -6,10 +6,10 @@ android {
 
     defaultConfig {
         applicationId "space.fstudio.lio.coffeebreaker"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 29
-        versionCode 1
-        versionName "2020.1"
+        versionCode 3
+        versionName "2020.3 [Connection Update]"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -32,6 +32,10 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'com.google.code.gson:gson:2.8.6'                // Google JSON Lib
+    implementation 'com.squareup.okhttp3:okhttp:4.4.0'              // HTTP Lib
+    implementation 'com.budiyev.android:code-scanner:2.1.0'         // QR Code Scan lib
 
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
