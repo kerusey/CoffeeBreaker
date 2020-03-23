@@ -51,11 +51,12 @@ def postOrder(JOrder):
 '''
 JOrder = {  "machineId": 1,
 			"coffeeType": "espresso",
-			"strength": 5,
+			"strength": 5,      
 			"volume": 1,
 			"milk": False,
 			"sugar": 1
          }
-
-postOrder(JOrder)
+         
+while(True):
+    getTokenStatus()
 '''
