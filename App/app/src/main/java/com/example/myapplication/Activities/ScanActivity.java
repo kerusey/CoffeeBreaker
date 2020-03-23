@@ -20,6 +20,8 @@ import com.google.gson.Gson;
 import com.google.zxing.Result;
 
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -122,7 +124,7 @@ public class ScanActivity extends AppCompatActivity {
         String postUrl = "http://" + ipv4Address + ":" + SERVER_DEFAULT_PORT + "/postTokenStatus/" + id;
 
         MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
-        String json = new Gson().toJson(new StatusScan(this, "Scaned"));
+        String json = new Gson().toJson(new StatusScan(this, "Scanned"));
         System.out.println(json);
         RequestBody postBody = RequestBody.create(mediaType, json);
 
@@ -165,12 +167,13 @@ public class ScanActivity extends AppCompatActivity {
                             String otv = response1.body().string();
                             if (otv.equals("#")) {
                                 Toast.makeText(ScanActivity.this, "Отправился запрос ", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(ScanActivity.this, ChoiceActivity.class).putExtra("array", array));
+
+                                GetUrl(SERVER_DEFAULT_ADDRESS, array[1]);
                             } else {
                                 Toast.makeText(ScanActivity.this, "Пересканьте QR-код", Toast.LENGTH_SHORT).show();
                                 finish();
                             }
-                            GetUrl(SERVER_DEFAULT_ADDRESS, array[1]);
+
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -214,12 +217,22 @@ public class ScanActivity extends AppCompatActivity {
                             System.out.println("======DEBUG======");
                             System.out.println(otv);
                             System.out.println("======DEBUG======");
-                            if (otv == null) {
-                                GetUrl(SERVER_DEFAULT_ADDRESS, array[1]);
-                            } else if (otv.equals("FAILED")) {
-                                startActivity(new Intent(ScanActivity.this, ChoiceActivity.class));
+                            if (otv.equals("Scanned")) {
+
+                                new Timer().schedule(
+                                        new TimerTask() {
+
+                                            @Override
+                                            public void run() {
+
+                                                GetUrl(SERVER_DEFAULT_ADDRESS, array[1]);
+                                            }
+
+                                        }, 2000);
                             } else if (otv.equals("OK")) {
-                                Toast.makeText(ScanActivity.this, "НЕправильный QR-код", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(ScanActivity.this, ChoiceActivity.class));
+                            } else if (otv.equals("FAILED")) {
+                                Toast.makeText(ScanActivity.this, "Неправильный QR-код", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(ScanActivity.this, MenuActivity.class));
                             }
 
