@@ -51,7 +51,8 @@ public class ScanActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         try {
-                            jsonToServer(result, "postToken");
+                            startActivity(new Intent(ScanActivity.this, ChoiceActivity.class));
+//                            jsonToServer(result, "postToken");
                         } catch (Exception e) {
                             Toast.makeText(ScanActivity.this, "Uncorrected QR code", Toast.LENGTH_SHORT).show();
                             mCodeScanner.startPreview();

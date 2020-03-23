@@ -36,6 +36,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'                // Google JSON Lib
     implementation 'com.squareup.okhttp3:okhttp:4.4.0'              // HTTP Lib
     implementation 'com.budiyev.android:code-scanner:2.1.0'         // QR Code Scan lib
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'           // ViewPager2
 
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
