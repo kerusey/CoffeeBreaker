@@ -1,7 +1,11 @@
 package space.fstudio.lio.coffeebreaker.Activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,6 +28,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import space.fstudio.lio.coffeebreaker.Objects.TokenJsonObject;
 import space.fstudio.lio.coffeebreaker.Objects.TokenStatusJsonObject;
+import space.fstudio.lio.coffeebreaker.R;
 
 import static space.fstudio.lio.coffeebreaker.Utils.Variables.SERVER_DEFAULT_ADDRESS;
 import static space.fstudio.lio.coffeebreaker.Utils.Variables.SERVER_DEFAULT_PORT;
@@ -51,7 +56,9 @@ public class ScanActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         try {
-                            jsonToServer(result, "postToken");
+                            startActivity(new Intent(ScanActivity.this, ChoiceActivity.class));
+                            finish();
+//                            jsonToServer(result, "postToken");
                         } catch (Exception e) {
                             Toast.makeText(ScanActivity.this, "Uncorrected QR code", Toast.LENGTH_SHORT).show();
                             mCodeScanner.startPreview();
@@ -128,7 +135,7 @@ public class ScanActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onResponse(Call call, final Response response) throws IOException {
+            public void onResponse(final Call call, final Response response) throws IOException {
                 // In order to access the TextView inside the UI thread, the code is executed inside runOnUiThread()
                 runOnUiThread(new Runnable() {
                     @Override
@@ -139,13 +146,17 @@ public class ScanActivity extends AppCompatActivity {
                             System.out.println(answer);
                             if (answer.equals("#") && !post.equals("postTokenStatus")) {
                                 jsonToServer(result, "postTokenStatus");
+                                call.cancel();
                             } else if (post.equals("postTokenStatus")) {
                                 jsonToServer(result, "getTokenStatus");
+                                call.cancel();
                             } else if (post.equals("getTokenStatus") && !answer.equals("OK")) {
                                 jsonToServer(result, "getTokenStatus");
+                                call.cancel();
                             } else {
                                 System.out.println("ALL DONE FUCK YOU");
                                 startActivity(new Intent(ScanActivity.this, ChoiceActivity.class));
+                                finish();
                             }
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -154,6 +165,24 @@ public class ScanActivity extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    @SuppressLint("ResourceType")
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.menuSkipScan) {
+            startActivity(new Intent(ScanActivity.this, ChoiceActivity.class));
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

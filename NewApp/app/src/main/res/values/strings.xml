@@ -1,6 +1,34 @@
 <resources>
     <string name="app_name">Coffee Breaker</string>
+
     <string name="btnScan">Scan</string>
     <string name="btnSettings">Settings</string>
     <string name="btnExit">Exit</string>
+
+    <string name="lore">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</string>
+
+    <string name="coffeeTypeEspresso">Espresso</string>
+    <string name="coffeeDescriptionEspresso">Espresso (/ɛˈsprɛsoʊ/ (About this soundlisten), Italian: [esˈprɛsso]) is a coffee-making method of Italian origin, in which a small amount of nearly boiling water is forced under pressure (expressed) through finely-ground coffee beans. Espresso coffee can be made with a wide variety of coffee beans and roasts. Espresso is generally thicker than coffee brewed by other methods, has a higher concentration of suspended and dissolved solids, and has crema on top (a foam with a creamy consistency).</string>
+
+    <string name="coffeeTypeCoffee">Coffee</string>
+    <string name="coffeeDescriptionCoffee">Coffee is a brewed drink prepared from roasted coffee beans, the seeds of berries from certain Coffea species. The genus Coffea is native to tropical Africa (specifically having its origin in Ethiopia and Sudan) and Madagascar, the Comoros, Mauritius, and Réunion in the Indian Ocean. Coffee plants are now cultivated in over 70 countries, primarily in the equatorial regions of the Americas, Southeast Asia, the Indian subcontinent, and Africa.</string>
+
+    <string name="coffeeTypeCappuccino">Cappuccino</string>
+    <string name="coffeeDescriptionCappuccino">A cappuccino (/ˌkæpʊˈtʃiːnoʊ/ (About this soundlisten); Italian pronunciation: [kapputˈtʃiːno]; Italian plural: cappuccini) is an espresso-based coffee drink that originated in Italy, and is traditionally prepared with steamed milk foam (microfoam).\n\nVariations of the drink involve the use of cream instead of milk, and flavoring with cinnamon or chocolate powder. It is typically smaller in volume than a caffè latte, with a thicker layer of microfoam.</string>
+
+    <string name="coffeeTypeLatteMacchiato">Latte Macchiato</string>
+    <string name="coffeeDescriptionLatteMacchiato">Latte macchiato (Italian pronunciation: [ˈlatte makˈkjaːto]) is a coffee beverage; the name means stained or marked milk. Marked as in an espresso stain on the milk used. It is a play on “Espresso macchiato” which is an espresso with a drop or two of milk or cream.</string>
+
+    <string name="coffeeTypeCaffeLatte">Caffe Latte</string>
+    <string name="coffeeDescriptionCaffeLatte">Caffe latte (or simply latte) (/ˈlɑːteɪ/ or /ˈlæteɪ/) is a coffee drink made with espresso and steamed milk. The word comes from the Italian caffè e latte [kafˌfɛ e ˈlatte], caffelatte [kaffeˈlatte] or caffellatte [kaffelˈlatte], which means \"coffee &amp; milk\". The word is also sometimes spelled latté or lattè in English with different kinds of accent marks, which can be a hyperforeignism or a deliberate attempt to indicate that the word is not pronounced according to the rules of English orthography.</string>
+
+    <string name="coffeeTypeMilkFroth">Milk Froth</string>
+    <string name="coffeeDescriptionMilkFroth">A milk frother is a utensil used for frothing milk, to be added to coffee (cappucino, latte, etc.). Its working mechanism is based on milk aeration. A thick and heavy foam is created by agitating air into the liquid. The tiny bubbles, which are formed during this process, make the milk texture lighter and increase its volume. There are three major types of milk frothers – manual, handheld electric, and automatic. A cappucino machine may have a steam nozzle which can be used to froth the milk. Some devices are able to froth and warm the liquid simultaneously.</string>
+
+    <string name="coffeeTypeWarmMilk">Warm Milk</string>
+    <string name="coffeeDescriptionWarmMilk">Warm milk is milk that has been heated above room temperature. It is commonly used as a nightcap for children and people who abstain from alcohol. Its effectiveness as such is disputed.</string>
+
+    <string name="coffeeTypeHotWater">Hot Water</string>
+    <string name="coffeeDescriptionHotWater">You really don`t know what is it?</string>
+
 </resources>

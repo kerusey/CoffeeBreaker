@@ -11,10 +11,10 @@ from PIL import Image
 Request = sys.path.insert(1, '/home/pi/CoffeeBreaker/CoffeeMachine')
 import Request
 
-
 def generateString ():
-    return str(datetime.datetime.now())
-
+    # return str(datetime.datetime.now())
+    return "abc"
+    
 Suffix_const = "#" # OK
 AppLink_const = "https://coffeebreaker.com" # SETME FIXME !
 MachineSettingsPath = "/home/pi/Documents/MachineSettings.json"
@@ -29,16 +29,16 @@ def generateQRLink ():
     return AppLink_const + Suffix_const + str(MachineID) + Suffix_const + Token, Token # QRLink func
 
 def fullscreen():
-    time.sleep(0.7)
-
+    time.sleep(1)
+    
     keyboard = Controller()
     keyboard.press(Key.alt)
-
-    time.sleep(0.3)
+    
+    time.sleep(0.4)
     keyboard.press(Key.f11)
-    time.sleep(0.3)
+    time.sleep(0.4)
     keyboard.release(Key.f11)
-
+    
     keyboard.release(Key.alt) # OK
 
 def visualNewSession():   # !!! generates NEW token and starts NEW session !!!
