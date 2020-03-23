@@ -16,7 +16,7 @@ def generateString ():
     return "abc"
     
 Suffix_const = "#" # OK
-AppLink_const = "https://coffeebreaker.com" # SETME FIXME !
+AppLink_const = "market://details?id=space.fstudio.lio.coffeebreaker" # SETME FIXME !
 MachineSettingsPath = "/home/pi/Documents/MachineSettings.json"
 
 with open(MachineSettingsPath) as json_file:
