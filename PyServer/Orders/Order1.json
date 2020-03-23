@@ -3,6 +3,6 @@
 	"type": "espresso",
 	"strength": 0,
 	"volume": 0,
-	"milk": false,
+	"milk": false, 
 	"shugar": 0
 }
