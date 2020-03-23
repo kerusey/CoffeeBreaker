@@ -1,20 +1,20 @@
 package com.example.myapplication.Activities;
 
 import android.annotation.SuppressLint;
-import android.content.DialogInterface;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
+import com.example.myapplication.MenuActivity;
 import com.example.myapplication.Object.StatusScan;
 import com.google.gson.Gson;
 import com.google.zxing.Result;
@@ -38,6 +38,7 @@ public class ScanActivity extends AppCompatActivity {
     CodeScanner mCodeScanner;
     CodeScannerView scannerView;
     String[] array;
+    SharedPreferences answer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,26 +89,7 @@ public class ScanActivity extends AppCompatActivity {
     }
 
     @SuppressLint("SetTextI18n")
-    private void scannerStuck(Result result) {//заглушка
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-        TextView textView = new TextView(ScanActivity.this);
-        textView.setPadding(16, 16, 16, 16);
-        builder.setView(textView);
-
-        String[] array = result.getText().split("#", 3);
-        textView.setText("Ссылка: " + array[0] + "\nИндификатор: " + array[1] + "\nДата: " + array[2]);
-
-        builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
-            @Override
-            public void onCancel(DialogInterface dialog) {
-                mCodeScanner.startPreview();
-            }
-        });
-
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
-    }
 
     private void jsonToServer(Result result) {
         array = result.getText().split("#", 3);
@@ -117,8 +99,10 @@ public class ScanActivity extends AppCompatActivity {
     }
 
     private void jsonToServer1(String[] array) {
-
-
+        answer = getSharedPreferences("answer", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = answer.edit();
+        editor.putString("array", array[1]);
+        editor.apply();
         connectServer1(SERVER_DEFAULT_ADDRESS, array[1]);
     }
 
@@ -143,10 +127,6 @@ public class ScanActivity extends AppCompatActivity {
         RequestBody postBody = RequestBody.create(mediaType, json);
 
         postRequest1(postUrl, postBody);
-    }
-
-    void connectServer2(String ipv4Address, String id) {
-        System.out.println("УРРРРРРРРАААААААААААААААА");
     }
 
     void postRequest1(String postUrl, RequestBody postBody) {
@@ -183,11 +163,9 @@ public class ScanActivity extends AppCompatActivity {
                         try {
                             assert response1.body() != null;
                             String otv = response1.body().string();
-                            System.out.println("======DEBUG======");
-                            System.out.println(otv);
-                            System.out.println("======DEBUG======");
                             if (otv.equals("#")) {
                                 Toast.makeText(ScanActivity.this, "Отправился запрос ", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(ScanActivity.this, ChoiceActivity.class).putExtra("array", array));
                             } else {
                                 Toast.makeText(ScanActivity.this, "Пересканьте QR-код", Toast.LENGTH_SHORT).show();
                                 finish();
@@ -236,15 +214,25 @@ public class ScanActivity extends AppCompatActivity {
                             System.out.println("======DEBUG======");
                             System.out.println(otv);
                             System.out.println("======DEBUG======");
-                            do {
+                            if (otv == null) {
                                 GetUrl(SERVER_DEFAULT_ADDRESS, array[1]);
-                            } while (otv.equals("OK"));
-                            if (otv.equals("OK")) {
-
-                                startActivity(new Intent(ScanActivity.this, ChoiceActivity.class).putExtra("array", array));
-                            } else {
-                                Toast.makeText(ScanActivity.this, "Не удалось подключиться к Интернету111111", Toast.LENGTH_SHORT).show();
+                            } else if (otv.equals("FAILED")) {
+                                startActivity(new Intent(ScanActivity.this, ChoiceActivity.class));
+                            } else if (otv.equals("OK")) {
+                                Toast.makeText(ScanActivity.this, "НЕправильный QR-код", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(ScanActivity.this, MenuActivity.class));
                             }
+
+
+//                           if(!otv.equals("FAILED")) GetUrl(SERVER_DEFAULT_ADDRESS, array[1]);
+//                            else{
+//                                System.out.println(otv);
+//                               if (otv.equals("FAILED")) {
+//                                   startActivity(new Intent(ScanActivity.this, ChoiceActivity.class).putExtra("array", array));
+//                               } else {
+//                                   Toast.makeText(ScanActivity.this, "НЕправильный QR-код", Toast.LENGTH_SHORT).show();
+//                               }
+
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -253,10 +241,6 @@ public class ScanActivity extends AppCompatActivity {
             }
         });
     }
-
-
-
-
 
     void postRequest(String postUrl, RequestBody postBody) {
 
@@ -281,7 +265,6 @@ public class ScanActivity extends AppCompatActivity {
                     }
                 });
             }
-
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
                 // In order to access the TextView inside the UI thread, the code is executed inside runOnUiThread()
@@ -291,17 +274,11 @@ public class ScanActivity extends AppCompatActivity {
                         try {
                             assert response.body() != null;
                             String otv = response.body().string();
-                            System.out.println(otv);
-                            System.out.println("======DEBUG======");
-                            System.out.println(otv);
-                            System.out.println("======DEBUG======");
-
                             if (otv.equals("#")) {
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
                                         try {
-//
                                             jsonToServer1(array);//передаем статус
                                         } catch (Exception e) {
                                             mCodeScanner.startPreview();
@@ -311,8 +288,6 @@ public class ScanActivity extends AppCompatActivity {
                                 });
                             } else {
                                 Toast.makeText(ScanActivity.this, "Не удалось подключиться к Интернету", Toast.LENGTH_SHORT).show();
-
-
                             }
                         } catch (IOException e) {
                             e.printStackTrace();

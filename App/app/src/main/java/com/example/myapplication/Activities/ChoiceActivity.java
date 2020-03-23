@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -53,18 +54,23 @@ public class ChoiceActivity extends AppCompatActivity implements View.OnClickLis
         switch (v.getId()) {
             case R.id.btn_latte_m:
                 editor.putString("coffeeType", "Латте макиато");
+                Toast.makeText(ChoiceActivity.this, "Выбрали Латте макиато ", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_latte:
                 editor.putString("coffeeType", "Латте");
+                Toast.makeText(ChoiceActivity.this, "Выбрали Латте ", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_cappuccino:
                 editor.putString("coffeeType", "Капучино");
+                Toast.makeText(ChoiceActivity.this, "Выбрали Капучино ", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_americano:
                 editor.putString("coffeeType", "Американо");
+                Toast.makeText(ChoiceActivity.this, "Выбрали Американо ", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_espresso:
                 editor.putString("coffeeType", "Эспрессо");
+                Toast.makeText(ChoiceActivity.this, "Выбрали Эспрессо", Toast.LENGTH_SHORT).show();
                 break;
         }
         editor.apply();
