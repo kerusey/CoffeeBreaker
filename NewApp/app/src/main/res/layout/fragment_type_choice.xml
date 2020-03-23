@@ -6,13 +6,16 @@
     android:layout_height="match_parent"
     tools:context="space.fstudio.lio.coffeebreaker.Fragments.TypeChoiceFragment">
 
-    <TextView
-        android:id="@+id/txtFragmentTypeChoice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="txtFragmentTypeChoice"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerCoffeeTypes"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scrollbars="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:itemCount="7"
+        tools:listitem="@layout/object_coffee_type" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

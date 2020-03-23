@@ -83,3 +83,9 @@ lint/generated/
 lint/outputs/
 lint/tmp/
 # lint/reports/
+/.idea/discord.xml
+/.idea/.name
+/.idea/misc.xml
+/.idea/render.experimental.xml
+/.idea/runConfigurations.xml
+/.idea/codeStyles/Project.xml
