@@ -18,4 +18,4 @@ mkdir OrderStatuses
 cd
 sudo apt-get install imagemagick
 curl https://processing.org/download/install-arm.sh | sudo sh
-sudo raspi-config
+raspi-config

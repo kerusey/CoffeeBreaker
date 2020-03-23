@@ -41,7 +41,7 @@ def postJsonOrder(id):
 			"strength": int(content['strength']),
 			"volume": int(content['volume']),
 			"milk": bool(content['milk']),
-			"shugar": int(content['shugar'])
+			"sugar": int(content['sugar'])
 			}
 
 	return dumping(jjson, path + filename)
@@ -107,4 +107,3 @@ def getOrderStatus(id):
 
 if __name__ == '__main__':
 	app.run(host=myHost, port=myPort)
-

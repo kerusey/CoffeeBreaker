@@ -44,3 +44,19 @@ def postOrderStatus(status):
     codeSmile = requests.post(url + "postOrderStatus/" + str(MachineSettings['MachineID']), json={"status": status})
     # return codeSmile   # optional (if you are in mood)
     # OK
+
+def postOrder(JOrder):
+    codeSmile = requests.post(url + "postOrder/" + str(MachineSettings['MachineID']), json=JOrder)
+
+'''
+JOrder = {  "machineId": 1,
+			"coffeeType": "espresso",
+			"strength": 5,      
+			"volume": 1,
+			"milk": False,
+			"sugar": 1
+         }
+         
+while(True):
+    getTokenStatus()
+'''

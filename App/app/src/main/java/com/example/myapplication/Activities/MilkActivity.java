@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -43,9 +44,11 @@ public class MilkActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.btn_yes:
                 editor.putBoolean("milk", true);
+                Toast.makeText(MilkActivity.this, "Выбрали кофе с молоком", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_no:
                 editor.putBoolean("milk", false);
+                Toast.makeText(MilkActivity.this, "Выбрали кофе без молока ", Toast.LENGTH_SHORT).show();
                 break;
         }
         editor.apply();

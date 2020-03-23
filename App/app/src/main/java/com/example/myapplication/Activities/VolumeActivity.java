@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -42,9 +43,11 @@ public class VolumeActivity extends AppCompatActivity implements View.OnClickLis
         SharedPreferences.Editor editor = answer.edit();
         switch (v.getId()) {
             case R.id.btn_2:
+                Toast.makeText(VolumeActivity.this, "Выбрали объём напитка", Toast.LENGTH_SHORT).show();
                 editor.putFloat("volume", 0.2F);//Включаем режим редактирования файла
                 break;
             case R.id.btn_4:
+                Toast.makeText(VolumeActivity.this, "Выбрали объём напитка", Toast.LENGTH_SHORT).show();
                 editor.putFloat("volume", 0.4F);//Включаем режим редактирования файла
                 break;
         }

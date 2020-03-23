@@ -1,5 +1,5 @@
 {
-	"machineId": "1",
+	"machineId": 1,
 	"type": "espresso",
 	"strength": 0,
 	"volume": 0,

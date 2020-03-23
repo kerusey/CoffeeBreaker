@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -47,18 +48,23 @@ public class SugarActivity extends AppCompatActivity implements View.OnClickList
         SharedPreferences.Editor editor = answer.edit();  //Включаем режим редактирования файла
         switch (v.getId()) {
             case R.id.btn_0:
+                Toast.makeText(SugarActivity.this, "Выбрали кофе без сахара", Toast.LENGTH_SHORT).show();
                 editor.putInt("sugar", 0);  //Устанавливаем переменной btnValue значения true
                 break;
             case R.id.btn_1:
+                Toast.makeText(SugarActivity.this, "Выбрали кофе с 1 лож.сахара", Toast.LENGTH_SHORT).show();
                 editor.putInt("sugar", 1);  //Устанавливаем переменной btnValue значения true
                 break;
             case R.id.btn_2:
+                Toast.makeText(SugarActivity.this, "Выбрали кофе с 2 лож.сахара", Toast.LENGTH_SHORT).show();
                 editor.putInt("sugar", 2);  //Устанавливаем переменной btnValue значения true
                 break;
             case R.id.btn_3:
+                Toast.makeText(SugarActivity.this, "Выбрали кофе с 3 лож.сахара", Toast.LENGTH_SHORT).show();
                 editor.putInt("sugar", 3);  //Устанавливаем переменной btnValue значения true
                 break;
             case R.id.btn_4:
+                Toast.makeText(SugarActivity.this, "Выбрали кофе с 4 лож.сахара", Toast.LENGTH_SHORT).show();
                 editor.putInt("sugar", 4);  //Устанавливаем переменной btnValue значения true
                 break;
         }
