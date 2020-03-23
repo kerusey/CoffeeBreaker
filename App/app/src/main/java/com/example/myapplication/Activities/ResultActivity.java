@@ -19,6 +19,8 @@ import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -107,7 +109,24 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
         boolean milk = answer.getBoolean("milk", true);
         int id1 = Integer.parseInt(id);
         String type = answer.getString("coffeeType", null);
-        float volume = answer.getFloat("volume", -0F);
+        switch (type) {
+            case "Латте макиато":
+                type = "Latte Macchiato";
+                break;
+            case "Латте":
+                type = "Caffe Latte";
+                break;
+            case "Капучино":
+                type = "Cappuccino";
+                break;
+            case "Американо":
+                type = "Coffee";
+                break;
+            case "Эспрессо":
+                type = "Espresso";
+                break;
+        }
+        float volume = answer.getFloat("volume", -0F) * 10;
         int strength = answer.getInt("strength", -1);
         int sugar = answer.getInt("sugar", -1);
         MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
@@ -211,11 +230,19 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
                         try {
                             assert response.body() != null;
                             String otv = response.body().string();
-                            System.out.println("======DEBUG======");
-                            System.out.println(otv);
-                            System.out.println("======DEBUG======");
-                            if (otv == null) {
-                                GetUrl(SERVER_DEFAULT_ADDRESS, array1);
+                            if (otv.equals("COMPLETED")) {
+
+                                new Timer().schedule(
+                                        new TimerTask() {
+
+                                            @Override
+                                            public void run() {
+                                                GetUrl(SERVER_DEFAULT_ADDRESS, array1);
+
+                                            }
+
+                                        }, 2000);
+
                             } else if (otv.equals("FAILED")) {
                                 startActivity(new Intent(ResultActivity.this, OkayActivity.class));
                             } else if (otv.equals("OK")) {
@@ -275,7 +302,7 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
                                         }
                                     }
                                 });
-                                startActivity(new Intent(ResultActivity.this, OkayActivity.class));
+                                //  startActivity(new Intent(ResultActivity.this, OkayActivity.class));
                             } else {
                                 Toast.makeText(ResultActivity.this, "Не удалось подключиться к Интернету", Toast.LENGTH_SHORT).show();
                             }

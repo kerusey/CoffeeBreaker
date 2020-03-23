@@ -5,7 +5,7 @@ import android.content.Context;
 public class Result {
 
     private int sugar, strength, machineId;
-    float volume;
+    private float volume;
     private String coffeeType;
     private boolean milk;
 
