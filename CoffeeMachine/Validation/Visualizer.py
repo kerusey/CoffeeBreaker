@@ -14,9 +14,9 @@ import Request
 def generateString ():
     # return str(datetime.datetime.now())
     return "abc"
-    
+
 Suffix_const = "#" # OK
-AppLink_const = "https://coffeebreaker.com" # SETME FIXME !
+AppLink_const = "market://details?id=space.fstudio.lio.coffeebreaker" # SETME FIXME !
 MachineSettingsPath = "/home/pi/Documents/MachineSettings.json"
 
 with open(MachineSettingsPath) as json_file:
@@ -30,15 +30,15 @@ def generateQRLink ():
 
 def fullscreen():
     time.sleep(1)
-    
+
     keyboard = Controller()
     keyboard.press(Key.alt)
-    
+
     time.sleep(0.4)
     keyboard.press(Key.f11)
     time.sleep(0.4)
     keyboard.release(Key.f11)
-    
+
     keyboard.release(Key.alt) # OK
 
 def visualNewSession():   # !!! generates NEW token and starts NEW session !!!
