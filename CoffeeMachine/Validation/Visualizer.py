@@ -12,8 +12,8 @@ Request = sys.path.insert(1, '/home/pi/CoffeeBreaker/CoffeeMachine')
 import Request
 
 def generateString ():
-    # return str(datetime.datetime.now())
-    return "abc"
+    return str(datetime.datetime.now())
+    # return "abc"
 
 Suffix_const = "#" # OK
 AppLink_const = "market://details?id=space.fstudio.lio.coffeebreaker" # SETME FIXME !
