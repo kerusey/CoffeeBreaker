@@ -1,8 +1,8 @@
 {
-	"machineId": 1,
+	"MachineID": "1",
 	"type": "espresso",
-	"strength": 0,
+	"strenght": 0,
 	"volume": 0,
-	"milk": false, 
+	"milk": false,
 	"shugar": 0
 }
