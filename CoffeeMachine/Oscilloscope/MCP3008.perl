@@ -40,7 +40,3 @@ sub get
 } # sub get
 
 1;
-<<<<<<< HEAD
-=======
-## 
->>>>>>> 5d05543b01bf96cddfabbcb83ad69cfe954440d0
