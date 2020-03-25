@@ -42,6 +42,7 @@ def main():
 	jsonOrder = finalOrder()
 	print(jsonOrder)
 	# Barista.make(jsonOrder) 
+	Visualizer.stopSession()
 	
-	
-main()
+while(True):	
+	main()
