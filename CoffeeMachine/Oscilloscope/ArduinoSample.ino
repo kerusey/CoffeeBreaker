@@ -12,7 +12,7 @@
 void setup() {
     Serial.begin(9600);
 }
-void loop() {
+void loop() { // YA AFIGENNIY PROGER NAFIG
     int val = analogRead(ANALOG_IN);
     Serial.write(0xff);
     Serial.write((val >> 8) & 0xff);
