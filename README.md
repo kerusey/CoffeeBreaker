@@ -26,5 +26,5 @@
 
 
 ## License
-[MIT | Copyright (c) 2019 CoffeeBreakerTM](https://github.com/kerusey/CoffeeBreaker/blob/master/LICENSE)
+[MIT | Copyright (c) 2020 CoffeeBreakerTM](https://github.com/kerusey/CoffeeBreaker/blob/master/LICENSE)
 
