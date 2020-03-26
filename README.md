@@ -1,5 +1,5 @@
-![GitHub]
-![GitHub last commit]
+## CoffeeBreaker
+
 <img src="https://user-images.githubusercontent.com/56975858/77643754-fa06ee80-6f70-11ea-88a9-f33b238a8626.jpg"/>
 
 ## Описание
