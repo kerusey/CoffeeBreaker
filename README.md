@@ -4,8 +4,6 @@
 
 <img src="https://user-images.githubusercontent.com/56975858/77643754-fa06ee80-6f70-11ea-88a9-f33b238a8626.jpg"/>
 
-# Описание
-
 <img src="https://user-images.githubusercontent.com/56975858/77687668-d44d0a00-6faf-11ea-9cc5-30385dfc4a55.jpg"/> 
 
 ## Актуальность и решаемая проблема
