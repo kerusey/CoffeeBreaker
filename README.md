@@ -1,7 +1,5 @@
 ![GitHub](https://img.shields.io/github/license/kerusey/CoffeeBreaker.svg?label=Coffee%20Breaker)
 ![GitHub last commit](https://img.shields.io/github/last-commit/kerusey/CoffeeBreaker.svg)
-<img src="https://user-images.githubusercontent.com/56975858/77643754-fa06ee80-6f70-11ea-88a9-f33b238a8626.jpg"/>
-<a href="https://github.com/syorito-hatsuki/WallpaperAppTemplate/blob/master/README-RU.md"><p align="right">Русский язык</p></a>
 # CoffeeBreaker
 
 <img src="https://user-images.githubusercontent.com/56975858/77643754-fa06ee80-6f70-11ea-88a9-f33b238a8626.jpg"/>
