@@ -22,7 +22,6 @@
 2. Любовью к кофейным напиткам
 
 ## Screenshots
-<img src="https://user-images.githubusercontent.com/56975858/77644402-fd4eaa00-6f71-11ea-8827-1ae0f531f927.jpg"/>
 
 
 ## License
