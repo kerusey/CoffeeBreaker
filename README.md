@@ -1,6 +1,6 @@
-<img src="https://img.shields.io/github/license/kerusey/CoffeeBreaker.svg?label=Coffee%20Breaker" href="https://vk.com/doc226187185_538193015?hash=3553fbb739db9397e1&dl=e61ca366eeb654fde0"/>
+<a href="https://gooogle.com"><img src="https://img.shields.io/github/license/kerusey/CoffeeBreaker.svg?label=Coffee%20Breaker" /></a>
+<a href="https://gooogle.com"><img src="https://img.shields.io/github/last-commit/kerusey/CoffeeBreaker.svg"/></a>
 
-![GitHub last commit](https://img.shields.io/github/last-commit/kerusey/CoffeeBreaker.svg)
 ![Screenshot](Schemes/logo.jpg)
 ![Screenshot](Schemes/nedo_adidas.jpg)
 
