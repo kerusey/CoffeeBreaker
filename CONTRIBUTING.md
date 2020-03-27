@@ -1,6 +1,6 @@
 # Contributing to CoffeeBreaker
 
-CoffeeBreakerTM would appriciate any help to improve the project! 
+CoffeeBreakerTM would appreciate any help to improve the project! 
 Contributions may include bug reports, bug fixes, new features, infrastructure enhancements, or 
 documentation updates.
 
