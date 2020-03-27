@@ -30,3 +30,12 @@
 ## Developer Notes
 So please feel free to fork it and open pull requests for any fix, improvement or feature you add. 
 You may check the [contributing guide](https://github.com/kerusey/CoffeeBreaker/blob/master/CONTRIBUTING.md) for more information on how to do this. 
+
+## CoffeeBreaker team
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/kerusey"><img src="https://avatars3.githubusercontent.com/u/38439184?s=400&u=cd2c9b9940b9faba20ad080274f079ca21286489&v=4" width="100px;" alt=""/><br /><sub><b>Danil Likh</b></sub></a><br /><a href="#maintenance-hamelsmu" title="Maintenance">🚧</a></td>
+    <td align="center"><a href="https://github.com/syorito-hatsuki"><img src="https://avatars3.githubusercontent.com/u/33298273?s=400&v=4" width="100px;" alt=""/><br /><sub><b>Syorito Hatsuki</b></sub></a><br /><a href="https://github.com/kerusey/CoffeeBreaker/pulls" title="Reviewed Pull Requests">👀</a> <a href="#ideas-dansbecker" title="Ideas, Planning, & Feedback">🤔</a> <a href="#maintenance-dansbecker" title="Maintenance">🚧</a></td>
+    
+  </tr>
+</table>
