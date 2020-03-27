@@ -8,7 +8,7 @@ documentation updates.
 
 ### Reporting Bugs
 
-If you found a bug in SVG.NET, you can [create an issue](https://help.github.com/articles/creating-an-issue/).
+If you found a bug in CoffeeBreaker, you can [create an issue](https://help.github.com/articles/creating-an-issue/).
 If you are able to build the library locally, please check, if the problem still exists in the
 [master branch](https://github.com/kerusey/CoffeeBreaker) before filing the bug. 
 If you can reproduce the problem, please provide enough information so that it can be reproduced by other developers.
