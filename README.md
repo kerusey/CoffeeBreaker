@@ -1,6 +1,7 @@
 <a href="https://github.com/kerusey/CoffeeBreaker/blob/master/LICENSE"><img src="https://img.shields.io/github/license/kerusey/CoffeeBreaker.svg?label=Coffee%20Breaker" /></a>
-<a href="https://gooogle.com"><img src="https://img.shields.io/github/last-commit/kerusey/CoffeeBreaker.svg"/></a>
-
+<a href="https://github.com/kerusey/CoffeeBreaker/commits/master"><img src="https://img.shields.io/github/last-commit/kerusey/CoffeeBreaker.svg"/></a>
+<a href="https://github.com/kerusey/CoffeeBreaker/archive/master.zip"><img src="https://img.shields.io/github/repo-size/kerusey/CoffeeBreaker.svg"/></a>
+<a href="https://gooogle.com"><img src="https://img.shields.io/github/hacktoberfest/2019/kerusey/CoffeeBreaker.svg"/></a>
 ![Screenshot](Schemes/logo.jpg)
 ![Screenshot](Schemes/nedo_adidas.jpg)
 
