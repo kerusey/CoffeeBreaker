@@ -14,7 +14,7 @@ If you are able to build the library locally, please check, if the problem still
 If you can reproduce the problem, please provide enough information so that it can be reproduced by other developers.
 This includes:
   * The Operating System
-  * The used CoffeeBreaker and dependences versions
+  * The used CoffeeBreaker and dependencies versions
   * An example image that shows the incorrect behavior, or a respective code snippet (preferably in the form of a failing unit test)
   * The stack trace in case of an unexpected exception
 For better readability, you may use [markdown code formatting](https://help.github.com/articles/creating-and-highlighting-code-blocks/) for any included code.
