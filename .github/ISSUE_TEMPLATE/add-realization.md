@@ -1,10 +1,8 @@
 ---
-name: Add realization / Допиши позже
-about: Describe this issue / Опиши что дописывать
+name: Add realization
+about: Describe this issue
 title: ''
 labels: ''
 assignees: ''
 
 ---
-
-path/to/file/filename.lang
