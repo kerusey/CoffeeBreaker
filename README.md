@@ -1,32 +1,44 @@
-<a href="https://github.com/kerusey/CoffeeBreaker/blob/master/LICENSE"><img src="https://img.shields.io/github/license/kerusey/CoffeeBreaker.svg?label=Coffee%20Breaker" /></a>
-<a href="https://gooogle.com"><img src="https://img.shields.io/github/last-commit/kerusey/CoffeeBreaker.svg"/></a>
+![GitHub](https://img.shields.io/github/license/syorito-hatsuki/WallpaperAppTemplate.svg?label=Wallpaper%20App%20Template)
 
-![Screenshot](Schemes/logo.jpg)
-![Screenshot](Schemes/nedo_adidas.jpg)
-
+![GitHub last commit](https://img.shields.io/github/last-commit/syorito-hatsuki/WallpaperAppTemplate.svg)
+<img src="https://user-images.githubusercontent.com/56975858/77643754-fa06ee80-6f70-11ea-88a9-f33b238a8626.jpg"/>
+<a href="https://github.com/syorito-hatsuki/WallpaperAppTemplate/blob/master/README-RU.md"><p align="right">Русский язык</p></a>
 ## Описание
-### Цель проекта 
-Целью проекта CoffeeBreaker является упрощение получения кофейного напитка, посредством исключения баристы из цепочки приготовления кофе.
-Мы создали систему, по которой человек может сварить кофе, используя лишь мобильный телефон и наши разработки. Вам лишь нужно просканировать QR-код, скачать наше приложения из Google Play Market'а и использовать этот же код для того, чтобы кофе машина выполнила ваш заказ.
+Актуальность и решаемая проблема
+Одним из наиболее популярных направлений на рынке современных IT технологий является массовое внедрение IoT систем. Популярность подобного рода технологий обусловлена прежде всего тем, что они позволяют в значительной мере упростить отношения между системой человек – техника, а также относительно простотой реализации и обслуживания подобного рода проектов. Рынок IoT систем только начинает развиваться, что способствует росту интереса к данному виду технологий, тем самым делая разработки в этой области наиболее актуальными и практически выгодными.
+Область деятельности нашей команды заключается в развитии отношений взаимодействия между пользователем и бытовыми приборами, на примере взаимодействия человека с кофемашиной через систему IoT. Реализация проекта представляет собой максимальную автоматизацию, а также удобство такого рода взаимодействия.
 
-### Наше приложение
-<img src="https://raw.githubusercontent.com/kerusey/CoffeeBreaker/master/Schemes/Preview.jpg"/>
-
-### QR-код
-![Screenshot](Schemes/QRcode.jpg)
-
-## Предполагаемый продукт
-Непосредственной целью нашего проекта является создание умной системы CoffeeBreaker, включающую в себя:
+Цель проекта. Предполагаемый продукт
+Непосредственной целью нашего проекта является создание системы IoT между пользователем и кофемашиной. Соответственно предполагаемым продуктом будет сама система, включающая в себя:
 1. Мобильное приложение
 2. Кофемашина, технически интегрированная в систему IoT.
-3. Web-Сервер, осуществляющий взаимосвязь между мобильным приложением и кофемашиной.
-4. Базу данных
+3. Осуществление взаимосвязи между непосредственно мобильным приложением и кофемашиной.
 
-![Screenshot](Schemes/NewProjectMainStructure.jpg)
+Целевая аудитория
+Целевая аудитория ограничивается прежде всего:
+1. Умением пользоваться интерфейсом современного мобильного телефона
+2. Любовью к кофейным напиткам
 
-## Developer Notes
-So please feel free to fork it and open pull requests for any fix, improvement or feature you add. 
-You may check the [contributing guide](https://github.com/kerusey/CoffeeBreaker/blob/master/CONTRIBUTING.md) for more information on how to do this. 
+Минимальная версия Android 4.4
+
+[APK for testing](https://github.com/syorito-hatsuki/WallpaperAppTemplate/blob/master/app-debug.apk?raw=true)
+
+
+## Whats new in 1.1
+- Updated file register system. Now you didn\`t need to add all image files to array yourself
+- Changed category adding system. Now you need only use this
+```java
+setCategory("Your asset folder path for current category");
+```
+
+## Screenshots
+<img src="https://user-images.githubusercontent.com/56975858/77644402-fd4eaa00-6f71-11ea-8827-1ae0f531f927.jpg"/>
+
+## External libraries that were used
+
+For create image finger zoom in dialog I use [Zoomage](http://jsibbold.github.io/zoomage/)
+
+For load images with out lags I use [Picasso](http://square.github.io/picasso/)
 
 ## License
-[MIT | Copyright (c) 2020 CoffeeBreakerTM](https://github.com/kerusey/CoffeeBreaker/blob/master/LICENSE)
+[MIT | Copyright (c) 2019 Syorito Hatsuki](https://github.com/syorito-hatsuki/WallpaperAppTemplate/blob/master/LICENSE)
