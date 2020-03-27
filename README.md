@@ -24,9 +24,9 @@
 
 ![Screenshot](Schemes/NewProjectMainStructure.jpg)
 
-## Developer Notes
-So please feel free to fork it and open pull requests for any fix, improvement or feature you add. 
-You may check the [contributing guide](https://github.com/kerusey/CoffeeBreaker/blob/master/CONTRIBUTING.md) for more information on how to do this. 
+## Заметки для разработчиков
+Если вы хотите принять участие в разработке проекта, можете сделать fork данного репозитория открыть новый pull requests для любой поправки, улучшения или нового функционала. 
+Обратитесь к нашему [руководсту для разработчиков](https://github.com/kerusey/CoffeeBreaker/blob/master/CONTRIBUTING.md), для более детальной информации о том, как правильно это сделать
 
 ## CoffeeBreaker team
 <table>
