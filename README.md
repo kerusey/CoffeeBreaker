@@ -3,7 +3,7 @@
 <a href="https://github.com/kerusey/CoffeeBreaker/archive/master.zip"><img src="https://img.shields.io/github/repo-size/kerusey/CoffeeBreaker.svg"/></a>
 <a href="google.com"><img src="https://img.shields.io/github/release-date/kerusey/CoffeeBreaker.svg"/></a>
 <a href="https://discord.gg/T7axzGg"><img src="https://img.shields.io/discord/394206293570879488"></a>
-<a href="https://google.com"><img src="https://img.shields.io/github/hacktoberfest/2019/kerusey/CoffeeBreaker.svg"/></a>
+<a href="https://github.com/kerusey/CoffeeBreaker/pulls"><img src="https://img.shields.io/github/hacktoberfest/2019/kerusey/CoffeeBreaker.svg"/></a>
 ![Screenshot](Schemes/logo.jpg)
 ![Screenshot](Schemes/nedo_adidas.jpg)
 
