@@ -1,4 +1,4 @@
-<a href="https://gooogle.com"><img src="https://img.shields.io/github/license/kerusey/CoffeeBreaker.svg?label=Coffee%20Breaker" /></a>
+<a href="https://github.com/kerusey/CoffeeBreaker/blob/master/LICENSE"><img src="https://img.shields.io/github/license/kerusey/CoffeeBreaker.svg?label=Coffee%20Breaker" /></a>
 <a href="https://gooogle.com"><img src="https://img.shields.io/github/last-commit/kerusey/CoffeeBreaker.svg"/></a>
 
 ![Screenshot](Schemes/logo.jpg)
