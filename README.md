@@ -24,5 +24,9 @@
 
 ![Screenshot](Schemes/NewProjectMainStructure.jpg)
 
+## Developer Notes
+So please feel free to fork it and open pull requests for any fix, improvement or feature you add. 
+You may check the [contributing guide](https://github.com/kerusey/CoffeeBreaker/blob/master/CONTRIBUTING.md) for more information on how to do this. 
+
 ## License
 [MIT | Copyright (c) 2020 CoffeeBreakerTM](https://github.com/kerusey/CoffeeBreaker/blob/master/LICENSE)
