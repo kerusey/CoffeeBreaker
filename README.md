@@ -15,9 +15,6 @@
 ### Наше приложение
 <img src="https://raw.githubusercontent.com/kerusey/CoffeeBreaker/master/Schemes/Preview.jpg"/>
 
-### QR-код
-![Screenshot](Schemes/QRcode.jpg)
-
 ## Предполагаемый продукт
 Непосредственной целью нашего проекта является создание умной системы CoffeeBreaker, включающую в себя:
 1. Мобильное приложение
