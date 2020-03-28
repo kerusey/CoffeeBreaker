@@ -2,7 +2,7 @@
 <a href="https://github.com/kerusey/CoffeeBreaker/commits/master"><img src="https://img.shields.io/github/last-commit/kerusey/CoffeeBreaker.svg"/></a>
 <a href="https://github.com/kerusey/CoffeeBreaker/archive/master.zip"><img src="https://img.shields.io/github/repo-size/kerusey/CoffeeBreaker.svg"/></a>
 <a href="https://github.com/kerusey/CoffeeBreaker/tags"><img src="https://img.shields.io/github/release-date/kerusey/CoffeeBreaker.svg"/></a>
-<a href="https://discord.gg/T7axzGg"><img src="https://img.shields.io/discord/394206293570879488"></a>
+<a href="https://discord.gg/9bdQ9py"><img src="https://img.shields.io/discord/693528089283657749"></a>
 <a href="https://github.com/kerusey/CoffeeBreaker/pulls"><img src="https://img.shields.io/github/hacktoberfest/2019/kerusey/CoffeeBreaker.svg"/></a>
 ![Screenshot](Schemes/logo.jpg)
 ![Screenshot](Schemes/nedo_adidas.jpg)
