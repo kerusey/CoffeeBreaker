@@ -6,7 +6,7 @@
 <a href="https://github.com/kerusey/CoffeeBreaker/pulls"><img src="https://img.shields.io/github/hacktoberfest/2019/kerusey/CoffeeBreaker.svg"/></a>
 ![Screenshot](Schemes/logo.jpg)
 ![Screenshot](Schemes/nedo_adidas.jpg)
-<a href="https://github.com/kerusey/CoffeeBreaker/blob/master/README.md"><p align="right">English</p></a>
+<a href="https://github.com/kerusey/CoffeeBreaker/blob/master/README.md"><p align="right">English version</p></a>
 
 ## Описание
 ### Цель проекта 
