@@ -15,6 +15,6 @@ with open('database.csv', 'w', newline='') as csvfile:
 	for j in range(days):
 		for i in range(orders):
 			if(j + 1 > 9):
-				writer.writerow({'date': '2020-01-' + str(j+1), 'time': randomTime(), 'milk': random.randint(0, 2), 'sugar': random.randint(0, 4), 'coffee': random.randint(0, 4), 'whater': random.randint(0, 4)})
+				writer.writerow({'date': '2020-01-' + str(j+1), 'time': randomTime(), 'milk': random.randint(0, 1), 'sugar': random.randint(0, 4), 'coffee': random.randint(1, 4), 'whater': random.randint(1, 4)})
 			else:
-				writer.writerow({'date': '2020-01-0' + str(j+1), 'time': randomTime(), 'milk': random.randint(0, 2), 'sugar': random.randint(0, 4), 'coffee': random.randint(0, 4), 'whater': random.randint(0, 4)})
+				writer.writerow({'date': '2020-01-0' + str(j+1), 'time': randomTime(), 'milk': random.randint(0, 1), 'sugar': random.randint(0, 4), 'coffee': random.randint(1, 4), 'whater': random.randint(1, 4)})
