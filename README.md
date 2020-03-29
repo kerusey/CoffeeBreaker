@@ -20,8 +20,8 @@ The main idea of ours project is creation of a smart CoffeeBreaker system, which
 2. IoT integrated coffee machine.
 3. Web-Server, witch connects mobile app and the coffee machine
 4. DataBase
+<img src="https://learn.adafruit.com/raspberry-pi-analog-to-digital-converters/mcp3008" align="center"/ >
 
-![Screenshot](Schemes/NewProjectMainStructure.jpg)
 
 ## Developer notes
 If you would like to take a part in the project development feel free to fork it and open pull requests for any fix, improvement or feature you add. 
