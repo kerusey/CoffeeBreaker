@@ -4,7 +4,7 @@ public class ValueInsert {
     Connection connection;
 
     public ValueInsert(Connection connection) { this.connection = connection; }
-    public void insert ()
+    public void insert () // work in progres... 
     {
 
 
