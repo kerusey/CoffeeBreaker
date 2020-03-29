@@ -4,10 +4,8 @@ cp CoffeeBreaker/MachineSettings.json  /home/pi/Documents
 sudo apt-get -y install python3
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 python3 get-pip.py
-sudo apt-get install build-essential python-dev python-smbus git
-cd
-git clone https://github.com/adafruit/Adafruit_Python_MCP3008.git
-cd Adafruit_Python_MCP3008
+sudo apt-get install build-essential python-dev python-smbus python-pip
+sudo pip3 install adafruit-mcp3008
 sudo python setup.py install
 cd ..
 rm -rf Adafruit_Python_MCP3008
@@ -23,4 +21,5 @@ mkdir OrderStatuses
 cd
 sudo apt-get install imagemagick
 curl https://processing.org/download/install-arm.sh | sudo sh
+rm get-pip.py
 raspi-config
