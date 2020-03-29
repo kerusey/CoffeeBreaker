@@ -18,8 +18,6 @@ def getOrder():
     strenght = json_data['strenght']
     volume = json_data['volume']
     milk = json_data['milk']
-    chokolate = json_data['chokolate']
-    canella = json_data['canella']
     shugar = json_data['shugar']
     # coffee settings block
     os.remove(folderPath + fileName)
