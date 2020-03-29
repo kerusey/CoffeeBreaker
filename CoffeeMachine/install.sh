@@ -8,7 +8,6 @@ sudo apt-get install build-essential python-dev python-smbus python-pip
 sudo pip3 install adafruit-mcp3008
 sudo python setup.py install
 cd ..
-rm -rf Adafruit_Python_MCP3008
 sudo pip3 -r install requrements.txt
 sudo apt-get -y install python3-rpi.gpio
 sudo apt-get install python3-tk
