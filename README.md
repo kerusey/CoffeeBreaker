@@ -21,8 +21,7 @@ The main idea of ours project is creation of a smart CoffeeBreaker system, which
 3. Web-Server, witch connects mobile app and the coffee machine
 4. DataBase
 </br>
-<img src="https://raw.githubusercontent.com/kerusey/CoffeeBreaker/master/Schemes/NewProjectMainStructure.jpg" align="center"/ >
-
+<p align="center"><img src="https://raw.githubusercontent.com/kerusey/CoffeeBreaker/master/Schemes/NewProjectMainStructure.jpg" / ></p>
 
 ## Developer notes
 If you would like to take a part in the project development feel free to fork it and open pull requests for any fix, improvement or feature you add. 
