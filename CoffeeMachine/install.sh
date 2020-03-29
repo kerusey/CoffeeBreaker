@@ -1,3 +1,6 @@
+sudo apt-get install figlet
+figlet -f slant Hello
+sudo apt install sl
 sudo apt-get update
 sudo apt-get -y upgrade
 cp CoffeeBreaker/MachineSettings.json  /home/pi/Documents
