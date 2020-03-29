@@ -20,6 +20,7 @@ The main idea of ours project is creation of a smart CoffeeBreaker system, which
 2. IoT integrated coffee machine.
 3. Web-Server, witch connects mobile app and the coffee machine
 4. DataBase
+</br>
 <img src="https://raw.githubusercontent.com/kerusey/CoffeeBreaker/master/Schemes/NewProjectMainStructure.jpg"/ >
 
 
