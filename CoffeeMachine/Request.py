@@ -47,7 +47,7 @@ def postOrderStatus(status):
 
 def postOrderBd(finalOrder, token):
     date = token[:10]
-    time = token[10:]
+    time = token[10:19]    
     bdOrder={"date": date,
             "time": time,
             "type": finalOrder['type'],
@@ -55,20 +55,15 @@ def postOrderBd(finalOrder, token):
             "volume": finalOrder['volume'],
             "milk": finalOrder['milk'],
             "shugar": finalOrder['shugar']
-
-    }
-    codeSmile = requests.post(url + "postBd/" + str(MachineSettings['MachineID']), json=bdOrder)
+            }
+    codeSmile = requests.post(url + "postBd/" + str(MachineSettings['MachineID']), json=bdOrder) # OK
 
 '''
-jjson ={"data": str(content['data']),
-        "time": str(content['time']),
-        "type": str(content['type']),
-        "strenght": int(content['strenght']),
-        "volume": int(content['volume']),
-        "milk": bool(content['milk']),
-        "shugar": int(content['shugar'])
-        }
-
-while(True):
-    getTokenStatus()
+finalOrder ={"MachineID": 1,
+            "type": 'espresso',
+            "strenght": 4,
+            "volume": 2,
+            "milk": 0,
+            "shugar": 0
+            }
 '''

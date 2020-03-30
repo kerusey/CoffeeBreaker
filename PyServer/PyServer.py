@@ -46,9 +46,9 @@ def postJsonOrder(id):
 	return dumping(jjson, path + filename)
 
 @app.route('/postBd/<id>', methods = ['POST'])
-def postJsonOrder(id):
-	path = myPath + "/Orders/"
-	filename = "Order" + str(id)
+def postJsonBd(id):
+	path = myPath + "/Databases/"
+	filename = "Database" + str(id)
 	content = request.get_json()
 	jjson ={"date": str(content['date']),
 			"time": str(content['time']),

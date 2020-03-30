@@ -19,9 +19,9 @@ def scanActivity():
 	Request.postTokenStatus(validationStatus)
 	if(validationStatus == "FAILED"):
 		Visualizer.stopSession()
-		return True
+		return token, True
 	
-	return False
+	return token, False
 	
 def finalOrder():
 	Request.postOrderStatus("WAITING")
@@ -38,10 +38,11 @@ def finalOrder():
 def main():
 	flag = True
 	while flag:
-		flag = scanActivity()
+		generalToken, flag = scanActivity()
 	jsonOrder = finalOrder()
+	Request.postOrderBd(jsonOrder, generalToken)
 	print(jsonOrder)
-	# Barista.make(jsonOrder) 
+	# Barista.make(jsonOrder)
 	Visualizer.stopSession()
 	
 while(True):	
