@@ -19,7 +19,7 @@ def getOrderStatus():
 def getTokenStatus():
     resp = requests.get(url + "getTokenStatus/" + str(MachineSettings['MachineID']))
     return resp.text # OK
-        
+
 def getToken():
     resp = requests.get(url + "getToken/" + str(MachineSettings['MachineID']))
     return resp.text
@@ -45,18 +45,30 @@ def postOrderStatus(status):
     # return codeSmile   # optional (if you are in mood)
     # OK
 
-def postOrder(JOrder):
-    codeSmile = requests.post(url + "postOrder/" + str(MachineSettings['MachineID']), json=JOrder)
+def postOrderBd(finalOrder, token):
+    date = token[:10]
+    time = token[10:]
+    bdOrder={"date": date,
+            "time": time,
+            "type": finalOrder['type'],
+            "strenght": finalOrder['strenght'],
+            "volume": finalOrder['volume'],
+            "milk": finalOrder['milk'],
+            "shugar": finalOrder['shugar']
+
+    }
+    codeSmile = requests.post(url + "postBd/" + str(MachineSettings['MachineID']), json=bdOrder)
 
 '''
-JOrder = {  "machineId": 1,
-			"coffeeType": "espresso",
-			"strength": 5,      
-			"volume": 1,
-			"milk": False,
-			"sugar": 1
-         }
-         
+jjson ={"data": str(content['data']),
+        "time": str(content['time']),
+        "type": str(content['type']),
+        "strenght": int(content['strenght']),
+        "volume": int(content['volume']),
+        "milk": bool(content['milk']),
+        "shugar": int(content['shugar'])
+        }
+
 while(True):
     getTokenStatus()
 '''
