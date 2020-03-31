@@ -1,5 +1,5 @@
 #	barista lib
-# import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 from Oscilloscope import Imitator
 import time
 
