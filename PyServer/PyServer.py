@@ -16,11 +16,11 @@ def dumping(jjson, fullFileName):
 	js = json.dumps(jjson, sort_keys=True, indent=4, separators=(',', ': '))
 	with open (fullFileName + '.json', 'w+') as f:
 		f.write(js)
-	return "#" # OK 
+	return "#" # OK
 
 app = Flask(__name__)
 
-myHost = "192.168.0.173"
+myHost = "192.168.0.102"
 myPort = 8090
 myPath = os.path.dirname(os.path.abspath(__file__))
 
@@ -34,7 +34,7 @@ def postJsonOrder(id):
 	path = myPath + "/Orders/"
 	filename = "Order" + str(id)
 	content = request.get_json()
-	
+
 	jjson ={"MachineID": int(content['MachineID']),
 			"type": str(content['type']),
 			"strenght": int(content['strenght']),
@@ -43,6 +43,21 @@ def postJsonOrder(id):
 			"shugar": int(content['shugar'])
 			}
 
+	return dumping(jjson, path + filename)
+
+@app.route('/postBd/<id>', methods = ['POST'])
+def postJsonBd(id):
+	path = myPath + "/Databases/"
+	filename = "Database" + str(id)
+	content = request.get_json()
+	jjson ={"date": str(content['date']),
+			"time": str(content['time']),
+			"type": str(content['type']),
+			"strenght": int(content['strenght']),
+			"volume": int(content['volume']),
+			"milk": bool(content['milk']),
+			"shugar": int(content['shugar'])
+			}
 	return dumping(jjson, path + filename)
 
 @app.route('/postToken/<id>', methods = ['POST'])
@@ -61,9 +76,9 @@ def postTokenStatus(id):
 	path = myPath + "/TokenStatuses/"
 	filename = "TokenStatus" + str(id)
 	content = request.get_json()
-	
+
 	jjson = {'status':content['status']}
-	
+
 	return dumping(jjson, path + filename)
 
 @app.route('/postOrderStatus/<id>', methods = ['POST'])
@@ -73,21 +88,21 @@ def postOrderStatus(id):
 	content = request.get_json()
 
 	jjson = {'status': content['status']}
-	
+
 	return dumping(jjson, path + filename)
 
 @app.route('/getToken/<id>') #  OK
 def getJsonToken(id):
 	path = myPath + "/Tokens/"
 	filename = 'Token' + str(id) + '.json'
-	
+
 	return jsonify(getExistance(path + filename))
 
 @app.route('/getOrder/<id>') #  OK
 def getJsonOrder(id):
 	path = myPath + "/Orders/"
 	filename = 'Order' + str(id) + '.json'
-	
+
 	return jsonify(getExistance(path + filename))
 
 @app.route('/getTokenStatus/<id>') #  OK
