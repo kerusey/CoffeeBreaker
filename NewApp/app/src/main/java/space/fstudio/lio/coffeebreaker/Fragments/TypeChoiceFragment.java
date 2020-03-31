@@ -30,7 +30,7 @@ public class TypeChoiceFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_type_choice, container, false);
 
-        Objects.requireNonNull(((AppCompatActivity) Objects.requireNonNull(getActivity())).getSupportActionBar()).setSubtitle("Choice coffee type");
+        Objects.requireNonNull(((AppCompatActivity) Objects.requireNonNull(getActivity())).getSupportActionBar()).setSubtitle("Choice coffee type");//установка второго названия
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerCoffeeTypes);
 
@@ -53,9 +53,9 @@ public class TypeChoiceFragment extends Fragment {
 
     private void prepareCoffeeTypes() {
         CoffeeTypeObject coffeeTypeObject = new CoffeeTypeObject(
-                R.drawable.espresso,
-                getString(R.string.coffeeTypeEspresso),
-                getString(R.string.coffeeDescriptionEspresso));
+                R.drawable.espresso,//картинка кофе
+                getString(R.string.coffeeTypeEspresso),//название
+                getString(R.string.coffeeDescriptionEspresso));// описание кофе
         coffeeTypesList.add(coffeeTypeObject);
 
         coffeeTypeObject = new CoffeeTypeObject(
@@ -100,6 +100,6 @@ public class TypeChoiceFragment extends Fragment {
                 getString(R.string.coffeeDescriptionHotWater));
         coffeeTypesList.add(coffeeTypeObject);
 
-        coffeeTypeRecyclerAdapter.notifyDataSetChanged();
+        coffeeTypeRecyclerAdapter.notifyDataSetChanged();//
     }
 }

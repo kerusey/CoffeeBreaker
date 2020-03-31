@@ -176,7 +176,7 @@ public class ScanActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {//it is for button skip
         if (item.getItemId() == R.id.menuSkipScan) {
             startActivity(new Intent(ScanActivity.this, ChoiceActivity.class));
             finish();
