@@ -19,16 +19,9 @@ def scanActivity():
 	Request.postTokenStatus(validationStatus)
 	if(validationStatus == "FAILED"):
 		Visualizer.stopSession()
-		return token, True
-<<<<<<< HEAD
-
+		return token, True	
 	return token, False
 
-=======
-	
-	return token, False
-	
->>>>>>> fba78621e64bd20e79c8af082fc79f3c4b1c8809
 def finalOrder():
 	Request.postOrderStatus("WAITING")
 
