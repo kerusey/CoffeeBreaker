@@ -1,5 +1,5 @@
 #	barista lib
-import RPi.GPIO as GPIO
+# import RPi.GPIO as GPIO
 from Oscilloscope import Imitator
 import time
 
@@ -19,17 +19,29 @@ class Barista:
 		self.milk = milk
 		self.sugar = sugar
 
+
 	def run(self):
-		pass
-		'''
-		Imitator.keyEvent(coffeeType, matrix)
-		Imitator.keyEvent(strenght, matrix)
+		Imitator.keyEvent("coffeeType.matrix")
+
+		Imitator.keyEvent("strenght.matrix")
 		for i in strenght:
-			Imitator.keyEvent(up, matrix)
-		 .... # FIXME SOMEDAY
-		'''
+			Imitator.keyEvent("up.matrix")
+
+		Imitator.keyEvent("volume.matrix")
+		for i in volume:
+			Imitator.keyEvent("up.matrix")
+
+
 	def __del__(self):
-		pass
+		Imitator.keyEvent("strenght.matrix")
+
+		for i in strenght:
+			Imitator.keyEvent("down.matrix")
+
+		Imitator.keyEvent("volume.matrix")
+		for i in volume:
+			Imitator.keyEvent("down.matrix")
+
 
 def make(jsonOrder):
 	coffeeCup = Barista(jsonOrder['coffeeType'],

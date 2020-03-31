@@ -23,48 +23,30 @@ def removeOld():
 	if (os.path.isfile("data.txt")):
 		os.remove("data.txt")
 
-def loopAndWrite(times=10, defaultString="0, 0, 0, 0, 0, 0, 0, 0"):
+def loopAndWrite(keyName:str, defaultString="0, 0, 0, 0, 0, 0, 0, 0"):
 	timer = 0
-	removeOld()
-	with open("data.txt", "w") as f:
+	removeOld() # rewrite
+	with open(keyName, "w") as key:
 		while True:
 			values = [0]*8
 			for i in range(8):
 				values[i] = mcp.read_adc(i)
-			if (defaultString != "{0:}, {1:}, {2:}, {3:}, {4:}, {5:}, {6:}, {7:} \n".format(*values)):
-				f.write("{0:}, {1:}, {2:}, {3:}, {4:}, {5:}, {6:}, {7:} \n".format(*values))
+				currentRow = "{0:}, {1:}, {2:}, {3:}, {4:}, {5:}, {6:}, {7:} \n".format(*values)
+			if (defaultString != currentRow):
+				key.write(currentRow)
 				timer += 1
-			if(timer >= times):
-				f.close()
+			if(timer >= 1 and defaultString == currentRow):
+				key.close()
 				return 0 # FIXME Set only 4 pin chanel
 
 def getDefaultString():
-	with open("data.txt", "w") as f:
-		values = [0]*8
-		for i in range(8):
-			values[i] = mcp.read_adc(i)
-		f.write("{0:}, {1:}, {2:}, {3:}, {4:}, {5:}, {6:}, {7:} \n".format(*values))
-		f.close() # FIXME Set only 4 pin chanel
+	values = [0]*8
+	for i in range(8):
+		values[i] = mcp.read_adc(i)
+	return convertListToString(values)
 
-def convertStrToIntList(fileName):
-	with open(fileName, "r") as data:
-		matrix = []
-		for row in data:
-			# data.write(int(row))
-			wordlist = list(row.split(", "))
-			wordlist[len(wordlist)-1] = wordlist[len(wordlist)-1][:-1]
-			intlist = []
-			for char in wordlist:
-				intlist.append(int(char))
-			matrix.append(intlist)
-		return matrix # OK
+def dutySycle(keyName:str):
+	defaultStr = getDefaultString()
+	loopAndWrite(keyName, defaultString) # Writes a <keyname> file wich contains a pure 2-d matrix of a key-pressed event
 
 # 0, 1, 2, 3, 4, 5, 6, 7
-
-'''
-defaultStr = getDefaultString()
-loopAndWrite(defaultString=defaultStr)
-
-matrix = convertStrToIntList(fileName="data.txt")
-print(matrix[0])
-'''
