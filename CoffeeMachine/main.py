@@ -1,5 +1,5 @@
 from Validation import Visualizer
-from Barista import Order
+from Barista import Barista
 import Request
 import time
 import os
@@ -19,7 +19,7 @@ def scanActivity():
 	Request.postTokenStatus(validationStatus)
 	if(validationStatus == "FAILED"):
 		Visualizer.stopSession()
-		return token, True	
+		return token, True
 	return token, False
 
 def finalOrder():
