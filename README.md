@@ -4,7 +4,7 @@
 <a href="https://github.com/kerusey/CoffeeBreaker/tags"><img src="https://img.shields.io/github/release-date/kerusey/CoffeeBreaker.svg"/></a>
 <a href="https://discord.gg/9bdQ9py"><img src="https://img.shields.io/discord/693528089283657749"></a>
 <a href="https://github.com/kerusey/CoffeeBreaker/pulls"><img src="https://img.shields.io/github/hacktoberfest/2019/kerusey/CoffeeBreaker.svg"/></a>
-![Screenshot](Schemes/logo.jpg)
+![Screenshot](Schemes/newLogo.png)
 ![Screenshot](Schemes/nedo_adidas.jpg)
 <a href="https://github.com/kerusey/CoffeeBreaker/blob/master/README-RU.md"><p align="right">Русская версия</p></a>
 
