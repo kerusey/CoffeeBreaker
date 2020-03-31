@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 import space.fstudio.lio.coffeebreaker.Adapters.CoffeeTypeRecyclerAdapter;
+import space.fstudio.lio.coffeebreaker.Adapters.RecyclerTouchListener;
 import space.fstudio.lio.coffeebreaker.Objects.CoffeeTypeObject;
 import space.fstudio.lio.coffeebreaker.R;
 
@@ -24,15 +25,16 @@ public class TypeChoiceFragment extends Fragment {
 
     private CoffeeTypeRecyclerAdapter coffeeTypeRecyclerAdapter;
     private ArrayList<CoffeeTypeObject> coffeeTypesList = new ArrayList<>();
-
+    private RecyclerView recyclerView;
+    private String type;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_type_choice, container, false);
+        View view = inflater.inflate(R.layout.fragment_type_choice, container, false);//обозначаем, куда будем загружать объекты
 
         Objects.requireNonNull(((AppCompatActivity) Objects.requireNonNull(getActivity())).getSupportActionBar()).setSubtitle("Choice coffee type");//установка второго названия
 
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerCoffeeTypes);
+        recyclerView = view.findViewById(R.id.recyclerCoffeeTypes);
 
         coffeeTypeRecyclerAdapter = new CoffeeTypeRecyclerAdapter(coffeeTypesList);
 
@@ -41,14 +43,24 @@ public class TypeChoiceFragment extends Fragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         recyclerView.setAdapter(coffeeTypeRecyclerAdapter);
-
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                final CoffeeTypeObject coffeeTypeObject = coffeeTypesList.get(position);
+                type = coffeeTypeObject.getCoffeeName();
+                //        pager2.setAdapter(new ViewPagerAdapter(MilkChoiceFragment));//переход к следующей активности
+            }
+        }));
         return view;
     }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         prepareCoffeeTypes();
+
+
     }
 
     private void prepareCoffeeTypes() {
@@ -100,6 +112,6 @@ public class TypeChoiceFragment extends Fragment {
                 getString(R.string.coffeeDescriptionHotWater));
         coffeeTypesList.add(coffeeTypeObject);
 
-        coffeeTypeRecyclerAdapter.notifyDataSetChanged();//
+        coffeeTypeRecyclerAdapter.notifyDataSetChanged();//устанавливаем изменения
     }
 }
