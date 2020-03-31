@@ -23,7 +23,7 @@
 3. Web-Сервер, осуществляющий взаимосвязь между мобильным приложением и кофемашиной.
 4. Базу данных
 
-![Screenshot](Schemes/NewProjectMainStructure.jpg)
+<p align="center"><img src="https://raw.githubusercontent.com/kerusey/CoffeeBreaker/master/Schemes/NewProjectMainStructure.jpg" / ></p>
 
 ## Заметки для разработчиков
 Если вы хотите принять участие в разработке проекта, можете сделать fork данного репозитория открыть новый pull request для любой поправки, улучшения или нового функционала. 

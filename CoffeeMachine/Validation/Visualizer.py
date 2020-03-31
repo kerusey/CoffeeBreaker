@@ -69,3 +69,8 @@ def validateToken(token):
         return "FAILED"
     else:
         return "OK"
+
+def visulizeErrorMessage():
+    session = Image.open("issue2.png").show()
+    fullscreen()
+    

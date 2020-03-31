@@ -19,7 +19,7 @@ def getOrderStatus():
 def getTokenStatus():
     resp = requests.get(url + "getTokenStatus/" + str(MachineSettings['MachineID']))
     return resp.text # OK
-        
+
 def getToken():
     resp = requests.get(url + "getToken/" + str(MachineSettings['MachineID']))
     return resp.text
@@ -45,18 +45,25 @@ def postOrderStatus(status):
     # return codeSmile   # optional (if you are in mood)
     # OK
 
-def postOrder(JOrder):
-    codeSmile = requests.post(url + "postOrder/" + str(MachineSettings['MachineID']), json=JOrder)
+def postOrderBd(finalOrder, token):
+    date = token[:10]
+    time = token[10:19]    
+    bdOrder={"date": date,
+            "time": time,
+            "type": finalOrder['type'],
+            "strenght": finalOrder['strenght'],
+            "volume": finalOrder['volume'],
+            "milk": finalOrder['milk'],
+            "shugar": finalOrder['shugar']
+            }
+    codeSmile = requests.post(url + "postBd/" + str(MachineSettings['MachineID']), json=bdOrder) # OK
 
 '''
-JOrder = {  "machineId": 1,
-			"coffeeType": "espresso",
-			"strength": 5,      
-			"volume": 1,
-			"milk": False,
-			"sugar": 1
-         }
-         
-while(True):
-    getTokenStatus()
+finalOrder ={"MachineID": 1,
+            "type": 'espresso',
+            "strenght": 4,
+            "volume": 2,
+            "milk": 0,
+            "shugar": 0
+            }
 '''

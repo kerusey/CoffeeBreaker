@@ -5,7 +5,13 @@ days = 31
 orders = 100
 
 def randomTime():
-	return str(random.randint(0, 23)) + ":" + str(random.randint(0, 59))
+	hrs = str(random.randint(0, 23))
+	mins = str(random.randint(0, 59))
+	if(int(mins) < 10):
+		mins = "0" + mins
+	if(int(hrs) < 10):
+		hrs = "0" + hrs
+	return hrs + ":" + mins
 
 with open('database.csv', 'w', newline='') as csvfile:
 	fieldnames = ['date', 'time', 'milk', 'sugar', 'coffee', 'water']
