@@ -43,6 +43,9 @@ def main():
 	print(jsonOrder)
 	# Barista.make(jsonOrder)
 	Visualizer.stopSession()
+	errorStatus = False
+	if(errorStatus):
+		Visualizer.visulizeErrorMessage()
 
 while(True):
 	main()
