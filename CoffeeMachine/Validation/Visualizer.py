@@ -73,5 +73,4 @@ def validateToken(token):
 def visualizeErrorMessage():
     session = Image.open("issue21.jpg").show()
     fullscreen()
-    
-visualizeErrorMessage()
+   
