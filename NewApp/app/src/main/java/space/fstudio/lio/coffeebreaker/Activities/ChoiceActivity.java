@@ -8,12 +8,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import java.util.List;
+
 import space.fstudio.lio.coffeebreaker.Adapters.RecyclerTouchListener;
 import space.fstudio.lio.coffeebreaker.Adapters.ViewPagerAdapter;
+import space.fstudio.lio.coffeebreaker.Objects.CoffeeTypeObject;
 import space.fstudio.lio.coffeebreaker.R;
 
 public class ChoiceActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
+    private List<CoffeeTypeObject> coffeeTypesList;
+    private String type;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +31,8 @@ public class ChoiceActivity extends AppCompatActivity {
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
-
+                final CoffeeTypeObject coffeeTypeObject = coffeeTypesList.get(position);
+                type = coffeeTypeObject.getCoffeeName();
             }
 
         }));
