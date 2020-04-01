@@ -16,7 +16,7 @@ public class MilkChoiceFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_milk_choice, container, false);
+        View view = inflater.inflate(R.layout.fragment_milk_choice, container, false);// файл разметки;  родительский элемент разметки, откуда будут взяты LayoutParams для загружаемой вьюхи
         return view;
     }
 

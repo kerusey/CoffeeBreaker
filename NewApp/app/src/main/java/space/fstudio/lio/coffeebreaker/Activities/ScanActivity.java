@@ -26,6 +26,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import space.fstudio.lio.coffeebreaker.NavigationActivity;
 import space.fstudio.lio.coffeebreaker.Objects.TokenJsonObject;
 import space.fstudio.lio.coffeebreaker.Objects.TokenStatusJsonObject;
 import space.fstudio.lio.coffeebreaker.R;
@@ -56,9 +57,9 @@ public class ScanActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         try {
-                            startActivity(new Intent(ScanActivity.this, ChoiceActivity.class));
-                            finish();
-//                            jsonToServer(result, "postToken");
+                            //               startActivity(new Intent(ScanActivity.this, ChoiceActivity.class));
+                            //               finish();
+                            jsonToServer(result, "postToken");
                         } catch (Exception e) {
                             Toast.makeText(ScanActivity.this, "Uncorrected QR code", Toast.LENGTH_SHORT).show();
                             mCodeScanner.startPreview();
@@ -97,7 +98,7 @@ public class ScanActivity extends AppCompatActivity {
             if (!post.equals("postTokenStatus"))
                 json = new Gson().toJson(new TokenJsonObject(array[2]));
             else
-                json = new Gson().toJson(new TokenStatusJsonObject(array[2]));
+                json = new Gson().toJson(new TokenStatusJsonObject("Scanned"));
 
             System.out.println("Post: " + json);
             postBody = RequestBody.create(mediaType, json);
@@ -112,6 +113,7 @@ public class ScanActivity extends AppCompatActivity {
                     .post(postBody)
                     .build();
         } else {
+            postUrl = "http://" + SERVER_DEFAULT_ADDRESS + ":" + SERVER_DEFAULT_PORT + "/getTokenStatus/" + array[1];
             request = new Request.Builder()
                     .url(postUrl)
                     .get()
@@ -135,7 +137,7 @@ public class ScanActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onResponse(final Call call, final Response response) throws IOException {
+            public void onResponse(final Call call, final Response response) {
                 // In order to access the TextView inside the UI thread, the code is executed inside runOnUiThread()
                 runOnUiThread(new Runnable() {
                     @Override
@@ -144,19 +146,22 @@ public class ScanActivity extends AppCompatActivity {
                             assert response.body() != null;
                             String answer = response.body().string();
                             System.out.println(answer);
-                            if (answer.equals("#") && !post.equals("postTokenStatus")) {
+                            if (answer.equals("#") && post.equals("postToken")) {
                                 jsonToServer(result, "postTokenStatus");
-                                call.cancel();
-                            } else if (post.equals("postTokenStatus")) {
+
+                            } else if (answer.equals("#") && post.equals("postTokenStatus")) {
                                 jsonToServer(result, "getTokenStatus");
-                                call.cancel();
-                            } else if (post.equals("getTokenStatus") && !answer.equals("OK")) {
+
+                            } else if (post.equals("getTokenStatus") && answer.equals("SCANNED")) {
                                 jsonToServer(result, "getTokenStatus");
-                                call.cancel();
-                            } else {
-                                System.out.println("ALL DONE FUCK YOU");
+
+                            } else if (post.equals("getTokenStatus") && answer.equals("FAILED")) {
+                                startActivity(new Intent(ScanActivity.this, NavigationActivity.class));
+
+                            } else if (post.equals("getTokenStatus") && answer.equals("OK")) {
+                                System.out.println("ALL DONE");
                                 startActivity(new Intent(ScanActivity.this, ChoiceActivity.class));
-                                finish();
+
                             }
                         } catch (IOException e) {
                             e.printStackTrace();

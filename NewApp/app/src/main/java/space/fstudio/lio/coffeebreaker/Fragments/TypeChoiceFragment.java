@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -48,7 +49,16 @@ public class TypeChoiceFragment extends Fragment {
             public void onClick(View view, int position) {
                 final CoffeeTypeObject coffeeTypeObject = coffeeTypesList.get(position);
                 type = coffeeTypeObject.getCoffeeName();
-                //        pager2.setAdapter(new ViewPagerAdapter(MilkChoiceFragment));//переход к следующей активности
+
+                VolumeChoiceFragment VolFragment = new VolumeChoiceFragment();
+
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.viewPager2, VolFragment);
+
+//                FragmentManager fragmentManager = getFragmentManager();
+//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
             }
         }));
         return view;
