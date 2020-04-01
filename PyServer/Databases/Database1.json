@@ -4,6 +4,6 @@
     "sugar": 0,
     "strength": 4,
     "time": " 22:45:15",
-    "type": "espresso",
+    "coffeeType": "espresso",
     "volume": 2
 }

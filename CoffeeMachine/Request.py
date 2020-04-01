@@ -53,7 +53,7 @@ def postOrderBd(finalOrder, token):
     time = token[10:19]
     bdOrder={"date": date,
             "time": time,
-            "type": finalOrder['type'],
+            "coffeeType": finalOrder['coffeeType'],
             "strength": finalOrder['strength'],
             "volume": finalOrder['volume'],
             "milk": finalOrder['milk'],
@@ -63,7 +63,7 @@ def postOrderBd(finalOrder, token):
 
 '''
 finalOrder ={"MachineID": 1,
-            "type": 'espresso',
+            "coffeeType": 'espresso',
             "strength": 4,
             "volume": 2,
             "milk": 0,

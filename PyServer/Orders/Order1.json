@@ -1,6 +1,6 @@
 {
 	"MachineID": "1",
-	"type": "espresso",
+	"coffeeType": "espresso",
 	"strength": 0,
 	"volume": 0,
 	"milk": false,

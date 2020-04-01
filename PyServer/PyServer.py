@@ -35,7 +35,7 @@ def postJsonOrder(id):
 	content = request.get_json()
 
 	jjson ={"MachineID": int(content['MachineID']),
-			"type": str(content['type']),
+			"coffeeType": str(content['coffeeType']),
 			"strength": int(content['strength']),
 			"volume": int(content['volume']),
 			"milk": bool(content['milk']),
@@ -51,7 +51,7 @@ def postJsonBd(id):
 	content = request.get_json()
 	jjson ={"date": str(content['date']),
 			"time": str(content['time']),
-			"type": str(content['type']),
+			"coffeeType": str(content['coffeeType']),
 			"strength": int(content['strength']),
 			"volume": int(content['volume']),
 			"milk": bool(content['milk']),
