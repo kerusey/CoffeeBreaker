@@ -1,16 +1,17 @@
 #	barista lib
 import RPi.GPIO as GPIO
-from Oscilloscope import Imitator
+try:
+	from Oscilloscope import Imitator
+except ImportError:
+	from .Oscilloscope import Imitator
 import time
 
-# also custom stuff like tseh 95 does
-
 class Barista:
-	coffeeType
-	strength
-	volume
-	milk
-	sugar
+	coffeeType = 'espresso'
+	strength = 2
+	volume = 4
+	milk = 1
+	sugar = 0
 
 	def __init__(self, coffeeType, strength, volume, milk, sugar):
 		self.coffeeType = coffeeType
@@ -19,9 +20,8 @@ class Barista:
 		self.milk = milk
 		self.sugar = sugar
 
-
 	def run(self):
-		Imitator.keyEvent("coffeeType.matrix")
+		Imitator.keyEvent(coffeeType + ".matrix")
 
 		Imitator.keyEvent("strength.matrix")
 		for i in strength:
@@ -50,3 +50,13 @@ def make(jsonOrder):
 						jsonOrder['milk'],
 						jsonOrder['sugar'])
 	coffeeCup.run()
+
+finalOrder ={"MachineID": 1,
+            "coffeeType": 'latte',
+            "strength": 4,
+            "volume": 2,
+            "milk": 0,
+            "sugar": 0
+            }
+            
+# make(finalOrder)

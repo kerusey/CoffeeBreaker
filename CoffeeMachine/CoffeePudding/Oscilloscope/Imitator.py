@@ -12,11 +12,13 @@ Some of these should be GND & 5V, so they're constant
 And we need to write a voltage writer for the variable pins from the data, that we've got from the PyReaderSample.py
 '''
 
-pinlist = {'default', 14, 15, 16, 17, "default", None, None} # FIXME write a -released- ones
+pinlist = ('default', 14, 15, 16, 17, "default", None, None) # FIXME write a -released- ones
 
 def initializePinout():
 	GPIO.setmode(GPIO.BOARD)
 	for pin in pinlist:
+		if (pin == 'default' or pin == None):
+			continue
 		GPIO.setup(pin, GPIO.OUT)
 
 def convertStrToIntMatrix(keyName):
@@ -33,9 +35,9 @@ def convertStrToIntMatrix(keyName):
 		return matrix # OK
 
 def keyEvent(matrixName):
-	matrix = convertStrToIntMatrix(matrixName + ".txt")
+	matrix = convertStrToIntMatrix(matrixName)
 	for arr in matrix:
-		for member in range(len(arr)):
+		for member in range(len(arr)-1):
 			if(pinlist[member] != 'default' and pinlist[member] != None):
-				pwm = GPIO.PWM(pinlist[i], 100)
-				pwm.start(arr[i] / 1023 * 100)
+				pwm = GPIO.PWM(pinlist[member], 100)
+				pwm.start(arr[member] / 1023 * 100)
