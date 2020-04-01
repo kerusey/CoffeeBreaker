@@ -36,10 +36,10 @@ def postJsonOrder(id):
 
 	jjson ={"MachineID": int(content['MachineID']),
 			"type": str(content['type']),
-			"strenght": int(content['strenght']),
+			"strength": int(content['strength']),
 			"volume": int(content['volume']),
 			"milk": bool(content['milk']),
-			"shugar": int(content['shugar'])
+			"sugar": int(content['sugar'])
 			}
 
 	return dumping(jjson, path + filename)
@@ -52,10 +52,10 @@ def postJsonBd(id):
 	jjson ={"date": str(content['date']),
 			"time": str(content['time']),
 			"type": str(content['type']),
-			"strenght": int(content['strenght']),
+			"strength": int(content['strength']),
 			"volume": int(content['volume']),
 			"milk": bool(content['milk']),
-			"shugar": int(content['shugar'])
+			"sugar": int(content['sugar'])
 			}
 	return dumping(jjson, path + filename)
 

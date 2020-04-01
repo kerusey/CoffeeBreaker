@@ -7,14 +7,14 @@ import time
 
 class Barista:
 	coffeeType
-	strenght
+	strength
 	volume
 	milk
 	sugar
 
-	def __init__(self, coffeeType, strenght, volume, milk, sugar):
+	def __init__(self, coffeeType, strength, volume, milk, sugar):
 		self.coffeeType = coffeeType
-		self.strenght = strenght
+		self.strength = strength
 		self.volume = volume
 		self.milk = milk
 		self.sugar = sugar
@@ -23,8 +23,8 @@ class Barista:
 	def run(self):
 		Imitator.keyEvent("coffeeType.matrix")
 
-		Imitator.keyEvent("strenght.matrix")
-		for i in strenght:
+		Imitator.keyEvent("strength.matrix")
+		for i in strength:
 			Imitator.keyEvent("up.matrix")
 
 		Imitator.keyEvent("volume.matrix")
@@ -33,9 +33,9 @@ class Barista:
 
 
 	def __del__(self):
-		Imitator.keyEvent("strenght.matrix")
+		Imitator.keyEvent("strength.matrix")
 
-		for i in strenght:
+		for i in strength:
 			Imitator.keyEvent("down.matrix")
 
 		Imitator.keyEvent("volume.matrix")
