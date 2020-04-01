@@ -19,7 +19,7 @@ def getOrderStatus():
 def getTokenStatus():
     resp = requests.get(url + "getTokenStatus/" + str(MachineSettings['MachineID']))
     return resp.text # OK
-
+        
 def getToken():
     resp = requests.get(url + "getToken/" + str(MachineSettings['MachineID']))
     return resp.text
@@ -44,6 +44,9 @@ def postOrderStatus(status):
     codeSmile = requests.post(url + "postOrderStatus/" + str(MachineSettings['MachineID']), json={"status": status})
     # return codeSmile   # optional (if you are in mood)
     # OK
+
+def postOrder(JOrder):
+    codeSmile = requests.post(url + "postOrder/" + str(MachineSettings['MachineID']), json=JOrder)
 
 def postOrderBd(finalOrder, token):
     date = token[:10]
