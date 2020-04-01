@@ -1,12 +1,12 @@
 package space.fstudio.lio.coffeebreaker.Objects;
 
 public class OrderJsonObject {
-
-    int machineId, strength, volume, sugar;
     private String coffeeType;
     private boolean milk;
+    private int sugar, strength, machineId;
+    private float volume;
 
-    public OrderJsonObject(int machineId, String coffeeType, int strength, int volume, boolean milk, int sugar) {
+    public OrderJsonObject(int machineId, String coffeeType, int sugar, boolean milk, float volume, int strength) {
         this.machineId = machineId;
         this.coffeeType = coffeeType;
         this.strength = strength;
@@ -15,3 +15,5 @@ public class OrderJsonObject {
         this.sugar = sugar;
     }
 }
+
+
