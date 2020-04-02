@@ -7,7 +7,6 @@
 ![Screenshot](Schemes/logo.jpg)
 ![Screenshot](Schemes/nedo_adidas.jpg)
 <a href="https://github.com/kerusey/CoffeeBreaker/blob/master/README-RU.md"><p align="right">Русская версия</p></a>
-
 ## Description
 ### Main goal of the project
 The aim of the CoffeeBreaker project is to simplify the receipt of coffee drink by excluding barista from the coffee chain. We have created a system where an each person can make coffee using only a mobile phone and our developments. You just need to scan the QR-code, download our apps from Google Play Market and use the same code to allow the coffee machine to fulfill your order
