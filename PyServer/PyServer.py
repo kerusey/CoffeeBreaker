@@ -7,6 +7,7 @@ def getExistance(fullFileName):
 	if(os.path.isfile(fullFileName)):
 		with open(fullFileName) as json_data:
 			jsonFile = json.load(json_data)
+		os.remove(fullFileName)
 		return jsonFile
 	else:
 		return "0"  #  OK
@@ -35,28 +36,13 @@ def postJsonOrder(id):
 	content = request.get_json()
 
 	jjson ={"MachineID": int(content['MachineID']),
-			"coffeeType": str(content['coffeeType']),
-			"strength": int(content['strength']),
+			"type": str(content['type']),
+			"strenght": int(content['strenght']),
 			"volume": int(content['volume']),
 			"milk": bool(content['milk']),
-			"sugar": int(content['sugar'])
+			"shugar": int(content['shugar'])
 			}
 
-	return dumping(jjson, path + filename)
-
-@app.route('/postBd/<id>', methods = ['POST'])
-def postJsonBd(id):
-	path = myPath + "/Databases/"
-	filename = "Database" + str(id)
-	content = request.get_json()
-	jjson ={"date": str(content['date']),
-			"time": str(content['time']),
-			"coffeeType": str(content['coffeeType']),
-			"strength": int(content['strength']),
-			"volume": int(content['volume']),
-			"milk": bool(content['milk']),
-			"sugar": int(content['sugar'])
-			}
 	return dumping(jjson, path + filename)
 
 @app.route('/postToken/<id>', methods = ['POST'])
@@ -95,18 +81,14 @@ def getJsonToken(id):
 	path = myPath + "/Tokens/"
 	filename = 'Token' + str(id) + '.json'
 
-	jsonFile = jsonify(getExistance(path + filename))
-	os.remove(path + filename)
-	return jsonFile
+	return jsonify(getExistance(path + filename))
 
 @app.route('/getOrder/<id>') #  OK
 def getJsonOrder(id):
 	path = myPath + "/Orders/"
 	filename = 'Order' + str(id) + '.json'
 
-	jsonFile = jsonify(getExistance(path + filename))
-	os.remove(path + filename)
-	return jsonFile
+	return jsonify(getExistance(path + filename))
 
 @app.route('/getTokenStatus/<id>') #  OK
 def getTokenStatus(id):
