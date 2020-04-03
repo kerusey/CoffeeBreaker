@@ -3,11 +3,12 @@ import requests
 import json
 import os.path
 
-def getExistance(fullFileName):
+def getExistance(fullFileName, movable=True):
 	if(os.path.isfile(fullFileName)):
 		with open(fullFileName) as json_data:
 			jsonFile = json.load(json_data)
-		os.remove(fullFileName)
+		if(movable):
+			os.remove(fullFileName)
 		return jsonFile
 	else:
 		return "0"  #  OK
@@ -43,6 +44,21 @@ def postJsonOrder(id):
 			"shugar": int(content['shugar'])
 			}
 
+	return dumping(jjson, path + filename)
+
+@app.route('/postBd/<id>', methods = ['POST'])
+def postJsonBd(id):
+	path = myPath + "/Databases/"
+	filename = "Database" + str(id)
+	content = request.get_json()
+	jjson ={"date": str(content['date']),
+			"time": str(content['time']),
+			"coffeeType": str(content['coffeeType']),
+			"strength": int(content['strength']),
+			"volume": int(content['volume']),
+			"milk": bool(content['milk']),
+			"sugar": int(content['sugar'])
+			}
 	return dumping(jjson, path + filename)
 
 @app.route('/postToken/<id>', methods = ['POST'])
@@ -94,14 +110,14 @@ def getJsonOrder(id):
 def getTokenStatus(id):
 	path = myPath + "/TokenStatuses/"
 	filename = 'TokenStatus' + str(id) + '.json'
-	jsonFile = getExistance(path + filename)
+	jsonFile = getExistance(path + filename, False)
 	return "0" if (jsonFile == "0")	else jsonFile['status']
 
 @app.route('/getOrderStatus/<id>') #  OK
 def getOrderStatus(id):
 	path = myPath + "/OrderStatuses/"
 	filename = 'OrderStatus' + str(id) + '.json'
-	jsonFile = getExistance(path + filename)
+	jsonFile = getExistance(path + filename, False)
 	return "0" if (jsonFile == "0")	else jsonFile['status']
 
 if __name__ == '__main__':

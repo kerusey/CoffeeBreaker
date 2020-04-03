@@ -63,9 +63,3 @@ def stopSession(): # OK
     keyboard.press(Key.space)
     keyboard.release(Key.space)
     os.remove("session.png")
-
-def validateToken(token):
-    if (Request.getToken() != token):
-        return "FAILED"
-    else:
-        return "OK"

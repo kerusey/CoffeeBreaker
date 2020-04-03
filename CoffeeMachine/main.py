@@ -4,8 +4,16 @@ import Request
 import time
 import os
 
+def validateToken(token):
+	if (Request.getToken() != token):
+		return "FAILED"
+	else:
+		return "OK"
+
+
 def scanActivity():
 	currentToken = Visualizer.visualNewSession()
+	Visualizer.stopSession()
 	Request.postTokenStatus("READYTOSCAN")
 
 	timer = 2
@@ -15,13 +23,13 @@ def scanActivity():
 		if (timer >= 90):
 			timer = 2
 
-	validationStatus = Visualizer.validateToken(currentToken)
+	validationStatus = validateToken(currentToken)
 	Request.postTokenStatus(validationStatus)
 	if(validationStatus == "FAILED"):
 		Visualizer.stopSession()
-		return True
+		return currentToken, True
 
-	return False
+	return currentToken, False
 
 def finalOrder():
 	Request.postOrderStatus("WAITING")
@@ -38,9 +46,11 @@ def finalOrder():
 def main():
 	flag = True
 	while flag:
-		flag = scanActivity()
+		generalToken, flag = scanActivity()
 	jsonOrder = finalOrder()
 	print(jsonOrder)
+
+	Request.postBd(jsonOrder, generalToken)
 	# Barista.make(jsonOrder)
 	Visualizer.stopSession()
 
