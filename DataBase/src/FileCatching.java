@@ -17,7 +17,6 @@ public class FileCatching {
             System.out.println(item.getName() + (item.isDirectory() ? " \t folder" : "\t file"));
           String  filename = item.getName();
             new JsonParser(filename, catalog__, connection).Parse();
-          //  new JsonParser(filename, catalog__).readJSON();
         }
     }
 }
