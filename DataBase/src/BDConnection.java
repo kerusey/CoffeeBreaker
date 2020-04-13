@@ -1,30 +1,31 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.io.*;
+import java.util.Properties;
 
 
 
 public class BDConnection {
 
     public BDConnection() {
-        try{
-            String url = "your database URL"; // watchout it might be a timezone error (use ?Timezone: )
-            String username = "your username";
-            String password = "your username";
+        try {
+            String url = "jdbc:mysql://178.206.224.58:3306/coffeeBreaker?serverTimezone=Europe/Moscow";
+            String username = "coffeeBreaker";
+            String password = "coffeeBreaker";
             Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
-            try (Connection connection = DriverManager.getConnection(url, username, password)){
+            try (Connection connection = DriverManager.getConnection(url, username, password)) {
 
                 System.out.println("Connection to coffeeBreaker BD has been completed!");
-               try {
-                   new JavaBDPrint(connection).print();// printing Data Base values
-                   new ValueInsert(connection).insert(); // inserts values 
-               }catch (Exception ignore) {
-                   System.out.println("proeb");// was used to catch printing troubles. 
+                try {
+                   new FileCatching(connection).GetAmountOfFiles();
 
-               }
+                } catch (Exception ignore) {
+                    System.out.println("error");
+
+                }
             }
-        }
-        catch(Exception ex){
-            System.out.println("Connection failed..."); // could occur if you didn t import Driver as a library. 
+        } catch (Exception ex) {
+            System.out.println("Connection failed...");
 
             System.out.println(ex);
         }

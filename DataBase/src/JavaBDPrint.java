@@ -36,11 +36,11 @@ public class JavaBDPrint {
             System.out.print("sugar value " + sugar + "mg  ");
             System.out.println("coffee value " + coffee + "mg");
             System.out.println("DATE: " + date + "  To be certain at: " +  time );
+            System.out.println();
+            System.out.println();
+            System.out.println();
         }
         rs.close();
-
-
-
 
     }
 
