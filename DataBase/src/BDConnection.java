@@ -9,9 +9,9 @@ public class BDConnection {
 
     public BDConnection() {
         try {
-            String url = "jdbc:mysql://178.206.224.58:3306/coffeeBreaker?serverTimezone=Europe/Moscow";
-            String username = "coffeeBreaker";
-            String password = "coffeeBreaker";
+            String url = "";
+            String username = "";
+            String password = "";
             Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
             try (Connection connection = DriverManager.getConnection(url, username, password)) {
 
