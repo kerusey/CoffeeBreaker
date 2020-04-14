@@ -1,7 +1,9 @@
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.io.*;
+
 import java.util.Properties;
+
 
 
 
@@ -9,9 +11,13 @@ public class BDConnection {
 
     public BDConnection() {
         try {
-            String url = "jdbc:mysql://178.206.224.58:3306/coffeeBreaker?serverTimezone=Europe/Moscow";
-            String username = "coffeeBreaker";
-            String password = "coffeeBreaker";
+            FileInputStream fis;
+            Properties property = new Properties();
+            fis = new FileInputStream("src/main/resources/application.properties");
+            property.load(fis);
+            String url = property.getProperty("db.host");;
+            String username = property.getProperty("db.login");;
+            String password = property.getProperty("db.password");
             Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
             try (Connection connection = DriverManager.getConnection(url, username, password)) {
 

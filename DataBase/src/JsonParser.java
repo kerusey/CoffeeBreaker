@@ -15,8 +15,7 @@ public class JsonParser {
         "time": " 22:45:15",
         "type": "espresso",
         "volume": 2
-
-         */
+      */
     public String catalog;
     public String FileName;
     public Connection connection;
