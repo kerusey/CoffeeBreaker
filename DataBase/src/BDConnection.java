@@ -15,8 +15,8 @@ public class BDConnection {
             Properties property = new Properties();
             fis = new FileInputStream("src/main/resources/application.properties");
             property.load(fis);
-            String url = property.getProperty("db.host");;
-            String username = property.getProperty("db.login");;
+            String url = property.getProperty("db.host");
+            String username = property.getProperty("db.login");
             String password = property.getProperty("db.password");
             Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
             try (Connection connection = DriverManager.getConnection(url, username, password)) {
