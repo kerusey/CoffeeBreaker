@@ -14,13 +14,13 @@ def randomTime():
 	return hrs + ":" + mins
 
 with open('database.csv', 'w', newline='') as csvfile:
-	fieldnames = ['date', 'time', 'milk', 'sugar', 'coffee', 'water']
+	fieldnames = ['id', 'date', 'time', 'milk', 'sugar', 'coffee', 'water']
 	writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 	writer.writeheader()
 
 	for j in range(days):
 		for i in range(orders):
 			if(j + 1 > 9):
-				writer.writerow({'date': '2020-01-' + str(j+1), 'time': randomTime(), 'milk': random.randint(0, 1), 'sugar': random.randint(0, 4), 'coffee': random.randint(1, 4), 'water': random.randint(1, 4)})
+				writer.writerow({'id': random.randint(1, 10), 'date': '2020-01-' + str(j+1), 'time': randomTime(), 'milk': random.randint(0, 1), 'sugar': random.randint(0, 4), 'coffee': random.randint(1, 4), 'water': random.randint(1, 4)})
 			else:
-				writer.writerow({'date': '2020-01-0' + str(j+1), 'time': randomTime(), 'milk': random.randint(0, 1), 'sugar': random.randint(0, 4), 'coffee': random.randint(1, 4), 'water': random.randint(1, 4)})
+				writer.writerow({'id': random.randint(1, 10), 'date': '2020-01-0' + str(j+1), 'time': randomTime(), 'milk': random.randint(0, 1), 'sugar': random.randint(0, 4), 'coffee': random.randint(1, 4), 'water': random.randint(1, 4)})
