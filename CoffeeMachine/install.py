@@ -1,5 +1,6 @@
 # Tests required
 
+import socket
 from getpass import getpass
 import subprocess
 from os import *
@@ -31,24 +32,40 @@ print(type(getItemInPrefix(prefix)))
 prefix = getItemInPrefix(prefix)
 '''
 
+haveToBePreinstalled = ["tightvncserver",
+						"pure-ftpd",
+						"sl",
+						"sshpass"
+						]
+
 aptPackages = [ "build-essential",
 				"python-dev",
 				"python-smbus",
 				"imagemagick",
 				"python3-tk",
-				"python3-rpi.gpio",
-				"tightvncserver",
-				"pure-ftpd"
+				"python3-rpi.gpio"
 				]
 
-services = ["ssh", "vncserver", "ftp"]
+# services = ["ssh", "vncserver", "ftp"]
 
 def clear():
 	subprocess.call(["clear"])
 
+def initSshServer():
+	print("Enter SSH password:", end='')
+	password = str(getpass())
+	subprocess.call(["sshpass", "-p", password, "ssh", "pi@".join(socket.gethostbyname(socket.gethostname()))])
+	subprocess.call(["sudo", "systemctl", "enable", "ssh"])
+	subprocess.call(["sudo", "systemctl", "start", "ssh"])
+
 def initVncServer():
-	subprocess.call(["vncserver", "-qq"])
-	with open("/home/pi/.config/autostart/tightvnc.desktop", "w") as writeable, open("config/tightvnc.desktop", "r") as readabe:
+	with open("/root/.vnc/config.d/vncserver-x11", "r") as readabe, open("vncserver-x11", "w") as writeable:
+		writeable.write(readabe.read())
+
+	print("Enter VNC password:")
+	subprocess.call(["sudo", "vncpasswd -service"])
+
+	with open("/home/pi/.config/autostart/tightvnc.desktop", "w") as writeable, open("config/tightvnc.desktop", "r") as readabe: # adding to the autostart
 	pathlib.Path("/home/pi/.config/autostart").mkdir(parents=True, exist_ok=True)
 		writeable.write(readabe.read())
 
@@ -62,12 +79,15 @@ def initFtpServer():
 
 def preinstall():
 	try:
-		subprocess.call([*prefix, "apt-get", "-qq", "install", "sl"])
+		for item in haveToBePreinstalled:
+			subprocess.call([*prefix, "apt-get", "-qq", "install", item])
 	except:
 		time.sleep(2)
 		print("awaiting for dpkg")
 		preinstall()
+	initSshServer()
 	initFtpServer()
+	initVncServer()
 
 def initWifiAutoconnection(login:str, password:str):
 	try:
@@ -132,9 +152,6 @@ def back(threadName, frontThread=frontThread):
 	subprocess.call(["curl", "-s", "https://processing.org/download/install-arm.sh", "-o", "install-arm.sh"])
 	shellRun("install-arm.sh")
 
-	for service in services:
-		subprocess.call([*prefix, "systemctl", "enable", service])
-		subprocess.call([*prefix, "systemctl", "start", service])
 
 	initWifiAutoconnection(ssid, password)
 
