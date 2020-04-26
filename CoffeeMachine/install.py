@@ -2,10 +2,14 @@
 
 from getpass import getpass
 import subprocess
-import os
-import sys
+from os import *
 import time
 import threading
+
+def visualize():
+	while(True):
+		system("sl")
+
 
 prefix = ["sudo"]
 suffix = [">", "/dev/null"]
@@ -45,7 +49,12 @@ def clear():
 	subprocess.call(["clear"])
 
 def preinstall():
-	subprocess.call([*prefix, "apt-get", "-qq", "install", "sl"])
+	try:
+		subprocess.call([*prefix, "apt-get", "-qq", "install", "sl"])
+	except:
+		time.sleep(2)
+		print("awaiting for dpkg")
+		preinstall()
 
 def initFtpServer():
 	subprocess.call([*prefix, "groupadd", "ftpgroup"])
@@ -83,7 +92,7 @@ def front(threadName):
 	clear()
 	preInstallThread = threading.Thread(target=preinstall)
 	preInstallThread.start()
-	preinstall()
+	time.sleep(3)
 	print("Enter SSID: ", end='')
 	ssid = str(input())
 	print("Enter Key or Password: ", end='')
@@ -91,10 +100,8 @@ def front(threadName):
 	clear()
 	backThread = threading.Thread(target=back, args=("backThread_TH",))
 	backThread.start()
-
-	while(True):
-		clear()
-		subprocess.call("sl")
+	clear()
+	visualize()
 
 try:
 	frontThread = threading.Thread(target=front, args=("frontThread_TH",))
@@ -104,6 +111,7 @@ except:
 
 
 def back(threadName, frontThread=frontThread):
+	time.sleep(1)
 	subprocess.call([*prefix, "curl", "-s", "https://bootstrap.pypa.io/get-pip.py", "-o", "get-pip.py", *suffix])
 	subprocess.call([*prefix, "apt-get", "-s", "update", "&&", "apt-get", "-s", "upgrade", "-y", "--force-yes", "-qq"])
 	subprocess.call([*prefix, "cp", "MachineSettings.json",  "/home/pi/Documents"])
@@ -112,7 +120,7 @@ def back(threadName, frontThread=frontThread):
 
 	for item in aptPackages:
 		subprocess.call([*prefix, "apt-get", item, "-qq", *suffix])
-	
+
 	subprocess.call([*prefix, "curl", "-s", "https://processing.org/download/install-arm.sh"])
 	shellRun("install-arm.sh")
 
