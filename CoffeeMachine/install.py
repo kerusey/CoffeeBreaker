@@ -46,6 +46,12 @@ services = ["ssh", "vncserver", "ftp"]
 def clear():
 	subprocess.call(["clear"])
 
+def initVncServer():
+	subprocess.call(["vncserver", "-qq"])
+	with open("/home/pi/.config/autostart/tightvnc.desktop", "w") as writeable, open("config/tightvnc.desktop", "r") as readabe:
+	pathlib.Path("/home/pi/.config/autostart").mkdir(parents=True, exist_ok=True)
+		writeable.write(readabe.read())
+
 def initFtpServer():
 	print("Enter FTP password:")
 	subprocess.call([*prefix, "groupadd", "ftpgroup"])
