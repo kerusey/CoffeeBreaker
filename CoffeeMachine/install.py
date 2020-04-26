@@ -37,9 +37,7 @@ aptPackages = [ "build-essential",
 				"imagemagick",
 				"python3-tk",
 				"python3-rpi.gpio",
-				"ssh",
-				"realvnc-vnc-server",
-				"realvnc-vnc-viewer",
+				"tightvncserver",
 				"pure-ftpd"
 				]
 
@@ -48,6 +46,14 @@ services = ["ssh", "vncserver", "ftp"]
 def clear():
 	subprocess.call(["clear"])
 
+def initFtpServer():
+	print("Enter FTP password:")
+	subprocess.call([*prefix, "groupadd", "ftpgroup"])
+	subprocess.call([*prefix, "useradd", "ftpuser", "-g", "ftpgroup", "-s", "/sbin/nologin", "-d", "/dev/null"])
+	subprocess.call([*prefix, "pure-pw", "useradd", "upload", "-u", "ftpuser", "-g" "ftpgroup", "-d", "/home/pi", "-m"])
+	subprocess.call([*prefix, "pure-pw", "mkdb"])
+	subprocess.call([*prefix, "service", "pure-ftpd", "restart"])
+
 def preinstall():
 	try:
 		subprocess.call([*prefix, "apt-get", "-qq", "install", "sl"])
@@ -55,13 +61,7 @@ def preinstall():
 		time.sleep(2)
 		print("awaiting for dpkg")
 		preinstall()
-
-def initFtpServer():
-	subprocess.call([*prefix, "groupadd", "ftpgroup"])
-	subprocess.call([*prefix, "useradd", "ftpuser", "-g", "ftpgroup", "-s", "/sbin/nologin", "-d", "/dev/null"])
-	subprocess.call([*prefix, "pure-pw", "useradd", "upload", "-u", "ftpuser", "-g" "ftpgroup", "-d", "/home/pi", "-m"])
-	subprocess.call([*prefix, "pure-pw", "mkdb"])
-	subprocess.call([*prefix, "service", "pure-ftpd", "restart"])
+	initFtpServer()
 
 def initWifiAutoconnection(login:str, password:str):
 	try:
@@ -85,8 +85,9 @@ def initWifiAutoconnection(login:str, password:str):
 
 def shellRun(name:str):
 	subprocess.call([*prefix, "chmod", "+x", name])
-	subprocess.call([*prefix, "./", name, "-qq", *suffix]) # Watch carefully it may not work !
+	system("sudo ./" + name + " > logs.log 2> /dev/null")
 	subprocess.call([*prefix, "rm", name])
+	subprocess.call([*prefix, "rm", "logs.log"]) # optional
 
 def front(threadName):
 	clear()
@@ -112,16 +113,17 @@ except:
 
 def back(threadName, frontThread=frontThread):
 	time.sleep(1)
-	subprocess.call([*prefix, "curl", "-s", "https://bootstrap.pypa.io/get-pip.py", "-o", "get-pip.py", *suffix])
-	subprocess.call([*prefix, "apt-get", "-s", "update", "&&", "apt-get", "-s", "upgrade", "-y", "--force-yes", "-qq"])
+	subprocess.call([*prefix, "curl", "-s", "https://bootstrap.pypa.io/get-pip.py", "-o", "get-pip.py", *suffix]) # OK
+	subprocess.call([*prefix, "apt-get", "update", "-qq"]) # OK
+	subprocess.call([*prefix, "apt-get", "upgrade", "--force-yes", "-qq"]) # OK
 	subprocess.call([*prefix, "cp", "MachineSettings.json",  "/home/pi/Documents"])
 	subprocess.call([*prefix, "python3", "-s", "get-pip.py", "-qq"])
 	subprocess.call([*prefix, "rm", "get-pip.py"])
 
 	for item in aptPackages:
-		subprocess.call([*prefix, "apt-get", item, "-qq", *suffix])
+		subprocess.call([*prefix, "apt-get", "-qq", "install", item])
 
-	subprocess.call([*prefix, "curl", "-s", "https://processing.org/download/install-arm.sh"])
+	subprocess.call(["curl", "-s", "https://processing.org/download/install-arm.sh", "-o", "install-arm.sh"])
 	shellRun("install-arm.sh")
 
 	for service in services:

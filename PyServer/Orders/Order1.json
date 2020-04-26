@@ -2,7 +2,7 @@
 	"MachineID": "1",
 	"coffeeType": "espresso",
 	"strength": 0,
-	"volume": 0,
+	"volume": 4,
 	"milk": false,
 	"sugar": 0
 }
