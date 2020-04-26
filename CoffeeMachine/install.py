@@ -68,7 +68,6 @@ def initVncServer(): # TestME
 	with open("/home/pi/.config/autostart/tightvnc.desktop", "w") as writeable, open("config/tightvnc.desktop", "r") as readabe: # adding to the autostart
 		writeable.write(readabe.read())
 
-
 def initFtpServer():
 	subprocess.call([*prefix, "groupadd", "ftpgroup"])
 	subprocess.call([*prefix, "useradd", "ftpuser", "-g", "ftpgroup", "-s", "/sbin/nologin", "-d", "/dev/null"])
@@ -84,7 +83,7 @@ def initWifiAutoconnection(): # TestME
 		print("failed to initialize interfaces")
 		return None
 	'''
-	
+
 	print("Enter SSID: ", end='')
 	ssid = str(input())
 	print("Enter Key or Password: ", end='')
@@ -107,10 +106,10 @@ def preinstall():# TestME
 
 	print("Enter SSH password:")
 	initSshServer()
-	
+
 	print("Enter FTP password:")
 	initFtpServer()
-	
+
 	print("Enter VNC password:")
 	initVncServer()
 
@@ -126,10 +125,6 @@ def front(threadName):
 	preInstallThread = threading.Thread(target=preinstall)
 	preInstallThread.start()
 	time.sleep(3)
-	print("Enter SSID: ", end='')
-	ssid = str(input())
-	print("Enter Key or Password: ", end='')
-	password = str(getpass())
 	clear()
 	backThread = threading.Thread(target=back, args=("backThread_TH",))
 	backThread.start()
