@@ -15,21 +15,21 @@ prefix = ["sudo"]
 suffix = [">", "/dev/null"]
 
 aptHaveToBePreinstalled = ["tightvncserver",
-						   "sl",
-						   "sshpass"
-						  ]
+			   "sl",
+			   "sshpass"
+			  ]
 
 pipHaveToBePreinstalled = ["netifaces",
-						   "pathlib",
-						  ]
+			   "pathlib",
+			  ]
 
 aptPackages = [ "build-essential",
-				"python-dev",
-				"python-smbus",
-				"imagemagick",
-				"python3-tk",
-				"python3-rpi.gpio"
-				]
+		"python-dev",
+		"python-smbus",
+		"imagemagick",
+		"python3-tk",
+		"python3-rpi.gpio"
+		]
 
 def getLan(): # OK
 	interfaces = netifaces.interfaces()
