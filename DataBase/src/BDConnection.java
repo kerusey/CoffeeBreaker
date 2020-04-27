@@ -1,20 +1,15 @@
 import java.io.FileInputStream;
-import java.io.IOException;
+import java.lang.Exception;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.DriverManager;
-
 import java.util.Properties;
-
-
-
 
 public class BDConnection {
 
     Connection connection;
 
-    public Connection getCon() throws IOException, ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
-
+    public Connection getCon() throws Exception {
         FileInputStream fis;
         Properties property = new Properties();
         fis = new FileInputStream("src/main/resources/application.properties");
@@ -29,12 +24,9 @@ public class BDConnection {
 
         } catch (Exception ex) {
             System.out.println("Connection failed...");
-
             System.out.println(ex);
         }
-
         return connection;
 
     }
 }
-
