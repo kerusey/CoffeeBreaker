@@ -69,7 +69,6 @@ def initSshServer(): # OK
 		except:
 			print("exception")
 
-	move("/home/pi", "/home/" + userName)
 	subprocess.call(["sudo", "deluser", "--remove", "pi"])
 	'''
 	print("Establishing SSH server...")
