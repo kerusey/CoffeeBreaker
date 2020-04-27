@@ -1,26 +1,29 @@
 import org.javatuples.Septet;
-
 import java.sql.Connection;
-        import java.sql.*;
+import java.sql.*;
 
 
 public class ValueInsert {
 
-    Object pair;
+    Object septet;
     Connection connection;
     Statement statement;
 
-    public ValueInsert(Connection connection, Septet<String, String, String, Boolean, Integer, Integer, Integer> pair) { this.connection = connection;  this.pair= pair;}
+    public ValueInsert(Septet<Integer, Integer, Integer, Integer, Integer, String, String> septet, Connection connection) {
+        this.septet = septet;
+        this.connection =connection;
+    }
 
 
     public void insert () throws SQLException {
         statement = connection.createStatement();
-        String sql = "INSERT INTO num " + " VALUES (pair)"; // нужно  поменять расположения переменных в кортеже + законверить json переменные в нужные написав дляф этого метод
+        String sql = "INSERT INTO CoffeeBreakerDataTable " + " VALUES (septet)";
         statement.executeUpdate(sql);
         System.out.println("Inserted records into the table...");
-        new JavaBDPrint(connection).print();
+     // new JavaBDPrint(connection).print();
 
     }
 
 
 }
+

@@ -17,7 +17,7 @@ public class JavaBDPrint {
 
     public void print() throws SQLException {
         statement = connection.createStatement();
-        sql = "SELECT water, milk, sugar, coffee, mtime, mdate FROM num";
+        sql = "SELECT water, milk, sugar, coffee, mtime, mdate FROM CoffeeBreakerDataTable";
         rs = statement.executeQuery(sql);
 
 
