@@ -16,7 +16,7 @@ import java.util.List;
 import space.fstudio.lio.coffeebreaker.Objects.CoffeeTypeObject;
 import space.fstudio.lio.coffeebreaker.R;
 
-public class CoffeeTypeRecyclerAdapter extends RecyclerView.Adapter<CoffeeTypeRecyclerAdapter.TypeHolder> /*implements RecyclerView.OnItemTouchListener*/ {
+public class CoffeeTypeRecyclerAdapter extends RecyclerView.Adapter<CoffeeTypeRecyclerAdapter.TypeHolder> {
     private List<CoffeeTypeObject> coffeeTypesList;//24 52 61
 
     public CoffeeTypeRecyclerAdapter(List<CoffeeTypeObject> coffeeTypesList) {

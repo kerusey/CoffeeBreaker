@@ -1,15 +1,17 @@
 package space.fstudio.lio.coffeebreaker.Fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,16 +25,16 @@ import space.fstudio.lio.coffeebreaker.Objects.CoffeeTypeObject;
 import space.fstudio.lio.coffeebreaker.R;
 
 public class TypeChoiceFragment extends Fragment {
-
+    SharedPreferences answer;
     private CoffeeTypeRecyclerAdapter coffeeTypeRecyclerAdapter;
     private ArrayList<CoffeeTypeObject> coffeeTypesList = new ArrayList<>();
     private RecyclerView recyclerView;
-    private String type;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_type_choice, container, false);//обозначаем, куда будем загружать объекты
-
+        answer = getActivity().getSharedPreferences("answer", Context.MODE_PRIVATE);
         Objects.requireNonNull(((AppCompatActivity) Objects.requireNonNull(getActivity())).getSupportActionBar()).setSubtitle("Choice coffee type");//установка второго названия
 
         recyclerView = view.findViewById(R.id.recyclerCoffeeTypes);
@@ -48,13 +50,17 @@ public class TypeChoiceFragment extends Fragment {
             @Override
             public void onClick(View view, int position) {
                 final CoffeeTypeObject coffeeTypeObject = coffeeTypesList.get(position);
-                type = coffeeTypeObject.getCoffeeName();
+                String type = coffeeTypeObject.getCoffeeName();
+                SharedPreferences.Editor editor = answer.edit();
+                editor.putString("coffeeType", type);
+                Toast.makeText(getActivity(), type, Toast.LENGTH_SHORT).show();
+                editor.apply();
 
-                VolumeChoiceFragment VolFragment = new VolumeChoiceFragment();
-
-                FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.viewPager2, VolFragment);
+//                VolumeChoiceFragment VolFragment = new VolumeChoiceFragment();
+//
+//                FragmentManager fragmentManager = getFragmentManager();
+//                fragmentManager.beginTransaction()
+//                        .replace(R.id.viewPager2, VolFragment);
 
 //                FragmentManager fragmentManager = getFragmentManager();
 //                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -98,11 +104,11 @@ public class TypeChoiceFragment extends Fragment {
                 getString(R.string.coffeeDescriptionLatteMacchiato));
         coffeeTypesList.add(coffeeTypeObject);
 
-        coffeeTypeObject = new CoffeeTypeObject(
-                R.drawable.caffe_latte,
-                getString(R.string.coffeeTypeCaffeLatte),
-                getString(R.string.coffeeDescriptionCaffeLatte));
-        coffeeTypesList.add(coffeeTypeObject);
+//        coffeeTypeObject = new CoffeeTypeObject(
+//                R.drawable.caffe_latte,
+//                getString(R.string.coffeeTypeCaffeLatte),
+//                getString(R.string.coffeeDescriptionCaffeLatte));
+//        coffeeTypesList.add(coffeeTypeObject);
 
         coffeeTypeObject = new CoffeeTypeObject(
                 R.drawable.milk_froth,
@@ -116,11 +122,11 @@ public class TypeChoiceFragment extends Fragment {
                 getString(R.string.coffeeDescriptionWarmMilk));
         coffeeTypesList.add(coffeeTypeObject);
 
-        coffeeTypeObject = new CoffeeTypeObject(
-                R.drawable.hot_water,
-                getString(R.string.coffeeTypeHotWater),
-                getString(R.string.coffeeDescriptionHotWater));
-        coffeeTypesList.add(coffeeTypeObject);
+//        coffeeTypeObject = new CoffeeTypeObject(
+//                R.drawable.hot_water,
+//                getString(R.string.coffeeTypeHotWater),
+//                getString(R.string.coffeeDescriptionHotWater));
+//        coffeeTypesList.add(coffeeTypeObject);
 
         coffeeTypeRecyclerAdapter.notifyDataSetChanged();//устанавливаем изменения
     }

@@ -1,5 +1,7 @@
 package space.fstudio.lio.coffeebreaker.Activities;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -23,6 +25,18 @@ public class ChoiceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choice);
+        SharedPreferences answer = getSharedPreferences("answer", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = answer.edit();
+        editor.putString("coffeeType", "NO");
+        editor.putInt("sugar", 10);
+        editor.putFloat("volume", 0.5F);
+        editor.putInt("strength", 10);
+        editor.apply();
+        int sugar = answer.getInt("sugar", 10);
+        float volume = answer.getFloat("volume", 0.3F);
+        int strength = answer.getInt("strength", 10);
+        String coffeeType = answer.getString("coffeeType", "NO");
+        System.out.println(sugar + "\r\n" + volume + "\r\n" + strength + "\r\n" + coffeeType);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//возвращение к навигационной панели (кнопка назад)
         final ViewPager2 pager2 = findViewById(R.id.viewPager2);
         pager2.setAdapter(new ViewPagerAdapter(this));
