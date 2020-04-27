@@ -1,11 +1,12 @@
 # Tests required
 
-import socket
+from os import listdir, system
 from getpass import getpass
 import subprocess
-from os import system
+from shutil import move
 import time
 import threading
+import pathlib
 
 def visualize():
 	while(True):
@@ -32,6 +33,7 @@ aptPackages = [ "build-essential",
 		]
 
 def getLan(): # OK
+	import netifaces
 	interfaces = netifaces.interfaces()
 	for i in interfaces:
 		if i == 'lo':
@@ -50,10 +52,32 @@ def clear(): # OK
 	subprocess.call(["clear"])
 
 def initSshServer(): # OK
+		print("Creating a new user...")
+	print("Enter new login: ", end="")
+	userName = str(input())
 	password = str(getpass())
+	subprocess.call(["sudo", "/usr/sbin/useradd", "--groups", "sudo", "-m", userName, "-p", password])
+	print("New user has been successfully added.")
+	''' # Experemental convertation !
+	print("Converting data between accounts...")
+	sourcePath = "/home/pi/"
+	destinationPath = "/home/" + userName
+	source = listdir(sourcePath)
+	for item in source:
+		try:
+			move(sourcePath + item, destinationPath)
+		except:
+			print("exception")
+
+	move("/home/pi", "/home/" + userName)
+	subprocess.call(["sudo", "deluser", "--remove", "pi"])
+	'''
+	print("Establishing SSH server...")
+	subprocess.call(["sudo", "passwd", userName])
+	system("sshpass -p " + password + " ssh " + userName + "@" + getLan())
 	subprocess.call(["sudo", "systemctl", "enable", "ssh"])
-	subprocess.call(["sshpass", "-p", password, "ssh", "pi@"+getLan()])
 	subprocess.call(["sudo", "systemctl", "start", "ssh"])
+
 
 def initVncServer(): # OK
 	with open("/root/.vnc/config.d/vncserver-x11", "w") as serverWriteable, open("config/vncserver-x11", "r") as serverReadable:
@@ -86,14 +110,19 @@ def initWifiAutoconnection(): # TestVersion
 		writeable.write('psk="KEY"'.format(psk=password))
 		writeable.write("}")
 
-def preinstall(): # TestVersion
+def initFtpServer(): # OK
+	subprocess.call([*prefix, "groupadd", "ftpgroup"])
+	subprocess.call([*prefix, "useradd", "ftpuser", "-g", "ftpgroup", "-s", "/sbin/nologin", "-d", "/dev/null"])
+	subprocess.call([*prefix, "pure-pw", "useradd", "upload", "-u", "ftpuser", "-g" "ftpgroup", "-d", "/home/pi", "-m"])
+	subprocess.call([*prefix, "pure-pw", "mkdb"])
+	subprocess.call([*prefix, "service", "pure-ftpd", "restart"])
+
+def preinstall(): # OK
 	subprocess.call([*prefix, "apt-get", "-qq", "update"])
 	for item in aptHaveToBePreinstalled:
 		subprocess.call([*prefix, "apt-get", "-qq", "install", item])
 	for item in pipHaveToBePreinstalled:
 		subprocess.call([*prefix, "pip3", "-q", "install", item])
-		import item
-
 
 def shellRun(name:str): # OK
 	subprocess.call([*prefix, "chmod", "+x", name])
