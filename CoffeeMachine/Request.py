@@ -45,25 +45,28 @@ def postOrderStatus(status):
     # return codeSmile   # optional (if you are in mood)
     # OK
 
+def postOrder(JOrder):
+    codeSmile = requests.post(url + "postOrder/" + str(MachineSettings['MachineID']), json=JOrder)
+
 def postOrderBd(finalOrder, token):
     date = token[:10]
-    time = token[10:19]    
+    time = token[10:19]
     bdOrder={"date": date,
             "time": time,
-            "type": finalOrder['type'],
-            "strenght": finalOrder['strenght'],
+            "coffeeType": finalOrder['coffeeType'],
+            "strength": finalOrder['strength'],
             "volume": finalOrder['volume'],
             "milk": finalOrder['milk'],
-            "shugar": finalOrder['shugar']
+            "sugar": finalOrder['sugar']
             }
     codeSmile = requests.post(url + "postBd/" + str(MachineSettings['MachineID']), json=bdOrder) # OK
 
 '''
 finalOrder ={"MachineID": 1,
-            "type": 'espresso',
-            "strenght": 4,
+            "coffeeType": 'espresso',
+            "strength": 4,
             "volume": 2,
             "milk": 0,
-            "shugar": 0
+            "sugar": 0
             }
 '''

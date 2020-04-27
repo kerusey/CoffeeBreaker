@@ -1,35 +1,32 @@
+import java.io.FileInputStream;
+import java.lang.Exception;
+import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.DriverManager;
-
-
+import java.util.Properties;
 
 public class BDConnection {
 
-    public BDConnection() {
-        try{
-            String url = "your database URL"; // watchout it might be a timezone error (use ?Timezone: )
-            String username = "your username";
-            String password = "your username";
-            Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
-            try (Connection connection = DriverManager.getConnection(url, username, password)){
+    Connection connection;
 
-                System.out.println("Connection to coffeeBreaker BD has been completed!");
-               try {
-                   new JavaBDPrint(connection).print();// printing Data Base values
-                   new ValueInsert(connection).insert(); // inserts values 
-               }catch (Exception ignore) {
-                   System.out.println("proeb");// was used to catch printing troubles. 
+    public Connection getCon() throws Exception {
+        FileInputStream fis;
+        Properties property = new Properties();
+        fis = new FileInputStream("src/main/resources/application.properties");
+        property.load(fis);
+        String url = property.getProperty("db.host");
+        String username = property.getProperty("db.login");
+        String password = property.getProperty("db.password");
+        Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
+        try (Connection connection1 = DriverManager.getConnection(url, username, password)) {
+            this.connection = connection1;
+            System.out.println("Connection to coffeeBreaker BD has been completed!");
 
-               }
-            }
-        }
-        catch(Exception ex){
-            System.out.println("Connection failed..."); // could occur if you didn t import Driver as a library. 
-
+        } catch (Exception ex) {
+            System.out.println("Connection failed...");
             System.out.println(ex);
         }
+        return connection;
 
     }
-
-
 }
