@@ -1,7 +1,7 @@
 class Data {
 
     private boolean milk;
-    private String date, time, type;    
+    private String date, time, type;
     private int id, sugar, volume, strength;
 
     public Data(String date, String time, int id, String type, int sugar, boolean milk, int strength, int volume) {
@@ -49,3 +49,4 @@ class Data {
     }
 
 }
+

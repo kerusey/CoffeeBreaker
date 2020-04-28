@@ -1,8 +1,7 @@
 import org.javatuples.Septet;
 import java.lang.Exception;
-import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
-import java.sql.SQLException;
+
 
 public class BDInsertion {
 
@@ -17,21 +16,21 @@ public class BDInsertion {
     }
 
     public void CreateSeptet(int milk, int coffee, int sugar, int water, int id, String time, String date) throws Exception {
-        
+
         Septet<Integer, Integer, Integer, Integer, Integer, String, String> septet = Septet.with(milk, coffee, sugar, water, id, time, date);
-        new ValueInsert(septet, connection).insert();
+        new ValueInsert(septet, connection);
     }
 
     public void Convert(Data data) throws Exception {
-        
+
         int coffee = 8,
-            milk = 0,
-            sugar = data.getSugar() * 6;,
-            id = data.getId();
+                milk = 0,
+                sugar = data.getSugar() * 6;
+        int id = data.getId();
 
         String date = data.getDate(),
-               time = data.getTime();
-        
+                time = data.getTime();
+
         if (data.getMilk())
             milk += 100;
 
@@ -46,14 +45,14 @@ public class BDInsertion {
             case "espresso":
                 CreateSeptet(milk, coffee, sugar, data.getVolume(), id, time, date);
                 break;
-            
+
             case "milkCoffee":
                 int milkCoffeeVolume = data.getVolume();
                 int milkCoffeeWater = (int) ((int) milkCoffeeVolume * 0.5);
                 milk += milkCoffeeWater;
                 CreateSeptet(milk, coffee, sugar, milkCoffeeWater, id, time, date);
                 break;
-            
+
             case "latteMacchiato":
                 int latteMacchiatoVolume = data.getVolume();
                 int latteMacchiatoWater = (int) ((int) latteMacchiatoVolume * 0.3);
