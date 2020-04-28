@@ -56,15 +56,6 @@ public class TypeChoiceFragment extends Fragment {
                 Toast.makeText(getActivity(), type, Toast.LENGTH_SHORT).show();
                 editor.apply();
 
-//                VolumeChoiceFragment VolFragment = new VolumeChoiceFragment();
-//
-//                FragmentManager fragmentManager = getFragmentManager();
-//                fragmentManager.beginTransaction()
-//                        .replace(R.id.viewPager2, VolFragment);
-
-//                FragmentManager fragmentManager = getFragmentManager();
-//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
             }
         }));
         return view;
