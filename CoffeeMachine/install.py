@@ -1,6 +1,6 @@
 # Tests required
 
-from os import listdir, system
+from os import listdir, system, getuid
 from getpass import getpass
 import subprocess
 from shutil import move
@@ -8,9 +8,8 @@ import time
 import threading
 import pathlib
 
-def visualize():
-	while(True):
-		system("sl")
+if (getuid() != 0):
+	print("You should run this script with sudo!\n sudo python3 install.py")
 
 prefix = ["sudo"]
 suffix = [">", "/dev/null"]
@@ -31,6 +30,10 @@ aptPackages = [ "build-essential",
 		"python3-tk",
 		"python3-rpi.gpio"
 		]
+
+def visualize():
+	while(True):
+		system("sl")
 
 def getLan(): # OK
 	import netifaces
