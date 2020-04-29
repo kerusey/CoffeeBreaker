@@ -133,7 +133,6 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
         String json = new Gson().toJson(new com.example.myapplication.Object.Result(this, id1, type, sugar, milk, volume, strength));
         System.out.println(json);
         RequestBody postBody = RequestBody.create(mediaType, json);
-
         postRequest(postUrl, postBody);
     }
 
