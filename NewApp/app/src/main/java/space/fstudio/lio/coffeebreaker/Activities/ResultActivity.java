@@ -41,7 +41,6 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
     protected void onStart() {
         super.onStart();
         bundle = getIntent().getExtras();
-
     }
 
     @SuppressLint({"SetTextI18n", "DefaultLocale"})//игорирование английского текста
@@ -78,27 +77,27 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
         String type = answer.getString("coffeeType", "MMM");
 
         if (answer.getFloat("volume", 0.5F) != 0.03F && type.equals("Espresso"))
-            txt_volume.setText("0.06 Л");
+            txt_volume.setText("60 МЛ");
         else
-            txt_volume.setText("0.03 Л");
+            txt_volume.setText("30 МЛ");
         if (answer.getFloat("volume", 0.5F) != 0.2F && type.equals("Latte Macchiato"))
-            txt_volume.setText("0.4 Л");
+            txt_volume.setText("400 МЛ");
         else
-            txt_volume.setText("0.2 Л");
+            txt_volume.setText("200 МЛ");
         if (answer.getFloat("volume", 0.5F) != 0.1F && type.equals("Caffe Latte"))
-            txt_volume.setText("0.2 Л");
+            txt_volume.setText("200 МЛ");
         else
-            txt_volume.setText("0.1 Л");
+            txt_volume.setText("100 МЛ");
         if (answer.getFloat("volume", 0.5F) != 0.2F && type.equals("Cappuccino"))
-            txt_volume.setText("0.3 Л");
+            txt_volume.setText("300 МЛ");
         else
-            txt_volume.setText("0.2 Л");
+            txt_volume.setText("200 МЛ");
         if (answer.getFloat("volume", 0.5F) != 0.2F && type.equals("Coffee"))
-            txt_volume.setText("0.4 Л");
+            txt_volume.setText("400 МЛ");
         else
-            txt_volume.setText("0.2 Л");
+            txt_volume.setText("200 МЛ");
         if (type.equals("Warm Milk"))
-            txt_volume.setText("0.1 Л");
+            txt_volume.setText("100 МЛ");
 
 
         txt_strength = findViewById(R.id.txt_strength);
@@ -131,23 +130,6 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
         boolean milk = answer.getBoolean("milk", true);
         int id1 = Integer.parseInt(id);
         String type = answer.getString("coffeeType", "MMM");
-        switch (type) {
-            case "Латте макиато":
-                type = "Latte Macchiato";
-                break;
-            case "Латте":
-                type = "Caffe Latte";
-                break;
-            case "Капучино":
-                type = "Cappuccino";
-                break;
-            case "Американо":
-                type = "Coffee";
-                break;
-            case "Эспрессо":
-                type = "Espresso";
-                break;
-        }
         float volume = answer.getFloat("volume", -0F) * 10;
         int strength = answer.getInt("strength", -1);
         int sugar = answer.getInt("sugar", -1);

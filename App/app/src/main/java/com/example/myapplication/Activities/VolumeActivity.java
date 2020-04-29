@@ -34,6 +34,7 @@ public class VolumeActivity extends AppCompatActivity implements View.OnClickLis
         btn_2 = findViewById(R.id.btn_2);
         btn_4 = findViewById(R.id.btn_4);
 
+
         btn_2.setOnClickListener(this);
         btn_4.setOnClickListener(this);
     }

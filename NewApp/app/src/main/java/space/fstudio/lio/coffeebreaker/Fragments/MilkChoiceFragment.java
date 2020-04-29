@@ -84,5 +84,6 @@ public class MilkChoiceFragment extends Fragment implements View.OnClickListener
         }
         editor.apply();
         checking();
+        // getActivity().finish();
     }
 }

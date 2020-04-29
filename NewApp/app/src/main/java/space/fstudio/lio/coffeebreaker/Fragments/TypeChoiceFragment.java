@@ -113,11 +113,6 @@ public class TypeChoiceFragment extends Fragment {
                 getString(R.string.coffeeDescriptionWarmMilk));
         coffeeTypesList.add(coffeeTypeObject);
 
-//        coffeeTypeObject = new CoffeeTypeObject(
-//                R.drawable.hot_water,
-//                getString(R.string.coffeeTypeHotWater),
-//                getString(R.string.coffeeDescriptionHotWater));
-//        coffeeTypesList.add(coffeeTypeObject);
 
         coffeeTypeRecyclerAdapter.notifyDataSetChanged();//устанавливаем изменения
     }

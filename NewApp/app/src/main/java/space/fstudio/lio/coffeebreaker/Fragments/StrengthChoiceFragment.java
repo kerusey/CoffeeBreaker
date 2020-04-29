@@ -38,7 +38,7 @@ public class StrengthChoiceFragment extends Fragment {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 SharedPreferences.Editor editor = answer.edit();               //Включаем режим редактирования файла
                 editor.putInt("strength", progress);  //Устанавливаем переменной skbValue значения получаемое с SeekBar
-                editor.apply();                       //Сохроняем настройки
+                editor.apply();                       //Сохраняем настройки
 
             }
 
