@@ -1,4 +1,3 @@
-
 from getpass import getpass
 import subprocess
 from os import system, getuid
@@ -21,8 +20,6 @@ aptHaveToBePreinstalled = ["tightvncserver",
 pipHaveToBePreinstalled = ["netifaces",
 			   "pathlib",
 			  ]
-
-
 
 def preinstall(): # OK
 	subprocess.call([*prefix, "apt-get", "-qq", "update"])
@@ -57,6 +54,3 @@ def initWifiAutoconnection(): # TestVersion
 		writeable.write('  psk="' + password + '"\n')
 		writeable.write("}")
 	print()
-
-
-# initWifiAutoconnection()

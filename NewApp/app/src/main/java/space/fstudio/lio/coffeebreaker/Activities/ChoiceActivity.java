@@ -20,30 +20,27 @@ public class ChoiceActivity extends AppCompatActivity {
     private List<CoffeeTypeObject> coffeeTypesList;
     private String type;
     private CoffeeTypeRecyclerAdapter coffeeTypeRecyclerAdapter;
+    SharedPreferences answer;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_choice);
-        SharedPreferences answer = getSharedPreferences("answer", Context.MODE_PRIVATE);
+    private void defValues() {
+        answer = getSharedPreferences("answer", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = answer.edit();
         editor.putString("coffeeType", "NO");
         editor.putInt("sugar", 10);
         editor.putFloat("volume", 0.5F);
         editor.putInt("strength", 10);
         editor.apply();
-        int sugar = answer.getInt("sugar", 10);
-        float volume = answer.getFloat("volume", 0.3F);
-        int strength = answer.getInt("strength", 10);
-        String coffeeType = answer.getString("coffeeType", "NO");
-        System.out.println(sugar + "\r\n" + volume + "\r\n" + strength + "\r\n" + coffeeType);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_choice);
+        defValues();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//возвращение к навигационной панели (кнопка назад)
         final ViewPager2 pager2 = findViewById(R.id.viewPager2);
         pager2.setAdapter(new ViewPagerAdapter(this));
-        //    recyclerView.setHasFixedSize(true);
-        //    recyclerView.setItemAnimator(new DefaultItemAnimator());
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -51,7 +48,6 @@ public class ChoiceActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
-
     }
 
     @Override

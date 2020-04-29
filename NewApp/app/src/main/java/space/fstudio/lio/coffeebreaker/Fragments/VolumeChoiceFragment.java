@@ -18,10 +18,10 @@ import space.fstudio.lio.coffeebreaker.R;
 
 public class VolumeChoiceFragment extends Fragment implements View.OnClickListener {
     SharedPreferences answer;
-    Button btn_2, btn_4;
+    Button btnM, btnB;
     Bundle bundle;
-    float volume_M;
-    float volume_B;
+    int volume_M;
+    int volume_B;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -32,36 +32,36 @@ public class VolumeChoiceFragment extends Fragment implements View.OnClickListen
         String type = answer.getString("coffeeType", "MMM");
         switch (type) {
             case "Espresso":
-                volume_M = 0.03F;
-                volume_B = 0.06F;
+                volume_M = 30;
+                volume_B = 60;
                 break;
             case "Latte Macchiato":
-                volume_M = 0.2F;
-                volume_B = 0.4F;
+                volume_M = 200;
+                volume_B = 400;
                 break;
             case "Caffe Latte"://  crema: 100, 200
-                volume_M = 0.1F;
-                volume_B = 0.2F;
+                volume_M = 100;
+                volume_B = 200;
                 break;
             case "Cappuccino":
-                volume_M = 0.2F;
-                volume_B = 0.3F;
+                volume_M = 200;
+                volume_B = 300;
                 break;
             case "Coffee":// with milk
-                volume_M = 0.2F;
-                volume_B = 0.4F;
+                volume_M = 200;
+                volume_B = 400;
                 break;
             case "Warm Milk":
-                volume_M = 0.1F;
-                volume_B = 0.1F;
+                volume_M = 100;
+                volume_B = 100;
                 break;
 
         }
-        btn_2 = view.findViewById(R.id.btn_2);
-        btn_4 = view.findViewById(R.id.btn_4);
+        btnM = view.findViewById(R.id.btnM);
+        btnB = view.findViewById(R.id.btnB);
 
-        btn_2.setOnClickListener(this);
-        btn_4.setOnClickListener(this);
+        btnM.setOnClickListener(this);
+        btnB.setOnClickListener(this);
         return view;
 
 
@@ -76,11 +76,11 @@ public class VolumeChoiceFragment extends Fragment implements View.OnClickListen
     public void onClick(View v) {
         SharedPreferences.Editor editor = answer.edit();
         switch (v.getId()) {
-            case R.id.btn_2:
+            case R.id.btnM:
                 Toast.makeText(getActivity(), "Выбрали размер кружки", Toast.LENGTH_SHORT).show();
                 editor.putFloat("volume", volume_M);//Включаем режим редактирования файла
                 break;
-            case R.id.btn_4:
+            case R.id.btnB:
                 Toast.makeText(getActivity(), "Выбрали размер кружки", Toast.LENGTH_SHORT).show();
                 editor.putFloat("volume", volume_B);//Включаем режим редактирования файла
                 break;
