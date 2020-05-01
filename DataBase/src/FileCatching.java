@@ -1,14 +1,12 @@
 import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.Objects;
+
 
 public class FileCatching {
     String catalog = "C:\\Users\\khash\\IdeaProjects\\NewCoffeeBreaker\\src\\main\\java\\GovnoNahuy";
-   File file = new File(catalog);
-   String catalog__ = catalog + "\\";
+    File file = new File(catalog);
+    String catalog__ = catalog + "\\";
 
     public void GetAmountOfFiles() throws Exception {
         Connection connection = new BDConnection().getCon();
@@ -20,8 +18,10 @@ public class FileCatching {
             String filename = item.getName();
             Data data = new JsonParser(filename, catalog__).Parse();
             new BDInsertion(connection).Convert(data);
-
+            File FileToDelete = new File(catalog__ + filename);
+            FileToDelete.delete();
         }
+
     }
 }
 

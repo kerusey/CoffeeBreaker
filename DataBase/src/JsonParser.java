@@ -1,6 +1,7 @@
 import com.google.gson.Gson;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 
 public class JsonParser {
 
@@ -12,12 +13,17 @@ public class JsonParser {
         this.catalog = catalog;
     }
 
-    public Data Parse() throws FileNotFoundException {
-        return new Gson().fromJson(new FileReader(catalog + fileName), Data.class);
+    public Data Parse() throws IOException {
+        String FinalPath = catalog + fileName;
+        Gson gson = new Gson();
+        FileReader fileReader = new FileReader(FinalPath);
+        Data data = gson.fromJson(fileReader, Data.class);
+        fileReader.close();
+        return data;
     }
 }
 
-// water ... milk .... sugar ... coffee ... time... date
+
 
 
 
