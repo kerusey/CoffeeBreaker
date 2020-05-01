@@ -10,17 +10,16 @@ from Config import WifiConfig, Services
 if (getuid() != 0):
 	print("You should run this script with sudo!\n sudo python3 install.py")
 
-prefix = ["sudo"]
-suffix = [">", "/dev/null"]
+toNull = " > /dev/null"
 
 aptHaveToBePreinstalled = ["tightvncserver",
-			   "sl",
-			   "sshpass"
-			  ]
+				"sl",
+				"sshpass"
+				]
 
 pipHaveToBePreinstalled = ["netifaces",
-			   "pathlib",
-			  ]
+				"pathlib",
+				]
 
 aptPackages = [ "build-essential",
 		"python-dev",
@@ -34,26 +33,21 @@ def visualize():
 	while(True):
 		system("sl")
 
-def shellRun(name:str): # OK
-	subprocess.call([*prefix, "chmod", "+x", name])
-	subprocess.call([*prefix, "./", name, "-qq", *suffix])
-	subprocess.call([*prefix, "rm", name])
-
 def clear(): # OK
-	subprocess.call(["clear"])
+	system("clear")
 
 def preinstall(): # OK
-	subprocess.call([*prefix, "apt-get", "-qq", "update"])
+	system("sudo apt-get -qq update > /dev/null")
 	for item in aptHaveToBePreinstalled:
-		subprocess.call([*prefix, "apt-get", "-qq", "install", item])
+		system("sudo apt-get -qq install " + item + toNull)
 	for item in pipHaveToBePreinstalled:
-		subprocess.call([*prefix, "pip3", "-q", "install", item])
+		system("sudo pip3 -q install " + item + toNull)
 
 def shellRun(name:str): # OK
-	subprocess.call([*prefix, "chmod", "+x", name])
+	system("sudo chmod +x ", name)
 	system("sudo ./" + name + " > logs.log 2> /dev/null")
-	subprocess.call([*prefix, "rm", name])
-	subprocess.call([*prefix, "rm", "logs.log"]) # optional
+	system("sudo rm " + name)
+	system("sudo rm logs.log") # optional
 
 def front(threadName):
 	clear()
@@ -72,21 +66,19 @@ try:
 except:
 	print("Error: unable to start thread")
 
-
 def back(threadName, frontThread=frontThread):
 	time.sleep(1)
-	subprocess.call([*prefix, "curl", "-s", "https://bootstrap.pypa.io/get-pip.py", "-o", "get-pip.py", *suffix]) # OK
-	subprocess.call([*prefix, "apt-get", "upgrade", "--force-yes", "-qq"]) # OK
-	subprocess.call([*prefix, "cp", "MachineSettings.json",  "/home/pi/Documents"])
-	subprocess.call([*prefix, "python3", "-s", "get-pip.py", "-qq"])
-	subprocess.call([*prefix, "rm", "get-pip.py"])
+	system("sudo curl -s https://bootstrap.pypa.io/get-pip.py -o get-pip.py " + toNull) # OK
+	system("sudo apt-get upgrade --force-yes -qq" + toNull) # OK
+	system("sudo cp MachineSettings.json /home/pi/Documents" + toNull)
+	system("sudo python3 -s get-pip.py -qq" + toNull)
+	system("sudo rm get-pip.py")
 
 	for item in aptPackages:
-		subprocess.call([*prefix, "apt-get", "-qq", "install", item])
+		system("sudo apt-get -qq install " + item + toNull)
 
-	subprocess.call(["curl", "-s", "https://processing.org/download/install-arm.sh", "-o", "install-arm.sh"])
+	system("curl -s https://processing.org/download/install-arm.sh -o install-arm.sh" + toNull)
 	shellRun("install-arm.sh")
-
-	subprocess.call("rm", "nohup.out")
+	system("rm nohup.out")
 
 	exit()
