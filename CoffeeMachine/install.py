@@ -51,8 +51,11 @@ def shellRun(name:str): # OK
 
 def front(threadName):
 	clear()
-	preInstallThread = threading.Thread(target=preinstall)
-	preInstallThread.start()
+	preinstall()
+	Services.initSshServer()
+	Services.initVncServer()
+	Services.initFtpServer()
+	WifiConfig.setWifiConfig()
 	time.sleep(3)
 	clear()
 	backThread = threading.Thread(target=back, args=("backThread_TH",))
