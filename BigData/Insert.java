@@ -18,6 +18,5 @@ public class Insert {
         this.mtime= mtime;
         Statement statement = connection.createStatement();
         statement.executeUpdate("INSERT INTO `CoffeeBreakerDataTable`(id, milk, coffee, sugar, water,  mtime, mdate) VALUE ('" + id + "','" + milk + "','" + coffee + "','" + sugar + "','" + water + "','" + mtime + "', '" + mdate + "')");
-        System.out.println("Inserted records into the table...");
     }
 }
