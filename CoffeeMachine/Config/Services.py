@@ -41,14 +41,11 @@ def initSshServer(): # OK
 	subprocess.call(["sudo", "systemctl", "start", "ssh"])
 
 def initVncServer(): # OK
-	with open("/root/.vnc/config.d/vncserver-x11", "w") as serverWriteable, open("vncserver-x11", "r") as serverReadable:
-		serverWriteable.write(serverReadable.read())
-
 	print("Enabling VNC protocol...")
 	subprocess.call(["sudo", "vncserver"])
 
 	pathlib.Path("/home/pi/.config/autostart").mkdir(parents=True, exist_ok=True)
-	with open("/home/pi/.config/autostart/tightvnc.desktop", "w") as writeable, open("tightvnc.desktop", "r") as readabe: # adding to the autostart
+	with open("/home/pi/.config/autostart/tightvnc.desktop", "w") as writeable, open("/home/pi/CoffeeBreaker/CoffeeMachine/Config/tightvnc.desktop", "r") as readabe: # adding to the autostart
 		writeable.write(readabe.read())
 
 def initFtpServer(): # OK
@@ -57,5 +54,3 @@ def initFtpServer(): # OK
 	subprocess.call(["sudo", "pure-pw", "useradd", "upload", "-u", "ftpuser", "-g" "ftpgroup", "-d", "/home/pi", "-m"])
 	subprocess.call(["sudo", "pure-pw", "mkdb"])
 	subprocess.call(["sudo", "service", "pure-ftpd", "restart"])
-	
-initVncServer()

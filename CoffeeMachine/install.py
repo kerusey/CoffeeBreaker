@@ -8,7 +8,8 @@ import pathlib
 from Config import WifiConfig, Services
 
 if (getuid() != 0):
-	print("You should run this script with sudo!\n sudo python3 install.py")
+	print("You should run this script with sudo!\nsudo python3 install.py")
+	exit()
 
 toNull = " > /dev/null"
 
@@ -51,9 +52,9 @@ def shellRun(name:str): # OK
 
 def front(threadName):
 	clear()
-	preinstall()
-	Services.initSshServer()
-	Services.initVncServer()
+	preinstall() # OK
+	Services.initSshServer() # OK
+	Services.initVncServer() # OK
 	Services.initFtpServer()
 	WifiConfig.setWifiConfig()
 	time.sleep(3)
@@ -83,5 +84,4 @@ def back(threadName, frontThread=frontThread):
 	system("curl -s https://processing.org/download/install-arm.sh -o install-arm.sh" + toNull)
 	shellRun("install-arm.sh")
 	system("rm nohup.out")
-
-	exit()
+	os.system("sudo reboot")

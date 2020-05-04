@@ -49,4 +49,3 @@ def setWifiConfig():
 		os.system("sudo cp ./wpa_supplicant.conf /etc/wpa_supplicant/")
 		os.system("sudo rm -f ./interfaces")
 		os.system("sudo rm -f ./wpa_supplicant.conf")
-		os.system("sudo reboot")

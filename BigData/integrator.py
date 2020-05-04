@@ -21,6 +21,7 @@ def getFiltredDict(id, milk, coffee, sugar, water, mtime, mdate):
 
 	for element in removableElements:
 		del(mount[element])
+
 	return mount
 
 def generateCondition(filtredDict:dict):
@@ -36,16 +37,6 @@ def getCredits(path:str="databaseCredits.txt"):
 			databaseCredits.append(row[:-1])
 
 	return databaseCredits
-
-databaseCredits = getCredits()
-
-db = mysql.connector.connect(
-	host=databaseCredits[0],
-	user=databaseCredits[1],
-	passwd=databaseCredits[2]
-)
-mycursor = db.cursor()
-mycursor.execute("USE coffeeBreaker;")
 
 def clearDatabase():
 	mycursor.execute("DELETE FROM CoffeeBreakerDataTable")
