@@ -20,8 +20,8 @@ aptHaveToBePreinstalled = ["figlet",
 	]
 
 pipHaveToBePreinstalled = ["netifaces",
-				"pathlib",
-				]
+	"pathlib",
+	]
 
 aptPackages = [ "build-essential",
 		"python-dev",
