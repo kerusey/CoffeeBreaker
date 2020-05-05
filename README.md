@@ -25,16 +25,17 @@ The main idea of ours project is creation of a smart CoffeeBreaker system, which
 5. A neural network that predicts spending ingredients for each coffee machine
 </br>
 <p align="center"><img src="https://raw.githubusercontent.com/kerusey/CoffeeBreaker/master/Schemes/NewProjectMainStructure.jpg" / ></p>
-## System composition
-The interaction of intersystem nodes consists of three consecutive stages that occur in turn:
 
-#### • The first step.</br>
+## System composition</br>
+#### The interaction of intersystem nodes consists of three consecutive stages that occur in turn:
+
+###### • The first step:</br>
 The user searches the map for the cafe where the coffee machine is located, then orders a coffee drink in the mobile app. Later, the order information is sent to the server and the order information is saved in the database.
 </br>
-#### • The second stage.</br>
+###### • The second stage:</br>
 The server sends order data to the microcomputer using the REST API, and it passes it as bytes to the Arduino, which translates it to the coffee machine.
  </br>
-#### • The third stage. </br>
+###### • The third stage: </br>
 The coffee machine receives data from the Arduino and brews coffee for the user. </br>
 ## Results
 The result of interaction of the system elements is a coffee drink prepared in a user-defined configuration. The resources used for the preparation of which are recorded and stored in the database, with the possibility of subsequent access and processing of this information by the neural network.
