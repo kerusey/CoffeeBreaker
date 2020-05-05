@@ -21,7 +21,7 @@ def getCredits(path: str = os.path.dirname(os.path.abspath(__file__)) + "\databa
 		hrs = "0" + str(hrs)
 	return str(str(hrs) + ":" + str(mins))'''
 
-def getValues(days):
+def getValues(days):#simplify this method 
 	coffee = 8
 	id_ = random.randint(1,8)
 	sugar = random.randint(0,4)
