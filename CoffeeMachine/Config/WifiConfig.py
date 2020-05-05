@@ -3,8 +3,7 @@ import string
 from getpass import getpass
 from platform import system
 
-script_dir = os.path.dirname(os.path.abspath(__file__))
-
+script_dir = os.path.dirname(os.path.abspath(__file__)) + "/"
 interfacesTemplate = """
 auto lo
 iface lo inet loopback
@@ -38,14 +37,14 @@ def setWifiConfig():
 	iface = interfacesTemplate
 	supplicant = string.Template(wpaSupplicantTemplate).substitute({"ssid": ssid, "password": password})
 
-	with open(script_dir + "/interfaces", "wt") as interfaces, open(script_dir + "/wpa_supplicant.conf", "wt") as wpa_supplicant:
+	with open(script_dir + "sessionInterfaces", "wt") as interfaces, open(script_dir + "sessionWpa_supplicant.conf", "wt") as wpa_supplicant:
 		interfaces.write(iface)
 		wpa_supplicant.write(supplicant)
 
 	if (system() == "Linux"):
-		os.system("sudo rm /var/run/wpa_supplicant/wlan0")
-		os.system("sudo pkill -f wpa_supplicant.conf")
-		os.system("sudo cp ./interfaces /etc/network/")
-		os.system("sudo cp ./wpa_supplicant.conf /etc/wpa_supplicant/")
-		os.system("sudo rm -f ./interfaces")
-		os.system("sudo rm -f ./wpa_supplicant.conf")
+		os.system("sudo rm /var/run/wpa_supplicant/wlan0 1> NULL 2> NULL")
+		os.system("sudo pkill -f wpa_supplicant.conf 1> NULL 2> NULL")
+		os.system("sudo cp " + script_dir + "sessionInterfaces /etc/network/interfaces")
+		os.system("sudo cp " + script_dir + "sessionWpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant.conf")
+		os.system("sudo rm -f " + script_dir + "sessionInterfaces")
+		os.system("sudo rm -f " + script_dir + "sessionWpa_supplicant.conf")
