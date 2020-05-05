@@ -1,8 +1,8 @@
 import mysql.connector as connector
 import random
 import os
-days = 1
-orders = 20
+days = 31
+orders = 100
 
 
 def getCredits(path: str = os.path.dirname(os.path.abspath(__file__)) + "\databaseCredits.txt"):
