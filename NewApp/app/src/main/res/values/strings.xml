@@ -22,13 +22,8 @@
     <string name="coffeeTypeCaffeLatte">Caffe Latte</string>
     <string name="coffeeDescriptionCaffeLatte">Caffe latte (or simply latte) (/ˈlɑːteɪ/ or /ˈlæteɪ/) is a coffee drink made with espresso and steamed milk. The word comes from the Italian caffè e latte [kafˌfɛ e ˈlatte], caffelatte [kaffeˈlatte] or caffellatte [kaffelˈlatte], which means \"coffee &amp; milk\". The word is also sometimes spelled latté or lattè in English with different kinds of accent marks, which can be a hyperforeignism or a deliberate attempt to indicate that the word is not pronounced according to the rules of English orthography.</string>
 
-    <string name="coffeeTypeMilkFroth">Milk Froth</string>
-    <string name="coffeeDescriptionMilkFroth">A milk frother is a utensil used for frothing milk, to be added to coffee (cappucino, latte, etc.). Its working mechanism is based on milk aeration. A thick and heavy foam is created by agitating air into the liquid. The tiny bubbles, which are formed during this process, make the milk texture lighter and increase its volume. There are three major types of milk frothers – manual, handheld electric, and automatic. A cappucino machine may have a steam nozzle which can be used to froth the milk. Some devices are able to froth and warm the liquid simultaneously.</string>
-
-    <string name="coffeeTypeWarmMilk">Warm Milk</string>
-    <string name="coffeeDescriptionWarmMilk">Warm milk is milk that has been heated above room temperature. It is commonly used as a nightcap for children and people who abstain from alcohol. Its effectiveness as such is disputed.</string>
-
-    <string name="coffeeTypeHotWater">Hot Water</string>
-    <string name="coffeeDescriptionHotWater">You really don`t know what is it?</string>
+    <string name="coffeeTypeCrema">Crema</string>
+    <string name="coffeeDescriptionCrema">Caffè crema (Italian: "cream coffee") refers to an old name for espresso (1940s and 1950s) and a long espresso drink served primarily in Germany, Switzerland and Austria and northern Italy (1980s onwards), along the Italian/Swiss and Italian/Austrian border. In Germany it is generally known as a "Café Crème" or just "Kaffee" and is generally the default type of black coffee served, unless there is a filter machine.
+        \n\nAs a colorful term it generally means "espresso", while in technical discussions, referring to the long drink, it may more narrowly be referred to as Swiss caffè crema.</string>
 
 </resources>

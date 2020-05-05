@@ -71,49 +71,41 @@ public class TypeChoiceFragment extends Fragment {
     }
 
     private void prepareCoffeeTypes() {
-        CoffeeTypeObject coffeeTypeObject = new CoffeeTypeObject(
+        CoffeeTypeObject coffeeTypeObject = new CoffeeTypeObject(//        espresso: 30, 60
                 R.drawable.espresso,//картинка кофе
                 getString(R.string.coffeeTypeEspresso),//название
                 getString(R.string.coffeeDescriptionEspresso));// описание кофе
         coffeeTypesList.add(coffeeTypeObject);
 
-        coffeeTypeObject = new CoffeeTypeObject(
+        coffeeTypeObject = new CoffeeTypeObject(//        milkcoffee: 200, 400
                 R.drawable.coffee,
                 getString(R.string.coffeeTypeCoffee),
                 getString(R.string.coffeeDescriptionCoffee));
         coffeeTypesList.add(coffeeTypeObject);
 
         coffeeTypeObject = new CoffeeTypeObject(
-                R.drawable.cappuccino,
+                R.drawable.cappuccino,//cappuccino : 200, 300
                 getString(R.string.coffeeTypeCappuccino),
                 getString(R.string.coffeeDescriptionCappuccino));
         coffeeTypesList.add(coffeeTypeObject);
 
         coffeeTypeObject = new CoffeeTypeObject(
                 R.drawable.latte_macchiato,
-                getString(R.string.coffeeTypeLatteMacchiato),
+                getString(R.string.coffeeTypeLatteMacchiato),//        latte macchiato: 200, 400
                 getString(R.string.coffeeDescriptionLatteMacchiato));
         coffeeTypesList.add(coffeeTypeObject);
 
-//        coffeeTypeObject = new CoffeeTypeObject(
-//                R.drawable.caffe_latte,
-//                getString(R.string.coffeeTypeCaffeLatte),
-//                getString(R.string.coffeeDescriptionCaffeLatte));
-//        coffeeTypesList.add(coffeeTypeObject);
-
         coffeeTypeObject = new CoffeeTypeObject(
-                R.drawable.milk_froth,
-                getString(R.string.coffeeTypeMilkFroth),
-                getString(R.string.coffeeDescriptionMilkFroth));
+                R.drawable.crema,
+                getString(R.string.coffeeTypeCrema),//         crema: 100, 200
+                getString(R.string.coffeeDescriptionCrema));
         coffeeTypesList.add(coffeeTypeObject);
-
-        coffeeTypeObject = new CoffeeTypeObject(
-                R.drawable.warm_milk,
-                getString(R.string.coffeeTypeWarmMilk),
-                getString(R.string.coffeeDescriptionWarmMilk));
-        coffeeTypesList.add(coffeeTypeObject);
-
 
         coffeeTypeRecyclerAdapter.notifyDataSetChanged();//устанавливаем изменения
     }
 }
+
+
+
+
+

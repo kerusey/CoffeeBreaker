@@ -36,7 +36,7 @@ public class MilkChoiceFragment extends Fragment implements View.OnClickListener
         btn_yes.setOnClickListener(this);
         btn_no.setOnClickListener(this);
         sugar = answer.getInt("sugar", 10);
-        volume = answer.getFloat("volume", 0.5F);
+        volume = answer.getInt("volume", 500);
         strength = answer.getInt("strength", 10);
         coffeeType = answer.getString("coffeeType", "NO");
         System.out.println(sugar + "\r\n" + volume + "\r\n" + strength + "\r\n" + coffeeType);
@@ -74,11 +74,11 @@ public class MilkChoiceFragment extends Fragment implements View.OnClickListener
         SharedPreferences.Editor editor = answer.edit();
         switch (v.getId()) {
             case R.id.btn_yes:
-                editor.putBoolean("milk", true);
+                editor.putInt("milk", 100);
                 Toast.makeText(getActivity(), "Выбрали кофе с молоком", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_no:
-                editor.putBoolean("milk", false);
+                editor.putInt("milk", 0);
                 Toast.makeText(getActivity(), "Выбрали кофе без молока ", Toast.LENGTH_SHORT).show();
                 break;
         }

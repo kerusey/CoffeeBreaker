@@ -27,9 +27,14 @@ public class ChoiceActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = answer.edit();
         editor.putString("coffeeType", "NO");
         editor.putInt("sugar", 10);
-        editor.putFloat("volume", 0.5F);
+        editor.putInt("volume", 500);
         editor.putInt("strength", 10);
         editor.apply();
+        int sugar = answer.getInt("sugar", 10);
+        float volume = answer.getInt("volume", 500);
+        int strength = answer.getInt("strength", 10);
+        String coffeeType = answer.getString("coffeeType", "NO");
+        System.out.println(sugar + "\r\n" + volume + "\r\n" + strength + "\r\n" + coffeeType);
     }
 
     @Override

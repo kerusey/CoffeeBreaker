@@ -39,7 +39,7 @@ public class VolumeChoiceFragment extends Fragment implements View.OnClickListen
                 volume_M = 200;
                 volume_B = 400;
                 break;
-            case "Caffe Latte"://  crema: 100, 200
+            case "Crema":
                 volume_M = 100;
                 volume_B = 200;
                 break;
@@ -47,15 +47,10 @@ public class VolumeChoiceFragment extends Fragment implements View.OnClickListen
                 volume_M = 200;
                 volume_B = 300;
                 break;
-            case "Coffee":// with milk
+            case "Coffee":
                 volume_M = 200;
                 volume_B = 400;
                 break;
-            case "Warm Milk":
-                volume_M = 100;
-                volume_B = 100;
-                break;
-
         }
         btnM = view.findViewById(R.id.btnM);
         btnB = view.findViewById(R.id.btnB);
@@ -78,11 +73,11 @@ public class VolumeChoiceFragment extends Fragment implements View.OnClickListen
         switch (v.getId()) {
             case R.id.btnM:
                 Toast.makeText(getActivity(), "Выбрали размер кружки", Toast.LENGTH_SHORT).show();
-                editor.putFloat("volume", volume_M);//Включаем режим редактирования файла
+                editor.putInt("volume", volume_M);//Включаем режим редактирования файла
                 break;
             case R.id.btnB:
                 Toast.makeText(getActivity(), "Выбрали размер кружки", Toast.LENGTH_SHORT).show();
-                editor.putFloat("volume", volume_B);//Включаем режим редактирования файла
+                editor.putInt("volume", volume_B);//Включаем режим редактирования файла
                 break;
         }
         editor.apply();

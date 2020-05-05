@@ -67,32 +67,32 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
         txt_sugar.setText(String.format("%d", answer.getInt("sugar", -1)));
 
         txt_milk = findViewById(R.id.txt_milk);
-        if (!answer.getBoolean("milk", true))
-            txt_milk.setText("Нет");
-        else
+        if (answer.getInt("milk", 50) == 100)
             txt_milk.setText("Да");
+        else
+            txt_milk.setText("Нет");
 
         txt_volume = findViewById(R.id.txt_volume);
 
         String type = answer.getString("coffeeType", "MMM");
 
-        if (answer.getFloat("volume", 0.5F) != 0.03F && type.equals("Espresso"))
+        if (answer.getInt("volume", 500) != 300 && type.equals("Espresso"))
             txt_volume.setText("60 МЛ");
         else
             txt_volume.setText("30 МЛ");
-        if (answer.getFloat("volume", 0.5F) != 0.2F && type.equals("Latte Macchiato"))
+        if (answer.getInt("volume", 500) != 200 && type.equals("Latte Macchiato"))
             txt_volume.setText("400 МЛ");
         else
             txt_volume.setText("200 МЛ");
-        if (answer.getFloat("volume", 0.5F) != 0.1F && type.equals("Caffe Latte"))
+        if (answer.getInt("volume", 500) != 100 && type.equals("Caffe Latte"))
             txt_volume.setText("200 МЛ");
         else
             txt_volume.setText("100 МЛ");
-        if (answer.getFloat("volume", 0.5F) != 0.2F && type.equals("Cappuccino"))
+        if (answer.getInt("volume", 500) != 200 && type.equals("Cappuccino"))
             txt_volume.setText("300 МЛ");
         else
             txt_volume.setText("200 МЛ");
-        if (answer.getFloat("volume", 0.5F) != 0.2F && type.equals("Coffee"))
+        if (answer.getInt("volume", 500) != 200 && type.equals("Coffee"))
             txt_volume.setText("400 МЛ");
         else
             txt_volume.setText("200 МЛ");
@@ -130,7 +130,7 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
         boolean milk = answer.getBoolean("milk", true);
         int id1 = Integer.parseInt(id);
         String type = answer.getString("coffeeType", "MMM");
-        float volume = answer.getFloat("volume", -0F) * 10;
+        float volume = answer.getInt("volume", 500);
         int strength = answer.getInt("strength", -1);
         int sugar = answer.getInt("sugar", -1);
         MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
