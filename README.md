@@ -8,7 +8,11 @@
 <a href="https://github.com/kerusey/CoffeeBreaker/blob/master/README-RU.md"><p align="right">Русская версия</p></a>
 ## Description
 ### Main goal of the project
-The aim of the CoffeeBreaker project is to simplify the receipt of coffee drink by excluding barista from the coffee chain. We have created a system where an each person can make coffee using only a mobile phone and our developments. You just need to scan the QR-code, download our apps from Google Play Market and use the same code to allow the coffee machine to fulfill your order
+  Automation is one of the main trends in the development of modern IT technologies. It is not difficult to explain it: the ability to completely avoid the human factor, necessity to pay salaries-this puts automation at the top of modern prospects.
+ 
+ Our product is aimed at implementing this very perspective.
+ 
+ The Coffee Breaker system is an automated system that allows everyone who loves coffee and knows how to use a modern mobile phone to make coffee without the participation of a Barista.
 ### Our mobile app
 <img src="https://raw.githubusercontent.com/kerusey/CoffeeBreaker/master/Schemes/Preview.jpg"/>
 
