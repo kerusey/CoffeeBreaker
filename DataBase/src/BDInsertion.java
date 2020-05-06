@@ -1,4 +1,4 @@
-import org.javatuples.Septet;
+import org.javatuples.Sextet;
 import java.lang.Exception;
 import java.sql.Connection;
 
@@ -14,17 +14,16 @@ public class BDInsertion {
     public BDInsertion(Connection connection) throws Exception {
         this.connection = connection;
     }
+//    sextet <A, B, C, D, E>    milk sugar water id mtime mdate
+    public void CreateSextet(int milk,  int sugar, int water, int id, String time, String date) throws Exception {
 
-    public void CreateSeptet(int milk, int coffee, int sugar, int water, int id, String time, String date) throws Exception {
-
-        Septet<Integer, Integer, Integer, Integer, Integer, String, String> septet = Septet.with(milk, coffee, sugar, water, id, time, date);
-        new ValueInsert(septet, connection);
+        Sextet<Integer, Integer, Integer,  Integer, String, String> sextet = Sextet.with(milk,  sugar, water, id, time, date);
+        new ValueInsert(sextet, connection);
     }
 
     public void Convert(Data data) throws Exception {
 
-        int coffee = 8,
-                milk = 0,
+               int milk = 0,
                 sugar = data.getSugar() * 6;
         int id = data.getId();
 
@@ -39,28 +38,27 @@ public class BDInsertion {
                 int cappuccinoVolume = data.getVolume();
                 int cappuccinoWater = (int) ((int) cappuccinoVolume * 0.3);
                 milk += (int) ((int) cappuccinoVolume * 0.7);
-                CreateSeptet(milk, coffee, sugar, cappuccinoWater, id, time, date);
+                CreateSextet(milk,  sugar, cappuccinoWater, id, time, date);
                 break;
 
-            case "espresso":
-                CreateSeptet(milk, coffee, sugar, data.getVolume(), id, time, date);
+            case "espresso": CreateSextet( milk,  sugar, data.getVolume(), id, time, date);
                 break;
 
             case "milkCoffee":
                 int milkCoffeeVolume = data.getVolume();
                 int milkCoffeeWater = (int) ((int) milkCoffeeVolume * 0.5);
                 milk += milkCoffeeWater;
-                CreateSeptet(milk, coffee, sugar, milkCoffeeWater, id, time, date);
+                CreateSextet(milk,  sugar, milkCoffeeWater, id, time, date);
                 break;
 
             case "latteMacchiato":
                 int latteMacchiatoVolume = data.getVolume();
                 int latteMacchiatoWater = (int) ((int) latteMacchiatoVolume * 0.3);
                 milk += (int) ((int) latteMacchiatoVolume * 0.7);
-                CreateSeptet(milk, coffee, sugar, latteMacchiatoWater, id, time, date);
+                CreateSextet(milk,  sugar, latteMacchiatoWater, id, time, date);
 
             case "cream cafe":
-                CreateSeptet(milk, coffee, sugar, data.getVolume(), id, time, date);
+                CreateSextet(milk, sugar, data.getVolume(), id, time, date);
                 break;
         }
 

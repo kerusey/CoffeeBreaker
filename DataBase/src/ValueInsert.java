@@ -1,25 +1,26 @@
-import org.javatuples.Septet;
+
+import org.javatuples.Sextet;
 import java.sql.Connection;
 import java.sql.*;
 
 
 public class ValueInsert {
 
-    Object septet;
+     Object sextet;
     Connection connection;
 
-    public ValueInsert(Septet<Integer, Integer, Integer, Integer, Integer, String, String> septet, Connection connection) throws SQLException {
-        this.septet = septet;
+    public ValueInsert(Sextet<Integer, Integer, Integer, Integer, String, String> sextet, Connection connection) throws SQLException {
+        this.sextet = sextet;
         this.connection = connection;
-        int milk = septet.getValue0();
-        int coffee = septet.getValue1();
-        int sugar = septet.getValue2();
-        int water = septet.getValue3();
-        int id = septet.getValue4();
-        String mtime = septet.getValue5();
-        String mdate = septet.getValue6();
+        int milk = sextet.getValue0();
+        int sugar = sextet.getValue1();
+        int water = sextet.getValue2();
+        int id = sextet.getValue3();
+        String mtime = sextet.getValue4();
+        String mdate = sextet.getValue5();
+        mdate = mdate + " " + mtime;
         Statement statement = connection.createStatement();
-        statement.executeUpdate("INSERT INTO `CoffeeBreakerDataTable`(id, milk, coffee, sugar, water,  mtime, mdate) VALUE ('" + id + "','" + milk + "','" + coffee + "','" + sugar + "','" + water + "','" + mtime + "', '" + mdate + "')");
+        statement.executeUpdate("INSERT INTO `CoffeeBreakerDataTable`(coffeeID, water,  sugar, milk, date ) VALUE ('" + id + "','" + water + "','" + sugar + "', '"+ milk +"' , '" + mdate + "')");
         System.out.println("Inserted records into the table...");
 
     }
