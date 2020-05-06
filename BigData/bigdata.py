@@ -64,8 +64,6 @@ def initPandasDataFrame(matrix):
 			data[item] = matrix[index]
 		except:
 			pass
-	for idex, item in enumerate(future_columns):
-		
 	return pandas.DataFrame(data=data)
 
 
