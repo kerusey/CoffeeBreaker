@@ -22,7 +22,7 @@ public class MilkChoiceFragment extends Fragment implements View.OnClickListener
     Button btn_yes, btn_no;
     private SharedPreferences answer;
     int sugar;
-    float volume;
+    int volume;
     int strength;
     String coffeeType;
     @Nullable

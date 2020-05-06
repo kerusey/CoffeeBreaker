@@ -1,35 +1,25 @@
 package space.fstudio.lio.coffeebreaker.Activities;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
-import com.google.gson.Gson;
-
-import java.io.IOException;
+import java.util.Locale;
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 import space.fstudio.lio.coffeebreaker.R;
-
-import static space.fstudio.lio.coffeebreaker.Utils.Variables.SERVER_DEFAULT_ADDRESS;
-import static space.fstudio.lio.coffeebreaker.Utils.Variables.SERVER_DEFAULT_PORT;
 
 public class ResultActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -37,6 +27,7 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
     String array1;
     Button btn_accept, btn_m, btn_s, btn_v, btn_st;
     TextView txt_sugar, txt_milk, txt_volume, txt_strength, txt_type, txt_price;
+    SharedPreferences answer;
 
     protected void onStart() {
         super.onStart();
@@ -49,7 +40,7 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
 
-        SharedPreferences answer = getSharedPreferences("answer", Context.MODE_PRIVATE);
+        answer = getSharedPreferences("answer", Context.MODE_PRIVATE);
 
         btn_accept = findViewById(R.id.btn_accept);
         btn_m = findViewById(R.id.btn_m);
@@ -76,28 +67,7 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
 
         String type = answer.getString("coffeeType", "MMM");
 
-        if (answer.getInt("volume", 500) != 300 && type.equals("Espresso"))
-            txt_volume.setText("60 МЛ");
-        else
-            txt_volume.setText("30 МЛ");
-        if (answer.getInt("volume", 500) != 200 && type.equals("Latte Macchiato"))
-            txt_volume.setText("400 МЛ");
-        else
-            txt_volume.setText("200 МЛ");
-        if (answer.getInt("volume", 500) != 100 && type.equals("Caffe Latte"))
-            txt_volume.setText("200 МЛ");
-        else
-            txt_volume.setText("100 МЛ");
-        if (answer.getInt("volume", 500) != 200 && type.equals("Cappuccino"))
-            txt_volume.setText("300 МЛ");
-        else
-            txt_volume.setText("200 МЛ");
-        if (answer.getInt("volume", 500) != 200 && type.equals("Coffee"))
-            txt_volume.setText("400 МЛ");
-        else
-            txt_volume.setText("200 МЛ");
-        if (type.equals("Warm Milk"))
-            txt_volume.setText("100 МЛ");
+        txt_volume.setText(answer.getInt("volume", 500) + " МЛ");
 
 
         txt_strength = findViewById(R.id.txt_strength);
@@ -111,8 +81,11 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
 
         txt_price = findViewById(R.id.txt_price);
         txt_price.setText((new Random().nextInt(999) + 1) + "\u20bd");
+
         array1 = answer.getString("array", "1");
-        runOnUiThread(new Runnable() {
+        /*
+
+         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -121,16 +94,16 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
                     e.printStackTrace();
                 }
             }
-        });
+        });*/
     }
-
-    void connectServer(String ipv4Address, String id) {
+    /*
+ void connectServer(String ipv4Address, String id) {
         String postUrl = "http://" + ipv4Address + ":" + SERVER_DEFAULT_PORT + "/postOrder/" + id;
         SharedPreferences answer = getSharedPreferences("answer", Context.MODE_PRIVATE);
-        boolean milk = answer.getBoolean("milk", true);
+        int milk = answer.getInt("milk", 50);
         int id1 = Integer.parseInt(id);
         String type = answer.getString("coffeeType", "MMM");
-        float volume = answer.getInt("volume", 500);
+        int volume = answer.getInt("volume", 500);
         int strength = answer.getInt("strength", -1);
         int sugar = answer.getInt("sugar", -1);
         MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
@@ -317,34 +290,189 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
             }
         });
     }
+     */
+
 
     @Override
     public void onClick(View v) {
+        FragmentManager manager = getSupportFragmentManager();
         switch (v.getId()) {
             case R.id.btn_accept:
                 //   startActivity(new Intent(ResultActivity.this, OkayActivity.class));
                 break;
             case R.id.btn_s:
-                //  startActivity(new Intent(ResultActivity.this, SugarActivity.class).putExtra("editMode", true));
+                ShowSugarDialog();
+//                SugarDialogFragment sugarDialogFragment = new SugarDialogFragment();
+//                sugarDialogFragment.show(manager, "myDialog");
+//                txt_sugar.setText(String.format(Locale.getDefault(), "%d", answer.getInt("sugar", -1)));
                 break;
             case R.id.btn_m:
-                //   startActivity(new Intent(ResultActivity.this, MilkActivity.class).putExtra("editMode", true));
+                ShowMilkDialog();
                 break;
             case R.id.btn_v:
-                //   startActivity(new Intent(ResultActivity.this, VolumeActivity.class).putExtra("editMode", true));
+                ShowVolumeDialog();
+
                 break;
             case R.id.btn_st:
-                //  startActivity(new Intent(ResultActivity.this, StrengthActivity.class));
+                ShowStrengthDialog();
+
                 break;
         }
     }
-
 
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
 
     }
+
+    public void ShowMilkDialog() {
+        String title = "Молоко ";
+        String button1String = "Да";
+        String button2String = "Нет";
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(title);  // заголовок
+        // добавляем переключатели
+        builder.setPositiveButton(button1String, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                Toast.makeText(ResultActivity.this, "Кофе с молоком", Toast.LENGTH_LONG).show();
+                txt_milk.setText("Да");
+            }
+        });
+
+
+        builder.setNegativeButton(button2String, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                Toast.makeText(ResultActivity.this, "Кофе без молока", Toast.LENGTH_LONG).show();
+                txt_milk.setText("Нет");
+            }
+        });
+        builder.setCancelable(true);
+        builder.create();
+        builder.show();
+    }
+
+    public void ShowVolumeDialog() {
+        int volume_M = 0;
+        int volume_B = 0;
+        String title = "Выберите размер стакана: ";
+        String button1String = "Маленькая";
+        String button2String = "Большая";
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(title);  // заголовок
+        // добавляем переключатели
+
+        String type = answer.getString("coffeeType", "MMM");
+
+        switch (type) {
+            case "Espresso":
+                volume_M = 30;
+                volume_B = 60;
+                break;
+            case "Latte Macchiato":
+                volume_M = 200;
+                volume_B = 400;
+                break;
+            case "Crema":
+                volume_M = 100;
+                volume_B = 200;
+                break;
+            case "Cappuccino":
+                volume_M = 200;
+                volume_B = 300;
+                break;
+            case "Coffee":
+                volume_M = 200;
+                volume_B = 400;
+                break;
+        }
+
+        final int finalVolume_M = volume_M;
+        final int finalVolume_B = volume_B;
+        builder.setPositiveButton(button1String, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                Toast.makeText(ResultActivity.this, "Выбрали размер кружки", Toast.LENGTH_SHORT).show();
+
+                txt_volume.setText(String.format(Locale.getDefault(), "%s", finalVolume_M + " МЛ"));
+            }
+        });
+        builder.setNegativeButton(button2String, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                Toast.makeText(ResultActivity.this, "Выбрали размер кружки", Toast.LENGTH_SHORT).show();
+                txt_volume.setText(String.format(Locale.getDefault(), "%s", finalVolume_B + " МЛ"));
+            }
+        });
+        builder.setCancelable(true);
+        builder.create();
+        builder.show();
+    }
+
+
+    public void ShowStrengthDialog() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final SeekBar seek = new SeekBar(this);
+        seek.setMax(7);
+        String title = "Выберите крепкость: ";
+        builder.setTitle(title);  // заголовок
+        builder.setView(seek);
+        seek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+                txt_strength.setText(String.format(Locale.getDefault(), "%d", progress));
+            }
+
+            public void onStartTrackingTouch(SeekBar arg0) {
+            }
+
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+
+        });
+        builder.setPositiveButton("OK",
+
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        builder.create();
+        builder.show();
+
+    }
+
+    public void ShowSugarDialog() {
+        final String[] numberOfTeespoonsOfShugar = {"1", "2", "3", "4", "5"};
+        String title = "Выберите количество чайных ложек сахара: ";
+        String button1String = "OK";
+        String button2String = "Cancel";
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(title);  // заголовок
+        // добавляем переключатели
+        builder.setSingleChoiceItems(numberOfTeespoonsOfShugar, -1,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int item) {
+                        txt_sugar.setText(String.format(Locale.getDefault(), "%s", numberOfTeespoonsOfShugar[item] + " ч.л."));
+                        Toast.makeText(ResultActivity.this, "Вы выбрали " + numberOfTeespoonsOfShugar[item] + " ч.л.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+        builder.setPositiveButton(button1String, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                Toast.makeText(ResultActivity.this, "Изменения сохранены", Toast.LENGTH_LONG).show();
+            }
+        });
+        builder.setNegativeButton(button2String, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                Toast.makeText(ResultActivity.this, "Изменение отменено", Toast.LENGTH_LONG).show();
+            }
+        });
+        builder.setCancelable(true);
+        builder.create();
+        builder.show();
+    }
 }
+
+
 
 
 
