@@ -10,7 +10,6 @@ def validateToken(token):
 	else:
 		return "OK"
 
-
 def scanActivity():
 	currentToken = Visualizer.visualNewSession()
 	Visualizer.stopSession()
