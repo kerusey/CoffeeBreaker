@@ -8,7 +8,11 @@
 <a href="https://github.com/kerusey/CoffeeBreaker/blob/master/README-RU.md"><p align="right">Русская версия</p></a>
 ## Description
 ### Main goal of the project
-The aim of the CoffeeBreaker project is to simplify the receipt of coffee drink by excluding barista from the coffee chain. We have created a system where an each person can make coffee using only a mobile phone and our developments. You just need to scan the QR-code, download our apps from Google Play Market and use the same code to allow the coffee machine to fulfill your order
+  Automation is one of the main trends in the development of modern IT technologies. It is not difficult to explain it: the ability to completely avoid the human factor, necessity to pay salaries-this puts automation at the top of modern prospects.
+ 
+ Our product is aimed at implementing this very perspective.
+ 
+ The Coffee Breaker system is an automated system that allows everyone who loves coffee and knows how to use a modern mobile phone to make coffee without the participation of a Barista.
 ### Our mobile app
 <img src="https://raw.githubusercontent.com/kerusey/CoffeeBreaker/master/Schemes/Preview.jpg"/>
 
@@ -18,9 +22,23 @@ The main idea of ours project is creation of a smart CoffeeBreaker system, which
 2. IoT integrated coffee machine.
 3. Web-Server, witch connects mobile app and the coffee machine
 4. DataBase
+5. A neural network that predicts spending ingredients for each coffee machine
 </br>
 <p align="center"><img src="https://raw.githubusercontent.com/kerusey/CoffeeBreaker/master/Schemes/NewProjectMainStructure.jpg" / ></p>
 
+## System composition</br>
+#### The interaction of intersystem nodes consists of three consecutive stages that occur in turn:
+
+###### • The first step:</br>
+The user searches the map for the cafe where the coffee machine is located, then orders a coffee drink in the mobile app. Later, the order information is sent to the server and the order information is saved in the database.
+</br>
+###### • The second stage:</br>
+The server sends order data to the microcomputer using the REST API, and it passes it as bytes to the Arduino, which translates it to the coffee machine.
+ </br>
+###### • The third stage: </br>
+The coffee machine receives data from the Arduino and brews coffee for the user. </br>
+## Results
+The result of interaction of the system elements is a coffee drink prepared in a user-defined configuration. The resources used for the preparation of which are recorded and stored in the database, with the possibility of subsequent access and processing of this information by the neural network.
 ## Developer notes
 If you would like to take a part in the project development feel free to fork it and open pull requests for any fix, improvement or feature you add. 
 You may check the [contributing guide](https://github.com/kerusey/CoffeeBreaker/blob/master/CONTRIBUTING.md) for more information on how to do this. 

@@ -1,6 +1,9 @@
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
+import numpy
+import pandas
+import matplotlib.pyplot
+import pymysql
+import datetime
+from sqlalchemy import create_engine
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_error
 from sklearn.neural_network import MLPRegressor
@@ -8,12 +11,43 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.model_selection import GridSearchCV
 
+def addToTheDate(year, month, day):
+	pass
+	
+def getCredits(path:str="databaseCredits.txt"):
+	databaseCredits = []
+	with open (path, "r") as creditsFile:
+		for row in creditsFile:
+			databaseCredits.append(row[:-1])
+	return databaseCredits
 
-data = pd.read_csv('E:/Рабочий стол/bd5.csv')
+def summer(data, id, date): # returns milk, coffee, sugar, water summary from filtred database 
+	result = []
+	data = data[(data['id'] == id) & (data['mdate'] == date)]
+	for header in data:
+		if (header == "id"):
+			continue
+		if (header == "mtime"):
+			break
+		print(header)
+		result.append(sum(item for item in data[header]))
+	return result
 
-data.sort_values(by=['date'],
-        ascending=[True]).head()
+def summerIdByDate(data, id:int, fromDate:str, toDate:str):
+	globalSum = []
+	data = data[(data['id'] == id) & (data['date'] > fromDate) & (data['date'] < toDate)]
+	currentDate = data['date'][:-7]
+	start_date = datetime.date(2009, 5, 10)
+	end_date = datetime.date(2009, 5, 30)
+	day_count = (end_date - start_date).days + 1
 
+
+databaseCredits = getCredits()
+url = "mysql+pymysql://" + databaseCredits[1] + ":" + databaseCredits[2] + "@" + databaseCredits[0] + "/" + "coffeeBreaker"
+conn = create_engine(url)
+data = pandas.read_sql("SELECT * FROM CoffeeBreakerDataTable", con=conn)
+
+"""
 values = data.milk
 past = 7 * 4
 future = 3
@@ -108,3 +142,4 @@ plt.plot(y_test.iloc[0], label="Real")
 plt.legend()
 
 mean_absolute_error(prediction, y_test.iloc[0])
+"""
