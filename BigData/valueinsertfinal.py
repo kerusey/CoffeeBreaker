@@ -1,11 +1,17 @@
 import mysql.connector as connector
 import random
 import os
+from platform import system
 days = 31
 orders = 100
 
+creditPath = os.path.dirname(os.path.abspath(__file__))
+if (system() == "Linux"):
+	creditPath += "/"
+else:
+	creditPath += "\\"
 
-def getCredits(path: str = os.path.dirname(os.path.abspath(__file__)) + "\databaseCredits.txt"):
+def getCredits(path: str = creditPath + "databaseCredits.txt"):
 	databaseCredits = []
 	with open(path, "r") as creditsFile:
 	    for row in creditsFile:
@@ -13,22 +19,17 @@ def getCredits(path: str = os.path.dirname(os.path.abspath(__file__)) + "\databa
 	return databaseCredits
 
 def randomTime():
-	hrs = random.randint(0, 24)
-	mins = random.randint(0, 60)
-	if(int(mins) < 10):
-		mins = "0" + str(mins)
-	if(int(hrs) < 10):
-		hrs = "0" + str(hrs)
-	sec = "00"
-	return str(str(hrs) + ":" + str(mins) + ":" + sec)
+	hrs = random.randint(0, 23)
+	mins = random.randint(0, 59)
+	sec = random.randint(0, 59)
+	hrs = "0" + str(hrs) if(hrs < 10) else str(hrs)
+	mins = "0" + str(mins) if (mins < 10) else str(mins)
+	sec = "0" + str(sec) if(sec < 10) else str(sec)
+	return str(hrs + ":" + mins + ":" + sec)
 
 def getValues(days):
-	if (days < 10):
-		mdate = "2020-01-0" + str(days)
-	else:
-		mdate = "2020-01-" + str(days)
-	mdate +=randomTime
-
+	mdate = "2020-01-0" + str(days) if (days < 10) else "2020-01-" + str(days)
+	mdate += " " + randomTime()
 	return random.randint(1, 8),  random.randint(2, 4) * 100,  random.randint(0, 4), random.randint(0, 2) * 100, mdate
 
 dbCredit = getCredits()
@@ -46,13 +47,12 @@ def clearDatabase():
 	dataBaseConnection.commit()
 
 def insertDatabase():
+	print("WORKING...")
 	for j in range(days):
 		for i in range(orders):
-			sql = "INSERT INTO CoffeeBreakerDataTable ( coffeeID, water, sugar, milk, date) VALUES (%s, %s, %s, %s, %s)"
+			sql = "INSERT INTO CoffeeBreakerDataTable (coffeeID, water, sugar, milk, date) VALUES (%s, %s, %s, %s, %s)"
 			sqlcursor.execute(sql, getValues(j+1))
 			dataBaseConnection.commit()
+	print("DONE!")
 
-
-
-
-
+insertDatabase()
