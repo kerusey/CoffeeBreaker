@@ -15,6 +15,7 @@ import space.fstudio.lio.coffeebreaker.Adapters.CoffeeTypeRecyclerAdapter;
 import space.fstudio.lio.coffeebreaker.Adapters.ViewPagerAdapter;
 import space.fstudio.lio.coffeebreaker.Objects.CoffeeTypeObject;
 import space.fstudio.lio.coffeebreaker.R;
+
 public class ChoiceActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private List<CoffeeTypeObject> coffeeTypesList;
@@ -46,6 +47,7 @@ public class ChoiceActivity extends AppCompatActivity {
         final ViewPager2 pager2 = findViewById(R.id.viewPager2);
         pager2.setAdapter(new ViewPagerAdapter(this));
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {

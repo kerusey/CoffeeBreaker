@@ -3,7 +3,8 @@
     android:height="108dp"
     android:viewportWidth="306.36"
     android:viewportHeight="306.36">
-  <group android:translateX="59.57"
+  <group
+      android:translateX="59.57"
       android:translateY="59.57">
     <path
         android:fillColor="#fff"
@@ -14,6 +15,6 @@
     <path
         android:pathData="M93.61,93.61m-90.11,0a90.11,90.11 0,1 1,180.22 0a90.11,90.11 0,1 1,-180.22 0"
         android:strokeWidth="7"
-        android:strokeColor="#fff"/>
+        android:strokeColor="#fff" />
   </group>
 </vector>

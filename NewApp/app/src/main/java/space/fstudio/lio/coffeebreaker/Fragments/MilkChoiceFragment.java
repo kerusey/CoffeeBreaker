@@ -25,6 +25,7 @@ public class MilkChoiceFragment extends Fragment implements View.OnClickListener
     int volume;
     int strength;
     String coffeeType;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

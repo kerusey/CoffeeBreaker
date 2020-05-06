@@ -22,6 +22,7 @@ public class VolumeChoiceFragment extends Fragment implements View.OnClickListen
     Bundle bundle;
     int volume_M;
     int volume_B;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

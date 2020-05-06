@@ -17,6 +17,7 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
     FragmentTransaction tran;
     private static final int FRAGMENT_COUNT = 5;
     private FragmentActivity fragmentActivity;
+
     public ViewPagerAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
         this.fragmentActivity = fragmentActivity;

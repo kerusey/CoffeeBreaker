@@ -18,6 +18,7 @@ import space.fstudio.lio.coffeebreaker.R;
 public class SugarChoiceFragment extends Fragment implements View.OnClickListener {
     SharedPreferences answer;
     Button btn_0, btn_1, btn_2, btn_3, btn_4;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

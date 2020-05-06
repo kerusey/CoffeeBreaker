@@ -20,6 +20,7 @@ public class StrengthChoiceFragment extends Fragment {
     Button btn_strong;
     SeekBar skb_straight;
     SharedPreferences answer;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

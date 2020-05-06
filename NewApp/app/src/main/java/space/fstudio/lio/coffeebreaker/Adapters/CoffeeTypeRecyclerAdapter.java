@@ -49,8 +49,6 @@ public class CoffeeTypeRecyclerAdapter extends RecyclerView.Adapter<CoffeeTypeRe
     }
 
 
-
-
     @Override
     public void onBindViewHolder(@NonNull TypeHolder holder, int position) {
         final CoffeeTypeObject coffeeTypeObject = coffeeTypesList.get(position);
