@@ -11,6 +11,9 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.model_selection import GridSearchCV
 
+fromDate = "2020-01-01"
+toDate = "2020-01-07"
+
 def convertStrToDatetime(date):
 	return datetime.date(int(date[0:4]), int(date[5:7]), int(date[8:10]))
 
@@ -21,7 +24,7 @@ def getCredits(path:str="databaseCredits.txt"):
 			databaseCredits.append(row[:-1])
 	return databaseCredits
 
-def summer(data, id:int, date:datetime): # returns coffee, water, sugar, milk summary from filtred database 
+def summer(data, id:int, date:datetime): # returns coffee, water, sugar, milk summary from filtred database
 	result = []
 	date = str(date)
 	data = data[(data['coffeeID'] == id) & ([str(item)[:-9] == date for item in data['date']])]
@@ -31,13 +34,12 @@ def summer(data, id:int, date:datetime): # returns coffee, water, sugar, milk su
 			continue
 		if (header == "date"):
 			break
-		print(header)
 		result.append(sum(item for item in data[header]))
-	print(result)
 	return result
 
-def summerIdByDate(data, id:int, fromDate:str, toDate:str):
+def summerIdByDate(data, id:int, fromDate:datetime, toDate:datetime):
 	globalSum = [ ]
+	fromDate, toDate = str(fromDate), str(toDate)
 	data = data[(data['coffeeID'] == id) & ([str(item)[:-9] >= fromDate for item in data['date']]) & ([str(item)[:-9] <= toDate for item in data['date']])]
 	fromDate, toDate = convertStrToDatetime(fromDate), convertStrToDatetime(toDate)
 	currentDate = fromDate
@@ -47,42 +49,35 @@ def summerIdByDate(data, id:int, fromDate:str, toDate:str):
 		currentDate += datetime.timedelta(days=1)
 	return globalSum
 
+def initPandasDataFrame(matrix):
+	data = {}
+	past_columns = future_columns = []
 
+	for item in range((toDate - fromDate).days + 1):
+		past_columns.append("past_" + str(item))
+
+	for item in range(((toDate - fromDate).days + 1) // 7):
+		future_columns.append("future_" + str(item))
+
+	for index, item in enumerate(past_columns):
+		try:
+			data[item] = matrix[index]
+		except:
+			return pandas.DataFrame(data=data)
+	return pandas.DataFrame(data=data)
+
+
+fromDate, toDate = convertStrToDatetime(fromDate), convertStrToDatetime(toDate)
 databaseCredits = getCredits()
 url = "mysql+pymysql://" + databaseCredits[1] + ":" + databaseCredits[2] + "@" + databaseCredits[0] + "/" + "coffeeBreaker"
 conn = create_engine(url)
 data = pandas.read_sql("SELECT * FROM CoffeeBreakerDataTable", con=conn)
+matrix = summerIdByDate(data, 4, fromDate, toDate)
 
-matrix = summerIdByDate(data, 4, "2020-01-01", "2020-01-04")
-print(matrix)
-
+dataFrame = initPandasDataFrame(matrix)
+print(dataFrame)
 
 """
-values = data.milk
-past = 7 * 4
-future = 3
-
-start = past
-end = len(values) - future
-print(start, end)
-
-raw_df = [ ]
-for i in range(start, end):
-    past_and_future_values = values [(i - past) : (i + future)]
-    raw_df.append(list(past_and_future_values))
-
-past_columns = [f"past_{i}" for i in range(past)]
-future_columns = [f"future_{i}" for i in range(future)]
-
-df = pd.DataFrame(raw_df, columns=(past_columns + future_columns))
-df
-
-x = df[past_columns] [:-1]
-y = df[future_columns] [:-1]
-
-x_test = df[past_columns] [-1:]
-y_test = df[future_columns] [-1:]
-
 ''' LINEAR REGRESSION '''
 LinReg = LinearRegression()
 
