@@ -11,9 +11,9 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.model_selection import GridSearchCV
 
-def addToTheDate(year, month, day):
-	pass
-	
+def convertStrToDatetime(date):
+	return datetime.date(int(date[0:4]), int(date[5:7]), int(date[8:10]))
+
 def getCredits(path:str="databaseCredits.txt"):
 	databaseCredits = []
 	with open (path, "r") as creditsFile:
@@ -21,31 +21,41 @@ def getCredits(path:str="databaseCredits.txt"):
 			databaseCredits.append(row[:-1])
 	return databaseCredits
 
-def summer(data, id, date): # returns milk, coffee, sugar, water summary from filtred database 
+def summer(data, id:int, date:datetime): # returns coffee, water, sugar, milk summary from filtred database 
 	result = []
-	data = data[(data['id'] == id) & (data['mdate'] == date)]
+	date = str(date)
+	data = data[(data['coffeeID'] == id) & ([str(item)[:-9] == date for item in data['date']])]
+	result.append(len(data.coffeeID)*8)
 	for header in data:
-		if (header == "id"):
+		if (header == "coffeeID" or header == "id"):
 			continue
-		if (header == "mtime"):
+		if (header == "date"):
 			break
 		print(header)
 		result.append(sum(item for item in data[header]))
+	print(result)
 	return result
 
 def summerIdByDate(data, id:int, fromDate:str, toDate:str):
-	globalSum = []
-	data = data[(data['id'] == id) & (data['date'] > fromDate) & (data['date'] < toDate)]
-	currentDate = data['date'][:-7]
-	start_date = datetime.date(2009, 5, 10)
-	end_date = datetime.date(2009, 5, 30)
-	day_count = (end_date - start_date).days + 1
+	globalSum = [ ]
+	data = data[(data['coffeeID'] == id) & ([str(item)[:-9] >= fromDate for item in data['date']]) & ([str(item)[:-9] <= toDate for item in data['date']])]
+	fromDate, toDate = convertStrToDatetime(fromDate), convertStrToDatetime(toDate)
+	currentDate = fromDate
+	dayNumber = (toDate - fromDate).days + 1
+	for day in range(dayNumber):
+		globalSum.append(summer(data, id, currentDate))
+		currentDate += datetime.timedelta(days=1)
+	return globalSum
 
 
 databaseCredits = getCredits()
 url = "mysql+pymysql://" + databaseCredits[1] + ":" + databaseCredits[2] + "@" + databaseCredits[0] + "/" + "coffeeBreaker"
 conn = create_engine(url)
 data = pandas.read_sql("SELECT * FROM CoffeeBreakerDataTable", con=conn)
+
+matrix = summerIdByDate(data, 4, "2020-01-01", "2020-01-04")
+print(matrix)
+
 
 """
 values = data.milk
