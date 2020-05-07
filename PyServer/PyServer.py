@@ -38,7 +38,7 @@ def postJsonOrder(id):
 
 	jjson ={"MachineID": int(content['MachineID']),
 			"type": str(content['type']),
-			"strenght": int(content['strenght']),
+			"strength": int(content['strength']),
 			"volume": int(content['volume']),
 			"milk": int(content['milk']),
 			"sugar": int(content['sugar'])
