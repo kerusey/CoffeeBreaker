@@ -55,7 +55,6 @@ def installAquarium(): # OK
 	system("rm Term-Animation-2.4.tar.gz asciiquarium.tar.gz NUL")
 	system("rm -rf Term-Animation-2.4/ asciiquarium_1.1/")
 
-
 def preinstall(): # OK
 	for index, item in enumerate(aptHaveToBePreinstalled):
 		system("sudo apt-get -qq install " + item + toNull)
@@ -65,6 +64,8 @@ def preinstall(): # OK
 	for item in pipHaveToBePreinstalled:
 		system("sudo pip3 -q install " + item + toNull)
 
+preinstall() # OK
+
 def shellRun(name:str): # OK
 	system("sudo chmod +x " + name)
 	system("sudo ./" + name + " > logs.log 2> /dev/null")
@@ -73,7 +74,6 @@ def shellRun(name:str): # OK
 
 def front(threadName):
 	clear()
-	preinstall() # OK
 	Services.initSshServer() # OK
 	Services.initVncServer() # OK
 	Services.initFtpServer() # OK
