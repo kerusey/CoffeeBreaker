@@ -2,6 +2,18 @@ from getpass import getpass
 import subprocess
 from os import system
 import pathlib
+import string
+
+vncAutostartScript = """
+[Desktop Entry]
+Type=Application
+Name=TightVNC
+Exec=vncserver :1
+StartupNotify=false
+"""
+
+def vncautostart():
+	system("sudo mkdir /home/" + GLOBALUSERNAME + "")
 
 def getLan(): # OK
 	import netifaces
@@ -13,13 +25,13 @@ def getLan(): # OK
 		if iface != None:
 			for j in iface:
 				return str(j['addr'])
+				def initSshServer(): # OK
 
-def initSshServer(): # OK
 	print("Creating a new user...")
 	print("Enter new login: ", end="")
 	userName = str(input())
 	password = str(getpass())
-	subprocess.call(["sudo", "/usr/sbin/useradd", "--groups", "sudo", "-m", userName, "-p", password])
+	system("sudo /usr/sbin/useradd --groups sudo -m " + userName + " -p " + password)
 	print("New user has been successfully added.")
 	''' # Experemental convertation !
 	print("Converting data between accounts...")
@@ -35,22 +47,23 @@ def initSshServer(): # OK
 	subprocess.call(["sudo", "deluser", "--remove", "pi"])
 	'''
 	print("Establishing SSH server...")
-	subprocess.call(["sudo", "passwd", userName])
+	system("sudo passwd " + userName)
 	system("sshpass -p " + password + " ssh " + userName + "@" + getLan())
-	subprocess.call(["sudo", "systemctl", "enable", "ssh"])
-	subprocess.call(["sudo", "systemctl", "start", "ssh"])
+	system("sudo systemctl enable ssh")
+	system("sudo systemctl start ssh")
+	return userName
 
-def initVncServer(): # OK
+def initVncServer(userName): # OK
 	print("Enabling VNC protocol...")
-	subprocess.call(["sudo", "vncserver"])
+	system("sudo vncserver")
 
-	pathlib.Path("/home/pi/.config/autostart").mkdir(parents=True, exist_ok=True)
-	with open("/home/pi/.config/autostart/tightvnc.desktop", "w") as writeable, open("/home/pi/CoffeeBreaker/CoffeeMachine/Config/tightvnc.desktop", "r") as readabe: # adding to the autostart
-		writeable.write(readabe.read())
+	pathlib.Path("/home/" + userName + "/.config/autostart").mkdir(parents=True, exist_ok=True)
+	with open("/home/" + userName + "/.config/autostart/tightvnc.desktop", "w") as writeable:# adding to the autostart
+		writeable.write(vncAutostartScript)
 
 def initFtpServer(): # OK
-	subprocess.call(["sudo", "groupadd", "ftpgroup"])
-	subprocess.call(["sudo", "useradd", "ftpuser", "-g", "ftpgroup", "-s", "/sbin/nologin", "-d", "/dev/null"])
-	subprocess.call(["sudo", "pure-pw", "useradd", "upload", "-u", "ftpuser", "-g" "ftpgroup", "-d", "/home/pi", "-m"])
-	subprocess.call(["sudo", "pure-pw", "mkdb"])
-	subprocess.call(["sudo", "service", "pure-ftpd", "restart"])
+	system("sudo groupadd ftpgroup")
+	system("sudo useradd ftpuser -g ftpgroup -s /sbin/nologin -d /dev/null")
+	system("sudo pure-pw useradd upload -u ftpuser -g ftpgroup -d /home/pi", "-m")
+	system("sudo pure-pw mkdb")
+	system("sudo service pure-ftpd restart")
