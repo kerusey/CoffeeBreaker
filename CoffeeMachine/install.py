@@ -78,9 +78,9 @@ def front(threadName):
 	Services.initVncServer() # OK
 	Services.initFtpServer() # OK
 	WifiConfig.setWifiConfig() # OK
-	visual()
 	backThread = threading.Thread(target=back, args=("backThread_TH",))
 	backThread.start()
+	visual()
 	clear()
 
 try:
@@ -102,4 +102,4 @@ def back(threadName, frontThread=frontThread):
 
 	system("curl -s https://processing.org/download/install-arm.sh -o install-arm.sh" + toNull)
 	shellRun("install-arm.sh")
-	os.system("sudo reboot now")
+	system("sudo reboot now")
