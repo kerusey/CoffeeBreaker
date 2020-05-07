@@ -6,18 +6,13 @@ from platform import system
 script_dir = os.path.dirname(os.path.abspath(__file__)) + "/"
 interfacesTemplate = """
 auto lo
-iface lo inet loopback
 
-auto eth0
-iface eth0 inet manual
+auto wlan0
 
 allow-hotplug wlan0
-iface wlan0 inet manual
+iface wlan0 inet dhcp
 wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
-
-allow-hotplug wlan1
-iface wlan1 inet manual
-	wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
+iface default inet dhcp
 """
 
 wpaSupplicantTemplate = """
@@ -27,6 +22,9 @@ network={
 	ssid="$ssid"
 	psk="$password"
 	key_mgmt=WPA-PSK
+	proto=RSN
+	pairwise=CCMP
+	auth_alg=OPEN
 }
 """
 
