@@ -56,6 +56,7 @@ def installAquarium(): # OK
 	system("rm -rf Term-Animation-2.4/ asciiquarium_1.1/")
 
 def preinstall(): # OK
+	clear()
 	for index, item in enumerate(aptHaveToBePreinstalled):
 		system("sudo apt-get -qq install " + item + toNull)
 		if (index == 0):
@@ -80,8 +81,8 @@ def front(threadName):
 	WifiConfig.setWifiConfig() # OK
 	backThread = threading.Thread(target=back, args=("backThread_TH",))
 	backThread.start()
-	visual()
 	clear()
+	visual()
 
 try:
 	frontThread = threading.Thread(target=front, args=("frontThread_TH",))
