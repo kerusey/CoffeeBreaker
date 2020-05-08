@@ -9,7 +9,7 @@ def getLan(): # OK
 		if i == 'lo':
 			continue
 		iface = netifaces.ifaddresses(i).get(netifaces.AF_INET)
-		if iface != None:
+		if (iface != None):
 			for j in iface:
 				return str(j['addr'])
 
