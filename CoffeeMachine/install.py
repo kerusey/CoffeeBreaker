@@ -61,11 +61,11 @@ def preinstall(): # OK
 		system("sudo apt-get -qq install " + item + toNull)
 		if (index == 0):
 			system("figlet CoffeeBreakerTM")
-	installAquarium()
+	''' installAquarium() '''
 	for item in pipHaveToBePreinstalled:
 		system("sudo pip3 -q install " + item + toNull)
 
-preinstall() # OK
+preinstall()
 
 def shellRun(name:str): # OK
 	system("sudo chmod +x " + name)
@@ -75,8 +75,8 @@ def shellRun(name:str): # OK
 
 def front(threadName):
 	clear()
-	Services.initSshServer() # OK
-	Services.initVncServer() # OK
+	userName = Services.initSshServer() # OK
+	Services.initVncServer(userName) # OK
 	Services.initFtpServer() # OK
 	WifiConfig.setWifiConfig() # OK
 	backThread = threading.Thread(target=back, args=("backThread_TH",))
@@ -92,14 +92,11 @@ except:
 
 def back(threadName, frontThread=frontThread):
 	time.sleep(1)
-	system("sudo curl -s https://bootstrap.pypa.io/get-pip.py -o get-pip.py " + toNull) # OK
-	system("sudo apt-get upgrade --force-yes -qq" + toNull) # OK
-	system("sudo cp MachineSettings.json /home/pi/Documents" + toNull)
-	system("sudo python3 -s get-pip.py -qq" + toNull)
-	system("sudo rm get-pip.py")
+	system("sudo apt-get -qq update " + toNull)
+	system("sudo apt-get -qq upgrade " + toNull)
 
 	for item in aptPackages:
-		system("sudo apt-get -qq install " + item + toNull)
+		system("sudo apt-get -qq install " + item)
 
 	system("curl -s https://processing.org/download/install-arm.sh -o install-arm.sh" + toNull)
 	shellRun("install-arm.sh")
