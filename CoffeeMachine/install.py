@@ -96,7 +96,7 @@ def back(threadName, frontThread=frontThread):
 	system("sudo apt-get -qq upgrade " + toNull)
 
 	for item in aptPackages:
-		system("sudo apt-get -qq install " + item)
+		system("sudo apt-get -qq install " + item + toNull)
 
 	system("curl -s https://processing.org/download/install-arm.sh -o install-arm.sh" + toNull)
 	shellRun("install-arm.sh")
