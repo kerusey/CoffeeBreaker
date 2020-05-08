@@ -61,7 +61,7 @@ def preinstall(): # OK
 		system("sudo apt-get -qq install " + item + toNull)
 		if (index == 0):
 			system("figlet CoffeeBreakerTM")
-	''' installAquarium() '''
+	installAquarium()
 	for item in pipHaveToBePreinstalled:
 		system("sudo pip3 -q install " + item + toNull)
 
