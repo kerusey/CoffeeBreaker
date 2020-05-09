@@ -29,6 +29,7 @@ aptPackages = [ "build-essential",
 		"imagemagick",
 		"python3-tk",
 		"python3-rpi.gpio",
+	        "arduino",
 		]
 
 def visual(): # OK
