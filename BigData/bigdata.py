@@ -12,7 +12,8 @@ from sklearn.neighbors import KNeighborsRegressor
 from sklearn.model_selection import GridSearchCV
 
 fromDate = "2020-01-01"
-toDate = "2020-01-07"
+toDate = "2020-01-10"
+id = 1
 
 def convertStrToDatetime(date):
 	return datetime.date(int(date[0:4]), int(date[5:7]), int(date[8:10]))
@@ -54,16 +55,14 @@ def initPandasDataFrame(matrix):
 	past_columns = future_columns = []
 
 	for item in range((toDate - fromDate).days + 1):
-		past_columns.append("past_" + str(item))
+		past_columns.append("day_" + str(item))
 
-	for item in range(((toDate - fromDate).days + 1) // 7):
-		future_columns.append("future_" + str(item))
+	matrix = numpy.array(matrix).transpose()
+	header = ["coffee", "water", "sugar", "milk"]
 
-	for index, item in enumerate(past_columns):
-		try:
-			data[item] = matrix[index]
-		except:
-			pass
+	for index, item in enumerate(matrix):
+		data[header[index]] = item
+
 	return pandas.DataFrame(data=data)
 
 
@@ -72,7 +71,7 @@ databaseCredits = getCredits()
 url = "mysql+pymysql://" + databaseCredits[1] + ":" + databaseCredits[2] + "@" + databaseCredits[0] + "/" + "coffeeBreaker"
 conn = create_engine(url)
 data = pandas.read_sql("SELECT * FROM CoffeeBreakerDataTable", con=conn)
-matrix = summerIdByDate(data, 4, fromDate, toDate)
+matrix = summerIdByDate(data, id, fromDate, toDate)
 
 dataFrame = initPandasDataFrame(matrix)
 print(dataFrame)
