@@ -33,7 +33,9 @@ class ConnectionTest(Resource):
 
 class AnotherConnectionTest(Resource):
 	def get(self):
-		return {'anotherConnection': 'established'}
+		print("hello, world")
+		return "hello, world"
 
-api.add_resource(ConnectionTest, '/connectionTest', '/AnotherConnectionTest')
+api.add_resource(ConnectionTest, '/connectionTest')
+api.add_resource(AnotherConnectionTest, '/fuckup')
 app.run(host=host, port=port, debug=True)
