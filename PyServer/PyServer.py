@@ -26,9 +26,14 @@ path = os.path.dirname(os.path.abspath(__file__))
 app = Flask(__name__)
 api = Api(app)
 
-class HelloWorld(Resource):
+class ConnectionTest(Resource):
 	def get(self):
-		return {'hello': 'world'}
+		print("connection established")
+		return {'connection': 'established'}
 
-api.add_resource(HelloWorld, '/')
+class AnotherConnectionTest(Resource):
+	def get(self):
+		return {'anotherConnection': 'established'}
+
+api.add_resource(ConnectionTest, '/connectionTest', '/AnotherConnectionTest')
 app.run(host=host, port=port, debug=True)
