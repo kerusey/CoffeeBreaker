@@ -31,6 +31,4 @@ class HelloWorld(Resource):
 		return {'hello': 'world'}
 
 api.add_resource(HelloWorld, '/')
-
-
 app.run(host=host, port=port, debug=True)
