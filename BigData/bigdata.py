@@ -1,6 +1,6 @@
 import numpy
 import pandas
-import matplotlib.pyplot
+import matplotlib.pyplot as plt
 import pymysql
 import datetime
 from sqlalchemy import create_engine
@@ -12,7 +12,7 @@ from sklearn.neighbors import KNeighborsRegressor
 from sklearn.model_selection import GridSearchCV
 
 fromDate = "2020-01-01"
-toDate = "2020-01-10"
+toDate = "2020-01-30"
 id = 1
 
 def convertStrToDatetime(date):
@@ -50,22 +50,6 @@ def summerIdByDate(data, id:int, fromDate:datetime, toDate:datetime):
 		currentDate += datetime.timedelta(days=1)
 	return globalSum
 
-def initPandasDataFrame(matrix):
-	data = {}
-	past_columns = future_columns = []
-
-	for item in range((toDate - fromDate).days + 1):
-		past_columns.append("day_" + str(item))
-
-	matrix = numpy.array(matrix).transpose()
-	header = ["coffee", "water", "sugar", "milk"]
-
-	for index, item in enumerate(matrix):
-		data[header[index]] = item
-
-	return pandas.DataFrame(data=data)
-
-
 fromDate, toDate = convertStrToDatetime(fromDate), convertStrToDatetime(toDate)
 databaseCredits = getCredits()
 url = "mysql+pymysql://" + databaseCredits[1] + ":" + databaseCredits[2] + "@" + databaseCredits[0] + "/" + "coffeeBreaker"
@@ -73,25 +57,44 @@ conn = create_engine(url)
 data = pandas.read_sql("SELECT * FROM CoffeeBreakerDataTable", con=conn)
 matrix = summerIdByDate(data, id, fromDate, toDate)
 
-dataFrame = initPandasDataFrame(matrix)
-print(dataFrame)
+raw_df = [ ]
+columnMilk = []
+for row in matrix:
+	columnMilk.append(row[1])
+values = columnMilk
 
-"""
+start = past = 7
+future = 1
+end = len(matrix) - future
+
+for i in range(start, end):
+	past_and_future_values = values [(i - past) : (i + future)]
+	raw_df.append(list(past_and_future_values))
+
+past_columns = [f"past_{i}" for i in range(past)]
+future_columns = [f"future_{i}" for i in range(future)]
+
+dataFrame = pandas.DataFrame(raw_df, columns=(past_columns + future_columns))
+
+x = dataFrame[past_columns] [:-1]
+y = dataFrame[future_columns] [:-1]
+
+x_test = dataFrame[past_columns] [-1:]
+y_test = dataFrame[future_columns] [-1:]
+
 ''' LINEAR REGRESSION '''
 LinReg = LinearRegression()
 
 LinReg.fit(x,y)
 prediction = LinReg.predict(x_test)
-prediction
-y_test
 plt.plot(prediction[0], label="Prediction")
 
 plt.plot(y_test.iloc[0], label="Real")
 plt.legend()
 
-mean_absolute_error(prediction[0], y_test.iloc[0])
+print(mean_absolute_error(prediction[0], y_test.iloc[0]))
 
-
+"""
 ''' Neural Networks '''
 
 MLP = MLPRegressor(max_iter=500, hidden_layer_sizes=(100,100,100))
