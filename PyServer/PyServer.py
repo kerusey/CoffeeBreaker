@@ -29,29 +29,30 @@ path = os.path.dirname(os.path.abspath(__file__))
 app = Flask(__name__)
 api = Api(app)
 
+ingredients = ( "coffeeType", "milk", "strength", "sugar", "volume" )
+dataBaseHeader = ( "coffeeID", "water", "sugar", "milk" )
+
 class OrderFromApp(Resource):
     def post(self, id):
         parser = reqparse.RequestParser()
         parser.add_argument("coffeeType", type=str, location='json')
         for item in ingredients:
-            if (item == "coffeeType"):
+            if (item is "coffeeType"):
                 continue
             parser.add_argument(item, type=int, location='json')
         args = parser.parse_args()
-        requests.post('http://' + str(coffeeMachineClusterPool[id]) + ":" + str(port) + "/post/ToCluster_<id>", json=json.dumps(args))
+        requests.post('http://' + str(coffeeMachineClusterPool[id]) + ":" + str(port) + "/Order_<id>", json=json.dumps(args))
+        return 200
 
-ingredientsForBd = ("milk", "sugar","water","ID")
-class OrderRaspberry(Resource):
+class DataToDataBase(Resource):
     def get(self, id):
         parser = reqparse.RequestParser()
-        parser.add_argument('ID', type=str, location='json')
-        for item in ingredientsForBd:
-            if (item=="ID"):
-                continue
-            parser.add_argument(item, type=int, location='json')
+        for name in dataBaseHeader:
+            parser.add_argument(name, type=int, location='json')
         args = parser.parse_args()
-        return args
+        return 200
 
-api.add_resource(OrderFromApp, '/post/OrderFromApp_<id>')
-api.add_resource(OrderRaspberry, '/post/OrderFromRaspberry_<id>')
+api.add_resource(OrderFromApp, "/post/AppOrder_<id>")
+api.add_resource(OrderRaspberry, "/post/ToDataBase_<id>")
+
 app.run(host=host, port=port, debug=True)

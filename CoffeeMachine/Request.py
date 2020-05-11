@@ -41,5 +41,5 @@ class OrderFromPyServer(Resource):
         globalQueue.append(args)
         print(globalQueue)
 
-api.add_resource(OrderFromPyServer, '/post/ToCluster_<id>')
+api.add_resource(OrderFromPyServer, "/post/ToCluster_<id>")
 app.run(host=host, port=port, debug=True)
