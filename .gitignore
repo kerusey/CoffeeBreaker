@@ -151,6 +151,7 @@ nytprof.out
 _build/
 Build
 Build.bat
+databaseCredits.txt
 
 # Module::Install
 inc/
