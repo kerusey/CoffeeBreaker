@@ -82,30 +82,21 @@ for row in matrix:
   column.append(row[1])
 values = matrix[0:31]
 """
-columnCoffee = []; # empty list
+columnCoffee = columnWater = columnSugar = columnMilk = []
+
 for row in matrix:
 	columnCoffee.append(row[0])
-coffeeValues = columnCoffee
-
-columnWater = []; # empty list
-for row in matrix:
 	columnWater.append(row[1])
-waterValues = columnWater
-
-columnSugar = []; # empty list
-for row in matrix:
 	columnSugar.append(row[2])
-sugarValues = columnSugar
-
-columnMilk = []; # empty list
-for row in matrix:
 	columnMilk.append(row[3])
+coffeeValues = columnCoffee
+waterValues = columnWater
+sugarValues = columnSugar
 milkValues = columnMilk
 
-past = 7
+past = start = 7
 future = 1
 
-start = past
 end = len(matrix) - future
 
 print(start, end)
