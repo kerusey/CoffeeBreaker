@@ -1,72 +1,45 @@
+from flask import Flask
+from flask_restful import Resource, Api, reqparse
+import netifaces
+import os
 import json
-import requests
 
-MachineSettingsPath = "/home/pi/CoffeeBreaker/CoffeeMachine/MachineSettings.json"
+ingredients = ("coffeeType", "milk", "strength", "sugar", "volume")
+globalQueue = []
 
-with open(MachineSettingsPath) as json_file:
-        MachineSettings = json.load(json_file)
+def getLan(): # OK
+    interfaces = netifaces.interfaces()
+    for i in interfaces:
+        if (i == 'lo'):
+            continue
+        iface = netifaces.ifaddresses(i).get(netifaces.AF_INET)
+        if (iface != None):
+            for j in iface:
+                return str(j['addr'])
 
-url = "http://" + MachineSettings['Ip'] + ":" + str(MachineSettings['Port']) + "/" # <- insert here method path
+coffeeMachinePool = {}
+with open("CoffeeMachinePool.json") as jsonFile:
+    data = json.load(jsonFile)
+    for row in data:
+        coffeeMachinePool[row] = data[row]
 
-def getHelloWorld():
-    resp = requests.get(url)
-    print(resp.text)
+host = getLan()
+port = 8090
+path = os.path.dirname(os.path.abspath(__file__))
+app = Flask(__name__)
+api = Api(app)
 
-def getOrderStatus():
-    resp = requests.get(url + "getOrderStatus/" + str(MachineSettings['MachineID']))
-    return resp.text # OK
+class OrderFromPyServer(Resource):
+    def post(self, id):
+        parser = reqparse.RequestParser()
+        parser.add_argument("coffeeType", type=str, location='json')
+        for item in ingredients:
+            if (item is "coffeeType"):
+                continue
+            parser.add_argument(item, type=int, location='json')
+        args = parser.parse_args()
+        globalQueue.append(args)
+        print(globalQueue)
 
-def getTokenStatus():
-    resp = requests.get(url + "getTokenStatus/" + str(MachineSettings['MachineID']))
-    return resp.text # OK
-
-def getToken():
-    resp = requests.get(url + "getToken/" + str(MachineSettings['MachineID']))
-    return resp.text
-
-def getOrder():
-    resp = requests.get(url + "getOrder/" + str(MachineSettings['MachineID']))
-    try:
-        JOrder = resp.json()
-        return JOrder
-    except:
-        return resp # OK
-
-def postTokenStatus(status):
-    codeSmile = requests.post(url + "postTokenStatus/" + str(MachineSettings['MachineID']), json={"status": status})
-    # return codeSmile
-    # OK
-
-def postToken(token):
-    codeSmile = requests.post(url + "postToken/" + str(MachineSettings['MachineID']), json={"token": token})
-
-def postOrderStatus(status):
-    codeSmile = requests.post(url + "postOrderStatus/" + str(MachineSettings['MachineID']), json={"status": status})
-    # return codeSmile   # optional (if you are in mood)
-    # OK
-
-def postOrder(JOrder):
-    codeSmile = requests.post(url + "postOrder/" + str(MachineSettings['MachineID']), json=JOrder)
-
-def postOrderBd(finalOrder, token):
-    date = token[:10]
-    time = token[10:19]
-    bdOrder={"date": date,
-            "time": time,
-            "coffeeType": finalOrder['coffeeType'],
-            "strength": finalOrder['strength'],
-            "volume": finalOrder['volume'],
-            "milk": finalOrder['milk'],
-            "sugar": finalOrder['sugar']
-            }
-    codeSmile = requests.post(url + "postBd/" + str(MachineSettings['MachineID']), json=bdOrder) # OK
-
-'''
-finalOrder ={"MachineID": 1,
-            "coffeeType": 'espresso',
-            "strength": 4,
-            "volume": 2,
-            "milk": 0,
-            "sugar": 0
-            }
-'''
+api.add_resource(OrderFromPyServer, '/post/ToCluster_<id>')
+app.run(host=host, port=port, debug=True)
