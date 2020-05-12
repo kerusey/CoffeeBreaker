@@ -1,5 +1,5 @@
 from Validation import Visualizer
-from Barista import Order
+from CoffeePudding import Barista
 import Request
 import time
 import os 

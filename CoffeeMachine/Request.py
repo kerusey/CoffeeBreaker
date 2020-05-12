@@ -1,5 +1,6 @@
 import json
 import requests
+import os
 
 scriptDir = os.path.dirname(os.path.abspath(__file__)) + "/"
 MachineSettingsPath = scriptDir + "/MachineSettings.json"
