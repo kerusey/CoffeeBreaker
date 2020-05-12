@@ -1,6 +1,7 @@
 <component name="InspectionProjectProfileManager">
   <profile version="1.0">
     <option name="myName" value="Project Default" />
+    <inspection_tool class="KotlinUnusedImport" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="MismatchedCollectionQueryUpdate" enabled="false" level="WARNING" enabled_by_default="false">
       <option name="queryNames">
         <value />
@@ -12,5 +13,7 @@
         <value />
       </option>
     </inspection_tool>
+    <inspection_tool class="UNUSED_IMPORT" enabled="true" level="UNUSED ENTRY" enabled_by_default="true" />
+    <inspection_tool class="UnusedImportStatement" enabled="true" level="INFORMATION" enabled_by_default="true" />
   </profile>
 </component>

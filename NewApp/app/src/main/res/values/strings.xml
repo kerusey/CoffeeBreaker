@@ -19,10 +19,7 @@
     <string name="coffeeTypeLatteMacchiato">Latte Macchiato</string>
     <string name="coffeeDescriptionLatteMacchiato">Latte macchiato (Italian pronunciation: [ˈlatte makˈkjaːto]) is a coffee beverage; the name means stained or marked milk. Marked as in an espresso stain on the milk used. It is a play on “Espresso macchiato” which is an espresso with a drop or two of milk or cream.</string>
 
-    <string name="coffeeTypeCaffeLatte">Caffe Latte</string>
-    <string name="coffeeDescriptionCaffeLatte">Caffe latte (or simply latte) (/ˈlɑːteɪ/ or /ˈlæteɪ/) is a coffee drink made with espresso and steamed milk. The word comes from the Italian caffè e latte [kafˌfɛ e ˈlatte], caffelatte [kaffeˈlatte] or caffellatte [kaffelˈlatte], which means \"coffee &amp; milk\". The word is also sometimes spelled latté or lattè in English with different kinds of accent marks, which can be a hyperforeignism or a deliberate attempt to indicate that the word is not pronounced according to the rules of English orthography.</string>
-
-    <string name="coffeeTypeCrema">Crema</string>
+  <string name="coffeeTypeCrema">Caffè crema</string>
     <string name="coffeeDescriptionCrema">Caffè crema (Italian: "cream coffee") refers to an old name for espresso (1940s and 1950s) and a long espresso drink served primarily in Germany, Switzerland and Austria and northern Italy (1980s onwards), along the Italian/Swiss and Italian/Austrian border. In Germany it is generally known as a "Café Crème" or just "Kaffee" and is generally the default type of black coffee served, unless there is a filter machine.
         \n\nAs a colorful term it generally means "espresso", while in technical discussions, referring to the long drink, it may more narrowly be referred to as Swiss caffè crema.</string>
 
