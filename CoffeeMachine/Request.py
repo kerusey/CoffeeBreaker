@@ -1,11 +1,11 @@
 import json
 import requests
 
-scriptPath = os.path.dirname(os.path.abspath(__file__)) + "/"
-MachineSettingsPath = scriptPath + "MachineSettings.json"
+scriptDir = os.path.dirname(os.path.abspath(__file__)) + "/"
+MachineSettingsPath = scriptDir + "/MachineSettings.json"
 
 with open(MachineSettingsPath) as json_file:
-        MachineSettings = json.load(json_file)
+    MachineSettings = json.load(json_file)
 
 url = "http://" + MachineSettings['Ip'] + ":" + str(MachineSettings['Port']) + "/" # <- insert here method path
 
@@ -20,7 +20,7 @@ def getOrderStatus():
 def getTokenStatus():
     resp = requests.get(url + "getTokenStatus/" + str(MachineSettings['MachineID']))
     return resp.text # OK
-
+        
 def getToken():
     resp = requests.get(url + "getToken/" + str(MachineSettings['MachineID']))
     return resp.text
@@ -49,25 +49,15 @@ def postOrderStatus(status):
 def postOrder(JOrder):
     codeSmile = requests.post(url + "postOrder/" + str(MachineSettings['MachineID']), json=JOrder)
 
-def postOrderBd(id, finalOrder, token):
-    date = token[:10]
-    time = token[11:19]
-    bdOrder={"id": finalOrder['id'],
-            "date": date,
-            "time": time,
-            "coffeeType": finalOrder['coffeeType'],
-            "volume": finalOrder['volume'],
-            "milk": finalOrder['milk'],
-            "sugar": finalOrder['sugar'],
-            }
-    codeSmile = requests.post(url + "postBd/" + str(MachineSettings['MachineID']), json=bdOrder) # OK
-
 '''
-finalOrder ={"MachineID": 1,
-            "coffeeType": 'espresso',
-            "strength": 4,
-            "volume": 2,
-            "milk": 0,
-            "sugar": 0
-            }
+JOrder = {  "machineId": 1,
+            "coffeeType": "espresso",
+            "strength": 5,      
+            "volume": 1,
+            "milk": False,
+            "sugar": 1
+         }
+         
+while(True):
+    getTokenStatus()
 '''
