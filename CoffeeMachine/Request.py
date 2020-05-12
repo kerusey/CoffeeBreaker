@@ -1,7 +1,8 @@
 import json
 import requests
 
-MachineSettingsPath = "/home/pi/CoffeeBreaker/CoffeeMachine/MachineSettings.json"
+scriptPath = os.path.dirname(os.path.abspath(__file__)) + "/"
+MachineSettingsPath = scriptPath + "MachineSettings.json"
 
 with open(MachineSettingsPath) as json_file:
         MachineSettings = json.load(json_file)

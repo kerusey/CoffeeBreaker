@@ -8,8 +8,11 @@ from pynput.keyboard import Key, Controller
 from guizero import App, Picture
 import datetime
 from PIL import Image
-Request = sys.path.insert(1, '/home/pi/CoffeeBreaker/CoffeeMachine')
+scriptPath = os.path.dirname(os.path.abspath(__file__)) + "/"
+Request = sys.path.insert(1, scriptPath + 'CoffeeMachine')
 import Request
+
+MachineSettingsPath = scriptPath + "MachineSettings.json"
 
 def generateString ():
     return str(datetime.datetime.now())
@@ -17,7 +20,6 @@ def generateString ():
 
 Suffix_const = "#" # OK
 AppLink_const = "market://details?id=space.fstudio.lio.coffeebreaker" # SETME FIXME !
-MachineSettingsPath = "/home/pi/Documents/MachineSettings.json"
 
 with open(MachineSettingsPath) as json_file:
         MachineSettings = json.load(json_file)
