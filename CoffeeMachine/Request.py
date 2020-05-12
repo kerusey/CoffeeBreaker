@@ -52,7 +52,6 @@ class OrderToCluster(Resource):
 def postDataToDataBase(coffeeID:int, dictionary:dict):
     requests.post("http://chaos.fstudio.space:8090/ToDataBase_" + coffeeID, json=json.dumps(dictionary))
 
-
 api.add_resource(OrderToCluster, "/post/ToCluster_<id>")
 
 app.run(host=host, port=port, debug=True)
