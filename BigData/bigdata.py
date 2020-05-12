@@ -110,12 +110,11 @@ for index, item in enumerate(ingredientsNames):
 	tableDict[item] = currentDictionary
 
 ''' LINEAR REGRESSION '''
+LinReg = LinearRegression()
 
 def lenReg():
-	LinReg = LinearRegression()
 	for name in ingredientsNames:
-		LinReg.fit(tableDict[name]['x'], 
-				   tableDict[name]['y'])
+		LinReg.fit(tableDict[name]['x'], tableDict[name]['y'])
 		prediction = LinReg.predict(tableDict[name]['x_latest'])
 
 		print(prediction)
@@ -124,14 +123,12 @@ def lenReg():
 lenReg()
 
 ''' Neural Networks '''
-
 MLP = MLPRegressor(max_iter=500, hidden_layer_sizes=(100,100,100))
 
 def mlpReg():
 	for name in ingredientsNames: 
-		MLP.fit(tableDict[name]['x'], 
-				tableDict[name]['y'])
-		prediction = MLP.predict(tableDict[name]['x_latest']) #NN predict for coffee
+		MLP.fit(tableDict[name]['x'], tableDict[name]['y'])
+		prediction = MLP.predict(tableDict[name]['x_latest']) # NN predict for coffee
 		print(prediction)
 		print(tableDict[name]['y_latest'])
 
@@ -141,8 +138,7 @@ RFR = RandomForestRegressor(n_estimators = 1000, max_depth=10)
 
 def rfrReg():
 	for name in ingredientsNames:
-		RFR.fit(tableDict[name]['x'], 
-				tableDict[name]['y'])
+		RFR.fit(tableDict[name]['x'], tableDict[name]['y'].values.ravel())
 		prediction = RFR.predict(tableDict[name]['x_latest']) #RFR predict for coffee
 		print(prediction)
 		print(tableDict[name]['y_latest'])
@@ -154,23 +150,21 @@ KNN = KNeighborsRegressor(n_neighbors=3)
 
 def knnReg():
 	for name in ingredientsNames:
-		KNN.fit(tableDict[name]['x'],
-				tableDict[name]['y'])
+		KNN.fit(tableDict[name]['x'], tableDict[name]['y'])
 		prediction = KNN.predict(tableDict[name]['x_latest']) #NR predict for coffee
 		print(prediction)
 		print(tableDict[name]['y_latest'])
 
 ''' MLPRegressor '''
-MLP = MLPRegressor(hidden_layer_sizes=(100,100,100))
+MLP = MLPRegressor(hidden_layer_sizes=(100, 100, 100))
 GSCV = GridSearchCV(MLP , {
-    "max_iter": [100,500,1000],
+    "max_iter": [100, 500, 1000],
     "learning_rate_init": [0.001, 0.01],
 }, cv=3, scoring='neg_mean_absolute_error')
 
 def mlpReg():
 	for name in ingredientsNames:
-		GSCV.fit(tableDict[name]['x'], 
-				 tableDict[name]['y'])
+		GSCV.fit(tableDict[name]['x'], tableDict[name]['y'])
 		GSCV.best_score_
 		model = GSCV.best_estimator_
 		prediction = model.predict(tableDict[name]['x_latest'])[0] #MLP predict for coffee
