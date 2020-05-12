@@ -5,8 +5,6 @@ import os
 import json
 import requests
 
-ingredients = ("coffeeType", "milk", "strength", "sugar", "volume")
-
 def getLan(): # OK
     interfaces = netifaces.interfaces()
     for i in interfaces:
@@ -41,7 +39,7 @@ class OrderFromApp(Resource):
                 continue
             parser.add_argument(item, type=int, location='json')
         args = parser.parse_args()
-        requests.post('http://' + str(coffeeMachineClusterPool[id]) + ":" + str(port) + "/Order_<id>", json=json.dumps(args))
+        requests.post('http://' + str(coffeeMachineClusterPool[id]) + ":" + str(port) + "/ToCluster_<id>", json=json.dumps(args))
         return 200
 
 class DataToDataBase(Resource):
@@ -52,7 +50,7 @@ class DataToDataBase(Resource):
         args = parser.parse_args()
         return 200
 
-api.add_resource(OrderFromApp, "/post/AppOrder_<id>")
-api.add_resource(OrderRaspberry, "/post/ToDataBase_<id>")
+api.add_resource(OrderFromApp, "/post/ToServerFromApp_<id>")
+api.add_resource(DataToDataBase, "/post/ToDataBase_<id>")
 
 app.run(host=host, port=port, debug=True)
