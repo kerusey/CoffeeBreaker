@@ -4,12 +4,12 @@
 <a href="https://github.com/kerusey/CoffeeBreaker/tags"><img src="https://img.shields.io/github/release-date/kerusey/CoffeeBreaker.svg"/></a>
 <a href="https://discord.gg/9bdQ9py"><img src="https://img.shields.io/discord/693528089283657749"></a>
 <a href="https://github.com/kerusey/CoffeeBreaker/pulls"><img src="https://img.shields.io/github/hacktoberfest/2019/kerusey/CoffeeBreaker.svg"/></a>
-![Screenshot](Schemes/WhiteNewLogo.png)
+<img src="https://github.com/kerusey/CoffeeBreaker/blob/master/Schemes/WhiteNewLogo.png"/>
 <a href="https://github.com/kerusey/CoffeeBreaker/blob/master/README-RU.md"><p align="right">Русская версия</p></a>
 ## Description
 ### Main goal of the project
   Automation is one of the main trends in the development of modern IT technologies. It is not difficult to explain it: the ability to completely avoid the human factor, necessity to pay salaries-this puts automation at the top of modern prospects.
- 
+
  Our product is aimed at implementing this very perspective.
  
  The Coffee Breaker system is an automated system that allows everyone who loves coffee and knows how to use a modern mobile phone to make coffee without the participation of a Barista.
@@ -41,7 +41,7 @@ The coffee machine receives data from the Arduino and brews coffee for the user.
 The result of interaction of the system elements is a coffee drink prepared in a user-defined configuration. The resources used for the preparation of which are recorded and stored in the database, with the possibility of subsequent access and processing of this information by the neural network.
 ## Developer notes
 If you would like to take a part in the project development feel free to fork it and open pull requests for any fix, improvement or feature you add. 
-You may check the [contributing guide](https://github.com/kerusey/CoffeeBreaker/blob/master/CONTRIBUTING.md) for more information on how to do this. 
+You may check the <a href="https://github.com/kerusey/CoffeeBreaker/blob/master/CONTRIBUTING.md">contributing guide</a> for more information on how to do this. 
 
 ## CoffeeBreaker team
 <table>
