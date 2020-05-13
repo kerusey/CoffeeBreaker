@@ -24,15 +24,28 @@ dataBaseHeader = ( "coffeeID", "water", "sugar", "milk" )
 scriptPath = os.path.dirname(os.path.abspath(__file__)) + "/"
 
 MachineSettingsPath = scriptPath + "MachineSettings.json"
-with open(MachineSettingsPath) as json_file:
-	MachineSettings = json.load(json_file)
+coffeeMachinePoolPath = scriptPath + "CoffeeMachinePool.json"
+
+with open(MachineSettingsPath) as jsonFile:
+	MachineSettings = json.load(jsonFile)
+
+with open(coffeeMachinePoolPath) as jsonFile:
+	coffeeMachinePool = json.load(jsonFile)
 
 def postDataToDataBase(coffeeID:int, order:dict):
 	order["coffeeID"] = coffeeID
+	del order["strength"]
+	del order["coffeeType"]
 	requests.post("http://chaos.fstudio.space:8090/ToDataBase", json=json.dumps(order))
 
 def chooseCoffeeMachine(coffeeMachinePool:dict=coffeeMachinePool): # returns ID of available coffeeMachine from  coffeeMachinePool
-	return 0 # TODO realization of this method
+	for item in coffeeMachinePool:
+		if(coffeeMachinePool[item]['status'] == "passive"):
+			coffeeMachinePool[item]['status'] = "active"
+			with open (coffeeMachinePoolPath, 'w') as jsonFile:
+				json.dump(coffeeMachinePool, jsonFile, indent=4)
+			return item
+	return None
 
 path = os.path.dirname(os.path.abspath(__file__))
 app = Flask(__name__)
@@ -48,9 +61,12 @@ class OrderToCluster(Resource):
 			parser.add_argument(item, type=int, location='json')
 		order = parser.parse_args()
 		currentMachine = chooseCoffeeMachine()
-		barista.makeOrder(currentMachine, order)
-		postDataToDataBase(currentMachine, order)
-		return 200
+		if (currentMachine is None):
+			return "all coffee machines are in use" # TODO request some time user to wait
+		else:
+			barista.makeOrder(currentMachine, order)
+			postDataToDataBase(currentMachine, order)
+			return 200
 
 api.add_resource(OrderToCluster, "/post/OrderToCluster")
 app.run(host=host, port=port, debug=True, threaded=True)
