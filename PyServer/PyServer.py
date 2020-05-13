@@ -5,6 +5,7 @@ import os
 import json
 import requests
 import threading
+import DataBaseInsertion
 
 def getLan(): # OK
     interfaces = netifaces.interfaces()
@@ -49,7 +50,9 @@ class DataToDataBase(Resource):
         for name in dataBaseHeader:
             parser.add_argument(name, type=int, location='json')
         args = parser.parse_args()
-        return args
+        DataBaseInsertion.valueInsertion(args)
+        DataBaseInsertion.printingBD()
+        return 200
 
 api.add_resource(OrderFromApp, "/post/OrderFromApp_<id>")
 api.add_resource(DataToDataBase, "/post/ToDataBase")
