@@ -53,4 +53,5 @@ class DataToDataBase(Resource):
 api.add_resource(OrderFromApp, "/post/ToServerFromApp_<id>")
 api.add_resource(DataToDataBase, "/post/ToDataBase_<id>")
 
+
 app.run(host=host, port=port, debug=True)
