@@ -52,7 +52,5 @@ class OrderToCluster(Resource):
 		postDataToDataBase(currentMachine, order)
 		return 200
 
-
-
 api.add_resource(OrderToCluster, "/post/OrderToCluster")
 app.run(host=host, port=port, debug=True, threaded=True)
