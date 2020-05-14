@@ -11,7 +11,7 @@
   Automation is one of the main trends in the development of modern IT technologies. It is not difficult to explain it: the ability to completely avoid the human factor, necessity to pay salaries-this puts automation at the top of modern prospects.
 
  Our product is aimed at implementing this very perspective.
- 
+
  The Coffee Breaker system is an automated system that allows everyone who loves coffee and knows how to use a modern mobile phone to make coffee without the participation of a Barista.
 ### Our mobile app
 <img src="https://raw.githubusercontent.com/kerusey/CoffeeBreaker/master/Schemes/Preview.jpg"/>
@@ -40,8 +40,8 @@ The coffee machine receives data from the Arduino and brews coffee for the user.
 ## Results
 The result of interaction of the system elements is a coffee drink prepared in a user-defined configuration. The resources used for the preparation of which are recorded and stored in the database, with the possibility of subsequent access and processing of this information by the neural network.
 ## Developer notes
-If you would like to take a part in the project development feel free to fork it and open pull requests for any fix, improvement or feature you add. 
-You may check the <a href="https://github.com/kerusey/CoffeeBreaker/blob/master/CONTRIBUTING.md">contributing guide</a> for more information on how to do this. 
+If you would like to take a part in the project development feel free to fork it and open pull requests for any fix, improvement or feature you add.
+You may check the <a href="https://github.com/kerusey/CoffeeBreaker/blob/master/CONTRIBUTING.md">contributing guide</a> for more information on how to do this.
 
 ## CoffeeBreaker team
 <table>
@@ -52,6 +52,6 @@ You may check the <a href="https://github.com/kerusey/CoffeeBreaker/blob/master/
       <td align="center"><a href="https://github.com/llav3ji2019"><img src="https://avatars3.githubusercontent.com/u/56979109?s=400&u=3d7ae402373361726aea80cc6ce2275a55223e70&v=4" width="100px;" alt=""/><br /><sub><b>Pavel Emelyanov</b></sub></a><br /><a href="#ideas" title="Ideas, Planning, & Feedback">🤔</a><a href="#maintenance" title="Maintenance">🛠</a><a href="https://github.com/kerusey/CoffeeBreaker/commits?author=llav3ji2019" title="Code">💻</a>
     <td align="center"><a href="https://github.com/nzhnme"><img src="https://sun9-66.userapi.com/c844521/v844521801/cb888/forMhE2fT9U.jpg" width="100px;" alt=""/><br /><sub><b>Mayya Nuzhnaya</b></sub></a><br /><a href="#content" title="Content">🖋</a><a href="https://github.com/kerusey/CoffeeBreaker/commits?author=nzhnme" title="Code">💻</a><a href="#tool" title="Tools">🔧</a>
       <td align="center"><a href="https://github.com/Conng"><img src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/62/62e0c072ecbf2947600ee1c0cf71229c626342fa_full.jpg" width="100px;" alt=""/><br /><sub><b>Max Denisov</b></sub></a><br /><a href="#content" title="Content">🖋</a><a href="#documentation" title="Documentation">📖</a>
-    
+
   </tr>
 </table>
