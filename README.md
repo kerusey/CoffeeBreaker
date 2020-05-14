@@ -16,6 +16,7 @@
 ### Our mobile app
 <img src="https://raw.githubusercontent.com/kerusey/CoffeeBreaker/master/Schemes/Preview.jpg"/>
 
+
 ## Alleged product
 The main idea of ours project is creation of a smart CoffeeBreaker system, which contains:
 1. Mobile app
