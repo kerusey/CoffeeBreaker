@@ -1,0 +1,291 @@
+{
+  "version":"1.0",
+  "data":{
+    "sheets":[
+      {
+        "name":"Sheet",
+        "blocks":[
+          {
+            "type":"CODE",
+            "text":"import numpy\nimport pandas\nimport matplotlib.pyplot as plt\nimport pymysql\nfrom sqlalchemy import create_engine\nfrom sklearn.metrics import mean_absolute_error\nfrom sklearn.neural_network import MLPRegressor\nfrom sklearn.ensemble import RandomForestRegressor\nfrom sklearn.neighbors import KNeighborsRegressor\nfrom sklearn.model_selection import GridSearchCV",
+            "outputs":[
+              {
+                "stdout":"",
+                "stderr":"",
+                "outputReprs":[
+                  
+                ],
+                "displayData":[
+                  
+                ]
+              }
+            ]
+          },
+          {
+            "type":"CODE",
+            "text":"fromDate = \"2020-01-01\"\ntoDate = \"2020-01-30\"\nid = 1\npast = start = 7\nfuture = 1",
+            "outputs":[
+              {
+                "stdout":"",
+                "stderr":"",
+                "outputReprs":[
+                  
+                ],
+                "displayData":[
+                  
+                ]
+              }
+            ]
+          },
+          {
+            "type":"CODE",
+            "text":"def getCredits(path:str=\"databaseCredits.txt\"):\n\tdatabaseCredits = []\n\twith open (path, \"r\") as creditsFile:\n\t\tfor row in creditsFile:\n\t\t\tdatabaseCredits.append(row[:-1])\n\treturn databaseCredits",
+            "outputs":[
+              {
+                "stdout":"",
+                "stderr":"",
+                "outputReprs":[
+                  
+                ],
+                "displayData":[
+                  
+                ]
+              }
+            ]
+          },
+          {
+            "type":"CODE",
+            "text":"import datetime\ndef summer(data, id:int, date:datetime): # returns coffee, water, sugar, milk summary from filtred database\n\tresult = []\n\tdate = str(date)\n\tdata = data[(data['coffeeID'] == id) & ([str(item)[:-9] == date for item in data['date']])]\n\tresult.append(len(data.coffeeID)*8)\n\tfor header in data:\n\t\tif (header == \"coffeeID\" or header == \"id\"):\n\t\t\tcontinue\n\t\tif (header == \"date\"):\n\t\t\tbreak\n\t\tresult.append(sum(item for item in data[header]))\n\treturn result",
+            "outputs":[
+              {
+                "stdout":"",
+                "stderr":"",
+                "outputReprs":[
+                  
+                ],
+                "displayData":[
+                  
+                ]
+              }
+            ]
+          },
+          {
+            "type":"CODE",
+            "text":"def convertStrToDatetime(date):\n\treturn datetime.date(int(date[0:4]), int(date[5:7]), int(date[8:10]))\n    \ndef summerIdByDate(data, id:int, fromDate:datetime, toDate:datetime):\n\tglobalSum = [ ]\n\tfromDate, toDate = str(fromDate), str(toDate)\n\tdata = data[(data['coffeeID'] == id) & ([str(item)[:-9] >= fromDate for item in data['date']]) & ([str(item)[:-9] <= toDate for item in data['date']])]\n\tfromDate, toDate = convertStrToDatetime(fromDate), convertStrToDatetime(toDate)\n\tcurrentDate = fromDate\n\tdayNumber = (toDate - fromDate).days + 1\n\tfor day in range(dayNumber):\n\t\tglobalSum.append(summer(data, id, currentDate))\n\t\tcurrentDate += datetime.timedelta(days=1)\n\treturn globalSum",
+            "outputs":[
+              {
+                "stdout":"",
+                "stderr":"",
+                "outputReprs":[
+                  
+                ],
+                "displayData":[
+                  
+                ]
+              }
+            ]
+          },
+          {
+            "type":"CODE",
+            "text":"def initPandasDataFrame(matrix:list):\n\tdata = {}\n\tpast_columns = future_columns = []\n\n\tfor item in range((toDate - fromDate).days + 1):\n\t\tpast_columns.append(\"day_\" + str(item))\n\n\tmatrix = numpy.array(matrix).transpose()\n\theader = [\"coffee\", \"water\", \"sugar\", \"milk\"]\n\n\tfor index, item in enumerate(matrix):\n\t\tdata[header[index]] = item\n\n\treturn pandas.DataFrame(data=data)",
+            "outputs":[
+              {
+                "stdout":"",
+                "stderr":"",
+                "outputReprs":[
+                  
+                ],
+                "displayData":[
+                  
+                ]
+              }
+            ]
+          },
+          {
+            "type":"CODE",
+            "text":"def createDataFrame(values:list):\n\trawDataFrame = [ ]\n\tdictionary = {}\n\n\tpast_columns = [f\"past_{i}\" for i in range(past)]\n\tfuture_columns = [f\"future_{i}\" for i in range(future)]\n\t\n\tfor i in range(start, end):\n\t\trawDataFrame.append(list(values[(i - past) : (i + future)]))\n\n\tdataFrame = pandas.DataFrame(rawDataFrame, columns=(past_columns + future_columns))\n\n\tdictionary['x'] = dataFrame[past_columns] [:-1]\n\tdictionary['y'] = dataFrame[future_columns] [:-1]\n\tdictionary['x_latest'] = dataFrame[past_columns] [-1:]\n\tdictionary['y_latest'] = dataFrame[future_columns] [-1:]\n\n\treturn dataFrame, dictionary",
+            "outputs":[
+              {
+                "stdout":"",
+                "stderr":"",
+                "outputReprs":[
+                  
+                ],
+                "displayData":[
+                  
+                ]
+              }
+            ]
+          },
+          {
+            "type":"CODE",
+            "text":"fromDate, toDate = convertStrToDatetime(fromDate), convertStrToDatetime(toDate)\ndatabaseCredits = getCredits()\nurl = \"mysql+pymysql:\/\/\" + databaseCredits[1] + \":\" + databaseCredits[2] + \"@\" + databaseCredits[0] + \"\/\" + \"coffeeBreaker\"\nconn = create_engine(url)\ndata = pandas.read_sql(\"SELECT * FROM CoffeeBreakerDataTable\", con=conn)\nmatrix = summerIdByDate(data, id, fromDate, toDate)\n\ningredients = [ [], [], [], [] ] # coffee, water, sugar, milk\nend = len(matrix) - future\n\nfor row in matrix:\n\tfor index in range(4):\n\t\tingredients[index].append(row[index])\n\ningredientsNames = (\"coffee\", \"water\", \"sugar\", \"milk\")\ndataFrameDict = {}\ntableDict = {}\n\nfor index, item in enumerate(ingredientsNames):\n\tcurrentDataFrame, currentDictionary = createDataFrame(ingredients[index])\n\tdataFrameDict[item] = currentDataFrame\n\ttableDict[item] = currentDictionary",
+            "outputs":[
+              {
+                "stdout":"",
+                "stderr":"",
+                "outputReprs":[
+                  
+                ],
+                "displayData":[
+                  
+                ],
+                "error":{
+                  "category":"FileNotFoundError",
+                  "message":"FileNotFoundError: [Errno 2] No such file or directory: 'databaseCredits.txt'",
+                  "frames":[
+                    {
+                      "name":"<module>",
+                      "line":2
+                    },
+                    {
+                      "name":"getCredits",
+                      "line":3
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "type":"CODE",
+            "text":"from sklearn.linear_model import LinearRegression\n''' LINEAR REGRESSION '''\nLinReg = LinearRegression()\n\ndef lenReg(ingredientsNames:list=ingredientsNames):\n\tfor name in ingredientsNames:\n\t\tLinReg.fit(tableDict[name]['x'], tableDict[name]['y'])\n\t\tprediction = LinReg.predict(tableDict[name]['x_latest'])\n\n\t\tprint(prediction)\n\t\tprint(tableDict[name]['y_latest'])\n\nlenReg()\n\n''' LINEAR REGRESSION '''",
+            "outputs":[
+              {
+                "stdout":"",
+                "stderr":"",
+                "outputReprs":[
+                  
+                ],
+                "displayData":[
+                  
+                ],
+                "error":{
+                  "category":"NameError",
+                  "message":"NameError: name 'ingredientsNames' is not defined",
+                  "frames":[
+                    {
+                      "name":"<module>",
+                      "line":5
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "type":"CODE",
+            "text":"''' Neural Networks '''\nMLP = MLPRegressor(max_iter=500, hidden_layer_sizes=(100,100,100))\n\ndef mlpReg(ingredientsNames:list=ingredientsNames):\n\tfor name in ingredientsNames: \n\t\tMLP.fit(tableDict[name]['x'], tableDict[name]['y'])\n\t\tprediction = MLP.predict(tableDict[name]['x_latest']) # NN predict for coffee\n\t\tprint(prediction)\n\t\tprint(tableDict[name]['y_latest'])\n\n''' Neural Networks '''",
+            "outputs":[
+              {
+                "stdout":"",
+                "stderr":"",
+                "outputReprs":[
+                  
+                ],
+                "displayData":[
+                  
+                ],
+                "error":{
+                  "category":"NameError",
+                  "message":"NameError: name 'ingredientsNames' is not defined",
+                  "frames":[
+                    {
+                      "name":"<module>",
+                      "line":4
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "type":"CODE",
+            "text":"''' RandomForest '''\n\nRFR = RandomForestRegressor(n_estimators = 1000, max_depth=10)\n\ndef rfrReg(ingredientsNames:list=ingredientsNames):\n\tfor name in ingredientsNames:\n\t\tRFR.fit(tableDict[name]['x'], tableDict[name]['y'].values.ravel())\n\t\tprediction = RFR.predict(tableDict[name]['x_latest']) #RFR predict for coffee\n\t\tprint(prediction)\n\t\tprint(tableDict[name]['y_latest'])\n\nrfrReg()\n\n''' RandomForest '''",
+            "outputs":[
+              {
+                "stdout":"",
+                "stderr":"",
+                "outputReprs":[
+                  
+                ],
+                "displayData":[
+                  
+                ],
+                "error":{
+                  "category":"NameError",
+                  "message":"NameError: name 'ingredientsNames' is not defined",
+                  "frames":[
+                    {
+                      "name":"<module>",
+                      "line":5
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "type":"CODE",
+            "text":"''' NeighborsRegressor '''\nKNN = KNeighborsRegressor(n_neighbors=3)\n\ndef knnReg(ingredientsNames:list=ingredientsNames):\n\tfor name in ingredientsNames:\n\t\tKNN.fit(tableDict[name]['x'], tableDict[name]['y'])\n\t\tprediction = KNN.predict(tableDict[name]['x_latest']) #NR predict for coffee\n\t\tprint(prediction)\n\t\tprint(tableDict[name]['y_latest'])\n''' NeighborsRegressor '''",
+            "outputs":[
+              {
+                "stdout":"",
+                "stderr":"",
+                "outputReprs":[
+                  
+                ],
+                "displayData":[
+                  
+                ],
+                "error":{
+                  "category":"NameError",
+                  "message":"NameError: name 'ingredientsNames' is not defined",
+                  "frames":[
+                    {
+                      "name":"<module>",
+                      "line":4
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "type":"CODE",
+            "text":"''' MLPRegressor '''\nMLP = MLPRegressor(hidden_layer_sizes=(100, 100, 100))\nGSCV = GridSearchCV(MLP , {\n    \"max_iter\": [100, 500, 1000],\n    \"learning_rate_init\": [0.001, 0.01],\n}, cv=3, scoring='neg_mean_absolute_error')\n\ndef mlpReg(ingredientsNames:list=ingredientsNames):\n\tfor name in ingredientsNames:\n\t\tGSCV.fit(tableDict[name]['x'], tableDict[name]['y'])\n\t\tGSCV.best_score_\n\t\tmodel = GSCV.best_estimator_\n\t\tprediction = model.predict(tableDict[name]['x_latest'])[0] #MLP predict for coffee\n\t\tprint(prediction)\n\t\tprint(tableDict[name]['y_latest'])\n\nmlpReg()\n''' MLPRegressor '''",
+            "outputs":[
+              {
+                "stdout":"",
+                "stderr":"",
+                "outputReprs":[
+                  
+                ],
+                "displayData":[
+                  
+                ],
+                "error":{
+                  "category":"NameError",
+                  "message":"NameError: name 'ingredientsNames' is not defined",
+                  "frames":[
+                    {
+                      "name":"<module>",
+                      "line":8
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "packages":[
+      {
+        "name":"pymysql",
+        "source":"CONDA"
+      }
+    ],
+    "kernelType":"DATALORE"
+  }
+}
