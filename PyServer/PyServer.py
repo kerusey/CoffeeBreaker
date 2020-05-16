@@ -5,7 +5,7 @@ import os
 import json
 import requests
 import threading
-# import DataBaseInsertion
+import DataBaseInsertion
 
 def getLan(): # OK
     interfaces = netifaces.interfaces()
