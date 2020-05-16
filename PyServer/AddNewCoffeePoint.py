@@ -1,38 +1,47 @@
-import sys
+import getopt
 import json
 import os
-import getopt
+import sys
 
-path = os.path.dirname(os.path.abspath(__file__))+"/"
-coffeeShopInformation={}
-def _usage():
-    print("AddNewCoffeePoint.py [-n|--name <>] [-x|--x <>] [-y|--y <>] [-id|--id <>]")
+helpmsg = "python3 AddNewCoffeePoint.py -name <CoffeePointName> -x <XCoordinate> -y <YCoordinate> -id <CoffeeClusterID>"
+argumentList = (('name', '-n', '--name'), ('x', '-x', '--x'), ('y', '-y', '--y'), ('id', '-i', '--id'))
 
-if __name__ == "__main__":
-    argv = sys.argv[1:]
-    try:
-        opts, args = getopt.getopt(argv, "h", ["name=", "x=","y=", "id="])
-    except getopt.GetoptError:
-        _usage()
-        sys.exit(2)
+path = os.path.dirname(os.path.abspath(__file__)) + "/"
 
-    if len(opts) == 0:
-        _usage()
-        sys.exit()
-    for opt, arg in opts:
-        if opt == '-h':
-            _usage()
-            sys.exit()
-        elif opt in ("-x", "--x"):
-            coffeeShopInformation["x"] = arg
-        elif opt in ("-y", "--y"):
-            coffeeShopInformation["y"] = arg
-        elif opt in ("-id", "--id"):
-            coffeeShopInformation["id"] = arg
-        elif opt in ("-n", "--name"):
-            coffeeShopInformation["name"] = arg
-print(coffeeShopInformation)
-with open(path+"CoffeeHouses.json","a") as cafesWrite:#appending of inputed information to json
-            coffeeHousesJson = json.dumps(coffeeShopInformation)
-            cafesWrite.write(coffeeHousesJson ,sort_keys=True, indent=4, separators=(',', ': '))
-sys.exit()
+if (not os.path.isfile(path + "CoffeeHouses.json")):
+    with open(path + "CoffeeHouses.json", "w") as jsonFile:
+        json.dump({}, jsonFile)
+
+try:
+    options, arguments = getopt.getopt(sys.argv[1:], 'n:x:y:i:h', ['name=', 'x=', 'y=', 'id=', 'help'])
+except getopt.GetoptError:
+    print(helpmsg)
+    exit()
+
+currentLocation = {}
+
+for option, argument in options:
+    if (option in ('-h', '--help')):
+        print (helpmsg)
+        exit()
+
+for index, item in enumerate(argumentList):
+    if (options[index][0] in item):
+        if (item[0] == "name"):
+            currentLocation[item[0]] = options[index][1]
+        elif (item[0] == "id"):
+            currentLocation[item[0]] = int(options[index][1])
+        else:
+            currentLocation[item[0]] = float(options[index][1])
+
+def formatDict(rawDict:dict):
+    nameOfCurrentPoint = rawDict['name']
+    del rawDict['name']
+    return nameOfCurrentPoint, rawDict
+
+feeds = json.load(open(path + "CoffeeHouses.json"))
+with open(path + "CoffeeHouses.json", "w") as jsonFile:
+    nameOfCurrentPoint, formattedDict = formatDict(currentLocation)
+    print(formattedDict)
+    feeds[nameOfCurrentPoint] = formattedDict
+    json.dump(feeds, jsonFile, indent=4)
