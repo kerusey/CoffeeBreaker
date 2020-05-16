@@ -1,5 +1,3 @@
-# Tests required
-
 from os import listdir, system
 from getpass import getpass
 import subprocess
