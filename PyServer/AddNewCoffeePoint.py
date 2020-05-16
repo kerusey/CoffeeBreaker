@@ -32,7 +32,7 @@ for index, item in enumerate(argumentList):
         elif (item[0] == "id"):
             currentLocation[item[0]] = int(options[index][1])
         else:
-            currentLocation[item[0]] = float(options[index][1])
+            currentLocation[item[0]] = double(options[index][1])
 
 def formatDict(rawDict:dict):
     nameOfCurrentPoint = rawDict['name']
