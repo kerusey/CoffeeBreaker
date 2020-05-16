@@ -72,10 +72,6 @@ def shellRun(name:str): # OK
 
 def front(threadName):
 	clear()
-	userName = Services.initSshServer() # OK
-	Services.initVncServer(userName) # OK
-	Services.initFtpServer() # OK
-	WifiConfig.setWifiConfig() # OK
 	backThread = threading.Thread(target=back, args=("backThread_TH",))
 	backThread.start()
 	clear()
