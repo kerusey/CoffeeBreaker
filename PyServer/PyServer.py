@@ -5,7 +5,7 @@ import os
 import json
 import requests
 import threading
-import DataBaseInsertion
+# import DataBaseInsertion
 
 def getLan(): # OK
     interfaces = netifaces.interfaces()
@@ -19,14 +19,13 @@ def getLan(): # OK
 
 host = getLan()
 port = 8090
-path = os.path.dirname(os.path.abspath(__file__))+"/"
 app = Flask(__name__)
 api = Api(app)
+
+path = os.path.dirname(os.path.abspath(__file__)) + "/"
 coffeeMachineClusterPool = {}
 
-coffeeShopInformation={}
-
-with open(path+"CoffeeMachineClusterPool.json") as jsonFile:
+with open(path + "CoffeeMachineClusterPool.json") as jsonFile:
     data = json.load(jsonFile)
     for row in data:
         coffeeMachineClusterPool[row] = data[row]
@@ -58,13 +57,9 @@ class DataToDataBase(Resource):
 
 class CoffeeHouses(Resource):
     def get(self):
-        with open(path+"CoffeeHouses.json","r") as cafesRead:
-            info = json.load(cafesRead)
-            for row in info:
-                coffeeShopInformation[row] = info[row]
-        return 200
+        return json.load(open(path + "CoffeeHouses.json"))
 
 api.add_resource(OrderFromApp, "/post/OrderFromApp_<id>")
 api.add_resource(DataToDataBase, "/post/ToDataBase")
-api.add_resource(CoffeeHouses, "/CoffeeHouses")
-app.run(host, port, debug=True,threaded=True)
+api.add_resource(CoffeeHouses, "/get/CoffeeHouses")
+app.run(host, port, debug=True, threaded=True)
