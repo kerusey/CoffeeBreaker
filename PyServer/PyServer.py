@@ -24,6 +24,8 @@ app = Flask(__name__)
 api = Api(app)
 coffeeMachineClusterPool = {}
 
+coffeeShopInformation={}
+
 with open(path+"CoffeeMachineClusterPool.json") as jsonFile:
     data = json.load(jsonFile)
     for row in data:
@@ -54,7 +56,15 @@ class DataToDataBase(Resource):
         DataBaseInsertion.printingBD()
         return 200
 
+class CoffeeHouses(Resource):
+    def get(self):
+        with open(path+"CoffeeHouses.json","r") as cafesRead:
+            info = json.load(cafesRead)
+            for row in info:
+                coffeeShopInformation[row] = info[row]
+        return 200
+
 api.add_resource(OrderFromApp, "/post/OrderFromApp_<id>")
 api.add_resource(DataToDataBase, "/post/ToDataBase")
-
+api.add_resource(CoffeeHouses, "/CoffeeHouses")
 app.run(host, port, debug=True,threaded=True)
