@@ -14,7 +14,6 @@ public class BDInsertion {
     public BDInsertion(Connection connection) throws Exception {
         this.connection = connection;
     }
-//    sextet <A, B, C, D, E>    milk sugar water id mtime mdate
     public void CreateSextet(int milk,  int sugar, int water, int id, String time, String date) throws Exception {
 
         Sextet<Integer, Integer, Integer,  Integer, String, String> sextet = Sextet.with(milk,  sugar, water, id, time, date);
