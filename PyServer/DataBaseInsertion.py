@@ -29,18 +29,7 @@ def clearDatabase():
 	sql = "truncate coffeeBreaker.CoffeeBreakerDataTable;"
 	sqlcursor.execute(sql)
 	dataBaseConnection.commit()
-'''
-def insertDatabase():
-	print("WORKING...")
-	for j in range(days):
-		for i in range(orders):
-			sql = "INSERT INTO CoffeeBreakerDataTable (coffeeID, water, sugar, milk, date) VALUES (%s, %s, %s, %s, %s)"
-			sqlcursor.execute(sql, getValues(j+1))
-			dataBaseConnection.commit()
-	print("DONE!")
-'''
 
-#TODO("slovar in bd, json to dict")
 def valueInsertion(dataBaseValues: dict):
     sql = "INSERT INTO CoffeeBreakerDataTable (coffeeID, water, sugar, milk) VALUES (%s, %s, %s, %s)"
     listOfData = []

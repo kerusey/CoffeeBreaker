@@ -4,6 +4,9 @@ __pycache__/
 get-pip.py
 test.py
 *$py.class
+DataBaseCredits.cnf
+DataBaseCredits.json
+SecretKey.txt
 
 # C extensions
 *.so
