@@ -24,7 +24,6 @@ aptPackages = [ "build-essential",
 		"python-dev",
 		"python-smbus",
 		"imagemagick",
-		"python3-tk",
 		"python3-rpi.gpio",
 		]
 
@@ -91,4 +90,6 @@ def back(threadName, frontThread=frontThread):
 	for item in aptPackages:
 		system("sudo apt-get -qq install " + item)
 
+	system("sudo pip3 install -r requirements.txt")
+	
 	system("sudo reboot now")

@@ -68,5 +68,10 @@ class OrderToCluster(Resource):
 			postDataToDataBase(currentMachine, order)
 			return 200
 
+class Ping(Resource):
+	def get(self):
+		return 200
+
 api.add_resource(OrderToCluster, "/post/OrderToCluster")
+api.add_resource(Ping, "/ping")
 app.run(host=host, port=port, debug=True, threaded=True)

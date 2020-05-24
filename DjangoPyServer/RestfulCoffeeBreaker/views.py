@@ -2,7 +2,6 @@ from django.http import JsonResponse
 import os
 import json
 
-
 ingredients = ( "coffeeType", "milk", "strength", "sugar", "volume" )
 dataBaseHeader = ( "coffeeID", "water", "sugar", "milk" )
 
@@ -16,10 +15,9 @@ def getCoffeeHouses(request):
 			coffeeMachineClusterPool[row] = data[row]
 	return JsonResponse(coffeeMachineClusterPool)
 
-def postDataToDataBase(request,id):
+def postDataToDataBase(request):
 	pass
 
-def	postOrderFromApp(request,id):
+def	postOrderFromApp(request, id):
 
 	return 200
-
