@@ -14,7 +14,8 @@ DataBaseCredits = json.load(open(FILE_DIR + "DataBaseCredits.json"))
 # Application definition
 
 INSTALLED_APPS = [
-	'PyServer.apps.PyserverConfig',
+	'Database.apps.DatabaseConfig',
+	'RestfulCoffeeBreaker.apps.RestfulCoffeeBreakerConfig',
 	'rest_framework',
 	'django.contrib.admin',
 	'django.contrib.auth',
@@ -54,10 +55,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'DjangoPyServer.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
+REST_FRAMEWORK = {
+	'DEFAULT_PERMISSION_CLASSES': [
+		'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+	]
+}
+'''
 DATABASES = {
 	'default': {
 		'ENGINE': 'django.db.backends.mysql',
@@ -67,7 +70,7 @@ DATABASES = {
 		'PASSWORD': DataBaseCredits['pass'],
 	}
 }
-
+'''
 AUTH_PASSWORD_VALIDATORS = [
 	{
 		'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',

@@ -1,37 +1,4 @@
-from flask import Flask
-from flask_restful import Resource, Api, reqparse
-import netifaces
-import os
-import json
-import requests
-import threading
-import DataBaseInsertion
-
-def getLan(): # OK
-    interfaces = netifaces.interfaces()
-    for i in interfaces:
-        if (i == 'lo'):
-            continue
-        iface = netifaces.ifaddresses(i).get(netifaces.AF_INET)
-        if (iface != None):
-            for j in iface:
-                return str(j['addr'])
-
-host = getLan()
-port = 8090
-app = Flask(__name__)
-api = Api(app)
-
 path = os.path.dirname(os.path.abspath(__file__)) + "/"
-coffeeMachineClusterPool = {}
-
-with open(path + "CoffeeMachineClusterPool.json") as jsonFile:
-    data = json.load(jsonFile)
-    for row in data:
-        coffeeMachineClusterPool[row] = data[row]
-
-ingredients = ( "coffeeType", "milk", "strength", "sugar", "volume" )
-dataBaseHeader = ( "coffeeID", "water", "sugar", "milk" )
 
 class OrderFromApp(Resource):
     def post(self, id):
@@ -55,11 +22,6 @@ class DataToDataBase(Resource):
         DataBaseInsertion.printingBD()
         return 200
 
-class CoffeeHouses(Resource):
-    def get(self):
-        return json.load(open(path + "CoffeeHouses.json"))
-
 api.add_resource(OrderFromApp, "/post/OrderFromApp_<id>")
 api.add_resource(DataToDataBase, "/post/ToDataBase")
-api.add_resource(CoffeeHouses, "/get/CoffeeHouses")
 app.run(host, port, debug=True, threaded=True)
