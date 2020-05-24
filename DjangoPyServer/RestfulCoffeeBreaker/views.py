@@ -5,8 +5,7 @@ import json
 ingredients = ( "coffeeType", "milk", "strength", "sugar", "volume" )
 dataBaseHeader = ( "coffeeID", "water", "sugar", "milk" )
 
-path = os.path.dirname(os.path.abspath(__file__)) + "/"
-print(path)
+path = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/Globals/"
 
 def getCoffeeHouses(request):
 	coffeeMachineClusterPool = {}

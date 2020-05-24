@@ -6,10 +6,10 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/"
-FILE_DIR = os.path.dirname(os.path.abspath(__file__)) + "/"
+GLOBALS_DIR = BASE_DIR + "Globals/"
 
-SECRET_KEY = open(BASE_DIR + "SecretKey.txt")
-DataBaseCredits = json.load(open(FILE_DIR + "DataBaseCredits.json"))
+SECRET_KEY = open(GLOBALS_DIR + "SecretKey.txt")
+DataBaseCredits = json.load(open(GLOBALS_DIR + "DataBaseCredits.json"))
 
 # Application definition
 
