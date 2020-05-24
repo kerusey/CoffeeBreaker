@@ -3,12 +3,15 @@ import random
 import os
 from platform import system
 
-os.path.abspath(os.curdir)
+
+#os.path.abspath(os.curdir)
+
+os.path.dirname(os.path.abspath(__file__))
 os.chdir('..')
-creditPath = os.path.abspath(os.curdir) + "/Globals/"
+creditPath= os.path.abspath(os.curdir) + "/Globals/"
 print(creditPath)
 
-def getCredits(path: str = creditPath + "DataBaseCredits.txt"):
+def getCredits(path: str = creditPath + "databaseCredits.txt"):
 	databaseCredits = []
 	with open(path, "r") as creditsFile:
 	    for row in creditsFile:
