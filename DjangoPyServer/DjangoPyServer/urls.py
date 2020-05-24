@@ -4,5 +4,6 @@ from RestfulCoffeeBreaker import views
 
 urlpatterns = [
 	path('admin/', admin.site.urls),
-    path('get/', include('RestfulCoffeeBreaker.urls')),
+    path('', include('RestfulCoffeeBreaker.urls')),
+
 ]
