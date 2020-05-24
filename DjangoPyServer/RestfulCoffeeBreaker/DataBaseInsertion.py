@@ -1,27 +1,16 @@
 import mysql.connector as connector
-import random
+import json
 import os
 from platform import system
 
+creditPath = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/Globals/"
 
-#os.path.abspath(os.curdir)
+dbCredits = json.load(open(creditPath + "DataBaseCredits.json"))
 
-os.path.dirname(os.path.abspath(__file__))
-os.chdir('..')
-creditPath= os.path.abspath(os.curdir) + "/Globals/"
-print(creditPath)
-
-def getCredits(path: str = creditPath + "databaseCredits.txt"):
-	databaseCredits = []
-	with open(path, "r") as creditsFile:
-	    for row in creditsFile:
-	        databaseCredits.append(row[:-1])
-	return databaseCredits
-
-dbCredit = getCredits()
-dataBaseConnection = connector.connect(host = dbCredit[0],
-user = dbCredit[1],
-passwd = dbCredit[2],
+dataBaseConnection = connector.connect(
+    host = dbCredits['host'],
+    user = dbCredits['userName'],
+    passwd = dbCredits['pass'],
 )
 
 sqlcursor = dataBaseConnection.cursor()
