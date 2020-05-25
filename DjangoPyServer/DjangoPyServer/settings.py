@@ -1,6 +1,7 @@
 import os
 import sys
 import json
+import dj_database_url
 
 DEBUG = True
 ALLOWED_HOSTS = []
@@ -9,13 +10,19 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/"
 GLOBALS_DIR = BASE_DIR + "Globals/"
 
 SECRET_KEY = open(GLOBALS_DIR + "SecretKey.txt")
-DataBaseCredits = json.load(open(GLOBALS_DIR + "DataBaseCredits.json"))
+# DataBaseCredits = json.load(open(GLOBALS_DIR + "DataBaseCredits.json"))
 
 # Application definition
 
 INSTALLED_APPS = [
 	'Database.apps.DatabaseConfig',
+	'admin_tools',
+    'admin_tools.theming',
+    'admin_tools.menu',
+    'admin_tools.dashboard',
+    'django.contrib.sites',
 	'RestfulCoffeeBreaker.apps.RestfulCoffeeBreakerConfig',
+	'AdminMap.apps.AdminMapConfig',
 	'rest_framework',
 	'django.contrib.admin',
 	'django.contrib.auth',
@@ -23,6 +30,8 @@ INSTALLED_APPS = [
 	'django.contrib.sessions',
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
+	'leaflet',
+    'djgeojson',
 ]
 
 MIDDLEWARE = [
@@ -71,6 +80,14 @@ DATABASES = {
 	}
 }
 '''
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase',
+    }
+}
+
 AUTH_PASSWORD_VALIDATORS = [
 	{
 		'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -105,3 +122,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR
+
+LEAFLET_CONFIG = {
+    'DEFAULT_CENTER': (60.0, 31.0),
+	'MINIMAP': True,
+    'DEFAULT_ZOOM': 9,
+    'MIN_ZOOM': 3,
+    'MAX_ZOOM': 18,
+}
