@@ -3,6 +3,7 @@ import pandas
 import matplotlib.pyplot as plt
 import pymysql
 import datetime
+import json
 from sqlalchemy import create_engine
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_error
@@ -19,14 +20,7 @@ future = 1
 
 def convertStrToDatetime(date):
 	return datetime.date(int(date[0:4]), int(date[5:7]), int(date[8:10]))
-
-def getCredits(path:str="databaseCredits.txt"):
-	databaseCredits = []
-	with open (path, "r") as creditsFile:
-		for row in creditsFile:
-			databaseCredits.append(row[:-1])
-	return databaseCredits
-
+	
 def summer(data, id:int, date:datetime): # returns coffee, water, sugar, milk summary from filtred database
 	result = []
 	date = str(date)
@@ -87,8 +81,8 @@ def createDataFrame(values:list):
 	return dataFrame, dictionary
 
 fromDate, toDate = convertStrToDatetime(fromDate), convertStrToDatetime(toDate)
-databaseCredits = getCredits()
-url = "mysql+pymysql://" + databaseCredits[1] + ":" + databaseCredits[2] + "@" + databaseCredits[0] + "/" + "coffeeBreaker"
+databaseCredits = json.load(open("DataBaseCredits.json"))
+url = "mysql+pymysql://" + databaseCredits['userName'] + ":" + databaseCredits['pass'] + "@" + databaseCredits['host'] + "/" + "coffeeBreaker"
 conn = create_engine(url)
 data = pandas.read_sql("SELECT * FROM CoffeeBreakerDataTable", con=conn)
 matrix = summerIdByDate(data, id, fromDate, toDate)
