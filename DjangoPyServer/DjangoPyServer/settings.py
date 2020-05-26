@@ -10,24 +10,23 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/"
 GLOBALS_DIR = BASE_DIR + "Globals/"
 
 SECRET_KEY = open(GLOBALS_DIR + "SecretKey.txt")
-DataBaseCredits = json.load(open(GLOBALS_DIR + "DataBaseCredits.json"))
+DATA_BASE_CREDITS = json.load(open(GLOBALS_DIR + "DataBaseCredits.json"))
+COFFEE_HOUSES = json.load(open(GLOBALS_DIR + "CoffeeHouses.json"))
+COFFEE_MACHINE_CLUSTER_POOL = json.load(open(GLOBALS_DIR + "CoffeeMachineClusterPool.json"))
 
 # Application definition
 
+SITE_ID = 1
+
 INSTALLED_APPS = [
-	'admin_tools.template_loaders',
-	'admin_tools',
-	'admin_tools.theming',
-	'admin_tools.menu',
-	'admin_tools.dashboard',
 	'leaflet',
 	'djgeojson',
 	'haystack',
+	'rest_framework',
 	
-	'Database.apps.DatabaseConfig',
 	'RestfulCoffeeBreaker.apps.RestfulCoffeeBreakerConfig',
 	'AdminMap.apps.AdminMapConfig',
-	'rest_framework',
+	
 	'django.contrib.sites',
 	'django.contrib.admin',
 	'django.contrib.auth',
@@ -78,10 +77,10 @@ REST_FRAMEWORK = {
 DATABASES = {
 	'default': {
 		'ENGINE': 'django.contrib.gis.db.backends.mysql',
-		'NAME': DataBaseCredits['dataBaseName'],
-		'HOST': DataBaseCredits['host'],
-		'USER': DataBaseCredits['userName'],
-		'PASSWORD': DataBaseCredits['pass']
+		'NAME': DATA_BASE_CREDITS['dataBaseName'],
+		'HOST': DATA_BASE_CREDITS['host'],
+		'USER': DATA_BASE_CREDITS['userName'],
+		'PASSWORD': DATA_BASE_CREDITS['pass']
 	}
 }
 

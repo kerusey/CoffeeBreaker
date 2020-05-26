@@ -1,28 +1,24 @@
+from django.conf import settings
 import mysql.connector as connector
 import json
 import os
-from platform import system
-
-creditPath = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/Globals/"
-
-dbCredits = json.load(open(creditPath + "DataBaseCredits.json"))
 
 dataBaseConnection = connector.connect(
-    host = dbCredits['host'],
-    user = dbCredits['userName'],
-    passwd = dbCredits['pass'],
+    host = settings.DATA_BASE_CREDITS['host'],
+    user = settings.DATA_BASE_CREDITS['userName'],
+    passwd = settings.DATA_BASE_CREDITS['pass'],
 )
 
 sqlcursor = dataBaseConnection.cursor()
-sqlcursor.execute("USE " + dbCredits['dataBaseName'] + ";")
+sqlcursor.execute("USE " + settings.DATA_BASE_CREDITS['dataBaseName'] + ";")
 
 def clearDatabase():
-	sql = "truncate coffeeBreaker." + dbCredits['dataTableName'] + ";"
+	sql = "truncate coffeeBreaker." + settings.DATA_BASE_CREDITS['dataTableName'] + ";"
 	sqlcursor.execute(sql)
 	dataBaseConnection.commit()
 
 def valueInsert(dataBaseValues: dict):
-    sql = "INSERT INTO " + dbCredits['dataTableName'] + " (coffeeID, water, sugar, milk) VALUES (%s, %s, %s, %s)"
+    sql = "INSERT INTO " + settings.DATA_BASE_CREDITS['dataTableName'] + " (coffeeID, water, sugar, milk) VALUES (%s, %s, %s, %s)"
     listOfData = []
     for item  in dataBaseValues:
         listOfData.append(dataBaseValues[item])
@@ -31,9 +27,7 @@ def valueInsert(dataBaseValues: dict):
 
 def printBataFromBase():
     mycursor = dataBaseConnection.cursor()
-    mycursor.execute("SELECT * FROM " + dbCredits['dataTableName'])
+    mycursor.execute("SELECT * FROM " + settings.DATA_BASE_CREDITS['dataTableName'])
     myresult = mycursor.fetchall()
     for x in myresult:
         print(x)
-
-printBataFromBase()

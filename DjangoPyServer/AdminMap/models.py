@@ -11,8 +11,8 @@ from django.contrib.gis.db.models import PointField
 
 class CoffeeBreakerSpot(models.Model):
 	name = models.CharField(max_length=256)
-	xCoord = models.TextField()
-	yCoord = models.TextField() # FIXME
+	xCoord = models.FloatField()
+	yCoord = models.FloatField()
 	geom = PolygonField()
 
 	def __str__(self):
