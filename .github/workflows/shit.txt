@@ -1,0 +1,15 @@
+apparmor==2.13.4
+cupshelpers==1.0
+distlib==0.3.0
+LibAppArmor==2.13.4
+louis==3.13.0
+npyscreen==4.10.5
+pep517==0.8.2
+pwquality==1.4.2
+pycairo==1.19.1
+pycups==2.0.1
+pycurl==7.43.0.5
+PyGObject==3.36.1
+python-libtorrent==1.2.6
+PyYAML==5.3.1
+team==1.0
