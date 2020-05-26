@@ -10,7 +10,6 @@ from django import forms
 from django.contrib.gis.db.models import PointField
 
 class CoffeeBreakerSpot(models.Model):
-
 	name = models.CharField(max_length=256)
 	xCoord = models.TextField()
 	yCoord = models.TextField() # FIXME

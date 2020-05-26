@@ -3,7 +3,7 @@ import os
 import json
 from django.views.decorators.csrf import csrf_exempt
 import requests
-# from . import DataBaseInsertion
+from . import DataBaseInsertion
 
 path = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/Globals/"
 
@@ -31,7 +31,7 @@ def getCoffeeHouses(request):
 @csrf_exempt
 def postDataToDataBase(request):
 	data = json.loads(request.body)
-	# DataBaseInsertion.valueInsertion(data)
+	DataBaseInsertion.valueInsertion(data)
 	# DataBaseInsertion.printingBD() # OPTIONAL THINGY
 	return HttpResponse(200)
 

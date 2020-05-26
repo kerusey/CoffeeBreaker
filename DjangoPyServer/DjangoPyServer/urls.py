@@ -9,5 +9,5 @@ import os
 urlpatterns = [
 	path('admin/', admin.site.urls),
 	path('', include('AdminMap.urls')),
-	# path('', include('RestfulCoffeeBreaker.urls'))
+	path('', include('RestfulCoffeeBreaker.urls'))
 ]

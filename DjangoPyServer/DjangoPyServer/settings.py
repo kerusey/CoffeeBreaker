@@ -10,28 +10,33 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/"
 GLOBALS_DIR = BASE_DIR + "Globals/"
 
 SECRET_KEY = open(GLOBALS_DIR + "SecretKey.txt")
-# DataBaseCredits = json.load(open(GLOBALS_DIR + "DataBaseCredits.json"))
+DataBaseCredits = json.load(open(GLOBALS_DIR + "DataBaseCredits.json"))
 
 # Application definition
 
 INSTALLED_APPS = [
-	'Database.apps.DatabaseConfig',
+	'admin_tools.template_loaders',
 	'admin_tools',
-    'admin_tools.theming',
-    'admin_tools.menu',
-    'admin_tools.dashboard',
-    'django.contrib.sites',
+	'admin_tools.theming',
+	'admin_tools.menu',
+	'admin_tools.dashboard',
+	'leaflet',
+	'djgeojson',
+	'haystack',
+	
+	'Database.apps.DatabaseConfig',
 	'RestfulCoffeeBreaker.apps.RestfulCoffeeBreakerConfig',
 	'AdminMap.apps.AdminMapConfig',
 	'rest_framework',
+	'django.contrib.sites',
 	'django.contrib.admin',
 	'django.contrib.auth',
 	'django.contrib.contenttypes',
 	'django.contrib.sessions',
 	'django.contrib.messages',
 	'django.contrib.staticfiles',
-	'leaflet',
-    'djgeojson',
+	'django.contrib.humanize',
+	'django.contrib.gis'
 ]
 
 MIDDLEWARE = [
@@ -69,23 +74,15 @@ REST_FRAMEWORK = {
 		'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
 	]
 }
-'''
+
 DATABASES = {
 	'default': {
-		'ENGINE': 'django.db.backends.mysql',
+		'ENGINE': 'django.contrib.gis.db.backends.mysql',
 		'NAME': DataBaseCredits['dataBaseName'],
 		'HOST': DataBaseCredits['host'],
 		'USER': DataBaseCredits['userName'],
-		'PASSWORD': DataBaseCredits['pass'],
+		'PASSWORD': DataBaseCredits['pass']
 	}
-}
-'''
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'mydatabase',
-    }
 }
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -126,9 +123,9 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR
 
 LEAFLET_CONFIG = {
-    'DEFAULT_CENTER': (60.0, 31.0),
+	'DEFAULT_CENTER': (60.0, 31.0),
 	'MINIMAP': True,
-    'DEFAULT_ZOOM': 9,
-    'MIN_ZOOM': 3,
-    'MAX_ZOOM': 18,
+	'DEFAULT_ZOOM': 9,
+	'MIN_ZOOM': 3,
+	'MAX_ZOOM': 18,
 }

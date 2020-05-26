@@ -14,26 +14,26 @@ dataBaseConnection = connector.connect(
 )
 
 sqlcursor = dataBaseConnection.cursor()
-sqlcursor.execute("USE coffeeBreaker;")#use
+sqlcursor.execute("USE " + dbCredits['dataBaseName'] + ";")
 
 def clearDatabase():
-	sql = "truncate coffeeBreaker.CoffeeBreakerDataTable;"
+	sql = "truncate coffeeBreaker." + dbCredits['dataTableName'] + ";"
 	sqlcursor.execute(sql)
 	dataBaseConnection.commit()
 
-def valueInsertion(dataBaseValues: dict):
-    sql = "INSERT INTO CoffeeBreakerDataTable (coffeeID, water, sugar, milk) VALUES (%s, %s, %s, %s)"
+def valueInsert(dataBaseValues: dict):
+    sql = "INSERT INTO " + dbCredits['dataTableName'] + " (coffeeID, water, sugar, milk) VALUES (%s, %s, %s, %s)"
     listOfData = []
     for item  in dataBaseValues:
         listOfData.append(dataBaseValues[item])
     sqlcursor.execute(sql, tuple(listOfData))
     dataBaseConnection.commit()
 
-def printingBD():
+def printBataFromBase():
     mycursor = dataBaseConnection.cursor()
-    mycursor.execute("SELECT * FROM CoffeeBreakerDataTable")
+    mycursor.execute("SELECT * FROM " + dbCredits['dataTableName'])
     myresult = mycursor.fetchall()
     for x in myresult:
         print(x)
 
-
+printBataFromBase()
