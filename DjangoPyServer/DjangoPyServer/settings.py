@@ -20,6 +20,7 @@ SITE_ID = 1
 
 INSTALLED_APPS = [
 	'leaflet',
+	'markers',
 	'djgeojson',
 	'haystack',
 	'rest_framework',
@@ -36,6 +37,7 @@ INSTALLED_APPS = [
 	'django.contrib.staticfiles',
 	'django.contrib.humanize',
 	'django.contrib.gis'
+
 ]
 
 MIDDLEWARE = [

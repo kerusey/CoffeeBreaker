@@ -1,3 +1,4 @@
+from django.conf import settings
 import getopt
 import json
 import os
@@ -5,12 +6,6 @@ import sys
 
 helpmsg = "python3 AddNewCoffeePoint.py -name <CoffeePointName> -x <XCoordinate> -y <YCoordinate> -id <CoffeeClusterID>"
 argumentList = (('name', '-n', '--name'), ('x', '-x', '--x'), ('y', '-y', '--y'), ('id', '-i', '--id'))
-
-path = os.path.dirname(os.path.abspath(__file__)) + "/"
-
-if (not os.path.isfile(path + "CoffeeHouses.json")):
-    with open(path + "CoffeeHouses.json", "w") as jsonFile:
-        json.dump({}, jsonFile)
 
 try:
     options, arguments = getopt.getopt(sys.argv[1:], 'n:x:y:i:h', ['name=', 'x=', 'y=', 'id=', 'help'])
@@ -39,9 +34,7 @@ def formatDict(rawDict:dict):
     del rawDict['name']
     return nameOfCurrentPoint, rawDict
 
-feeds = json.load(open(path + "CoffeeHouses.json"))
-with open(path + "CoffeeHouses.json", "w") as jsonFile:
+with open(settings.GLOBALS_DIR + "CoffeeHouses.json", "w") as jsonFile:
     nameOfCurrentPoint, formattedDict = formatDict(currentLocation)
-    print(formattedDict)
-    feeds[nameOfCurrentPoint] = formattedDict
-    json.dump(feeds, jsonFile, indent=4)
+    settings.COFEE_HOUSES[nameOfCurrentPoint] = formattedDict
+    json.dump(settings.COFEE_HOUSES, jsonFile, indent=4)
