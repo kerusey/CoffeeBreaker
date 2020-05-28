@@ -17,7 +17,11 @@ def clearDatabase():
 	sqlcursor.execute(sql)
 	dataBaseConnection.commit()
 
-def valueInsert(dataBaseValues: dict):
+def dropDatabase():
+    sqlcursor.execute("DROP TABLE " + settings.DATA_BASE_CREDITS['dataTableName'])
+    dataBaseConnection.commit()
+
+def valueInsert(dataBaseValues: dict, header: tuple = ("coffeeID", "water", "sugar", "milk")):
     sql = "INSERT INTO " + settings.DATA_BASE_CREDITS['dataTableName'] + " (coffeeID, water, sugar, milk) VALUES (%s, %s, %s, %s)"
     listOfData = []
     for item  in dataBaseValues:

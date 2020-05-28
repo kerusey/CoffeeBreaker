@@ -1,7 +1,5 @@
 from leaflet.admin import LeafletGeoAdmin
 from django.contrib import admin
-from .models import CoffeeBreakerSpot
-from django.db import models
-from django_admin_display import admin_display
+from .models import CoffeeBreakerLocation
 
-admin.site.register(CoffeeBreakerSpot, LeafletGeoAdmin)
+admin.site.register(CoffeeBreakerLocation, LeafletGeoAdmin)
