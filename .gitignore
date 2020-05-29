@@ -9,6 +9,7 @@ test.py
 DataBaseCredits.cnf
 DataBaseCredits.json
 SecretKey.txt
+media/
 
 # C extensions
 *.so

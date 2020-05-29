@@ -1,15 +1,14 @@
-import os
-import sys
+import os, sys
 import json
-import dj_database_url
 
 DEBUG = True
 ALLOWED_HOSTS = []
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/"
 GLOBALS_DIR = BASE_DIR + "Globals/"
+TEMPLATE_SOURCE_DIR = BASE_DIR + "templates/"
 
-SECRET_KEY = open(GLOBALS_DIR + "SecretKey.txt")
+SECRET_KEY = open(GLOBALS_DIR + "SecretKey.txt").read()
 DATA_BASE_CREDITS = json.load(open(GLOBALS_DIR + "DataBaseCredits.json"))
 COFFEE_HOUSES = json.load(open(GLOBALS_DIR + "CoffeeHouses.json"))
 COFFEE_MACHINE_CLUSTER_POOL = json.load(open(GLOBALS_DIR + "CoffeeMachineClusterPool.json"))
@@ -55,7 +54,9 @@ ROOT_URLCONF = 'DjangoPyServer.urls'
 TEMPLATES = [
 	{
 		'BACKEND': 'django.template.backends.django.DjangoTemplates',
-		'DIRS': [],
+		'DIRS': [
+			os.path.join(BASE_DIR, 'templates'),
+		],
 		'APP_DIRS': True,
 		'OPTIONS': {
 			'context_processors': [
@@ -86,6 +87,14 @@ DATABASES = {
 	}
 }
 
+STATICFILES_DIRS = (
+	os.path.join(BASE_DIR, 'templates'),
+)
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+
 AUTH_PASSWORD_VALIDATORS = [
 	{
 		'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -101,6 +110,9 @@ AUTH_PASSWORD_VALIDATORS = [
 	},
 ]
 
+SERIALIZATION_MODULES = {
+	"geojson": "django.contrib.gis.serializers.geojson", 
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
@@ -114,19 +126,3 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.0/howto/static-files/
-
-STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR
-
-LEAFLET_CONFIG = {
-	'DEFAULT_CENTER': (60.0, 31.0),
-	'MINIMAP': True,
-	'DEFAULT_ZOOM': 9,
-	'MIN_ZOOM': 3,
-	'MAX_ZOOM': 18,
-}
