@@ -3,7 +3,7 @@
 <a href="https://github.com/kerusey/CoffeeBreaker/archive/master.zip"><img src="https://img.shields.io/github/repo-size/kerusey/CoffeeBreaker.svg"/></a>
 <a href="https://github.com/kerusey/CoffeeBreaker/tags"><img src="https://img.shields.io/github/release-date/kerusey/CoffeeBreaker.svg"/></a>
 <a href="https://discord.gg/9bdQ9py"><img src="https://img.shields.io/discord/693528089283657749"></a>
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c5a4cf1ec75a46239019e6ad5395ca12)](https://www.codacy.com/app/SamR1/FitTrackee)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c5a4cf1ec75a46239019e6ad5395ca12)](https://app.codacy.com/manual/kerusey/CoffeeBreaker/dashboard)
 
 <img src="https://github.com/kerusey/CoffeeBreaker/blob/master/Schemes/WhiteNewLogo.png"/>
 
