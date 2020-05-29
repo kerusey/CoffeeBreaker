@@ -1,4 +1,4 @@
-import os, sys
+import os
 import json
 
 DEBUG = True
@@ -23,10 +23,8 @@ INSTALLED_APPS = [
 	'djgeojson',
 	'haystack',
 	'rest_framework',
-	
 	'RestfulCoffeeBreaker.apps.RestfulCoffeeBreakerConfig',
 	'AdminMap.apps.AdminMapConfig',
-	
 	'django.contrib.sites',
 	'django.contrib.admin',
 	'django.contrib.auth',
@@ -111,7 +109,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 SERIALIZATION_MODULES = {
-	"geojson": "django.contrib.gis.serializers.geojson", 
+	"geojson": "django.contrib.gis.serializers.geojson",
 }
 
 # Internationalization

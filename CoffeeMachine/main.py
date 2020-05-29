@@ -56,7 +56,7 @@ class OrderToCluster(Resource):
 		parser = reqparse.RequestParser()
 		parser.add_argument("coffeeType", type=str, location='json')
 		for item in ingredients:
-			if (item is "coffeeType"):
+			if (item == "coffeeType"):
 				continue
 			parser.add_argument(item, type=int, location='json')
 		order = parser.parse_args()
@@ -64,7 +64,7 @@ class OrderToCluster(Resource):
 		if (currentMachine is None):
 			return "all coffee machines are in use" # TODO request some time user to wait
 		else:
-			barista.makeOrder(currentMachine, order)
+			# barista.makeOrder(currentMachine, order)
 			postDataToDataBase(currentMachine, order)
 			return 200
 
@@ -74,4 +74,4 @@ class Ping(Resource):
 
 api.add_resource(OrderToCluster, "/post/OrderToCluster")
 api.add_resource(Ping, "/ping")
-app.run(host=host, port=port, debug=True, threaded=True)
+app.run(host=host, port=port, debug=False, threaded=True)

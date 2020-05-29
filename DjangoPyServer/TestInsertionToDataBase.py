@@ -2,6 +2,7 @@ import mysql.connector as connector
 import random
 import os
 from platform import system
+
 days = 31
 orders = 100
 
@@ -34,8 +35,8 @@ def getValues(days):
 
 dbCredit = getCredits()
 dataBaseConnection = connector.connect(host = dbCredit[0],
-user = dbCredit[1],
-passwd = dbCredit[2],
+	user = dbCredit[1],
+	passwd = dbCredit[2],
 )
 
 sqlcursor = dataBaseConnection.cursor()
@@ -49,7 +50,7 @@ def clearDatabase():
 def insertDatabase():
 	print("WORKING...")
 	for j in range(days):
-		for i in range(orders):
+		for i in orders:
 			sql = "INSERT INTO CoffeeBreakerDataTable (coffeeID, water, sugar, milk, date) VALUES (%s, %s, %s, %s, %s)"
 			sqlcursor.execute(sql, getValues(j+1))
 			dataBaseConnection.commit()

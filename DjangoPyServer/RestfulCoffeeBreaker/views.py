@@ -1,7 +1,6 @@
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
-import os
 import json
 import requests
 from . import DataBaseInsertion
@@ -24,7 +23,7 @@ def postDataToDataBase(request):
 	return HttpResponse(200)
 
 @csrf_exempt
-def	postOrderFromApp(request,id):
+def	postOrderFromApp(request, id):
 	data = json.loads(request.body)
 	if (ping(id)):
 		requests.post('http://' + str(settings.COFFEE_MACHINE_CLUSTER_POOL[str(id)]) + ":8090/ToCluster", json=json.dumps(data))

@@ -1,7 +1,6 @@
 from django.conf import settings
 import mysql.connector as connector
 import json
-import os
 
 dataBaseConnection = connector.connect(
     host = settings.DATA_BASE_CREDITS['host'],

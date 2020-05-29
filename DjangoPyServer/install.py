@@ -1,10 +1,6 @@
-from os import listdir, system, getuid, chdir
-from getpass import getpass
-import subprocess
-from shutil import move
+from os import system, getuid, chdir
 import time
 import threading
-import pathlib
 
 if (getuid() != 0):
 	print("You should run this script with sudo!\nsudo python3 install.py")
