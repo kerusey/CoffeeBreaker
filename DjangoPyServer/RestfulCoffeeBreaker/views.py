@@ -9,7 +9,7 @@ def ping(id):
 	try:
 		requests.get('http://' + str(settings.COFFEE_MACHINE_CLUSTER_POOL[str(id)]) + ":8090/ping", timeout=5)
 		return True
-	except:
+	except Exception:
 		return False
 
 def getCoffeeHouses(request):
