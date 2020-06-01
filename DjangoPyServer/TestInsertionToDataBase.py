@@ -52,6 +52,7 @@ def insertDatabase():
 	for j in range(days):
 		for i in orders:
 			sql = "INSERT INTO CoffeeBreakerDataTable (coffeeID, water, sugar, milk, date) VALUES (%s, %s, %s, %s, %s)"
+			print("Current day number is : {} ; current order number is {}".format(j, i)) # DEBUG
 			sqlcursor.execute(sql, getValues(j+1))
 			dataBaseConnection.commit()
 	print("DONE!")

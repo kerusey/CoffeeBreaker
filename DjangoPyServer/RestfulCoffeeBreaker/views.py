@@ -5,9 +5,9 @@ import json
 import requests
 from . import DataBaseInsertion
 
-def ping(id):
+def ping(coffeeClusterID):
 	try:
-		requests.get('http://' + str(settings.COFFEE_MACHINE_CLUSTER_POOL[str(id)]) + ":8090/ping", timeout=5)
+		requests.get('http://' + str(settings.COFFEE_MACHINE_CLUSTER_POOL[str(coffeeClusterID)]) + ":8090/ping/", timeout=5)
 		return True
 	except Exception:
 		return False
