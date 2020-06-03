@@ -1,16 +1,42 @@
 {% load leaflet_tags %}
-<!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="style.css" />
-		<link rel="stylesheet" type="text/css" href="lib/leaflet.css">
-		<script src="lib/leaflet.js"></script>
-		<meta charset="UTF-8">
-  		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		{% leaflet_js %}
+    	{% leaflet_css %}
+		<style>
+		html, body {
+   			margin: 0;
+    		padding: 0;
+   		}
+		html, body, #map {
+    		height: 100%;
+    		width: 100%;
+    	}
+		  </style>
 	</head>
+	<script>
+    function map_init_basic (map, options) {
+		
+        var map = L.map('map', {}).setView([55.702868, 37.530865], 10);
+		var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		attribution: '&copy; <a href="copyright">Openstreetmap</a>'
+		}).addTo(map);
+		var marker1 = L.marker([55.702868, 37.530865], {
+		draggable: true,
+		})
+		.bindPopup('текст')
+		.addTo(map);
+		var marker2 = L.marker([55.709868, 37.530865], {
+		draggable: true,
+		})
+		.bindPopup('текст2')
+		.addTo(map);
+    }
+	  </script>
 	<body>
 		<h1>Coffee Breaker Locations</h1>
-		<div id="map"></div>
-		<script src="javascript.js"></script>
+		<div id="map">
+			{% leaflet_map "main" callback="window.map_init_basic" %}
+		</div>
 	</body>
 </html>
