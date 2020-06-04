@@ -16,8 +16,8 @@
 	</head>
 	<script>
     function map_init_basic (map, options) {
-		
-        var map = L.map('map', {}).setView([55.702868, 37.530865], 10);
+
+		var map = L.map('map', {}).setView([55.702868, 37.530865], 10);
 		var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		attribution: '&copy; <a href="copyright">Openstreetmap</a>'
 		}).addTo(map);
@@ -31,7 +31,8 @@
 		})
 		.bindPopup('текст2')
 		.addTo(map);
-    }
+	}
+	
 	  </script>
 	<body>
 		<h1>Coffee Breaker Locations</h1>
