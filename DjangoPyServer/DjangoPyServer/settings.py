@@ -10,7 +10,6 @@ TEMPLATE_SOURCE_DIR = BASE_DIR + "templates/"
 
 SECRET_KEY = open(GLOBALS_DIR + "SecretKey.txt").read()
 DATA_BASE_CREDITS = json.load(open(GLOBALS_DIR + "DataBaseCredits.json"))
-COFFEE_HOUSES = json.load(open(GLOBALS_DIR + "CoffeeHouses.json"))
 COFFEE_MACHINE_CLUSTER_POOL = json.load(open(GLOBALS_DIR + "CoffeeMachineClusterPool.json"))
 
 # Application definition
