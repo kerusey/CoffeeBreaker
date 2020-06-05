@@ -1,4 +1,5 @@
 from django.http import JsonResponse, HttpResponse
+from django.template import loader
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 import json
@@ -12,8 +13,17 @@ def ping(coffeeClusterID):
 	except Exception:
 		return False
 
-def getCoffeeHouses(request):
-	return JsonResponse(DataBaseInsertion.getDataConvertedToJson())
+def getNumberOfCoffeeHouses(request):
+	return HttpResponse(DataBaseInsertion.getNumberOfCoffeeHouses())
+
+
+def getCoffeeHouses(request, typeof):
+	if (typeof == "js"):
+		return JsonResponse(DataBaseInsertion.getDataConvertedToJson())
+	if(typeof == "json"):
+		return JsonResponse(DataBaseInsertion.getDataConvertedToJson(typeof))
+	page_404 = loader.get_template(settings.TEMPLATE_SOURCE_DIR + "404.html")
+	return HttpResponse(page_404.render())
 
 @csrf_exempt
 def postDataToDataBase(request):
