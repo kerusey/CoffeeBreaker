@@ -13,7 +13,7 @@ def ping(coffeeClusterID):
 		return False
 
 def getCoffeeHouses(request):
-	return JsonResponse(settings.COFFEE_HOUSES)
+	return JsonResponse(DataBaseInsertion.getDataConvertedToJson())
 
 @csrf_exempt
 def postDataToDataBase(request):
