@@ -45,5 +45,6 @@ def getDataConvertedToJson():
 			'yCoord': row[3],
 			'clusterID': row[4]
 		}
-		globalDict[row[1]] = currentDict
+
+		globalDict[row[1].replace(" ", "_")] = currentDict
 	return globalDict
