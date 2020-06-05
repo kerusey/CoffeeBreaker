@@ -55,10 +55,9 @@ def getDataConvertedToJson(typeof:str = "js"):
 				'yCoord': row[3],
 				'clusterID': row[4]
 			}
-			globalDict[row[0]] = currentDict
+			globalDict[int(row[0])] = currentDict
 
 	return globalDict
-
 
 def getNumberOfCoffeeHouses():
 	mycursor = dataBaseConnection.cursor()
