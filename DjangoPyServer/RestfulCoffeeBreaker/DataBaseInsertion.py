@@ -34,17 +34,39 @@ def printBataFromBase():
 	for x in myresult:
 		print(x)
 
-def getDataConvertedToJson():
+def getDataConvertedToJson(typeof:str = "js"):
+	mycursor = dataBaseConnection.cursor()
+	mycursor.execute("SELECT * FROM " + settings.DATA_BASE_CREDITS['dataTableName'])
+	results = mycursor.fetchall()	
+	globalDict = {}
+	if(typeof == "js"):
+		for row in results:
+			currentDict = {
+				'name': row[1],
+				'xCoord': row[2],
+				'yCoord': row[3],
+				'clusterID': row[4]
+			}
+			globalDict['_' + str(row[0])] = currentDict
+
+	else:
+		for row in results:
+			currentDict = {
+				'name': row[1],
+				'xCoord': row[2],
+				'yCoord': row[3],
+				'clusterID': row[4]
+			}
+			globalDict[int(row[0])] = currentDict
+
+	return globalDict
+
+print(getDataConvertedToJson())
+
+def getNumberOfCoffeeHouses():
 	mycursor = dataBaseConnection.cursor()
 	mycursor.execute("SELECT * FROM " + settings.DATA_BASE_CREDITS['dataTableName'])
 	results = mycursor.fetchall()
-	globalDict = {}
-	for row in results:
-		currentDict = {
-			'xCoord': row[2],
-			'yCoord': row[3],
-			'clusterID': row[4]
-		}
+	return results
 
-		globalDict[row[1].replace(" ", "_")] = currentDict
-	return globalDict
+getNumberOfCoffeeHouses()
