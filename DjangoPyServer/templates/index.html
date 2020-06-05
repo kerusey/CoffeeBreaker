@@ -1,70 +1,66 @@
-{% load leaflet_tags %}
-<html>
+ {% load leaflet_tags %}
+ <html>
 	<head>
 		{% leaflet_js %}
-    	{% leaflet_css %}
+		{% leaflet_css %}
+		<title>Coffee Breaker Locations</title>
 		<style>
 		html, body {
-   			margin: 0;
-    		padding: 0;
-   		}
+			margin: 0;
+			padding: 0;
+		}
 		html, body, #map {
-    		height: 100%;
-    		width: 100%;
-    	}
-		  </style>
-	</head>
-	<script>
-    function map_init_basic (map, options) {
+			height: 100%;
+			width: 100%;
+		}
+		</style>
+		<script>
+		/*import library fs to open file with hostName*/
 		var fs = require('fs');
-		var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-		const mysql = require('mysql');
-		var hostName="";
 
-		fs.readFile("../Globals/DataBaseCredits.json", function(err, data){
-			if(err){
-				console.log(err);
-			}
-			else {
-				var len = 0;
-				var hostName = JSON.parse(data).host;
-				var request = new XMLHttpRequest();
-				request.open('GET', 'http://' + hostName + ':8000/get/CoffeeHouses/', true);
-				request.send();
-				request.onload = function() {
-					var data1 = JSON.parse(request.responseText);
-					console.log(data1);
-					for(el in data1){
-						console.log(el.replace(/_/gi, ' '));
-						len++;
+		/*import library xmlhttprequest to send get request*/
+		 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+
+		function map_init_basic (map, options) {
+			/*Adding new layer*/
+			var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+				attribution: '&copy; <a href="copyright">Openstreetmap</a>'
+			}).addTo(map);
+			/*Adding new marker*/
+			var marker1 = L.marker([55.702868, 37.530865], {})
+			.bindPopup('текст')
+			.addTo(map);
+
+			var marker2 = L.marker([55.709868, 37.530865], {})
+			.bindPopup('текст2')
+			.addTo(map);
+
+			var hostName = "";
+			/*Openning the file*/
+			fs.readFile("../Globals/DataBaseCredits.json", function(err, data){
+				if(err){
+					/*Outputting errors*/
+					console.log(err);
+				}
+				else {
+					var hostName = JSON.parse(data).host;
+					var request = new XMLHttpRequest();
+					/*Get request*/
+					request.open('GET', 'http://' + hostName + ':8000/get/CoffeeHouses/js', true);
+					request.send();
+					request.onload = function() {
+						/*Working with data from response*/
+						var CoffeeHousesLocations  = JSON.parse(request.responseText);
+						console.log(CoffeeHousesLocations);
 					}
 				}
-			}
-		})
-
-		var map = L.map('map', {}).setView([55.702868, 37.530865], 10);
-
-		var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-			attribution: '&copy; <a href="copyright">Openstreetmap</a>'
-		}).addTo(map);
-
-		var marker1 = L.marker([55.702868, 37.530865], {
-			draggable: true,
-		})
-		.bindPopup('текст')
-		.addTo(map);
-
-		var marker2 = L.marker([55.709868, 37.530865], {
-			draggable: true,
-		})
-		.bindPopup('текст2')
-		.addTo(map);
+			})
 	}
-	  </script>
-	<body>
-		<h1>Coffee Breaker Locations</h1>
-		<div id="map">
-			{% leaflet_map "main" callback="window.map_init_basic" %}
-		</div>
-	</body>
-</html>
+	   </script>
+	   	 </head>
+	 <body>
+		 <div id="map">
+			{% leaflet_map "map" callback="window.map_init_basic" %}
+		 </div>
+	 </body>
+ </html>
