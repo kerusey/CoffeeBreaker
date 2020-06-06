@@ -15,7 +15,7 @@ The aim of the CoffeeBreaker project is to simplify the receipt of coffee drink 
 ## Alleged product
 The main idea of ours project is creation of a smart CoffeeBreaker system, which contains:
 1. Mobile app
-2. IoT integrated coffee machine.
+2. IoT integrated coffee machine
 3. Web-Server, witch connects mobile app and the coffee machine
 4. DataBase
 </br>
