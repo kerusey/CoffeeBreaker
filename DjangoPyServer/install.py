@@ -75,7 +75,7 @@ def front(threadName):
 try:
 	frontThread = threading.Thread(target=front, args=("frontThread_TH",))
 	frontThread.start()
-except:
+except Exception:
 	print("Error: unable to start thread")
 
 def back(threadName, frontThread=frontThread):
@@ -87,5 +87,4 @@ def back(threadName, frontThread=frontThread):
 		system("sudo apt-get -qq install " + item)
 
 	system("sudo pip3 install -r requirements.txt")
-	
 	system("sudo reboot now")

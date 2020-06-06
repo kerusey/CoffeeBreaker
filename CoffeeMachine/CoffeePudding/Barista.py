@@ -1,4 +1,4 @@
-from Host import host
+# from Host import host
 
 class Barista:
 	coffeeType = 'espresso'
@@ -22,7 +22,7 @@ class Barista:
 
 def make(jsonOrder):
 	pass
-	
+
 finalOrder ={"MachineID": 1,
             "coffeeType": 'latte',
             "strength": 4,
@@ -30,5 +30,5 @@ finalOrder ={"MachineID": 1,
             "milk": 0,
             "sugar": 0
             }
-            
+
 # make(finalOrder)

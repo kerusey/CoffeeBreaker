@@ -1,8 +1,7 @@
 import os
 import json
 
-DEBUG = True
-ALLOWED_HOSTS = []
+DEBUG = False
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/"
 GLOBALS_DIR = BASE_DIR + "Globals/"
@@ -10,8 +9,12 @@ TEMPLATE_SOURCE_DIR = BASE_DIR + "templates/"
 
 SECRET_KEY = open(GLOBALS_DIR + "SecretKey.txt").read()
 DATA_BASE_CREDITS = json.load(open(GLOBALS_DIR + "DataBaseCredits.json"))
-COFFEE_HOUSES = json.load(open(GLOBALS_DIR + "CoffeeHouses.json"))
 COFFEE_MACHINE_CLUSTER_POOL = json.load(open(GLOBALS_DIR + "CoffeeMachineClusterPool.json"))
+
+ALLOWED_HOSTS = [
+	"127.0.0.1",
+	DATA_BASE_CREDITS['host'],
+]
 
 # Application definition
 
@@ -19,9 +22,7 @@ SITE_ID = 1
 
 INSTALLED_APPS = [
 	'leaflet',
-	'markers',
 	'djgeojson',
-	'haystack',
 	'rest_framework',
 	'RestfulCoffeeBreaker.apps.RestfulCoffeeBreakerConfig',
 	'AdminMap.apps.AdminMapConfig',
@@ -90,9 +91,11 @@ STATICFILES_DIRS = (
 )
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
-
+STATIC_ROOT=os.path.join(BASE_DIR, "Static")
 AUTH_PASSWORD_VALIDATORS = [
 	{
 		'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
