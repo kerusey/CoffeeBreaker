@@ -10,7 +10,7 @@ DataBaseCredits.cnf
 DataBaseCredits.json
 SecretKey.txt
 media/
-
+node_modules/
 
 # C extensions
 *.so
