@@ -1,7 +1,7 @@
 import os
 import json
 
-DEBUG = True
+DEBUG = False
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/"
 GLOBALS_DIR = BASE_DIR + "Globals/"
@@ -87,8 +87,9 @@ DATABASES = {
 }
 
 STATICFILES_DIRS = [
-	os.path.join(BASE_DIR, 'static/')
-	]
+	os.path.join(BASE_DIR, 'static/'),
+	os.path.join(BASE_DIR, 'templates/'),
+]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
