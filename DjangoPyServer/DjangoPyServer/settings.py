@@ -1,7 +1,7 @@
 import os
 import json
 
-DEBUG = False
+DEBUG = True
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/"
 GLOBALS_DIR = BASE_DIR + "Globals/"
@@ -86,16 +86,15 @@ DATABASES = {
 	}
 }
 
-STATICFILES_DIRS = (
-	os.path.join(BASE_DIR, 'templates'),
-)
+STATICFILES_DIRS = [
+	os.path.join(BASE_DIR, 'static/')
+	]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
-STATIC_ROOT=os.path.join(BASE_DIR, "Static")
+
 AUTH_PASSWORD_VALIDATORS = [
 	{
 		'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',

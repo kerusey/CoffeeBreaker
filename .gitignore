@@ -11,7 +11,6 @@ DataBaseCredits.json
 SecretKey.txt
 media/
 node_modules/
-javascript.js
 package-lock.json
 package.json
 .package.json.kate-swp
