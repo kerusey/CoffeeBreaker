@@ -10,17 +10,15 @@ toNull = " > /dev/null"
 
 aptHaveToBePreinstalled = ["figlet",
 	"sl"
-	]
+]
 
 pipHaveToBePreinstalled = ["netifaces",
 	"pathlib",
-	]
+]
 
-aptPackages = [ "build-essential",
+aptPackages = [ "gdal",
 		"python-dev",
 		"python-smbus",
-		"imagemagick",
-		"python3-rpi.gpio",
 		]
 
 def visual(): # OK

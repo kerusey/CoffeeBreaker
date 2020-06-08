@@ -15,7 +15,6 @@ future==0.18.2
 haystack==0.42
 idna==2.9
 jsonfield==3.1.0
-leaflet==0.0.3
 mysql.connector==2.2.9
 mysqlclient==1.4.6
 ordered-set==4.0.1
