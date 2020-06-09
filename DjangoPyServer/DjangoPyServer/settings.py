@@ -1,7 +1,7 @@
 import os
 import json
 
-DEBUG = True
+DEBUG = False
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/"
 GLOBALS_DIR = BASE_DIR + "Globals/"
@@ -132,6 +132,7 @@ LEAFLET_CONFIG = {
     'DEFAULT_CENTER': (59.9386300, 30.3141300),
 	'DEFAULT_ZOOM': 10,
 	'MIN_ZOOM': 3,
+	'MINIMAP': True,
 	'MAX_ZOOM': 18,
 	'TILES': 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
 }
