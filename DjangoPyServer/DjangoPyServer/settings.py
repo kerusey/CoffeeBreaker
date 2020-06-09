@@ -1,7 +1,7 @@
 import os
 import json
 
-DEBUG = False
+DEBUG = True
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/"
 GLOBALS_DIR = BASE_DIR + "Globals/"
@@ -12,7 +12,7 @@ DATA_BASE_CREDITS = json.load(open(GLOBALS_DIR + "DataBaseCredits.json"))
 COFFEE_MACHINE_CLUSTER_POOL = json.load(open(GLOBALS_DIR + "CoffeeMachineClusterPool.json"))
 
 ALLOWED_HOSTS = [
-	"127.0.0.1",
+	"192.168.1.9",
 	DATA_BASE_CREDITS['host'],
 ]
 

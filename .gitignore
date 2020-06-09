@@ -14,7 +14,7 @@ node_modules/
 package-lock.json
 package.json
 .package.json.kate-swp
-
+static/
 # C extensions
 *.so
 
