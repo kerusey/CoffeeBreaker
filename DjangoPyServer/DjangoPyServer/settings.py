@@ -127,3 +127,12 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+LEAFLET_CONFIG = {
+    'DEFAULT_CENTER': (59.9386300, 30.3141300),
+	'DEFAULT_ZOOM': 10,
+	'MIN_ZOOM': 3,
+	'MAX_ZOOM': 18,
+	'TILES': 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+}
+
