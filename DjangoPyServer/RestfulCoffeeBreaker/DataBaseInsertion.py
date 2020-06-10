@@ -34,13 +34,16 @@ def printBataFromBase():
 	for x in myresult:
 		print(x)
 
-def getDataConvertedToJson(typeof:str = "js"):
+def getDataConvertedToJson(typeof:str):
 	mycursor = dataBaseConnection.cursor()
 	mycursor.execute("SELECT * FROM " + settings.DATA_BASE_CREDITS['dataTableName'])
 	results = mycursor.fetchall()
-	globalDict = {
-		'locations': {}
-	}
+
+	if(typeof == "number"):
+		return len(results)
+	
+	globalDict = {}
+
 	if(typeof == "js"):
 		for row in results:
 			currentDict = {
@@ -50,7 +53,10 @@ def getDataConvertedToJson(typeof:str = "js"):
 				'clusterID': row[4]
 			}
 			globalDict['_' + str(row[0])] = currentDict
-	else:
+		return globalDict
+
+	if(typeof in ("json", "json-as-dict")):
+		globalDict['locations'] = {}
 		for row in results:
 			currentDict = {
 				'name': row[1],
@@ -58,11 +64,19 @@ def getDataConvertedToJson(typeof:str = "js"):
 				'yCoord': row[3],
 				'clusterID': row[4]
 			}
-			globalDict['locations'][int(row[0])] = currentDict
-	return globalDict
+			globalDict['locations'][row[0]] = currentDict
+		return globalDict
 
-def getNumberOfCoffeeHouses():
-	mycursor = dataBaseConnection.cursor()
-	mycursor.execute("SELECT * FROM " + settings.DATA_BASE_CREDITS['dataTableName'])
-	results = mycursor.fetchall()
-	return len(results)
+	if(typeof == "json-as-list"):
+		globalDict = {
+			'locations': []
+		}
+		for row in results:
+			currentDict = {
+				'name': row[1],
+				'xCoord': row[2],
+				'yCoord': row[3],
+				'clusterID': row[4]
+			}
+			globalDict['locations'].append(currentDict)
+	return globalDict
