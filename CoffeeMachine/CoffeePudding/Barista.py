@@ -8,7 +8,7 @@ class Barista:
 	sugar = 0
 
 	def __init__(self, coffeeType, strength, volume, milk, sugar):
-		"""Convert Json order to Barista class"""
+		"""Converts Json order to Barista class."""
 		self.coffeeType = coffeeType
 		self.strength = strength
 		self.volume = volume
@@ -19,7 +19,7 @@ class Barista:
 		pass
 
 	def __del__(self):
-		"""Restore default coffee machine parameters"""
+		"""Restores default coffee machine parameters."""
 		pass
 
 def make(jsonOrder):
