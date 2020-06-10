@@ -4,7 +4,7 @@ function map_init_basic (map, options) {
 		attribution: '&copy; <a href="copyright">Openstreetmap</a>',
 	}).addTo(map);
 
-    var hostName = "192.168.1.9";
+    var hostName = "chaos.fstudio.space";
 	var iconOptions = {
 		iconUrl: '../static/myIcon.png',
 		iconSize: [30, 30]
