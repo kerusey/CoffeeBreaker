@@ -12,15 +12,13 @@ def ping(coffeeClusterID):
 	except Exception:
 		return False
 
-def getNumberOfCoffeeHouses(request):
-	return HttpResponse(DataBaseInsertion.getNumberOfCoffeeHouses())
-
-
 def getCoffeeHouses(request, typeof):
-	if (typeof == "js"):
+	if(typeof == "js"):
 		return JsonResponse(DataBaseInsertion.getDataConvertedToJson())
 	if(typeof == "json"):
 		return JsonResponse(DataBaseInsertion.getDataConvertedToJson(typeof))
+	if(typeof == "number"):
+		return HttpResponse(DataBaseInsertion.getNumberOfCoffeeHouses())
 
 @csrf_exempt
 def postDataToDataBase(request):

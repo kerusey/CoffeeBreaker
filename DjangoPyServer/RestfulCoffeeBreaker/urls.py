@@ -5,5 +5,4 @@ urlpatterns = [
 	path('get/CoffeeHouses/<str:typeof>', views.getCoffeeHouses, name='CoffeeHouses'),
 	path('post/DataToDataBase/', views.postDataToDataBase, name='DataToDataBase'),
 	path('post/OrderFromApp/<int:id>/', views.postOrderFromApp, name='OrderFromApp'),
-	path('get/NumberOfCoffeeHouses/', views.getNumberOfCoffeeHouses, name='NumberOfCoffeeHouses'),
 ]

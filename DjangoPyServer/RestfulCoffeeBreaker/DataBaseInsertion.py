@@ -63,6 +63,4 @@ def getNumberOfCoffeeHouses():
 	mycursor = dataBaseConnection.cursor()
 	mycursor.execute("SELECT * FROM " + settings.DATA_BASE_CREDITS['dataTableName'])
 	results = mycursor.fetchall()
-	return results
-
-getNumberOfCoffeeHouses()
+	return len(results)
