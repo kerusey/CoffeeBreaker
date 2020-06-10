@@ -1,4 +1,4 @@
-function map_init_basic (map, options) {
+function mapInitBasic (map, options) {
 	/*Adding new layer*/
 	L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 		attribution: "&copy; <a href='copyright'>Openstreetmap</a>",
