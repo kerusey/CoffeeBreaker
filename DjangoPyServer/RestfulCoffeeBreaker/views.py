@@ -15,10 +15,17 @@ def ping(coffeeClusterID):
 def getCoffeeHouses(request, typeof):
 	if(typeof == "js"):
 		return JsonResponse(DataBaseInsertion.getDataConvertedToJson())
+
 	if(typeof == "json"):
 		return JsonResponse(DataBaseInsertion.getDataConvertedToJson(typeof))
+
 	if(typeof == "number"):
 		return HttpResponse(DataBaseInsertion.getNumberOfCoffeeHouses())
+
+	page_404 = loader.get_template(settings.TEMPLATE_SOURCE_DIR + "404.html")
+
+	return HttpResponse(page_404.render())
+
 
 @csrf_exempt
 def postDataToDataBase(request):

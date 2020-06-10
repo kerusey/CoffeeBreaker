@@ -25,12 +25,13 @@ class Barista:
 def make(jsonOrder):
 	pass
 
-finalOrder ={"MachineID": 1,
-            "coffeeType": 'latte',
-            "strength": 4,
-            "volume": 2,
-            "milk": 0,
-            "sugar": 0
-            }
+finalOrder = {
+	"MachineID": 1,
+	"coffeeType": 'latte',
+	"strength": 4,
+	"volume": 2,
+	"milk": 0,
+	"sugar": 0
+}
 
 # make(finalOrder)

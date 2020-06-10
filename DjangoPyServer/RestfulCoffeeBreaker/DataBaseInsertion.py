@@ -38,7 +38,9 @@ def getDataConvertedToJson(typeof:str = "js"):
 	mycursor = dataBaseConnection.cursor()
 	mycursor.execute("SELECT * FROM " + settings.DATA_BASE_CREDITS['dataTableName'])
 	results = mycursor.fetchall()
-	globalDict = {}
+	globalDict = {
+		'locations': {}
+	}
 	if(typeof == "js"):
 		for row in results:
 			currentDict = {
@@ -56,7 +58,7 @@ def getDataConvertedToJson(typeof:str = "js"):
 				'yCoord': row[3],
 				'clusterID': row[4]
 			}
-			globalDict[int(row[0])] = currentDict
+			globalDict['locations'][int(row[0])] = currentDict
 	return globalDict
 
 def getNumberOfCoffeeHouses():
