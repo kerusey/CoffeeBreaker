@@ -37,7 +37,7 @@ def printBataFromBase():
 def getDataConvertedToJson(typeof:str = "js"):
 	mycursor = dataBaseConnection.cursor()
 	mycursor.execute("SELECT * FROM " + settings.DATA_BASE_CREDITS['dataTableName'])
-	results = mycursor.fetchall()	
+	results = mycursor.fetchall()
 	globalDict = {}
 	if(typeof == "js"):
 		for row in results:

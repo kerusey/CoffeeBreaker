@@ -7,5 +7,5 @@ class CoffeeBreakerLocation(models.Model): # u may also write a full page and ad
 	coffeeID = models.IntegerField()
 	# js map with add-point method with callback to xCoord & yCoord fields
 	def __str__(self):
-		'''Set name in the admin panel'''
+		"""Sets name in the admin panel"""
 		return self.name
