@@ -1,17 +1,26 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
     buildToolsVersion "29.0.3"
 
     defaultConfig {
         applicationId "space.fstudio.lio.coffeebreaker"
         minSdkVersion 21
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 4
         versionName "2020.4 [Map Refactor]"
+        multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    compileOptions {
+        // Flag to enable support for the new language APIs
+        coreLibraryDesugaringEnabled true
+        // Sets Java compatibility to Java 8
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     buildTypes {
@@ -32,12 +41,7 @@ android {
             manifest.srcFile 'src/main/AndroidManifest.xml'
             java.srcDirs = ['src/main/java', 'apt_generated']
             assets.srcDirs = ['src/main/assets']
-            res.srcDirs =
-                    [
-                            'src/main/res/layout/activity',
-                            'src/main/res/layout/fragment',
-                            'src/main/res'
-                    ]
+            res.srcDirs = ['src/main/res']
         }
     }
 
@@ -63,4 +67,5 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'com.google.android.material:material:1.1.0'
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.0.5'
 }
