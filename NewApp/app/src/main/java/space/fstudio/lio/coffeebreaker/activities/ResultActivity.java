@@ -20,15 +20,14 @@ import space.fstudio.lio.coffeebreaker.R;
 
 public class ResultActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Bundle bundle;
-    String array1;
-    Button btn_accept, btn_m, btn_s, btn_v, btn_st;
-    TextView txt_sugar, txt_milk, txt_volume, txt_strength, txt_type, txt_price;
-    SharedPreferences answer;
+    private TextView txt_sugar;
+    private TextView txt_milk;
+    private TextView txt_volume;
+    private TextView txt_strength;
+    private SharedPreferences answer;
 
     protected void onStart() {
         super.onStart();
-        bundle = getIntent().getExtras();
     }
 
     @SuppressLint({"SetTextI18n", "DefaultLocale"})//игорирование английского текста
@@ -39,11 +38,11 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
 
         answer = getSharedPreferences("answer", Context.MODE_PRIVATE);
 
-        btn_accept = findViewById(R.id.btn_accept);
-        btn_m = findViewById(R.id.btn_m);
-        btn_s = findViewById(R.id.btn_s);
-        btn_v = findViewById(R.id.btn_v);
-        btn_st = findViewById(R.id.btn_st);
+        Button btn_accept = findViewById(R.id.btn_accept);
+        Button btn_m = findViewById(R.id.btn_m);
+        Button btn_s = findViewById(R.id.btn_s);
+        Button btn_v = findViewById(R.id.btn_v);
+        Button btn_st = findViewById(R.id.btn_st);
         txt_sugar = findViewById(R.id.txt_sugar);
 
         btn_accept.setOnClickListener(ResultActivity.this);
@@ -62,10 +61,7 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
 
         txt_volume = findViewById(R.id.txt_volume);
 
-        String type = answer.getString("coffeeType", "MMM");
-
         txt_volume.setText(answer.getInt("volume", 500) + " МЛ");
-
 
         txt_strength = findViewById(R.id.txt_strength);
         if (answer.getInt("strength", -1) <= 0)
@@ -73,13 +69,13 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
         else
             txt_strength.setText(String.format("%d", answer.getInt("strength", -1)));
 
-        txt_type = findViewById(R.id.txt_coffee_type);
+        TextView txt_type = findViewById(R.id.txt_coffee_type);
         txt_type.setText(String.format("%s", answer.getString("coffeeType", null)));
 
-        txt_price = findViewById(R.id.txt_price);
+        TextView txt_price = findViewById(R.id.txt_price);
         txt_price.setText((new Random().nextInt(999) + 1) + "\u20bd");
 
-        array1 = answer.getString("array", "1");
+        String array1 = answer.getString("array", "1");
         /*
 
          runOnUiThread(new Runnable() {
@@ -298,20 +294,20 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
                 //   startActivity(new Intent(ResultActivity.this, OkayActivity.class));
                 break;
             case R.id.btn_s:
-                ShowSugarDialog();
+                showSugarDialog();
 //                SugarDialogFragment sugarDialogFragment = new SugarDialogFragment();
 //                sugarDialogFragment.show(manager, "myDialog");
 //                txt_sugar.setText(String.format(Locale.getDefault(), "%d", answer.getInt("sugar", -1)));
                 break;
             case R.id.btn_m:
-                ShowMilkDialog();
+                showMilkDialog();
                 break;
             case R.id.btn_v:
-                ShowVolumeDialog();
+                showVolumeDialog();
 
                 break;
             case R.id.btn_st:
-                ShowStrengthDialog();
+                showStrengthDialog();
 
                 break;
         }
@@ -322,7 +318,7 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
-    public void ShowMilkDialog() {
+    public void showMilkDialog() {
         String title = "Молоко ";
         String button1String = "Да";
         String button2String = "Нет";
@@ -348,7 +344,7 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
         builder.show();
     }
 
-    public void ShowVolumeDialog() {
+    public void showVolumeDialog() {
         int volume_M = 0;
         int volume_B = 0;
         String title = "Выберите размер стакана: ";
@@ -366,6 +362,7 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
                 volume_B = 60;
                 break;
             case "Latte Macchiato":
+            case "Coffee":
                 volume_M = 200;
                 volume_B = 400;
                 break;
@@ -376,10 +373,6 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
             case "Cappuccino":
                 volume_M = 200;
                 volume_B = 300;
-                break;
-            case "Coffee":
-                volume_M = 200;
-                volume_B = 400;
                 break;
         }
 
@@ -404,7 +397,7 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
     }
 
 
-    public void ShowStrengthDialog() {
+    public void showStrengthDialog() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         final SeekBar seek = new SeekBar(this);
         seek.setMax(7);
@@ -436,7 +429,7 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
-    public void ShowSugarDialog() {
+    public void showSugarDialog() {
         final String[] numberOfTeespoonsOfShugar = {"1", "2", "3", "4", "5"};
         String title = "Выберите количество чайных ложек сахара: ";
         String button1String = "OK";

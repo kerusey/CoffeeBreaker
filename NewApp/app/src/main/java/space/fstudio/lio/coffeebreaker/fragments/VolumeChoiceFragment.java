@@ -15,18 +15,16 @@ import space.fstudio.lio.coffeebreaker.R;
 
 
 public class VolumeChoiceFragment extends Fragment implements View.OnClickListener {
-    SharedPreferences answer;
-    Button btnM, btnB;
-    Bundle bundle;
-    int volume_M;
-    int volume_B;
+    private SharedPreferences answer;
+    private int volume_M;
+    private int volume_B;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_volume_choise, container, false);//обозначаем, куда будем загружать объекты
         answer = getActivity().getSharedPreferences("answer", Context.MODE_PRIVATE);
-        bundle = getActivity().getIntent().getExtras();
+        Bundle bundle = getActivity().getIntent().getExtras();
         SharedPreferences answer = getActivity().getSharedPreferences("answer", Context.MODE_PRIVATE);
         String type = answer.getString("coffeeType", "MMM");
         switch (type) {
@@ -51,8 +49,8 @@ public class VolumeChoiceFragment extends Fragment implements View.OnClickListen
                 volume_B = 400;
                 break;
         }
-        btnM = view.findViewById(R.id.btnM);
-        btnB = view.findViewById(R.id.btnB);
+        Button btnM = view.findViewById(R.id.btnM);
+        Button btnB = view.findViewById(R.id.btnB);
 
         btnM.setOnClickListener(this);
         btnB.setOnClickListener(this);

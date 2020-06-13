@@ -1,7 +1,9 @@
 package space.fstudio.lio.coffeebreaker.adapters;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -11,8 +13,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
 
-  private GestureDetector gestureDetector;
-  private ClickListener clickListener;
+  private final GestureDetector gestureDetector;
+  private final ClickListener clickListener;
 
   public RecyclerTouchListener(Context context,
       final ClickListener clickListener) {
@@ -39,9 +41,11 @@ public class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
   public void onTouchEvent(@NotNull RecyclerView rv, @NotNull MotionEvent e) {
   }
 
+  @SuppressLint("LongLogTag")
   @Override
   public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-
+    Log.d("RecyclerTouchListener:onRequestDisallowInterceptTouchEvent",
+        String.valueOf(disallowIntercept));
   }
 
   public interface ClickListener {

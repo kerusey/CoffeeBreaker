@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import com.google.android.gms.maps.GoogleMap;
@@ -18,10 +19,15 @@ import space.fstudio.lio.coffeebreaker.utils.Variables;
 
 public class MapsActivity extends AppCompatActivity {
 
+  ActionBar toolbar;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_maps);
+
+    if (getSupportActionBar() != null)
+      toolbar = getSupportActionBar();
 
     /*  Permission requesting for 6 and after's  */
     if (VERSION.SDK_INT >= 23 && checkSelfPermission(permission.ACCESS_FINE_LOCATION)
@@ -46,7 +52,7 @@ public class MapsActivity extends AppCompatActivity {
         new MapUtil().loadMarkersFromJSON(this, googleMap);
 
         googleMap.setOnMarkerClickListener(marker -> {
-          getSupportActionBar().setSubtitle(marker.getTitle());
+          toolbar.setSubtitle(marker.getTitle());
           return true;
         });
       });

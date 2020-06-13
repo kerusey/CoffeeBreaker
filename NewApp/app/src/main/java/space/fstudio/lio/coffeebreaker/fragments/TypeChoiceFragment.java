@@ -23,7 +23,7 @@ import space.fstudio.lio.coffeebreaker.objects.CoffeeTypeObject;
 
 public class TypeChoiceFragment extends Fragment {
 
-  SharedPreferences answer;
+  private SharedPreferences answer;
   private CoffeeTypeRecyclerAdapter coffeeTypeRecyclerAdapter;
   private final ArrayList<CoffeeTypeObject> coffeeTypesList = new ArrayList<>();
 

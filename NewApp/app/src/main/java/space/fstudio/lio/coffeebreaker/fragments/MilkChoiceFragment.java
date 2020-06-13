@@ -17,20 +17,19 @@ import space.fstudio.lio.coffeebreaker.activities.ResultActivity;
 
 public class MilkChoiceFragment extends Fragment implements View.OnClickListener {
 
-    Button btn_yes, btn_no;
     private SharedPreferences answer;
-    int sugar;
-    int volume;
-    int strength;
-    String coffeeType;
+    private int sugar;
+    private int volume;
+    private int strength;
+    private String coffeeType;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_milk_choice, container, false);// файл разметки;  родительский элемент разметки, откуда будут взяты LayoutParams для загружаемой вьюхи
         answer = getActivity().getSharedPreferences("answer", Context.MODE_PRIVATE);
-        btn_yes = view.findViewById(R.id.btn_yes);
-        btn_no = view.findViewById(R.id.btn_no);
+        Button btn_yes = view.findViewById(R.id.btn_yes);
+        Button btn_no = view.findViewById(R.id.btn_no);
 
         btn_yes.setOnClickListener(this);
         btn_no.setOnClickListener(this);
@@ -49,7 +48,7 @@ public class MilkChoiceFragment extends Fragment implements View.OnClickListener
 
     private void checking() {
 
-        if (sugar == 10 || volume == 0.5F || strength == 10 || coffeeType.equals("NO")) {
+        if ("NO".equals(coffeeType) || sugar == 10 || volume == 0.5F || strength == 10) {
             if (sugar == 10) {
                 Toast.makeText(getActivity(), "Сахар не выбран ", Toast.LENGTH_SHORT).show();
             }
@@ -59,7 +58,7 @@ public class MilkChoiceFragment extends Fragment implements View.OnClickListener
             if (strength == 10) {
                 Toast.makeText(getActivity(), "Крепкость не выбрана ", Toast.LENGTH_SHORT).show();
             }
-            if (coffeeType.equals("NO")) {
+            if ("NO".equals(coffeeType)) {
                 Toast.makeText(getActivity(), "Тип кофе не выбран ", Toast.LENGTH_SHORT).show();
             }
         } else {
@@ -80,6 +79,8 @@ public class MilkChoiceFragment extends Fragment implements View.OnClickListener
                 editor.putInt("milk", 0);
                 Toast.makeText(getActivity(), "Выбрали кофе без молока ", Toast.LENGTH_SHORT).show();
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + v.getId());
         }
         editor.apply();
         checking();

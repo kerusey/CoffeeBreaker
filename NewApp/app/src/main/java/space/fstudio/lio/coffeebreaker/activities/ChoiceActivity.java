@@ -5,21 +5,13 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
-import java.util.List;
 import space.fstudio.lio.coffeebreaker.R;
-import space.fstudio.lio.coffeebreaker.adapters.CoffeeTypeRecyclerAdapter;
 import space.fstudio.lio.coffeebreaker.adapters.ViewPagerAdapter;
-import space.fstudio.lio.coffeebreaker.objects.CoffeeTypeObject;
 
 public class ChoiceActivity extends AppCompatActivity {
-    private RecyclerView recyclerView;
-    private List<CoffeeTypeObject> coffeeTypesList;
-    private String type;
-    private CoffeeTypeRecyclerAdapter coffeeTypeRecyclerAdapter;
 
-    private void defValues() {
+  private void defValues() {
       SharedPreferences answer = getSharedPreferences("answer", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = answer.edit();
         editor.putString("coffeeType", "NO");
