@@ -1,7 +1,5 @@
 package space.fstudio.lio.coffeebreaker.activities;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,17 +9,7 @@ import space.fstudio.lio.coffeebreaker.adapters.ViewPagerAdapter;
 
 public class ChoiceActivity extends AppCompatActivity {
 
-  private void defValues() {
-      SharedPreferences answer = getSharedPreferences("answer", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = answer.edit();
-        editor.putString("coffeeType", "NO");
-        editor.putInt("sugar", 10);
-        editor.putInt("volume", 500);
-        editor.putInt("strength", 10);
-        editor.apply();
-    }
-
-    @Override
+  @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choice);

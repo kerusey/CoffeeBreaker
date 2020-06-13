@@ -14,19 +14,18 @@ import androidx.fragment.app.Fragment;
 import space.fstudio.lio.coffeebreaker.R;
 
 public class SugarChoiceFragment extends Fragment implements View.OnClickListener {
-    SharedPreferences answer;
-    Button btn_0, btn_1, btn_2, btn_3, btn_4;
+    private SharedPreferences answer;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sugar_choice, container, false);
         answer = getActivity().getSharedPreferences("answer", Context.MODE_PRIVATE);
-        btn_0 = view.findViewById(R.id.btn_0);
-        btn_1 = view.findViewById(R.id.btn_1);
-        btn_2 = view.findViewById(R.id.btn_2);
-        btn_3 = view.findViewById(R.id.btn_3);
-        btn_4 = view.findViewById(R.id.btn_4);
+        Button btn_0 = view.findViewById(R.id.btn_0);
+        Button btn_1 = view.findViewById(R.id.btn_1);
+        Button btn_2 = view.findViewById(R.id.btn_2);
+        Button btn_3 = view.findViewById(R.id.btn_3);
+        Button btn_4 = view.findViewById(R.id.btn_4);
         btn_0.setOnClickListener(this);
         btn_1.setOnClickListener(this);
         btn_2.setOnClickListener(this);
@@ -64,6 +63,8 @@ public class SugarChoiceFragment extends Fragment implements View.OnClickListene
                 Toast.makeText(getActivity(), "Выбрали кофе с 4 лож.сахара", Toast.LENGTH_SHORT).show();
                 editor.putInt("sugar", 4);  //Устанавливаем переменной btnValue значения true
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + v.getId());
         }
         editor.apply();// применить измиенения и закрытт редактор
 

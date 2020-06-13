@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
@@ -13,7 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
 import java.util.Locale;
 import java.util.Random;
 import space.fstudio.lio.coffeebreaker.R;
@@ -288,7 +288,6 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        FragmentManager manager = getSupportFragmentManager();
         switch (v.getId()) {
             case R.id.btn_accept:
                 //   startActivity(new Intent(ResultActivity.this, OkayActivity.class));
@@ -310,12 +309,9 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
                 showStrengthDialog();
 
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + v.getId());
         }
-    }
-
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-
     }
 
     public void showMilkDialog() {
@@ -374,6 +370,8 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
                 volume_M = 200;
                 volume_B = 300;
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + type);
         }
 
         final int finalVolume_M = volume_M;
@@ -411,9 +409,11 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
             }
 
             public void onStartTrackingTouch(SeekBar arg0) {
+                Log.d("onStartTrackingTouch", String.valueOf(arg0));
             }
 
             public void onStopTrackingTouch(SeekBar seekBar) {
+                Log.d("onStartTrackingTouch", String.valueOf(seekBar));
             }
 
         });

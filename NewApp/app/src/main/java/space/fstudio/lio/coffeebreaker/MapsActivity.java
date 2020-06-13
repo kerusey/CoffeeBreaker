@@ -15,11 +15,11 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import space.fstudio.lio.coffeebreaker.activities.SettingActivity;
 import space.fstudio.lio.coffeebreaker.utils.MapUtil;
-import space.fstudio.lio.coffeebreaker.utils.Variables;
+import space.fstudio.lio.coffeebreaker.utils.VariableConstants;
 
 public class MapsActivity extends AppCompatActivity {
 
-  ActionBar toolbar;
+  private ActionBar toolbar;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +34,7 @@ public class MapsActivity extends AppCompatActivity {
         != PackageManager.PERMISSION_GRANTED) {
       ActivityCompat
           .requestPermissions(this, new String[]{permission.ACCESS_FINE_LOCATION},
-              Variables.ACCESS_FINE_LOCATION_REQUEST_CODE);
+              VariableConstants.ACCESS_FINE_LOCATION_REQUEST_CODE);
     }
 
     SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()

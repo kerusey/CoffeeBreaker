@@ -24,7 +24,6 @@ public class VolumeChoiceFragment extends Fragment implements View.OnClickListen
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_volume_choise, container, false);//обозначаем, куда будем загружать объекты
         answer = getActivity().getSharedPreferences("answer", Context.MODE_PRIVATE);
-        Bundle bundle = getActivity().getIntent().getExtras();
         SharedPreferences answer = getActivity().getSharedPreferences("answer", Context.MODE_PRIVATE);
         String type = answer.getString("coffeeType", "MMM");
         switch (type) {
@@ -33,6 +32,7 @@ public class VolumeChoiceFragment extends Fragment implements View.OnClickListen
                 volume_B = 60;
                 break;
             case "Latte Macchiato":
+            case "Coffee":
                 volume_M = 200;
                 volume_B = 400;
                 break;
@@ -44,10 +44,8 @@ public class VolumeChoiceFragment extends Fragment implements View.OnClickListen
                 volume_M = 200;
                 volume_B = 300;
                 break;
-            case "Coffee":
-                volume_M = 200;
-                volume_B = 400;
-                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + type);
         }
         Button btnM = view.findViewById(R.id.btnM);
         Button btnB = view.findViewById(R.id.btnB);
@@ -76,6 +74,8 @@ public class VolumeChoiceFragment extends Fragment implements View.OnClickListen
                 Toast.makeText(getActivity(), "Выбрали размер кружки", Toast.LENGTH_SHORT).show();
                 editor.putInt("volume", volume_B);//Включаем режим редактирования файла
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + v.getId());
         }
         editor.apply();
 

@@ -2,8 +2,8 @@ package space.fstudio.lio.coffeebreaker.objects;
 
 public class CoffeeTypeObject {
 
-    private int coffeeIcon;
-    private String coffeeName, coffeeDescription;
+    private final int coffeeIcon;
+    private final String coffeeName, coffeeDescription;
 
     public CoffeeTypeObject(int coffeeIcon, String coffeeName, String coffeeDescription) {
         this.coffeeIcon = coffeeIcon;

@@ -13,7 +13,7 @@ import space.fstudio.lio.coffeebreaker.R;
 import space.fstudio.lio.coffeebreaker.objects.CoffeeTypeObject;
 
 public class CoffeeTypeRecyclerAdapter extends RecyclerView.Adapter<CoffeeTypeRecyclerAdapter.TypeHolder> {
-    private List<CoffeeTypeObject> coffeeTypesList;//24 52 61
+    private final List<CoffeeTypeObject> coffeeTypesList;//24 52 61
 
     public CoffeeTypeRecyclerAdapter(List<CoffeeTypeObject> coffeeTypesList) {
         this.coffeeTypesList = coffeeTypesList;
@@ -22,9 +22,9 @@ public class CoffeeTypeRecyclerAdapter extends RecyclerView.Adapter<CoffeeTypeRe
 
     static class TypeHolder extends RecyclerView.ViewHolder {
 
-        ImageView imgCoffeePreview;
+        private final ImageView imgCoffeePreview;
 
-        TextView txtCoffeeName, txtCoffeeDescription;
+        private final TextView txtCoffeeName, txtCoffeeDescription;
 
         TypeHolder(@NonNull View itemView) {//интерфейс
             super(itemView);

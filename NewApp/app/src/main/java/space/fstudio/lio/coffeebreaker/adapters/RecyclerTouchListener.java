@@ -37,8 +37,10 @@ public class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
     return false;
   }
 
+  @SuppressLint("LongLogTag")
   @Override
   public void onTouchEvent(@NotNull RecyclerView rv, @NotNull MotionEvent e) {
+    Log.d("RecyclerTouchListener:onTouchEvent", "RV: " + rv + "E: " + e);
   }
 
   @SuppressLint("LongLogTag")
