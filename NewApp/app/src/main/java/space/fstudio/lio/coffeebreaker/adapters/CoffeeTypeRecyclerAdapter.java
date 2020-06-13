@@ -24,7 +24,8 @@ public class CoffeeTypeRecyclerAdapter extends RecyclerView.Adapter<CoffeeTypeRe
 
         private final ImageView imgCoffeePreview;
 
-        private final TextView txtCoffeeName, txtCoffeeDescription;
+        private final TextView txtCoffeeName;
+        private final TextView txtCoffeeDescription;
 
         TypeHolder(@NonNull View itemView) {//интерфейс
             super(itemView);

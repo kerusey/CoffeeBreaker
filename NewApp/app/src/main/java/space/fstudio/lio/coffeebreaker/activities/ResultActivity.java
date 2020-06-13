@@ -75,7 +75,6 @@ public class ResultActivity extends AppCompatActivity implements View.OnClickLis
         TextView txt_price = findViewById(R.id.txt_price);
         txt_price.setText((new Random().nextInt(999) + 1) + "\u20bd");
 
-        String array1 = answer.getString("array", "1");
         /*
 
          runOnUiThread(new Runnable() {
