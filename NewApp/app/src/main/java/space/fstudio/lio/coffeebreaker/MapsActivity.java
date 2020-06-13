@@ -1,19 +1,22 @@
 package space.fstudio.lio.coffeebreaker;
 
-import android.Manifest;
+import android.Manifest.permission;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.Build;
+import android.os.Build.VERSION;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.FragmentActivity;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import space.fstudio.lio.coffeebreaker.activities.SettingActivity;
 import space.fstudio.lio.coffeebreaker.utils.MapUtil;
 import space.fstudio.lio.coffeebreaker.utils.Variables;
 
-public class MapsActivity extends FragmentActivity {
+public class MapsActivity extends AppCompatActivity {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -21,13 +24,11 @@ public class MapsActivity extends FragmentActivity {
     setContentView(R.layout.activity_maps);
 
     /*  Permission requesting for 6 and after's  */
-    if (Build.VERSION.SDK_INT >= 23) {
-      if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
-          != PackageManager.PERMISSION_GRANTED) {
-        ActivityCompat
-            .requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                Variables.ACCESS_FINE_LOCATION_REQUEST_CODE);
-      }
+    if (VERSION.SDK_INT >= 23 && checkSelfPermission(permission.ACCESS_FINE_LOCATION)
+        != PackageManager.PERMISSION_GRANTED) {
+      ActivityCompat
+          .requestPermissions(this, new String[]{permission.ACCESS_FINE_LOCATION},
+              Variables.ACCESS_FINE_LOCATION_REQUEST_CODE);
     }
 
     SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -44,10 +45,26 @@ public class MapsActivity extends FragmentActivity {
         /*  Load markers using MapUtil's  */
         new MapUtil().loadMarkersFromJSON(this, googleMap);
 
-        /*  Go to setting's window when FAB pressed  */
-        findViewById(R.id.fab).setOnClickListener(
-            v -> startActivity(new Intent(MapsActivity.this, SettingActivity.class)));
+        googleMap.setOnMarkerClickListener(marker -> {
+          getSupportActionBar().setSubtitle(marker.getTitle());
+          return true;
+        });
       });
     }
+  }
+
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.menu_main, menu);
+    return super.onCreateOptionsMenu(menu);
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+    if (item.getItemId() == R.id.action_settings) {
+      startActivity(new Intent(this, SettingActivity.class));
+      return true;
+    }
+    return super.onOptionsItemSelected(item);
   }
 }

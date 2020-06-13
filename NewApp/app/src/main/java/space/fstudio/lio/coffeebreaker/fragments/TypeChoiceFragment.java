@@ -25,8 +25,7 @@ public class TypeChoiceFragment extends Fragment {
 
   SharedPreferences answer;
   private CoffeeTypeRecyclerAdapter coffeeTypeRecyclerAdapter;
-  private ArrayList<CoffeeTypeObject> coffeeTypesList = new ArrayList<>();
-  private RecyclerView recyclerView;
+  private final ArrayList<CoffeeTypeObject> coffeeTypesList = new ArrayList<>();
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,7 +37,7 @@ public class TypeChoiceFragment extends Fragment {
         ((AppCompatActivity) Objects.requireNonNull(getActivity())).getSupportActionBar())
         .setSubtitle("Choice coffee type");//установка второго названия
 
-    recyclerView = view.findViewById(R.id.recyclerCoffeeTypes);
+    RecyclerView recyclerView = view.findViewById(R.id.recyclerCoffeeTypes);
 
     coffeeTypeRecyclerAdapter = new CoffeeTypeRecyclerAdapter(coffeeTypesList);
 
