@@ -1,29 +1,22 @@
 package space.fstudio.lio.coffeebreaker.utils;
 
-import android.app.ProgressDialog;
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
-import android.util.Log;
-import android.widget.Toast;
-
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
-
 import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import org.json.JSONObject;
 import space.fstudio.lio.coffeebreaker.R;
 import space.fstudio.lio.coffeebreaker.objects.Location;
 
@@ -40,38 +33,50 @@ public class MapUtil {
 
       Bitmap bm = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
 
-      Canvas canvas = new Canvas(bm);
-
       vectorDrawable.setBounds(0, 0, w, h);
-      vectorDrawable.draw(canvas);
+      vectorDrawable.draw(new Canvas(bm));
 
-      Toast.makeText(context, "WORK", Toast.LENGTH_SHORT).show();
       return BitmapDescriptorFactory.fromBitmap(bm);
 
     }
 
-    Toast.makeText(context, "NOT WORK", Toast.LENGTH_SHORT).show();
-    return null;
+    return new MarkerOptions().getIcon();
 
   }
 
-  public void loadMarkersFromJSON(GoogleMap map , BitmapDescriptor icon) throws Exception {
+  public void loadMarkersFromJSON(Activity activity, GoogleMap map) {
 
     /*  JSON parsing  */
-//    String json = readUrl("http://chaos.fstudio.space:8000/get/CoffeeHouses/json-as-list");
-//
-//    Gson gson = new Gson();
-//    Location location = gson.fromJson(json, Location.class);
-//
-//    System.out.println(location.name);
-//    System.out.println(location.xCoord);
-//    System.out.println(location.yCoord);
+    ExecutorService executorService = Executors.newSingleThreadExecutor();
+    executorService.submit(() -> {
 
-    /*  Markers generation  */
-//    map.addMarker(new MarkerOptions()
-//            .position(new LatLng(1, 1))
-//            .title("")
-//            .icon(icon));
+      try (BufferedReader reader = new BufferedReader(new InputStreamReader(
+          new URL("http://chaos.fstudio.space:8000/get/CoffeeHouses/json-as-list")
+              .openStream()))) {
+
+        Gson gson = new Gson();
+
+        /*  Create massive of location's  */
+        Location[] locations = gson
+            .fromJson(String.valueOf(new JSONObject(
+                reader.readLine()).getJSONArray("locations")), Location[].class);
+
+        for (Location l : locations) {
+
+          /*  Markers generation  */
+          if (activity != null) {
+            activity.runOnUiThread(() -> map.addMarker(new MarkerOptions()
+                .position(new LatLng(l.xCoord, l.yCoord))
+                .title(l.name)
+                .icon(getBitmapDescriptor(activity))));
+          }
+        }
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+
+    });
+
+    executorService.shutdown();
   }
-
 }
