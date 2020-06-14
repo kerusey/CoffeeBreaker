@@ -1,7 +1,6 @@
 from os import system, getuid, chdir
 import time
 import threading
-import pathlib
 from Config import WifiConfig, Services
 
 if (getuid() != 0):
@@ -61,7 +60,7 @@ def preinstall(): # OK
 		system("sudo apt-get -qq install " + item + toNull)
 		if (index == 0):
 			system("figlet CoffeeBreakerTM")
-	''' installAquarium() '''
+	installAquarium()
 	for item in pipHaveToBePreinstalled:
 		system("sudo pip3 -q install " + item + toNull)
 
@@ -87,7 +86,7 @@ def front(threadName):
 try:
 	frontThread = threading.Thread(target=front, args=("frontThread_TH",))
 	frontThread.start()
-except:
+except Exception:
 	print("Error: unable to start thread")
 
 def back(threadName, frontThread=frontThread):
