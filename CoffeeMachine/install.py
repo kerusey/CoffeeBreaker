@@ -1,6 +1,4 @@
 from os import system, getuid, chdir
-from getpass import getpass
-import subprocess
 import time
 import threading
 import pathlib
@@ -12,23 +10,26 @@ if (getuid() != 0):
 
 toNull = " > /dev/null"
 
-aptHaveToBePreinstalled = ["figlet",
+aptHaveToBePreinstalled = [
+	"figlet",
 	"pure-ftpd",
 	"tightvncserver",
 	"sshpass"
-	]
+]
 
-pipHaveToBePreinstalled = ["netifaces",
-	"pathlib",
-	]
+pipHaveToBePreinstalled = [
+	"netifaces",
+	"pathlib"
+]
 
-aptPackages = [ "build-essential",
-		"python-dev",
-		"python-smbus",
-		"imagemagick",
-		"python3-tk",
-		"python3-rpi.gpio",
-		]
+aptPackages = [
+	"build-essential",
+	"python-dev",
+	"python-smbus",
+	"imagemagick",
+	"python3-tk",
+	"python3-rpi.gpio"
+]
 
 def visual(): # OK
 	system("/usr/local/bin/asciiquarium")
