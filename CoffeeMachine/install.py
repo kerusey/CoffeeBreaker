@@ -1,129 +1,88 @@
-from os import listdir, system
+from os import listdir, system, getuid, chdir
 from getpass import getpass
 import subprocess
 from shutil import move
 import time
 import threading
 import pathlib
+from Config import WifiConfig, Services
 
-def visualize():
-	while(True):
-		system("sl")
+if (getuid() != 0):
+	print("You should run this script with sudo!\nsudo python3 install.py")
+	exit()
 
-prefix = ["sudo"]
-suffix = [">", "/dev/null"]
+toNull = " > /dev/null"
 
-aptHaveToBePreinstalled = ["tightvncserver",
-			   "sl",
-			   "sshpass"
-			  ]
+aptHaveToBePreinstalled = ["figlet",
+	"pure-ftpd",
+	"tightvncserver",
+	"sshpass"
+	]
 
 pipHaveToBePreinstalled = ["netifaces",
-			   "pathlib",
-			  ]
+	"pathlib",
+	]
 
 aptPackages = [ "build-essential",
 		"python-dev",
 		"python-smbus",
 		"imagemagick",
 		"python3-tk",
-		"python3-rpi.gpio"
+		"python3-rpi.gpio",
 		]
 
-def getLan(): # OK
-	import netifaces
-	interfaces = netifaces.interfaces()
-	for i in interfaces:
-		if i == 'lo':
-			continue
-		iface = netifaces.ifaddresses(i).get(netifaces.AF_INET)
-		if iface != None:
-			for j in iface:
-				return str(j['addr'])
-
-def shellRun(name:str): # OK
-	subprocess.call([*prefix, "chmod", "+x", name])
-	subprocess.call([*prefix, "./", name, "-qq", *suffix])
-	subprocess.call([*prefix, "rm", name])
+def visual(): # OK
+	system("/usr/local/bin/asciiquarium")
 
 def clear(): # OK
-	subprocess.call(["clear"])
+	system("clear")
 
-def initSshServer(): # OK
-	print("Creating a new user...")
-	print("Enter new login: ", end="")
-	userName = str(input())
-	password = str(getpass())
-	subprocess.call(["sudo", "/usr/sbin/useradd", "--groups", "sudo", "-m", userName, "-p", password])
-	print("New user has been successfully added.")
-	print("Establishing SSH server...")
-	subprocess.call(["sudo", "passwd", userName])
-	system("sshpass -p " + password + " ssh " + userName + "@" + getLan())
-	subprocess.call(["sudo", "systemctl", "enable", "ssh"])
-	subprocess.call(["sudo", "systemctl", "start", "ssh"])
-
-
-def initVncServer(): # OK
-	with open("/root/.vnc/config.d/vncserver-x11", "w") as serverWriteable, open("config/vncserver-x11", "r") as serverReadable:
-		serverWriteable.write(serverReadable.read())
-
-	print("Enter VNC password:")
-	subprocess.call([*prefix, "vncserver"])
-
-	pathlib.Path("/home/pi/.config/autostart").mkdir(parents=True, exist_ok=True)
-	with open("/home/pi/.config/autostart/tightvnc.desktop", "w") as writeable, open("config/tightvnc.desktop", "r") as readabe: # adding to the autostart
-		writeable.write(readabe.read())
-
-
-def initWifiAutoconnection(): # TestVersion
-	print("Enter SSID: ", end='')
-	ssid = str(input())
-	print("Enter Key or Password: ", end='')
-	password = str(getpass())
-
-	with open("/etc/network/interfaces", "w") as writeable, open("config/interfaces", "r") as readable:
-		for row in readable:
-			writeable.write(readable.read())
-		writeable.write("wpa-ssid " + ssid)
-		writeable.write("wpa-psk " + password)
-
-	with open("/etc/wpa_supplicant/wpa_supplicant.conf", "w+") as writeable, open("config/wpa_supplicant.conf") as readabe:
-		for number, row in enumerate(readabe):
-			writeable.write(readabe.read())
-		writeable.write('ssid="SSID"'.format(SSID=ssid))
-		writeable.write('psk="KEY"'.format(psk=password))
-		writeable.write("}")
-
-def initFtpServer(): # OK
-	subprocess.call([*prefix, "groupadd", "ftpgroup"])
-	subprocess.call([*prefix, "useradd", "ftpuser", "-g", "ftpgroup", "-s", "/sbin/nologin", "-d", "/dev/null"])
-	subprocess.call([*prefix, "pure-pw", "useradd", "upload", "-u", "ftpuser", "-g" "ftpgroup", "-d", "/home/pi", "-m"])
-	subprocess.call([*prefix, "pure-pw", "mkdb"])
-	subprocess.call([*prefix, "service", "pure-ftpd", "restart"])
+def installAquarium(): # OK
+	system("sudo apt-get -qq install libcurses-perl " + toNull)
+	chdir("/tmp/")
+	system("sudo wget http://search.cpan.org/CPAN/authors/id/K/KB/KBAUCOM/Term-Animation-2.4.tar.gz 2> NUL")
+	system("sudo tar -zxf Term-Animation-2.4.tar.gz")
+	chdir("/tmp/Term-Animation-2.4/")
+	system("perl -X Makefile.PL > NULL && make > NULL && make test > NULL")
+	system("sudo make install" + toNull)
+	chdir("/tmp/")
+	system("wget http://www.robobunny.com/projects/asciiquarium/asciiquarium.tar.gz 2> NUL")
+	system("tar -zxf asciiquarium.tar.gz")
+	chdir("/tmp/asciiquarium_1.1/")
+	system("sudo cp asciiquarium /usr/local/bin")
+	system("sudo chmod 0755 /usr/local/bin/asciiquarium")
+	chdir("/tmp/")
+	system("rm Term-Animation-2.4.tar.gz asciiquarium.tar.gz NUL")
+	system("rm -rf Term-Animation-2.4/ asciiquarium_1.1/")
 
 def preinstall(): # OK
-	subprocess.call([*prefix, "apt-get", "-qq", "update"])
-	for item in aptHaveToBePreinstalled:
-		subprocess.call([*prefix, "apt-get", "-qq", "install", item])
+	clear()
+	for index, item in enumerate(aptHaveToBePreinstalled):
+		system("sudo apt-get -qq install " + item + toNull)
+		if (index == 0):
+			system("figlet CoffeeBreakerTM")
+	''' installAquarium() '''
 	for item in pipHaveToBePreinstalled:
-		subprocess.call([*prefix, "pip3", "-q", "install", item])
+		system("sudo pip3 -q install " + item + toNull)
+
+preinstall()
 
 def shellRun(name:str): # OK
-	subprocess.call([*prefix, "chmod", "+x", name])
+	system("sudo chmod +x " + name)
 	system("sudo ./" + name + " > logs.log 2> /dev/null")
-	subprocess.call([*prefix, "rm", name])
-	subprocess.call([*prefix, "rm", "logs.log"]) # optional
+	system("sudo rm " + name)
+	system("sudo rm logs.log") # optional
 
 def front(threadName):
 	clear()
-	preInstallThread = threading.Thread(target=preinstall)
-	preInstallThread.start()
-	time.sleep(3)
-	clear()
+	userName = Services.initSshServer() # OK
+	Services.initVncServer(userName) # OK
+	Services.initFtpServer() # OK
+	WifiConfig.setWifiConfig() # OK
 	backThread = threading.Thread(target=back, args=("backThread_TH",))
 	backThread.start()
 	clear()
-	visualize()
+	visual()
 
 try:
 	frontThread = threading.Thread(target=front, args=("frontThread_TH",))
@@ -131,21 +90,14 @@ try:
 except:
 	print("Error: unable to start thread")
 
-
 def back(threadName, frontThread=frontThread):
 	time.sleep(1)
-	subprocess.call([*prefix, "curl", "-s", "https://bootstrap.pypa.io/get-pip.py", "-o", "get-pip.py", *suffix]) # OK
-	subprocess.call([*prefix, "apt-get", "upgrade", "--force-yes", "-qq"]) # OK
-	subprocess.call([*prefix, "cp", "MachineSettings.json",  "/home/pi/Documents"])
-	subprocess.call([*prefix, "python3", "-s", "get-pip.py", "-qq"])
-	subprocess.call([*prefix, "rm", "get-pip.py"])
+	system("sudo apt-get -qq update " + toNull)
+	system("sudo apt-get -qq upgrade " + toNull)
 
 	for item in aptPackages:
-		subprocess.call([*prefix, "apt-get", "-qq", "install", item])
+		system("sudo apt-get -qq install " + item)
 
-	subprocess.call(["curl", "-s", "https://processing.org/download/install-arm.sh", "-o", "install-arm.sh"])
+	system("curl -s https://processing.org/download/install-arm.sh -o install-arm.sh" + toNull)
 	shellRun("install-arm.sh")
-
-	subprocess.call("rm", "nohup.out")
-
-	exit()
+	system("sudo reboot now")
