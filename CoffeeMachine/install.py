@@ -1,7 +1,6 @@
-from os import listdir, system, getuid, chdir
+from os import system, getuid, chdir
 from getpass import getpass
 import subprocess
-from shutil import move
 import time
 import threading
 import pathlib
