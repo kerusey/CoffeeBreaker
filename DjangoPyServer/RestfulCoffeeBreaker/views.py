@@ -36,10 +36,10 @@ def postDataToDataBase(request):
 	return HttpResponse(200)
 
 @csrf_exempt
-def	postOrderFromApp(request, id):
+def	postOrderFromApp(request, coffeeClusterID):
 	data = json.loads(request.body)
-	if (ping(id)):
-		requests.post('http://' + str(settings.COFFEE_MACHINE_CLUSTER_POOL[str(id)]) + ":8090/ToCluster", json=json.dumps(data))
+	if (ping(coffeeClusterID)):
+		requests.post('http://' + str(settings.COFFEE_MACHINE_CLUSTER_POOL[str(coffeeClusterID)]) + ":8090/ToCluster", json=json.dumps(data))
 		return HttpResponse(200)
 	else:
 		return HttpResponse('Error on cluster server side')

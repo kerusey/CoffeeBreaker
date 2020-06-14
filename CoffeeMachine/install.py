@@ -50,25 +50,12 @@ def clear(): # OK
 	subprocess.call(["clear"])
 
 def initSshServer(): # OK
-		print("Creating a new user...")
+	print("Creating a new user...")
 	print("Enter new login: ", end="")
 	userName = str(input())
 	password = str(getpass())
 	subprocess.call(["sudo", "/usr/sbin/useradd", "--groups", "sudo", "-m", userName, "-p", password])
 	print("New user has been successfully added.")
-	''' # Experemental convertation !
-	print("Converting data between accounts...")
-	sourcePath = "/home/pi/"
-	destinationPath = "/home/" + userName
-	source = listdir(sourcePath)
-	for item in source:
-		try:
-			move(sourcePath + item, destinationPath)
-		except:
-			print("exception")
-
-	subprocess.call(["sudo", "deluser", "--remove", "pi"])
-	'''
 	print("Establishing SSH server...")
 	subprocess.call(["sudo", "passwd", userName])
 	system("sshpass -p " + password + " ssh " + userName + "@" + getLan())

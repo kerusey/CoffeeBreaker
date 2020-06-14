@@ -41,7 +41,6 @@ def getDataConvertedToJson(typeof:str):
 
 	if(typeof == "number"):
 		return len(results)
-	
 	globalDict = {}
 
 	if(typeof == "js"):
