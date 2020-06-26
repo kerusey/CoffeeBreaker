@@ -16,13 +16,12 @@ def ping(coffeeClusterID):
 def getCoffeeHouses(request, typeof):
 	accessableTypes = ("js", "json", "json-as-dict", "json-as-list", "number")
 	numericTypes = ("number")
-
+	
 	if(typeof in accessableTypes):
 		if(typeof in numericTypes):
 			return HttpResponse(DataBaseInsertion.getDataConvertedToJson(typeof))
 		else:
 			return JsonResponse(DataBaseInsertion.getDataConvertedToJson(typeof))
-
 
 	page_404 = loader.get_template(settings.TEMPLATE_SOURCE_DIR + "404.html")
 	return HttpResponse(page_404.render())
@@ -39,7 +38,9 @@ def postDataToDataBase(request):
 def	postOrderFromApp(request, coffeeClusterID):
 	data = json.loads(request.body)
 	if (ping(coffeeClusterID)):
-		requests.post('http://' + str(settings.COFFEE_MACHINE_CLUSTER_POOL[str(coffeeClusterID)]) + ":8090/ToCluster", json=json.dumps(data))
-		return HttpResponse(200)
+		CoffeeMachineID = requests.post('http://' + str(settings.COFFEE_MACHINE_CLUSTER_POOL[str(coffeeClusterID)]) + ":8090/ToCluster", json=json.dumps(data))
+		if (CoffeeMachineID == 404):
+			return HttpResponse('CBERR###') # cannot reach ToCluster method on cluster side
+		return HttpResponse(CoffeeMachineID) if CoffeeMachineID != 500 else HttpResponse('CBERR###') # 500 error to the cluster
 	else:
-		return HttpResponse('Error on cluster server side')
+		return HttpResponse('CBERR###') # cannot ping coffeeCluster (cluster is not responding)

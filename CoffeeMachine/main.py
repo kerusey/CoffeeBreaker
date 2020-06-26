@@ -6,6 +6,7 @@ import netifaces
 import json
 import requests
 import os
+from CoffeePudding import Barista
 
 def getLan(): # OK
 	interfaces = netifaces.interfaces()
@@ -42,12 +43,16 @@ def postDataToDataBase(coffeeID:int, order:dict):
 
 def chooseCoffeeMachine(coffeeMachinePool:dict=coffeeMachinePool): # returns ID of available coffeeMachine from  coffeeMachinePool
 	for item in coffeeMachinePool:
-		if(coffeeMachinePool[item]['status'] == "passive"):
+		if(coffeeMachinePool[item]['status'] == "free"):
 			coffeeMachinePool[item]['status'] = "active"
 			with open (coffeeMachinePoolPath, 'w') as jsonFile:
 				json.dump(coffeeMachinePool, jsonFile, indent=4)
 			return item
 	return None
+
+def freeCoffeeMachine(coffeeMachineID:int):
+	coffeeMachinePool[str(coffeeMachineID)]['status'] = "free"
+	json.dump(coffeeMachinePool, open(coffeeMachinePoolPath, 'w'), indent=4)
 
 path = os.path.dirname(os.path.abspath(__file__))
 app = Flask(__name__)
@@ -64,11 +69,13 @@ class OrderToCluster(Resource):
 		order = parser.parse_args()
 		currentMachine = chooseCoffeeMachine()
 		if (currentMachine is None):
-			return "all coffee machines are in use" # TODO request some time user to wait
+			return 'CBERR###' # all coffee machines are in use
 		else:
-			# barista.makeOrder(currentMachine, order)
-			postDataToDataBase(currentMachine, order)
-			return 200
+			Barista.makeOrder(machine=currentMachine, order=order)
+			postDataToDataBase(currentMachine, order) # TODO request some time user to wait
+			time.sleep(1200) # TODO set timer of making order
+			freeCoffeeMachine(currentMachine)
+			return currentMachine # returns the id of coffee machine that assigned to current order 
 
 class Ping(Resource):
 	def get(self):
