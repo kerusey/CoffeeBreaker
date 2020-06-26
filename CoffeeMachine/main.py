@@ -1,4 +1,4 @@
-#from .CoffeePudding import Barista
+from CoffeePudding import Barista
 
 from flask import Flask
 from flask_restful import Resource, Api, reqparse
@@ -6,7 +6,7 @@ import netifaces
 import json
 import requests
 import os
-from CoffeePudding import Barista
+import time
 
 def getLan(): # OK
 	interfaces = netifaces.interfaces()
@@ -29,17 +29,14 @@ scriptPath = os.path.dirname(os.path.abspath(__file__)) + "/"
 MachineSettingsPath = scriptPath + "MachineSettings.json"
 coffeeMachinePoolPath = scriptPath + "CoffeeMachinePool.json"
 
-with open(MachineSettingsPath) as jsonFile:
-	MachineSettings = json.load(jsonFile)
-
-with open(coffeeMachinePoolPath) as jsonFile:
-	coffeeMachinePool = json.load(jsonFile)
+MachineSettings = json.load(open(MachineSettingsPath))
+coffeeMachinePool = json.load(open(coffeeMachinePoolPath))
 
 def postDataToDataBase(coffeeID:int, order:dict):
 	order["coffeeID"] = coffeeID
 	del order["strength"]
 	del order["coffeeType"]
-	requests.post("http://chaos.fstudio.space:8090/ToDataBase", json=json.dumps(order))
+	requests.post("http://{}/ToDataBase".format(MachineSettings['ip']), json=json.dumps(order))
 
 def chooseCoffeeMachine(coffeeMachinePool:dict=coffeeMachinePool): # returns ID of available coffeeMachine from  coffeeMachinePool
 	for item in coffeeMachinePool:
@@ -71,11 +68,13 @@ class OrderToCluster(Resource):
 		if (currentMachine is None):
 			return 'CBERR###' # all coffee machines are in use
 		else:
-			Barista.makeOrder(machine=currentMachine, order=order)
+			Status = Barista.makeOrder(machine=currentMachine, order=order)
+			if (Status != "OK"):
+				return Status
 			postDataToDataBase(currentMachine, order) # TODO request some time user to wait
 			time.sleep(1200) # TODO set timer of making order
 			freeCoffeeMachine(currentMachine)
-			return currentMachine # returns the id of coffee machine that assigned to current order 
+			return currentMachine # returns the id of coffee machine that assigned to current order
 
 class Ping(Resource):
 	def get(self):

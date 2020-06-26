@@ -1,8 +1,4 @@
 {
-	"MachineID": 1,
-	"LogsPath": "/home/pi/Server/",
-	"Ip": "178.206.224.58",
-	"Port": 8090,
-	"ServerValidationPath": "/validation/",
-	"ServerOrderPath": "/order/"
+	"ClusterID": 1,
+	"ip": "178.206.224.58"
 }

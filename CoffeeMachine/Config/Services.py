@@ -11,9 +11,6 @@ Exec=vncserver :1
 StartupNotify=false
 """
 
-def vncautostart():
-	system("sudo mkdir /home/" + GLOBALUSERNAME + "")
-
 def getLan(): # OK
 	import netifaces
 	interfaces = netifaces.interfaces()

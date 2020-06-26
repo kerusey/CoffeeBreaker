@@ -16,7 +16,6 @@ def ping(coffeeClusterID):
 def getCoffeeHouses(request, typeof):
 	accessableTypes = ("js", "json", "json-as-dict", "json-as-list", "number")
 	numericTypes = ("number")
-	
 	if(typeof in accessableTypes):
 		if(typeof in numericTypes):
 			return HttpResponse(DataBaseInsertion.getDataConvertedToJson(typeof))
