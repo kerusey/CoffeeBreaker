@@ -19,6 +19,7 @@ import java.util.concurrent.Executors;
 import org.json.JSONObject;
 import space.fstudio.lio.coffeebreaker.R;
 import space.fstudio.lio.coffeebreaker.objects.Location;
+import space.fstudio.lio.coffeebreaker.utils.managers.ErrorManager;
 
 public class MapUtil {
 
@@ -44,35 +45,45 @@ public class MapUtil {
 
   }
 
-  public void loadMarkersFromJSON(Activity activity, GoogleMap map) {
+  public void markerLocationsFromJSON(Activity activity, GoogleMap map) {
 
     /*  JSON parsing  */
     ExecutorService executorService = Executors.newSingleThreadExecutor();
     executorService.submit(() -> {
 
       try (BufferedReader reader = new BufferedReader(new InputStreamReader(
-          new URL("http://chaos.fstudio.space:8000/get/CoffeeHouses/json-as-list")
-              .openStream()))) {
+          new URL("http://chaos.fstudio.space:8000/get/CoffeeHouses/json-as-list").openStream()))) {
 
         Gson gson = new Gson();
 
         /*  Create massive of location's  */
         Location[] locations = gson
-            .fromJson(String.valueOf(new JSONObject(
-                reader.readLine()).getJSONArray("locations")), Location[].class);
+            .fromJson(String.valueOf(new JSONObject(reader.readLine()).getJSONArray("locations")),
+                Location[].class);
 
-        for (Location l : locations) {
+        if (locations != null) {
+          for (Location l : locations) {
 
-          /*  Markers generation  */
-          if (activity != null) {
-            activity.runOnUiThread(() -> map.addMarker(new MarkerOptions()
-                .position(new LatLng(l.xCoord, l.yCoord))
-                .title(l.name)
-                .icon(getBitmapDescriptor(activity))));
+            /*  Markers generation  */
+            if (activity != null) {
+              activity.runOnUiThread(() -> map.addMarker(new MarkerOptions()
+                  .position(new LatLng(l.xCoord, l.yCoord))
+                  .title(l.name)
+                  .icon(getBitmapDescriptor(activity))));
+            }
           }
         }
       } catch (Exception e) {
-        e.printStackTrace();
+        if (activity != null) {
+          activity.runOnUiThread(() -> {
+            map.addMarker(new MarkerOptions()
+                .position(new LatLng(59.9329475F, 30.3511607F))
+                .title("Offline point")
+                .icon(getBitmapDescriptor(activity)));
+            ErrorManager.errorAlert(activity, ErrorManager.ERR_CONSTANTS_MARKER_REQUEST_FROM_SERVER,
+                "reload", (dialogInterface, i) -> markerLocationsFromJSON(activity, map));
+          });
+        }
       }
 
     });

@@ -1,0 +1,20 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <PreferenceCategory android:title="Maps settings"
+    android:key="maps_settings_category_pref">
+    <ListPreference
+      android:defaultValue="4"
+      android:entries="@array/mapTypeListArray"
+      android:entryValues="@array/mapTypeListValues"
+      android:key="map_type_list_pref"
+      android:summary="%s"
+      android:title="Map type's" />
+  </PreferenceCategory>
+  <PreferenceCategory android:title="Theme manager">
+    <SwitchPreference
+      android:defaultValue="false"
+      android:key="dark_theme_switch_pref"
+      android:title="Dark theme" />
+  </PreferenceCategory>
+
+</PreferenceScreen>

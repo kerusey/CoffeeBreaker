@@ -1,4 +1,4 @@
-package space.fstudio.lio.coffeebreaker;
+package space.fstudio.lio.coffeebreaker.activities;
 
 import android.Manifest.permission;
 import android.content.Intent;
@@ -8,55 +8,60 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
+import androidx.preference.PreferenceManager;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
-import space.fstudio.lio.coffeebreaker.activities.SettingActivity;
+import space.fstudio.lio.coffeebreaker.R;
 import space.fstudio.lio.coffeebreaker.utils.MapUtil;
-import space.fstudio.lio.coffeebreaker.utils.VariableConstants;
 
 public class MapsActivity extends AppCompatActivity {
 
-  private ActionBar toolbar;
+  private GoogleMap googleMap;
+  private int mapValue;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+
     setContentView(R.layout.activity_maps);
 
-    if (getSupportActionBar() != null)
-      toolbar = getSupportActionBar();
+    /*  Get map type from saved settings  */
+    mapValue = Integer.parseInt(PreferenceManager
+        .getDefaultSharedPreferences(this).getString("map_type_list_pref", "4"));
 
-    /*  Permission requesting for 6 and after's  */
-    if (VERSION.SDK_INT >= 23 && checkSelfPermission(permission.ACCESS_FINE_LOCATION)
-        != PackageManager.PERMISSION_GRANTED) {
-      ActivityCompat
-          .requestPermissions(this, new String[]{permission.ACCESS_FINE_LOCATION},
-              VariableConstants.ACCESS_FINE_LOCATION_REQUEST_CODE);
-    }
-
+    /*  Init map on view from SupportMapFragment  */
     SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
         .findFragmentById(R.id.map);
 
+    /*  Check mapFragment is not null  */
     if (mapFragment != null) {
+
       mapFragment.getMapAsync(googleMap -> {
 
-        googleMap.setMyLocationEnabled(true);
+        this.googleMap = googleMap;
+
+        if (VERSION.SDK_INT >= 23 && checkSelfPermission(permission.ACCESS_FINE_LOCATION)
+            == PackageManager.PERMISSION_GRANTED)
+          googleMap.setMyLocationEnabled(true);
 
         /*  Setup map view type  */
-        googleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+        googleMap.setMapType(mapValue);
 
         /*  Load markers using MapUtil's  */
-        new MapUtil().loadMarkersFromJSON(this, googleMap);
-
-        googleMap.setOnMarkerClickListener(marker -> {
-          toolbar.setSubtitle(marker.getTitle());
-          return true;
-        });
+        new MapUtil().markerLocationsFromJSON(this, googleMap);
       });
     }
+  }
+
+  protected void onResume() {
+    /*  Reset map type on resumed to activity  */
+    if (googleMap != null) {
+      mapValue = Integer.parseInt(PreferenceManager
+          .getDefaultSharedPreferences(this).getString("map_type_list_pref", "4"));
+      googleMap.setMapType(mapValue);
+    }
+    super.onResume();
   }
 
   @Override
@@ -68,7 +73,7 @@ public class MapsActivity extends AppCompatActivity {
   @Override
   public boolean onOptionsItemSelected(@NonNull MenuItem item) {
     if (item.getItemId() == R.id.action_settings) {
-      startActivity(new Intent(this, SettingActivity.class));
+      startActivity(new Intent(this, SettingsActivity.class));
       return true;
     }
     return super.onOptionsItemSelected(item);

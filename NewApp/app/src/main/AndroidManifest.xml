@@ -1,45 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="space.fstudio.lio.coffeebreaker">
+  xmlns:tools="http://schemas.android.com/tools"
+  package="space.fstudio.lio.coffeebreaker">
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.INTERNET" />
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+  <uses-permission android:name="android.permission.INTERNET" />
 
-    <uses-permission-sdk-23 android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission-sdk-23 android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission-sdk-23 android:name="android.permission.INTERNET" />
+  <application
+    android:name=".AppApplication"
+    android:appCategory="social"
+    android:icon="@mipmap/ic_launcher"
+    android:label="@string/app_name"
+    android:networkSecurityConfig="@xml/network_security_config"
+    android:roundIcon="@mipmap/ic_launcher_round"
+    android:theme="@style/AppTheme"
+    tools:ignore="AllowBackup"
+    tools:targetApi="o">
 
-    <application
-        android:allowBackup="true"
-        android:autoRevokePermissions="allowed"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:networkSecurityConfig="@xml/network_security_config"
-        tools:ignore="AllowBackup"
-        tools:targetApi="n">
+    <activity android:name=".activities.SplashActivity"
+      android:theme="@style/AppTheme.FullScreen">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
 
-        <activity
-            android:name=".MapsActivity"
-            android:label="@string/app_name">
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+    </activity>
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".activities.ChoiceActivity" />
-        <activity android:name=".activities.SettingActivity" />
+    <activity android:name=".activities.MapsActivity" />
+    <activity android:name=".activities.SettingsActivity" />
 
-        <activity android:name=".activities.ResultActivity" />
+    <meta-data
+      android:name="com.google.android.geo.API_KEY"
+      android:value="AIzaSyB1wpZ8hpsvOGqJfAGo9S4z5psqLVnlwQo" />
 
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
-    </application>
+  </application>
 </manifest>
