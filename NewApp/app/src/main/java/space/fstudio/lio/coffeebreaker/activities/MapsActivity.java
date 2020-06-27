@@ -3,7 +3,6 @@ package space.fstudio.lio.coffeebreaker.activities;
 import android.Manifest.permission;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.Build.VERSION;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -41,7 +40,7 @@ public class MapsActivity extends AppCompatActivity {
 
         this.googleMap = googleMap;
 
-        if (VERSION.SDK_INT >= 23 && checkSelfPermission(permission.ACCESS_FINE_LOCATION)
+        if (checkSelfPermission(permission.ACCESS_FINE_LOCATION)
             == PackageManager.PERMISSION_GRANTED)
           googleMap.setMyLocationEnabled(true);
 

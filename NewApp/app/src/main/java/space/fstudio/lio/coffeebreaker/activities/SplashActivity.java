@@ -5,7 +5,6 @@ import static space.fstudio.lio.coffeebreaker.utils.сonstants.VariableConstants
 import android.Manifest.permission;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.Build.VERSION;
 import android.os.Bundle;
 import android.view.View;
 import androidx.annotation.NonNull;
@@ -26,7 +25,7 @@ public class SplashActivity extends AppCompatActivity {
     setContentView(R.layout.activity_splash);
 
     /*  Permission requesting for 6 and after's  */
-    if (VERSION.SDK_INT >= 23 && checkSelfPermission(permission.ACCESS_FINE_LOCATION)
+    if (checkSelfPermission(permission.ACCESS_FINE_LOCATION)
         != PackageManager.PERMISSION_GRANTED) {
       ActivityCompat.requestPermissions(this, new String[]{permission.ACCESS_FINE_LOCATION},
           ACCESS_FINE_LOCATION_REQUEST_CODE);
