@@ -6,11 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.asLiveData
+import androidx.lifecycle.lifecycleScope
 import dev.fstudio.coffeebreaker.databinding.FragmentMainBinding
-import kotlinx.coroutines.flow.observeOn
+import kotlinx.coroutines.flow.collect
 
 class MainFragment : Fragment() {
 
@@ -27,8 +25,13 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.emitNumbers().asLiveData().observe(viewLifecycleOwner, {
-            binding.message.text = it.toString()
-        })
+
+        viewModel.messageLoop()
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.messageUiState.collect{
+                binding.message.text = it
+            }
+        }
     }
 }
