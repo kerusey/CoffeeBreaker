@@ -6,9 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import dev.fstudio.coffeebreaker.databinding.FragmentMainBinding
-import kotlinx.coroutines.flow.collect
+import android.content.Intent.getIntent
+import com.journeyapps.barcodescanner.CaptureManager
+import com.journeyapps.barcodescanner.DecoratedBarcodeView
 
 class MainFragment : Fragment() {
 
@@ -26,12 +27,5 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.messageLoop()
-
-        lifecycleScope.launchWhenStarted {
-            viewModel.messageUiState.collect{
-                binding.message.text = it
-            }
-        }
     }
 }
